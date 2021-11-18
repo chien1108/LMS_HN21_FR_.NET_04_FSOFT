@@ -20,7 +20,7 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public int Dislike { get; set; }
         public int Shares { get; set; }
         public int Views { get; set; }
-        public int ReportAbuseId { get; set; }
+        //public int ReportAbuseId { get; set; }
 
         public int InstructorId { get; set; }
         public int CategoryId { get; set; }
@@ -29,12 +29,14 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public Instructor Instructor { get; set; }
         public Language Language { get; set; }
         public SubCategory SubCategory { get; set; }
-        public ReportAbuse ReportAbuse { get; set; }
 
 
+
+        //public ICollection<ReportAbuse> ReportAbuses { get; set; }
         public ICollection<CourseRate> CourseRates { get; set; }
 
         public ICollection<CourseContent> CourseContent { get; set; }
+        public ICollection<Cart> Carts { get; set; }
 
     }
 }

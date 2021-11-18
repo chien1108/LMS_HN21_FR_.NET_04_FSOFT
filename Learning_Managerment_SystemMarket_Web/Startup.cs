@@ -1,4 +1,9 @@
+using Learning_Managerment_SystemMarket_Core.Contracts;
 using Learning_Managerment_SystemMarket_Core.Data;
+using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepository;
+using Learning_Managerment_SystemMarket_Core.Repositories.InstructorRepository;
+using Learning_Managerment_SystemMarket_Core.Repositories.StudentRepository;
+using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
 using Learning_Managerment_SystemMarket_Web.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,7 +37,10 @@ namespace Learning_Managerment_SystemMarket_Web
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
             //Config for Dependence Repository
-
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAdminSettingRepository, AdminSettingRepository>();
+            services.AddScoped<IInstructorRepository, InstructorRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
             //Config for Dependence Service
 
             services.AddAutoMapper(typeof(MapperProfile));
