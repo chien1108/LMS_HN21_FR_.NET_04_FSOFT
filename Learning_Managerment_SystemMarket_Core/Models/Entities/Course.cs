@@ -29,8 +29,9 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public Instructor Instructor { get; set; }
         public Language Language { get; set; }
         public SubCategory SubCategory { get; set; }
+        public ReportAbuse ReportAbuse { get; set; }
 
-        //public ICollection<Order> Orders { get; set; }
+
         public ICollection<CourseRate> CourseRates { get; set; }
 
         public ICollection<CourseContent> CourseContent { get; set; }

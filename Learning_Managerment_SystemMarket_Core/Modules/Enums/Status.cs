@@ -2,6 +2,9 @@
 {
     public enum Status
     {
-
+        IsDeleted,
+        IsActive,
+        Publish,
+        UnPublish
     }
 }

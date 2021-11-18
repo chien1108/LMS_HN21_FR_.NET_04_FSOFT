@@ -1,7 +1,9 @@
+using Learning_Managerment_SystemMarket_Core.Data;
 using Learning_Managerment_SystemMarket_Web.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +27,10 @@ namespace Learning_Managerment_SystemMarket_Web
         public void ConfigureServices(IServiceCollection services)
         {
             //config context SQL
-
+            services.AddDbContext<LMSDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
             //Config for Dependence Repository
 
             //Config for Dependence Service
