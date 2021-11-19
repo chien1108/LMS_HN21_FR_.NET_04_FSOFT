@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Learning_Managerment_SystemMarket_Core.Migrations
 {
     [DbContext(typeof(LMSDbContext))]
-    [Migration("20211118174432_Initial")]
+    [Migration("20211119031741_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,9 +56,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
@@ -68,7 +65,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("StudentId", "CourseId", "Id");
+                    b.HasKey("StudentId", "CourseId");
 
                     b.HasIndex("CourseId");
 
@@ -214,12 +211,10 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.CourseRate", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -237,12 +232,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
+                    b.HasKey("CourseId", "StudentId");
 
                     b.HasIndex("StudentId");
 
@@ -341,10 +331,11 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.InstructorDiscusstion", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InstructorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
@@ -355,12 +346,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<string>("Dislikes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InstructorId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("InstructorId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Likes")
                         .HasColumnType("nvarchar(max)");
 
@@ -370,17 +355,9 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("StudentId", "InstructorId");
 
-                    b.Property<int?>("StudentId1")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InstructorId1");
-
-                    b.HasIndex("StudentId1");
+                    b.HasIndex("InstructorId");
 
                     b.ToTable("InstructorDiscusstions");
                 });
@@ -398,10 +375,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<string>("Document")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InstructorId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("InstructorId1")
+                    b.Property<int>("InstructorId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
@@ -415,7 +389,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InstructorId1");
+                    b.HasIndex("InstructorId");
 
                     b.ToTable("InstructorVerifies");
                 });
@@ -490,10 +464,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.LikeDislikeCourse", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
@@ -510,62 +482,11 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
+                    b.HasKey("StudentId", "CourseId");
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("StudentId");
-
                     b.ToTable("LikeDislikeCourses");
-                });
-
-            modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.ModelHasPermission", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ModelType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "PermissionId");
-
-                    b.HasIndex("PermissionId");
-
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("ModelHasPermissions");
-                });
-
-            modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.ModelHasRole", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ModelType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("ModelHasRoles");
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Notification", b =>
@@ -697,10 +618,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("InstructorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("InstrutorId")
+                    b.Property<int>("InstructorId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
@@ -757,33 +675,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.ToTable("PaytabsInvoices");
                 });
 
-            modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Permission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("GuardName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PermissionName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Permissions");
-                });
-
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.ReportAbuse", b =>
                 {
                     b.Property<int>("Id")
@@ -822,66 +713,49 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GuardName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("RoleName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.RoleHasPermission", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RoleId", "PermissionId");
-
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("RoleHasPermissions");
-                });
-
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.SavedCourse", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
 
-                    b.HasIndex("CourseId");
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("CourseId", "StudentId");
 
                     b.HasIndex("StudentId");
 
@@ -909,7 +783,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Percentage")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(8, 5)
+                        .HasColumnType("decimal(8,5)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -986,19 +861,14 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.SubScription", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InstructorId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("InstructorId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("InstructorId1")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -1006,34 +876,30 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("StudentId")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("StudentId", "InstructorId");
 
-                    b.Property<int?>("StudentId1")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InstructorId1");
-
-                    b.HasIndex("StudentId1");
+                    b.HasIndex("InstructorId");
 
                     b.ToTable("SubScriptions");
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -1048,10 +914,12 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -1069,14 +937,23 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<int>("WhoIs")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.WebLanguage", b =>
@@ -1107,6 +984,107 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WebLanguages");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("RoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("UserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("UserTokens");
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Cart", b =>
@@ -1189,11 +1167,15 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 {
                     b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor", "Instructor")
                         .WithMany("InstructorDiscusstions")
-                        .HasForeignKey("InstructorId1");
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Student", "Student")
                         .WithMany()
-                        .HasForeignKey("StudentId1");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Instructor");
 
@@ -1204,7 +1186,9 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 {
                     b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor", "Instructor")
                         .WithMany()
-                        .HasForeignKey("InstructorId1");
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Instructor");
                 });
@@ -1237,40 +1221,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.ModelHasPermission", b =>
-                {
-                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Permission", "Permission")
-                        .WithMany()
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1");
-
-                    b.Navigation("Permission");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.ModelHasRole", b =>
-                {
-                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId1");
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Notification", b =>
@@ -1307,7 +1257,9 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 {
                     b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor", "Instructor")
                         .WithMany()
-                        .HasForeignKey("InstructorId");
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Instructor");
                 });
@@ -1340,25 +1292,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.RoleHasPermission", b =>
-                {
-                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Permission", "Permission")
-                        .WithMany()
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Permission");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.SavedCourse", b =>
@@ -1406,15 +1339,70 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 {
                     b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor", "Instructor")
                         .WithMany("SubScriptions")
-                        .HasForeignKey("InstructorId1");
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Student", "Student")
                         .WithMany("SubCriptions")
-                        .HasForeignKey("StudentId1");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Instructor");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Category", b =>

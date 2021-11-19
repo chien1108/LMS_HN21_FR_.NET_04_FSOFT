@@ -2,7 +2,7 @@
 
 namespace Learning_Managerment_SystemMarket_Core.Models.Entities
 {
-    public class SavedCourse : BaseEntity
+    public class SavedCourse : BaseEntityNotId
     {
         public int StudentId { get; set; }
         public int CourseId { get; set; }

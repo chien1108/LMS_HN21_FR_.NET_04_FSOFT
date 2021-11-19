@@ -131,33 +131,15 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Permissions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PermissionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GuardName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permissions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GuardName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -183,16 +165,17 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     WhoIs = table.Column<int>(type: "int", nullable: false),
                     IdUser = table.Column<int>(type: "int", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -206,7 +189,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -256,10 +239,9 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    InstructorId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InstructorId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Document = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    InstructorId1 = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -268,11 +250,11 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 {
                     table.PrimaryKey("PK_InstructorVerifies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InstructorVerifies_Instructors_InstructorId1",
-                        column: x => x.InstructorId1,
+                        name: "FK_InstructorVerifies_Instructors_InstructorId",
+                        column: x => x.InstructorId,
                         principalTable: "Instructors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -281,10 +263,9 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    InstrutorId = table.Column<int>(type: "int", nullable: false),
+                    InstructorId = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Remark = table.Column<int>(type: "int", nullable: false),
-                    InstructorId = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -297,27 +278,24 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         column: x => x.InstructorId,
                         principalTable: "Instructors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoleHasPermissions",
+                name: "RoleClaims",
                 columns: table => new
                 {
-                    PermissionId = table.Column<int>(type: "int", nullable: false),
-                    RoleId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoleHasPermissions", x => new { x.RoleId, x.PermissionId });
+                    table.PrimaryKey("PK_RoleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RoleHasPermissions_Permissions_PermissionId",
-                        column: x => x.PermissionId,
-                        principalTable: "Permissions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RoleHasPermissions_Roles_RoleId",
+                        name: "FK_RoleClaims_Roles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "Roles",
                         principalColumn: "Id",
@@ -328,34 +306,30 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "InstructorDiscusstions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    InstructorId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StudentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    InstructorId = table.Column<int>(type: "int", nullable: false),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Likes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Dislikes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StudentId1 = table.Column<int>(type: "int", nullable: true),
-                    InstructorId1 = table.Column<int>(type: "int", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InstructorDiscusstions", x => x.Id);
+                    table.PrimaryKey("PK_InstructorDiscusstions", x => new { x.StudentId, x.InstructorId });
                     table.ForeignKey(
-                        name: "FK_InstructorDiscusstions_Instructors_InstructorId1",
-                        column: x => x.InstructorId1,
+                        name: "FK_InstructorDiscusstions_Instructors_InstructorId",
+                        column: x => x.InstructorId,
                         principalTable: "Instructors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_InstructorDiscusstions_Students_StudentId1",
-                        column: x => x.StudentId1,
+                        name: "FK_InstructorDiscusstions_Students_StudentId",
+                        column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -394,83 +368,112 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "SubScriptions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StudentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    InstructorId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StudentId1 = table.Column<int>(type: "int", nullable: true),
-                    InstructorId1 = table.Column<int>(type: "int", nullable: true),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    InstructorId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubScriptions", x => x.Id);
+                    table.PrimaryKey("PK_SubScriptions", x => new { x.StudentId, x.InstructorId });
                     table.ForeignKey(
-                        name: "FK_SubScriptions_Instructors_InstructorId1",
-                        column: x => x.InstructorId1,
+                        name: "FK_SubScriptions_Instructors_InstructorId",
+                        column: x => x.InstructorId,
                         principalTable: "Instructors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SubScriptions_Students_StudentId1",
-                        column: x => x.StudentId1,
-                        principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ModelHasPermissions",
-                columns: table => new
-                {
-                    PermissionId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    ModelType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ModelHasPermissions", x => new { x.UserId, x.PermissionId });
-                    table.ForeignKey(
-                        name: "FK_ModelHasPermissions_Permissions_PermissionId",
-                        column: x => x.PermissionId,
-                        principalTable: "Permissions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ModelHasPermissions_User_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "User",
+                        name: "FK_SubScriptions_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ModelHasRoles",
+                name: "UserClaims",
                 columns: table => new
                 {
-                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    ModelType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ModelHasRoles", x => new { x.UserId, x.RoleId });
+                    table.PrimaryKey("PK_UserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ModelHasRoles_Roles_RoleId",
+                        name: "FK_UserClaims_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_UserLogins_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Roles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ModelHasRoles_User_UserId1",
-                        column: x => x.UserId1,
-                        principalTable: "User",
+                        name: "FK_UserRoles_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_UserTokens_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -528,7 +531,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "Carts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
                     StudentId = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
@@ -537,7 +539,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Carts", x => new { x.StudentId, x.CourseId, x.Id });
+                    table.PrimaryKey("PK_Carts", x => new { x.StudentId, x.CourseId });
                     table.ForeignKey(
                         name: "FK_Carts_Courses_CourseId",
                         column: x => x.CourseId,
@@ -580,19 +582,17 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "CourseRates",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Messge = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Star = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false),
                     StudentId = table.Column<int>(type: "int", nullable: false),
+                    Messge = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Star = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CourseRates", x => x.Id);
+                    table.PrimaryKey("PK_CourseRates", x => new { x.CourseId, x.StudentId });
                     table.ForeignKey(
                         name: "FK_CourseRates_Courses_CourseId",
                         column: x => x.CourseId,
@@ -611,8 +611,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "LikeDislikeCourses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     CourseId = table.Column<int>(type: "int", nullable: false),
                     StudentId = table.Column<int>(type: "int", nullable: false),
                     ForWhat = table.Column<int>(type: "int", nullable: false),
@@ -622,7 +620,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LikeDislikeCourses", x => x.Id);
+                    table.PrimaryKey("PK_LikeDislikeCourses", x => new { x.StudentId, x.CourseId });
                     table.ForeignKey(
                         name: "FK_LikeDislikeCourses_Courses_CourseId",
                         column: x => x.CourseId,
@@ -702,8 +700,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "SavedCourses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     StudentId = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
@@ -712,7 +708,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SavedCourses", x => x.Id);
+                    table.PrimaryKey("PK_SavedCourses", x => new { x.CourseId, x.StudentId });
                     table.ForeignKey(
                         name: "FK_SavedCourses_Courses_CourseId",
                         column: x => x.CourseId,
@@ -735,7 +731,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     InstructorId = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Percentage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Percentage = table.Column<decimal>(type: "decimal(8,5)", precision: 8, scale: 5, nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
@@ -818,11 +814,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseRates_CourseId",
-                table: "CourseRates",
-                column: "CourseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CourseRates_StudentId",
                 table: "CourseRates",
                 column: "StudentId");
@@ -843,19 +834,14 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 column: "SubcategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InstructorDiscusstions_InstructorId1",
+                name: "IX_InstructorDiscusstions_InstructorId",
                 table: "InstructorDiscusstions",
-                column: "InstructorId1");
+                column: "InstructorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InstructorDiscusstions_StudentId1",
-                table: "InstructorDiscusstions",
-                column: "StudentId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_InstructorVerifies_InstructorId1",
+                name: "IX_InstructorVerifies_InstructorId",
                 table: "InstructorVerifies",
-                column: "InstructorId1");
+                column: "InstructorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lectures_CourseContentId",
@@ -866,31 +852,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "IX_LikeDislikeCourses_CourseId",
                 table: "LikeDislikeCourses",
                 column: "CourseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LikeDislikeCourses_StudentId",
-                table: "LikeDislikeCourses",
-                column: "StudentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ModelHasPermissions_PermissionId",
-                table: "ModelHasPermissions",
-                column: "PermissionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ModelHasPermissions_UserId1",
-                table: "ModelHasPermissions",
-                column: "UserId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ModelHasRoles_RoleId",
-                table: "ModelHasRoles",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ModelHasRoles_UserId1",
-                table: "ModelHasRoles",
-                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notifications_InstructorId",
@@ -933,14 +894,16 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoleHasPermissions_PermissionId",
-                table: "RoleHasPermissions",
-                column: "PermissionId");
+                name: "IX_RoleClaims_RoleId",
+                table: "RoleClaims",
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SavedCourses_CourseId",
-                table: "SavedCourses",
-                column: "CourseId");
+                name: "RoleNameIndex",
+                table: "Roles",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SavedCourses_StudentId",
@@ -953,14 +916,36 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubScriptions_InstructorId1",
+                name: "IX_SubScriptions_InstructorId",
                 table: "SubScriptions",
-                column: "InstructorId1");
+                column: "InstructorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubScriptions_StudentId1",
-                table: "SubScriptions",
-                column: "StudentId1");
+                name: "IX_UserClaims_UserId",
+                table: "UserClaims",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLogins_UserId",
+                table: "UserLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_RoleId",
+                table: "UserRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "Users",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "Users",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -993,12 +978,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "LikeDislikeCourses");
 
             migrationBuilder.DropTable(
-                name: "ModelHasPermissions");
-
-            migrationBuilder.DropTable(
-                name: "ModelHasRoles");
-
-            migrationBuilder.DropTable(
                 name: "Notifications");
 
             migrationBuilder.DropTable(
@@ -1014,7 +993,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "ReportAbuses");
 
             migrationBuilder.DropTable(
-                name: "RoleHasPermissions");
+                name: "RoleClaims");
 
             migrationBuilder.DropTable(
                 name: "SavedCourses");
@@ -1026,22 +1005,31 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "SubScriptions");
 
             migrationBuilder.DropTable(
+                name: "UserClaims");
+
+            migrationBuilder.DropTable(
+                name: "UserLogins");
+
+            migrationBuilder.DropTable(
+                name: "UserRoles");
+
+            migrationBuilder.DropTable(
+                name: "UserTokens");
+
+            migrationBuilder.DropTable(
                 name: "WebLanguages");
 
             migrationBuilder.DropTable(
                 name: "CourseContents");
 
             migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Permissions");
+                name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "Roles");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Courses");

@@ -2,7 +2,7 @@
 
 namespace Learning_Managerment_SystemMarket_Core.Models.Entities
 {
-    public class CourseRate : BaseEntity
+    public class CourseRate : BaseEntityNotId
     {
         public string Messge { get; set; }
         public int Star { get; set; }

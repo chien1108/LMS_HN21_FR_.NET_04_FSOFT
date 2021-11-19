@@ -2,10 +2,10 @@
 
 namespace Learning_Managerment_SystemMarket_Core.Models.Entities
 {
-    public class SubScription : BaseEntity
+    public class SubScription : BaseEntityNotId
     {
-        public string StudentId { get; set; }
-        public string InstructorId { get; set; }
+        public int StudentId { get; set; }
+        public int InstructorId { get; set; }
 
         public Student Student { get; set; }
         public Instructor Instructor { get; set; }

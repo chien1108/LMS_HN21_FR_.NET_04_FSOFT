@@ -2,7 +2,7 @@
 
 namespace Learning_Managerment_SystemMarket_Core.Models.Entities
 {
-    public class Cart : BaseEntity
+    public class Cart : BaseEntityNotId
     {
         public int StudentId { get; set; }
         public int CourseId { get; set; }

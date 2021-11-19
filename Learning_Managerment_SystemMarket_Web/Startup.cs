@@ -2,6 +2,7 @@ using Learning_Managerment_SystemMarket_Core.Contracts;
 using Learning_Managerment_SystemMarket_Core.Data;
 using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepository;
 using Learning_Managerment_SystemMarket_Core.Repositories.InstructorRepository;
+using Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepository;
 using Learning_Managerment_SystemMarket_Core.Repositories.StudentRepository;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
 using Learning_Managerment_SystemMarket_Web.Mapper;
@@ -40,6 +41,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAdminSettingRepository, AdminSettingRepository>();
             services.AddScoped<IInstructorRepository, InstructorRepository>();
+            services.AddScoped<ISpecialDiscountRepository, SpecialDiscountRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
             //Config for Dependence Service
 
@@ -47,7 +49,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
