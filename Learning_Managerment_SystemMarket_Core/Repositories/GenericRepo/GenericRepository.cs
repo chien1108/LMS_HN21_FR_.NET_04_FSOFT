@@ -7,7 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Learning_Managerment_SystemMarket_Core.Repositories.GenericRepository
+namespace Learning_Managerment_SystemMarket_Core.Repositories.GenericRepo
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {

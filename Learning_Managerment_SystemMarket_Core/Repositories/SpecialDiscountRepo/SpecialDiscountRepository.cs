@@ -1,9 +1,9 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Data;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
-using Learning_Managerment_SystemMarket_Core.Repositories.GenericRepository;
+using Learning_Managerment_SystemMarket_Core.Repositories.GenericRepo;
 using System;
 
-namespace Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepository
+namespace Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepo
 {
     public class SpecialDiscountRepository : GenericRepository<SpecialDiscount>,ISpecialDiscountRepository
     {

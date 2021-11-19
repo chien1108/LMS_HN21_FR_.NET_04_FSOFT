@@ -1,7 +1,7 @@
-﻿using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepository;
-using Learning_Managerment_SystemMarket_Core.Repositories.InstructorRepository;
-using Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepository;
-using Learning_Managerment_SystemMarket_Core.Repositories.StudentRepository;
+﻿using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepo;
+using Learning_Managerment_SystemMarket_Core.Repositories.InstructorRepo;
+using Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepo;
+using Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo;
 using System;
 using System.Threading.Tasks;
 
