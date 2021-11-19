@@ -1,0 +1,7 @@
+# LMS_HN21_FR_.NET_04_FSOFT
+Project LMS 
+
+1. git checkout (branchname)
+2. Kiểm tra xem đang ở branch nào = lệnh git branch 
+3. nhớ là nên pull trc rùi push sau
+
