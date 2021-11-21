@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning_Managerment_SystemMarket_Web", "Learning_Managerment_SystemMarket_Web\Learning_Managerment_SystemMarket_Web.csproj", "{33670208-32E5-4AE4-9C09-C208ECF842D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learning_Managerment_SystemMarket_Web", "Learning_Managerment_SystemMarket_Web\Learning_Managerment_SystemMarket_Web.csproj", "{33670208-32E5-4AE4-9C09-C208ECF842D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning_Managerment_SystemMarket_Core", "Learning_Managerment_SystemMarket_Core\Learning_Managerment_SystemMarket_Core.csproj", "{04E2DB54-F330-4A97-BF3E-6DB4DD1A135C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learning_Managerment_SystemMarket_Core", "Learning_Managerment_SystemMarket_Core\Learning_Managerment_SystemMarket_Core.csproj", "{04E2DB54-F330-4A97-BF3E-6DB4DD1A135C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning_Managerment_SystemMarket_Services", "Learning_Managerment_SystemMarket_Services\Learning_Managerment_SystemMarket_Services.csproj", "{B3B5CD75-E4BD-4C6B-960C-8177E7F069A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learning_Managerment_SystemMarket_Services", "Learning_Managerment_SystemMarket_Services\Learning_Managerment_SystemMarket_Services.csproj", "{B3B5CD75-E4BD-4C6B-960C-8177E7F069A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning_Managerment_SystemMarket_ViewModels", "Learning_Managerment_SystemMarket_ViewModels\Learning_Managerment_SystemMarket_ViewModels.csproj", "{9311D637-6B49-4F3F-BFCD-006CC9B9A1B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learning_Managerment_SystemMarket_ViewModels", "Learning_Managerment_SystemMarket_ViewModels\Learning_Managerment_SystemMarket_ViewModels.csproj", "{9311D637-6B49-4F3F-BFCD-006CC9B9A1B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{67FDE3F8-614E-492F-9061-8C3644CCC8E7}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

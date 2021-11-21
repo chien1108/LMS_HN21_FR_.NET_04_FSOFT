@@ -6,43 +6,312 @@
     <title>@ViewData["Title"] - Learning_Managerment_SystemMarket_Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="/frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/frontend/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/custom_dt_html5.css">
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/dt-global_style.css">
+    <link href="/js/summernote.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/plugins/select2/select2.min.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/components.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Learning_Managerment_SystemMarket_Web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div class="navbar-bg"></div>
+    <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+            <ul class="navbar-nav mr-3">
+                <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            </ul>
+        </form>
+        <ul class="navbar-nav navbar-right">
+            <li class="dropdown dropdown-list-toggle">
+                <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="fa fa-language"></i></a>
+                <div class="dropdown-menu dropdown-list dropdown-menu-right">
+                    <div class="dropdown-header">
+                        Languages
+
+                    </div>
+                    <div class="dropdown-list-content dropdown-list-message">
+                        <a href="https://coursearly.com/cursus/public/locale/en" class="dropdown-item">
+                            <div class="dropdown-item-desc">
+                                <b>English</b>
+                            </div>
+                        </a>
+                        <a href="https://coursearly.com/cursus/public/locale/es" class="dropdown-item">
+                            <div class="dropdown-item-desc">
+                                <b>Spanish</b>
+                            </div>
+                        </a>
+                        <a href="https://coursearly.com/cursus/public/locale/ar" class="dropdown-item">
+                            <div class="dropdown-item-desc">
+                                <b>arabic</b>
+                            </div>
+                        </a>
+                        <a href="https://coursearly.com/cursus/public/locale/TR" class="dropdown-item">
+                            <div class="dropdown-item-desc">
+                                <b>Türkçe</b>
+                            </div>
+                        </a>
+                        <a href="https://coursearly.com/cursus/public/locale/Pt" class="dropdown-item">
+                            <div class="dropdown-item-desc">
+                                <b>Portugues</b>
+                            </div>
+                        </a>
+                        <a href="https://coursearly.com/cursus/public/locale/da" class="dropdown-item">
+                            <div class="dropdown-item-desc">
+                                <b>da</b>
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                    <img alt="image" src="https://coursearly.com/cursus/public/upload/image/60dee1e59cf8d.png" class="rounded-circle mr-1">
+                    <div class="d-sm-none d-lg-inline-block">Hi, Admin</div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-title">Logged in </div>
+                    <a href="https://coursearly.com/cursus/public/admin/profile" class="dropdown-item has-icon">
+                        <i class="far fa-user"></i> Profile
+                    </a>
+
+                    <a href="https://coursearly.com/cursus/public/admin/setting/general" class="dropdown-item has-icon">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="https://coursearly.com/cursus/public/admin/logout" class="dropdown-item has-icon text-danger">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="main-sidebar" tabindex="1" style="overflow: hidden; outline: none;">
+
+        <aside id="sidebar-wrapper">
+            <div class="sidebar-brand">
+                <a href="https://coursearly.com/cursus/public/admin/dashboard">Cursus</a>
             </div>
-        </nav>
-    </header>
-    <div class="container">
+            <div class="sidebar-brand sidebar-brand-sm">
+                <a href="https://coursearly.com/cursus/public/admin/dashboard"></a>
+            </div>
+            <ul class="sidebar-menu">
+
+                <li class="active">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="menu-header">Starter</li>
+
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/role"><i class="far fa-address-book"></i> <span>Role</span></a>
+                </li>
+
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/users"><i class="far fa-user"></i> <span>Users</span></a>
+                </li>
+
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/languages">
+                        <i class="fas fa-language"></i>
+                        <span>Languages</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/categories">
+                        <i class="fas fa-list-ul"></i>
+                        <span>Categories</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/sub-categories">
+                        <i class="fas fa-boxes"></i>
+                        <span>Sub Categories</span>
+                    </a>
+                </li>
+                <li class="menu-header">Students</li>
+
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/students">
+                        <i class="fas fa-user"></i>
+                        <span>Student</span>
+                    </a>
+                </li>
+                <li class="menu-header">Instructor</li>
+
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/instructors">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Instructor</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/verification">
+                        <i class="fas fa-certificate"></i>
+                        <span>Verification</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/payout">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <span>Payout</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown ">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fas fa-book"></i>
+                        <span>Course</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="nav-link  " href="https://coursearly.com/cursus/public/admin/courses/pending">Waiting for approval</a>
+                        </li>
+                        <li><a class="nav-link  " href="https://coursearly.com/cursus/public/admin/courses/all">All</a></li>
+                        <li><a class="nav-link  " href="https://coursearly.com/cursus/public/admin/courses/rejected">Rejected</a></li>
+                    </ul>
+                </li>
+                <li class="menu-header">Extra</li>
+
+                <li class="nav-item dropdown ">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="nav-link" href="https://coursearly.com/cursus/public/admin/setting/general">General</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="https://coursearly.com/cursus/public/admin/setting/legal">Legal</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="https://coursearly.com/cursus/public/admin/setting/social">Social</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="https://coursearly.com/cursus/public/admin/setting/payment">Payment</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="https://coursearly.com/cursus/public/admin/setting/seo">SEO</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="https://coursearly.com/cursus/public/admin/setting/appearance">Appearance</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="https://coursearly.com/cursus/public/admin/setting/other">Other</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="nav-item dropdown ">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
+                        <i class="far fa-file-word"></i>
+                        <span>Reports</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="nav-link" href="https://coursearly.com/cursus/public/admin/setting/general">Earning</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="https://coursearly.com/cursus/public/admin/report/course-sell">
+                                Cource Selling
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="https://coursearly.com/cursus/public/admin/report/subscription">
+                                Subscription
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="https://coursearly.com/cursus/public/admin/report/instructor-registration">
+                                Instructor Registration
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="https://coursearly.com/cursus/public/admin/report/student-registration">
+                                Student Registration
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/feedback">
+                        <i class="fas fa-comment"></i>
+                        <span>Feedback</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/noti-template">
+                        <i class="fas fa-bell"></i>
+                        <span>Notification Template</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/web-language">
+                        <i class="fa fa-language"></i>
+                        <span>Web Languages</span>
+                    </a>
+                </li>
+
+                <li class="">
+                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/faqs">
+                        <i class="fas fa-question"></i>
+                        <span>FAQ</span>
+                    </a>
+                </li>
+            </ul>
+
+        </aside>
+    </div>
+    <div class="main-content" style="min-height: 861px;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - Learning_Managerment_SystemMarket_Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="main-footer">
+        <div class="footer-left">
+            &copy; 2021 - Learning_Managerment_SystemMarket_Web <div class="bullet"></div> Design By <a href="">Team</a>
+        </div>
+        <div class="footer-right">
+            1.0.2
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="/frontend/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js')}}">
+    </script>
+    <script src="/frontend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/nicescroll.min.js"></script>
+    <script src="/js/moment.min.js"></script>
+
+    <script src="/plugins/table/datatable/datatables.js"></script>
+    <script src="/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
+    <script src="/plugins/table/datatable/button-ext/jszip.min.js"></script>
+    <script src="/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
+    <script src="/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+    <script src="/js/stisla.js"></script>
+    <script src="/plugins/select2/select2.min.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/chart.js"></script>
+
+    <script src="/js/summernote.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
