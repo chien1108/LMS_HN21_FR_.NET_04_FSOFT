@@ -1,5 +1,4 @@
-﻿using Learning_Managerment_SystemMarket_Core.Modules.Enums;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Learning_Managerment_SystemMarket_Core.Models.Base
@@ -10,9 +9,6 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Base
 
         [Required]
         public int Id { get; set; }
-
-        [Required]
-        public Status Status { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]

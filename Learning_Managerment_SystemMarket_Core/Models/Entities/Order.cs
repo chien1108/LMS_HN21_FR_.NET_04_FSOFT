@@ -1,4 +1,5 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Models.Base;
+using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 
 namespace Learning_Managerment_SystemMarket_Core.Models.Entities
 {
@@ -9,7 +10,7 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public decimal Price { get; set; }
         public int PaymentMethod { get; set; }
         public int AdminCommission { get; set; }
-        //public int Status { get; set; }
+        public StatusOrder Status { get; set; }
 
         public Student Student { get; set; }
         public Course Course { get; set; }

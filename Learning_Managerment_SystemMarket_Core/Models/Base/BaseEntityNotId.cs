@@ -9,9 +9,6 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Base
         private DateTime? _createdDate;
 
         [Required]
-        public Status Status { get; set; }
-
-        [Required]
         [DataType(DataType.DateTime)]
         public DateTime CreatedDate
         {

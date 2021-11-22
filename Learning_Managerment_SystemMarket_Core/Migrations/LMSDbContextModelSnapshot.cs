@@ -35,9 +35,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
@@ -59,9 +56,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.HasKey("StudentId", "CourseId");
 
@@ -143,10 +137,10 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("PromotionVideo")
-                        .HasColumnType("int");
+                    b.Property<string>("PromotionVideo")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Shares")
+                    b.Property<int>("Share")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -194,9 +188,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<int>("Position")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -225,9 +216,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Star")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("CourseId", "StudentId");
@@ -259,9 +247,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<string>("Question")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("FAQs");
@@ -289,8 +274,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -304,23 +289,47 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
+                    b.Property<int>("EmailNotification")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("EmailVerifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Facebook")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HeadLine")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InstructorName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("LinkedIn")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("PushNotification")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<string>("Website")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Youtube")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -349,9 +358,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.HasKey("StudentId", "InstructorId");
 
@@ -444,9 +450,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<int>("Positon")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -477,9 +480,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("StudentId", "CourseId");
 
                     b.HasIndex("CourseId");
@@ -502,9 +502,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
@@ -551,9 +548,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
                     b.Property<string>("NotificationTitle")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<string>("Subject")
                         .HasColumnType("nvarchar(max)");
@@ -625,7 +619,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<int>("Remark")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
+                    b.Property<int>("StatusPay")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -663,9 +657,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<string>("Result")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
@@ -688,9 +679,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
@@ -750,9 +738,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("CourseId", "StudentId");
 
                     b.HasIndex("StudentId");
@@ -787,9 +772,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -807,12 +789,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -871,9 +847,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("StudentId", "InstructorId");
 
                     b.HasIndex("InstructorId");
@@ -904,6 +877,9 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
                     b.Property<int>("IdUser")
                         .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -937,9 +913,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<int>("WhoIs")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -975,9 +948,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
                     b.Property<string>("ShortName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

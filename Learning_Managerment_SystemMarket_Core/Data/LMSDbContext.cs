@@ -195,7 +195,6 @@ namespace Learning_Managerment_SystemMarket_Core.Data
                     {
                         case EntityState.Added:
                             {
-                                baseEntity.Status = Status.IsActive;
                                 baseEntity.CreatedDate = now;
                                 baseEntity.ModifiedDate = now;
                                 break;

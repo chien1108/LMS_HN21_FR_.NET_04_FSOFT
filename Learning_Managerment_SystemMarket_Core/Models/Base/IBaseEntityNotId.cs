@@ -5,7 +5,6 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Base
 {
     public interface IBaseEntityNotId
     {
-        Status Status { get; set; }
 
         DateTime CreatedDate { get; set; }
 

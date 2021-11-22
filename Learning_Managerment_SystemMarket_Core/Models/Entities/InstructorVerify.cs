@@ -1,4 +1,5 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Models.Base;
+using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 
 namespace Learning_Managerment_SystemMarket_Core.Models.Entities
 {
@@ -7,7 +8,7 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public int InstructorId { get; set; }
         public string Name { get; set; }
         public string Document { get; set; }
-        //public int Status { get; set; }
+        public StatusInsVerify Status { get; set; }
 
         public Instructor Instructor { get; set; }
     }

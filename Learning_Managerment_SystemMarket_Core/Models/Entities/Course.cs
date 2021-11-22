@@ -1,4 +1,5 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Models.Base;
+using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 using System.Collections.Generic;
 
 namespace Learning_Managerment_SystemMarket_Core.Models.Entities
@@ -13,14 +14,15 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public bool IsFree { get; set; }
         public bool IsFeatured { get; set; }
         public bool IsBestseller { get; set; }
-        public int CoverImage { get; set; }
-        public int PromotionVideo { get; set; }
-        //public int Status { get; set; }
+        public int CoverImage { get; set; }// default img.png
+        public string PromotionVideo { get; set; } // null
+        public StatusCourse Status { get; set; } // 0 Draft, 1 Active , 2 WaitFor Approced, 3 Block, 4 Deactive
         public int Likes { get; set; }
         public int Dislike { get; set; }
-        public int Shares { get; set; }
+        public int Share { get; set; }
         public int Views { get; set; }
-        //public int ReportAbuseId { get; set; }
+        //public int ReportAbuseId { get; set; } // error
+
 
         public int InstructorId { get; set; }
         public int CategoryId { get; set; }
