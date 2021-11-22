@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\autotag.yml" />
+    <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-pro.yml" />
+    <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-rc-pro.yml" />
+    <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-rc.yml" />
+    <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish.yml" />
+    <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\update-icons.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.11" />

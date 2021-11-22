@@ -31,11 +31,6 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork
         public ISpecialDiscountRepository SpecialDiscounts => _specialDiscountRepository ??= new SpecialDiscountRepository(_context);
 
         public IStudentRepository Students => _studentRepository ??= new StudentRepository(_context);
-        //public ICategoryRepository Categories => _categoryRepository ??= new CategoryRepository(_context);
-
-        //public ITagRepository Tags => _tagRepository ??= new TagRepository(_context);
-
-        //public IPostRepository Posts => _postRepository ??= new PostRepository(_context);
 
         public void Dispose()
         {
