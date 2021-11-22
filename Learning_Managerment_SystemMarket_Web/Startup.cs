@@ -110,6 +110,10 @@ namespace Learning_Managerment_SystemMarket_Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "instuctor",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                  );
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });

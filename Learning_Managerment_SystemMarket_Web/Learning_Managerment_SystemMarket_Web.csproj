@@ -12,6 +12,12 @@
     <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-rc.yml" />
     <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish.yml" />
     <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\update-icons.yml" />
+    <None Include="wwwroot\instructor\public\frontend\vendor\unicons-2.0.1\.github\workflows\autotag.yml" />
+    <None Include="wwwroot\instructor\public\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-pro.yml" />
+    <None Include="wwwroot\instructor\public\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-rc-pro.yml" />
+    <None Include="wwwroot\instructor\public\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-rc.yml" />
+    <None Include="wwwroot\instructor\public\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish.yml" />
+    <None Include="wwwroot\instructor\public\frontend\vendor\unicons-2.0.1\.github\workflows\update-icons.yml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,10 +29,18 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.12" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Learning_Managerment_SystemMarket_Core\Learning_Managerment_SystemMarket_Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\instructor\public\upload\document\" />
+    <Folder Include="wwwroot\instructor\public\upload\image\" />
+    <Folder Include="wwwroot\instructor\public\upload\lectures\" />
+    <Folder Include="wwwroot\instructor\public\upload\video\" />
   </ItemGroup>
 
 </Project>
