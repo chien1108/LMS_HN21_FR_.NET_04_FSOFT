@@ -36,11 +36,11 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FeedBackServi
 
         public async Task<ServiceResponse<FeedBack>> Delete(FeedBack feedBack)
         {
-            var feedBackFromDB = await Find (x => x.Id == feedBack.Id);
+            var feedBackFromDB = await Find(x => x.Id == feedBack.Id);
             if (feedBackFromDB != null)
             {
                 _unitOfWork.FeedBacks.Delete(feedBack);
-                return new ServiceResponse<FeedBack> { Success = true, Message = "Add AdminSetting Success" };
+                return new ServiceResponse<FeedBack> { Success = true, Message = "Delete AdminSetting Success" };
             }
             else
             {
@@ -48,23 +48,20 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FeedBackServi
             }
         }
 
-        public async Task<FeedBack> Find(Expression<Func<FeedBack, bool>> expression = null, List<string> includes = null)
-        => await _unitOfWork.FeedBacks.FindByCondition(expression, includes);
+        public async Task<FeedBack> Find(Expression<Func<FeedBack, bool>> expression = null, 
+                                         List<string> includes = null)
+            => await _unitOfWork.FeedBacks.FindByCondition(expression, includes);
 
-        public Task<IList<FeedBack>> FindAll(Expression<Func<FeedBack, bool>> expression = null, Func<IQueryable<FeedBack>, IOrderedQueryable<FeedBack>> orderBy = null, List<string> includes = null)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IList<FeedBack>> FindAll(Expression<Func<FeedBack, bool>> expression = null,
+                                             Func<IQueryable<FeedBack>, IOrderedQueryable<FeedBack>> orderBy = null,
+                                             List<string> includes = null)
+            => await _unitOfWork.FeedBacks.GetAll(expression, orderBy, includes);
 
-        public Task<bool> IsExisted(Expression<Func<FeedBack, bool>> expression = null)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<bool> IsExisted(Expression<Func<FeedBack, bool>> expression = null)
+            => await _unitOfWork.FeedBacks.IsExists(expression);
 
-        public Task<bool> SaveChange()
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<bool> SaveChange()
+            => await _unitOfWork.Save();
 
         public async Task<ServiceResponse<FeedBack>> Update(FeedBack updateFeedBack)
         {
@@ -72,7 +69,7 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FeedBackServi
             if (feedBackFromDB != null)
             {
                 _unitOfWork.FeedBacks.Update(updateFeedBack);
-                return new ServiceResponse<FeedBack> { Success = true, Message = "Add AdminSetting Success" };
+                return new ServiceResponse<FeedBack> { Success = true, Message = "Update AdminSetting Success" };
             }
             else
             {

@@ -41,7 +41,7 @@ namespace Learning_Managerment_SystemMarket_Services.AdminServices.AdminSettingS
             if (adminSettingFromDB != null)
             {
                 _unitOfWork.AdminSettings.Delete(adminSettingVM);
-                return new ServiceResponse<AdminSetting> { Success = true, Message = "Add AdminSetting Success" };
+                return new ServiceResponse<AdminSetting> { Success = true, Message = "Delete AdminSetting Success" };
             }
             else
             {
