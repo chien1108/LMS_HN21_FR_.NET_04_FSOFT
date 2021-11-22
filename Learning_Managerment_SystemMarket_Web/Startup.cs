@@ -10,6 +10,7 @@ using Learning_Managerment_SystemMarket_Core.Repositories.FeedBackRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.InstructorDiscusstionRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.InstructorRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.InstructorVerifyRepo;
+using Learning_Managerment_SystemMarket_Core.Repositories.LanguageRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.LectureRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.LikeDislikeCourseRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.NotificationRepo;
@@ -53,8 +54,10 @@ namespace Learning_Managerment_SystemMarket_Web
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
             //Config for Dependence Repository
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<IAdminSettingRepository, AdminSettingRepository>();
             services.AddScoped<IInstructorRepository, InstructorRepository>();
             services.AddScoped<ISpecialDiscountRepository, SpecialDiscountRepository>();
@@ -68,6 +71,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IFeedBackRepository, FeedBackRepository>();
             services.AddScoped<IInstructorDiscusstionRepository,InstructorDiscusstionRepository>();
             services.AddScoped<IInstructorVerifyRepository, InstructorVerifyRepository>();
+            services.AddScoped<ILanguageRepository, LanguageRepository>();
             services.AddScoped<ILectureRepository, LectureRepository>();
             services.AddScoped<ILikeDislikeCourseRepository, LikeDislikeCourseRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
@@ -75,6 +79,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IPayOutRepository, PayOutRepository>();
             services.AddScoped<IPaytabsInvoiceRepository, PaytabsInvoiceRepository>();
+
             //Config for Dependence Service
 
             services.AddAutoMapper(typeof(MapperProfile));

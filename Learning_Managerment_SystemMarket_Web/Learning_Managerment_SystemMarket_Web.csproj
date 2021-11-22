@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\autotag.yml" />
     <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-pro.yml" />
     <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-rc-pro.yml" />
