@@ -5,7 +5,6 @@ var LectureData = []
 var LectureFormData = new FormData()
 
 $(function () {
-
     $("#lecturefrom").on('submit', function (e) {
         e.preventDefault(e);
         var form = $(this);
