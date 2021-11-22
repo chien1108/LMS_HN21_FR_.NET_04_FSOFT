@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Learning_Managerment_SystemMarket_Services.CourseServices
+namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
 {
-    public class CourseServices : ICourseServices
+    class CourseServices
     {
     }
 }
