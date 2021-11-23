@@ -23,16 +23,12 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorSer
 
         public async Task<ServiceResponse<Instructor>> Create(Instructor newInstructor)
         {
-            var instructorFromDb = await Find(x => x.Id == newInstructor.Id);
-            if (instructorFromDb == null)
+            await _unitOfWork.Instructors.Create(newInstructor);
+            if (!await SaveChange())
             {
-                await _unitOfWork.Instructors.Create(newInstructor);
-                return new ServiceResponse<Instructor> { Success = true, Message = "Add Instructor Success" };
+                return new ServiceResponse<Instructor> { Success = false, Message = "Something wrongs went create new Instructor" };
             }
-            else
-            {
-                return new ServiceResponse<Instructor> { Success = false, Message = "Instructor is Exist" };
-            }
+            return new ServiceResponse<Instructor> { Success = true, Message = "Add Instructor Success" };
         }
 
         public async Task<ServiceResponse<Instructor>> Delete(Instructor instructor)
@@ -41,6 +37,10 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorSer
             if (instructorFromDb != null)
             {
                 _unitOfWork.Instructors.Delete(instructor);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<Instructor> { Success = false, Message = "Something wrongs went delete new Instructor" };
+                }
                 return new ServiceResponse<Instructor> { Success = true, Message = "Delete Instructor Success" };
             }
             else
@@ -70,6 +70,10 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorSer
             if (instructorFromDb != null)
             {
                 _unitOfWork.Instructors.Update(updateInstructor);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<Instructor> { Success = false, Message = "Something wrongs went update new Instructor" };
+                }
                 return new ServiceResponse<Instructor> { Success = true, Message = "Update Instructor Success" };
             }
             else

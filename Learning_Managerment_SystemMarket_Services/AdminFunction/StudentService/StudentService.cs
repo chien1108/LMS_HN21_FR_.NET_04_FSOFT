@@ -23,16 +23,12 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.StudentServic
 
         public async Task<ServiceResponse<Student>> Create(Student newStudent)
         {
-            var studentFromDb = await Find(x => x.Id == newStudent.Id);
-            if (studentFromDb == null)
+            await _unitOfWork.Students.Create(newStudent);
+            if (!await SaveChange())
             {
-                await _unitOfWork.Students.Create(newStudent);
-                return new ServiceResponse<Student> { Success = true, Message = "Add Student Success" };
+                return new ServiceResponse<Student> { Success = false, Message = "Something wrongs went create new Student" };
             }
-            else
-            {
-                return new ServiceResponse<Student> { Success = false, Message = "Student is Exist" };
-            }
+            return new ServiceResponse<Student> { Success = true, Message = "Add Student Success" };
         }
 
         public async Task<ServiceResponse<Student>> Delete(Student student)
@@ -41,6 +37,10 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.StudentServic
             if (studentFromDb != null)
             {
                 _unitOfWork.Students.Delete(student);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<Student> { Success = false, Message = "Something wrongs went delete new Student" };
+                }
                 return new ServiceResponse<Student> { Success = true, Message = "Delete Student Success" };
             }
             else
@@ -70,6 +70,10 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.StudentServic
             if (studentFromDb != null)
             {
                 _unitOfWork.Students.Update(updateStudent);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<Student> { Success = false, Message = "Something wrongs went update new Student" };
+                }
                 return new ServiceResponse<Student> { Success = true, Message = "Update Student Success" };
             }
             else

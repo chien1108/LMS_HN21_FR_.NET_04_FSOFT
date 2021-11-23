@@ -23,16 +23,12 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FAQService
 
         public async Task<ServiceResponse<FAQ>> Create(FAQ newFAQ)
         {
-            var FAQFromDb = await Find(x => x.Id == newFAQ.Id);
-            if (FAQFromDb == null)
+            await _unitOfWork.FAQs.Create(newFAQ);
+            if (!await SaveChange())
             {
-                await _unitOfWork.FAQs.Create(newFAQ);
-                return new ServiceResponse<FAQ> { Success = true, Message = "Add FAQ Success" };
+                return new ServiceResponse<FAQ> { Success = false, Message = "Something wrongs went create new FAQ" };
             }
-            else
-            {
-                return new ServiceResponse<FAQ> { Success = false, Message = "FAQ is Exist" };
-            }
+            return new ServiceResponse<FAQ> { Success = true, Message = "Add FAQ Success" };
         }
 
         public async Task<ServiceResponse<FAQ>> Delete(FAQ FAQ)
@@ -41,6 +37,10 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FAQService
             if (FAQFromDb != null)
             {
                 _unitOfWork.FAQs.Delete(FAQ);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<FAQ> { Success = false, Message = "Something wrongs went delete new FAQ" };
+                }
                 return new ServiceResponse<FAQ> { Success = true, Message = "Delete FAQ Success" };
             }
             else
@@ -70,6 +70,10 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FAQService
             if (FAQFromDb != null)
             {
                 _unitOfWork.FAQs.Update(updateFAQ);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<FAQ> { Success = false, Message = "Something wrongs went update new FAQ" };
+                }
                 return new ServiceResponse<FAQ> { Success = true, Message = "Update FAQ Success" };
             }
             else

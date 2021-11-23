@@ -14,6 +14,7 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FeedBackServi
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+
         public FeedBackService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
@@ -22,16 +23,12 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FeedBackServi
 
         public async Task<ServiceResponse<FeedBack>> Create(FeedBack newFeedBack)
         {
-            var feedBackFromDb = await Find(x => x.Id == newFeedBack.Id);
-            if (feedBackFromDb == null)
+            await _unitOfWork.FeedBacks.Create(newFeedBack);
+            if (!await SaveChange())
             {
-                await _unitOfWork.FeedBacks.Create(newFeedBack);
-                return new ServiceResponse<FeedBack> { Success = true, Message = "Add FeedBack Success" };
+                return new ServiceResponse<FeedBack> { Success = false, Message = "Something wrongs went create new FeedBack" };
             }
-            else
-            {
-                return new ServiceResponse<FeedBack> { Success = false, Message = "FeedBack is Exist" };
-            }
+            return new ServiceResponse<FeedBack> { Success = true, Message = "Add FeedBack Success" };
         }
 
         public async Task<ServiceResponse<FeedBack>> Delete(FeedBack feedBack)
@@ -40,6 +37,10 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FeedBackServi
             if (feedBackFromDB != null)
             {
                 _unitOfWork.FeedBacks.Delete(feedBack);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<FeedBack> { Success = false, Message = "Something wrongs went delete new FeedBack" };
+                }
                 return new ServiceResponse<FeedBack> { Success = true, Message = "Delete AdminSetting Success" };
             }
             else
@@ -48,7 +49,7 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FeedBackServi
             }
         }
 
-        public async Task<FeedBack> Find(Expression<Func<FeedBack, bool>> expression = null, 
+        public async Task<FeedBack> Find(Expression<Func<FeedBack, bool>> expression = null,
                                          List<string> includes = null)
             => await _unitOfWork.FeedBacks.FindByCondition(expression, includes);
 
@@ -69,6 +70,10 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FeedBackServi
             if (feedBackFromDB != null)
             {
                 _unitOfWork.FeedBacks.Update(updateFeedBack);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<FeedBack> { Success = false, Message = "Something wrongs went update new FeedBack" };
+                }
                 return new ServiceResponse<FeedBack> { Success = true, Message = "Update AdminSetting Success" };
             }
             else

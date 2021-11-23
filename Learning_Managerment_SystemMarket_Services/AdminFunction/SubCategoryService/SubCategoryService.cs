@@ -23,16 +23,12 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategorySe
 
         public async Task<ServiceResponse<SubCategory>> Create(SubCategory newSubCategory)
         {
-            var subCategoryFromDb = await Find(x => x.Id == newSubCategory.Id);
-            if (subCategoryFromDb == null)
+            await _unitOfWork.SubCategories.Create(newSubCategory);
+            if (!await SaveChange())
             {
-                await _unitOfWork.SubCategories.Create(newSubCategory);
-                return new ServiceResponse<SubCategory> { Success = true, Message = "Add SubCategory Success" };
+                return new ServiceResponse<SubCategory> { Success = false, Message = "Something wrongs went create new SubCategory" };
             }
-            else
-            {
-                return new ServiceResponse<SubCategory> { Success = false, Message = "SubCategory is Exist" };
-            }
+            return new ServiceResponse<SubCategory> { Success = true, Message = "Add SubCategory Success" };
         }
 
         public async Task<ServiceResponse<SubCategory>> Delete(SubCategory subCategory)
@@ -41,6 +37,10 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategorySe
             if (subCategoryFromDb != null)
             {
                 _unitOfWork.SubCategories.Delete(subCategory);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<SubCategory> { Success = false, Message = "Something wrongs went delete new SubCategory" };
+                }
                 return new ServiceResponse<SubCategory> { Success = true, Message = "Delete SubCategory Success" };
             }
             else
@@ -49,7 +49,7 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategorySe
             }
         }
 
-        public async Task<SubCategory> Find(Expression<Func<SubCategory, bool>> expression = null, 
+        public async Task<SubCategory> Find(Expression<Func<SubCategory, bool>> expression = null,
                                             List<string> includes = null)
             => await _unitOfWork.SubCategories.FindByCondition(expression, includes);
 
@@ -70,6 +70,10 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategorySe
             if (subCategoryFromDb != null)
             {
                 _unitOfWork.SubCategories.Update(updateSubCategory);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<SubCategory> { Success = false, Message = "Something wrongs went update new SubCategory" };
+                }
                 return new ServiceResponse<SubCategory> { Success = true, Message = "Update SubCategory Success" };
             }
             else
