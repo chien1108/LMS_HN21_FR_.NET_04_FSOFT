@@ -33,22 +33,17 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             return View(); 
         }
 
-<<<<<<< HEAD
         //public async Task<IActionResult> GetCourseByCategory(int id)
         //{
         //    var course = _studentHomePageService.FindCourse(c => c.CategoryId == id);
         //}
-=======
+
         public async Task<IActionResult> GetCourseByCategory(int id)
         {
-<<<<<<< HEAD:Learning_Managerment_SystemMarket_Web/Areas/StudentFunction/Controllers/StudentController.cs
             var courses = await _studentHomePageService.FindAllCourse(c => c.CategoryId == id);
             return View(courses);
-=======
             var course = await _studentHomePageService.FindCourse(c => c.CategoryId == id);
             return View();
->>>>>>> d4e12d7ce85e5857cf821193bff8886ebf62944b:Learning_Managerment_SystemMarket_Web/Controllers/StudentController.cs
         }
->>>>>>> 5811c0e0c9c07931fd281ba6e0dcbed146462f7e
     }
 }
