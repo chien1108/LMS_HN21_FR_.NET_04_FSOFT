@@ -1,11 +1,29 @@
-﻿using Learning_Managerment_SystemMarket_Core.Models.Base;
+﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Core.Modules.Enums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Learning_Managerment_SystemMarket_Core.Models.Entities
+namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.DashboardViewModels
 {
-    public class Course : BaseEntity
+    public class SubmitCoursesVM
     {
+        private DateTime? _createdDate;
+
+        [Required]
+        public int Id { get; set; }
+
+        [Required]
+        [DataType(DataType.DateTime)]
+        public DateTime CreatedDate
+        {
+            get { return _createdDate ?? DateTime.Now; }
+            set { _createdDate = value; }
+        }
+        public DateTime? ModifiedDate { get; set; }
         public string Title { get; set; }
         public string SubTitile { get; set; }
         public string Description { get; set; }
@@ -28,10 +46,9 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public int CategoryId { get; set; }
         public int SubcategoryId { get; set; }
         public int LanguageId { get; set; }
-        public Instructor Instructor { get; set; }
+        //public Instructor Instructor { get; set; }
         public Language Language { get; set; }
         public SubCategory SubCategory { get; set; }
-        public Category Category { get; set; }
 
 
 
@@ -42,6 +59,5 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public ICollection<Cart> Carts { get; set; }
 
         public ICollection<Order> Orders { get; set; }
-
     }
 }

@@ -32,7 +32,6 @@ $(function () {
         addLectureToHtml()
         return false
     })
-
 });
 
 function onLectureFileChange() {
@@ -47,7 +46,6 @@ function onLectureFileChange() {
 function addLectureToHtml() {
     var tr = "";
     LectureData.forEach((element, index) => {
-
         tr += ` <tr>
         <td class="text-center">${index+1}</td>
         <td class="cell-ta">${element[0]['value']}</td>
@@ -61,12 +59,10 @@ function addLectureToHtml() {
         </tr>`
     });
     $("#tbodylecture").html(tr);
-
 }
 
 function deleteLecture(index) {
     LectureData.splice(index, 1);
-
     addLectureToHtml()
 }
 
