@@ -74,10 +74,29 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
             unitOfWork.Courses.Update(course);
         }
 
+<<<<<<< HEAD
         public async Task<IList<Course>> GetCourseByStudentId(int id)
         {
             //var courses= this.unitOfWork.Courses.FindByCondition(x=>x.Id==id)
             throw new System.NotImplementedException();
+=======
+        public async Task<ICollection<Course>> GetFeatureCourse(int size)
+        {
+            var course = await unitOfWork.Courses.GetFeatureCourse(size);
+            return course;
+        }
+
+        public async Task<ICollection<Course>> GetNewestCourse(int size)
+        {
+            var course = await unitOfWork.Courses.GetNewestCourse(size);
+            return course;
+        }
+
+        public async Task<IList<CategoryDetailVM>> GetAllCategory()
+        {
+            var categories = await unitOfWork.Categories.GetAll();
+            return _map.Map<IList<CategoryDetailVM>>(categories);
+>>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c
         }
     }
 }

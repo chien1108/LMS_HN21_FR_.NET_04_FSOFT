@@ -17,6 +17,7 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/components.css">
+<<<<<<< HEAD
     <link href='~/frontend/vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
 
     <link href="~/frontend/css/vertical-responsive-menu.min.css" rel="stylesheet">
@@ -42,6 +43,33 @@
     <link rel="stylesheet" type="text/css" href="~/frontend/vendor/semantic/semantic.min.css">
 
     <link rel="stylesheet" type="text/css" href="~/frontend/vendor/snackbar/snackbar.min.css">
+=======
+    <link href='frontend/vendor/unicons-2.0.1/css/animation.css' rel='stylesheet'>
+
+    <link href="frontend/css/vertical-responsive-menu.min.css" rel="stylesheet">
+
+    <link href="frontend/css/style.css" rel="stylesheet">
+
+    <link href="frontend/css/responsive.css" rel="stylesheet">
+
+    <link href="frontend/css/night-mode.css" rel="stylesheet">
+
+    <link href="frontend/css/instructor-dashboard.css" rel="stylesheet">
+
+    <link href="frontend/css/instructor-responsive.css" rel="stylesheet">
+
+    <link href="frontend/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="frontend/vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
+
+    <link href="frontend/vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+
+    <link href="frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="frontend/vendor/semantic/semantic.min.css">
+
+    <link rel="stylesheet" type="text/css" href="frontend/vendor/snackbar/snackbar.min.css">
+>>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c
 </head>
 <body>
     <header class="header clearfix">
@@ -61,6 +89,7 @@
                 <div class="ui simple dropdown item" tabindex="0">
                     <a href="#" class="option_links p-0" title="categories"><i class="uil uil-apps"></i></a>
                     <div class="menu dropdown_category5" tabindex="-1">
+<<<<<<< HEAD
 
                         <a href="https://coursearly.com/cursus/public/categories/business/4" class="item channel_item">Business</a>
                         <a href="https://coursearly.com/cursus/public/categories/design/5" class="item channel_item">Design</a>
@@ -80,6 +109,9 @@
                         <a href="https://coursearly.com/cursus/public/categories/personal-development/10" class="item channel_item">Personal Development</a>
                         <a href="https://coursearly.com/cursus/public/categories/photography/1" class="item channel_item">Photography</a>
                         <a href="https://coursearly.com/cursus/public/categories/teaching-&amp;-academics/13" class="item channel_item">Teaching &amp; Academics</a>
+=======
+                        <partial name="~/Views/Student/_Categories.cshtml">
+>>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c
                     </div>
                 </div>
             </div>
@@ -257,6 +289,10 @@
                         <a href="https://coursearly.com/cursus/public/feedback" class="item channel_item">Send Feedback</a>
 
                         <a href="https://coursearly.com/cursus/public/logout" class="item channel_item">Sign Out</a>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c
                     </div>
                 </li>
             </ul>
@@ -267,7 +303,11 @@
             <div class="left_section">
                 <ul>
                     <li class="menu--item">
+<<<<<<< HEAD
                         <a href="https://coursearly.com/cursus/public" class="menu--link active" title="Home">
+=======
+                        <a asp-action="Index" asp-controller="Student" class="menu--link active" title="Home">
+>>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c
                             <i class="uil uil-home-alt menu--icon"></i>
                             <span class="menu--label">Home</span>
                         </a>
@@ -458,6 +498,10 @@
                             <span class="menu--label">Report History</span>
                         </a>
                     </li>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c
                     <li class="menu--item ">
                         <a href="https://coursearly.com/cursus/public/feedback" class="menu--link " title="Send Feedback">
                             <i class="uil uil-comment-alt-exclamation menu--icon"></i>
@@ -471,6 +515,7 @@
     </nav>
 
     <div class="wrapper">
+<<<<<<< HEAD
         <div class="sa4d25 mb4d25">
             @RenderBody()
         </div>
@@ -561,11 +606,25 @@
     </div>
 
    
+=======
+        <div class="sa4d25">
+            <div class="container-fluid">
+                <div class="row">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+>>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="/frontend/js/jquery.min.js"></script>
+<<<<<<< HEAD
     <script src="/js/popper.min.js')}}">
+=======
+    <script src="/js/popper.min.js">
+>>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c
     </script>
     <script src="/frontend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/nicescroll.min.js"></script>
@@ -585,4 +644,8 @@
     <script src="/js/summernote.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c

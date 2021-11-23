@@ -1,7 +1,13 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Data;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Core.Repositories.GenericRepo;
+<<<<<<< HEAD
 using System.Collections.Generic;
+=======
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+>>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
@@ -15,9 +21,22 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
             _context = context;
         }
 
+<<<<<<< HEAD
         public Task<IList<Course>> GetCoursesByStudentId()
         {
             throw new System.NotImplementedException();
+=======
+        public async Task<ICollection<Course>> GetFeatureCourse(int size)
+        {
+            var course = await _context.Courses.OrderByDescending(x => x.Likes).Take(size).ToListAsync();
+            return course;
+        }
+
+        public async Task<ICollection<Course>> GetNewestCourse(int size)
+        {
+            var course = await _context.Courses.OrderByDescending(x => x.ModifiedDate).Take(size).ToListAsync();
+            return course;
+>>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c
         }
     }
 }

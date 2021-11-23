@@ -10,6 +10,7 @@ namespace Learning_Managerment_SystemMarket_Web.Mapper
         {
             CreateMap<Course, StudentHomePageVM>().ReverseMap();
             CreateMap<Course, CourseDetailVM>().ReverseMap();
+            CreateMap<Category, CategoryDetailVM>().ReverseMap();
         }
     }
 }

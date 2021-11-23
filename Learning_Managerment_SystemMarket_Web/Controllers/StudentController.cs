@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +10,19 @@ namespace Learning_Managerment_SystemMarket_Web.Controllers
 {
     public class StudentController : Controller
     {
+        private readonly IStudentHomePageService _studentHomePageService;
+        private readonly IMapper _mapper;
+
+        public StudentController(IStudentHomePageService studentHomePageService,IMapper mapper)
+        {
+            this._studentHomePageService = studentHomePageService;
+            this._mapper = mapper;
+        }
         public IActionResult Index()
         {
             return View();
         }
+<<<<<<< HEAD
        
         public IActionResult SavedCourses()
         {
@@ -21,6 +32,12 @@ namespace Learning_Managerment_SystemMarket_Web.Controllers
         public IActionResult Filter()
         {
             return View();
+=======
+
+        public async Task<IActionResult> GetCourseByCategory(int id)
+        {
+            var course = _studentHomePageService.FindCourse(c => c.CategoryId == id);
+>>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c
         }
     }
 }
