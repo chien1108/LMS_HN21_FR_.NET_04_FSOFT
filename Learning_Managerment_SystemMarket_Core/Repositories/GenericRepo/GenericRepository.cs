@@ -1,6 +1,7 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Contracts;
 using Learning_Managerment_SystemMarket_Core.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.GenericRepo
 
         public async Task<IList<T>> GetAll(Expression<Func<T, bool>> expression = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-            List<string> includes = null
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> includes = null
             )
         {
             IQueryable<T> query = _db;
@@ -55,10 +56,7 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.GenericRepo
 
             if (includes != null)
             {
-                foreach (var table in includes)
-                {
-                    query = query.Include(table);
-                }
+                query = includes(query);
             }
 
             if (orderBy != null)

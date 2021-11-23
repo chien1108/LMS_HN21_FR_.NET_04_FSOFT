@@ -19,6 +19,8 @@ namespace Learning_Managerment_SystemMarket_Core.Data
         {
         }
 
+       
+
         //DbSet
         public virtual DbSet<AdminSetting> AdminSettings { get; set; }
 
