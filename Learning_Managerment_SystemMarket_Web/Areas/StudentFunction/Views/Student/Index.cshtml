@@ -5,7 +5,6 @@
 @inject IUnitOfWork unitOfWork;
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_StudentLayout.cshtml";
     ICollection<Course> courseFeature = await studentHomePage.GetFeatureCourse(5);
     ICollection<Course> courseNew = await studentHomePage.GetNewestCourse(5);
 }
@@ -55,11 +54,11 @@
                                             </div>
                                             <a href="https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2" class="crse14s">@item.Title</a>
                                             <a href="#" class="crse-cate">
-                                                @item.SubCategory.SubCategoryName
+                                                @*@item.SubCategory.SubCategoryName*@
                                             </a>
                                             <div class="auth1lnkprce">
                                                 <p class="cr1fot">
-                                                    By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">@item.Instructor.InstructorName</a>
+                                                    By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">@*@item.Instructor.InstructorName*@</a>
                                                 </p>
                                                 <div class="prce142">$@item.Price</div>
                                                 <button onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/2//add';" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
@@ -123,11 +122,11 @@
                                             </div>
                                             <a href="https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2" class="crse14s">@item.Title</a>
                                             <a href="#" class="crse-cate">
-                                                @item.SubCategory.SubCategoryName
+                                                @*@item.SubCategory.SubCategoryName*@
                                             </a>
                                             <div class="auth1lnkprce">
                                                 <p class="cr1fot">
-                                                    By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">@item.Instructor.InstructorName</a>
+                                                    By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">@*@item.Instructor.InstructorName*@</a>
                                                 </p>
                                                 <div class="prce142">$@item.Price</div>
                                                 <button onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/2//add';" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>

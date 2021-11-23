@@ -35,14 +35,16 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
             unitOfWork.Courses.Delete(course);
         }
 
-        public async Task<Course> FindCourse(Expression<Func<Course, bool>> expression = null, List<string> includes = null)
+        public async Task<CourseDetailVM> FindCourse(Expression<Func<Course, bool>> expression = null, List<string> includes = null)
         {
-            return await this.unitOfWork.Courses.FindByCondition(expression, includes);
+            var course = await unitOfWork.Courses.FindByCondition(expression, includes);
+            return _map.Map<CourseDetailVM>(course);
         }
 
-        public async Task<IList<Course>> FindAllCourse(Expression<Func<Course, bool>> expression = null, Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null, List<string> includes = null)
+        public async Task<IList<CourseDetailVM>> FindAllCourse(Expression<Func<Course, bool>> expression = null, Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null, List<string> includes = null)
         {
-            return await this.unitOfWork.Courses.GetAll();
+            var course = await this.unitOfWork.Courses.GetAll();
+            return _map.Map<IList<CourseDetailVM>>(course);
         }
 
         public async Task<IList<StudentHomePageVM>> GetAllCourseIsActive()
