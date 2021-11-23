@@ -23,6 +23,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
         Task<IList<StudentHomePageVM>> GetAllCourseIsActive();
         Task<IList<CategoryDetailVM>> GetAllCategory();
         Task<CourseDetailVM> GetDetailsCourseById(int id);
+        Task<IList<Course>> GetCourseByStudentId(int id);
         Task<bool> SaveChange();
         Task<ICollection<Course>> GetFeatureCourse(int size);
         Task<ICollection<Course>> GetNewestCourse(int size);

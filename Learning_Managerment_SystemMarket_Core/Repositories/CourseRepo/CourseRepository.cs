@@ -1,6 +1,8 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Data;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Core.Repositories.GenericRepo;
+
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,11 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
             _context = context;
         }
 
+
+        public Task<IList<Course>> GetCoursesByStudentId()
+        {
+            throw new System.NotImplementedException();
+        }
         public async Task<ICollection<Course>> GetFeatureCourse(int size)
         {
             var course = await _context.Courses.OrderByDescending(x => x.Likes).Take(size).ToListAsync();
