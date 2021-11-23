@@ -23,30 +23,48 @@ namespace Learning_Managerment_SystemMarket_Services.AdminServices.AdminSettingS
 
         public async Task<ServiceResponse<AdminSetting>> Create(AdminSetting newAdminSetting)
         {
-            var adminSettingFromDb = await Find(x => x.Id == newAdminSetting.Id);
-            if (adminSettingFromDb == null)
+            try
             {
-                await _unitOfWork.AdminSettings.Create(newAdminSetting);
-                return new ServiceResponse<AdminSetting> { Success = true, Message = "Add AdminSetting Success" };
+                var adminSettingFromDb = await Find(x => x.Id == newAdminSetting.Id);
+                if (adminSettingFromDb == null)
+                {
+                    await _unitOfWork.AdminSettings.Create(newAdminSetting);
+                    return new ServiceResponse<AdminSetting> { Success = true, Message = "Add AdminSetting Success" };
+                }
+                else
+                {
+                    return new ServiceResponse<AdminSetting> { Success = false, Message = "AdminSetting is Exist" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<AdminSetting> { Success = false, Message = "AdminSetting is Exist" };
+
+                return new ServiceResponse<AdminSetting> { Success = false, Message = ex.Message     };
             }
+
         }
 
         public async Task<ServiceResponse<AdminSetting>> Delete(AdminSetting adminSettingVM)
         {
-            var adminSettingFromDB = await Find(x => x.Id == adminSettingVM.Id);
-            if (adminSettingFromDB != null)
+            try
             {
-                _unitOfWork.AdminSettings.Delete(adminSettingVM);
-                return new ServiceResponse<AdminSetting> { Success = true, Message = "Delete AdminSetting Success" };
+                var adminSettingFromDB = await Find(x => x.Id == adminSettingVM.Id);
+                if (adminSettingFromDB != null)
+                {
+                    _unitOfWork.AdminSettings.Delete(adminSettingVM);
+                    return new ServiceResponse<AdminSetting> { Success = true, Message = "Delete AdminSetting Success" };
+                }
+                else
+                {
+                    return new ServiceResponse<AdminSetting> { Success = false, Message = "Not Found AdminSetting" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<AdminSetting> { Success = false, Message = "Not Found AdminSetting" };
+
+                return new ServiceResponse<AdminSetting> { Success = false, Message = ex.Message };
             }
+
         }
 
         public async Task<AdminSetting> Find(Expression<Func<AdminSetting,bool>> expression = null,
@@ -67,16 +85,25 @@ namespace Learning_Managerment_SystemMarket_Services.AdminServices.AdminSettingS
 
         public async Task<ServiceResponse<AdminSetting>> Update(AdminSetting updateAdminSetting)
         {
-            var adminSettingFromDB = await Find(x => x.Id == updateAdminSetting.Id);
-            if (adminSettingFromDB != null)
+            try
             {
-                _unitOfWork.AdminSettings.Update(updateAdminSetting);
-                return new ServiceResponse<AdminSetting> { Success = true, Message = "Update AdminSetting Success" };
+                var adminSettingFromDB = await Find(x => x.Id == updateAdminSetting.Id);
+                if (adminSettingFromDB != null)
+                {
+                    _unitOfWork.AdminSettings.Update(updateAdminSetting);
+                    return new ServiceResponse<AdminSetting> { Success = true, Message = "Update AdminSetting Success" };
+                }
+                else
+                {
+                    return new ServiceResponse<AdminSetting> { Success = false, Message = "Not Found AdminSetting" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<AdminSetting> { Success = false, Message = "Not Found AdminSetting" };
+
+                return new ServiceResponse<AdminSetting> { Success = false, Message = ex.Message };
             }
+
         }
     }
 }

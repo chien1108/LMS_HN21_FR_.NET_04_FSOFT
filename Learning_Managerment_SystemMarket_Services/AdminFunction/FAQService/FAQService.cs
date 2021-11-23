@@ -23,30 +23,46 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FAQService
 
         public async Task<ServiceResponse<FAQ>> Create(FAQ newFAQ)
         {
-            await _unitOfWork.FAQs.Create(newFAQ);
-            if (!await SaveChange())
+            try
             {
-                return new ServiceResponse<FAQ> { Success = false, Message = "Something wrongs went create new FAQ" };
+                await _unitOfWork.FAQs.Create(newFAQ);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<FAQ> { Success = false, Message = "Something wrongs went create new FAQ" };
+                }
+                return new ServiceResponse<FAQ> { Success = true, Message = "Add FAQ Success" };
             }
-            return new ServiceResponse<FAQ> { Success = true, Message = "Add FAQ Success" };
+            catch (Exception ex)
+            {
+                return new ServiceResponse<FAQ> { Success = true, Message = ex.Message };
+            }
+
         }
 
         public async Task<ServiceResponse<FAQ>> Delete(FAQ FAQ)
         {
-            var FAQFromDb = await Find(x => x.Id == FAQ.Id);
-            if (FAQFromDb != null)
+            try
             {
-                _unitOfWork.FAQs.Delete(FAQ);
-                if (!await SaveChange())
+                var FAQFromDb = await Find(x => x.Id == FAQ.Id);
+                if (FAQFromDb != null)
                 {
-                    return new ServiceResponse<FAQ> { Success = false, Message = "Something wrongs went delete new FAQ" };
+                    _unitOfWork.FAQs.Delete(FAQ);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<FAQ> { Success = false, Message = "Something wrongs went delete new FAQ" };
+                    }
+                    return new ServiceResponse<FAQ> { Success = true, Message = "Delete FAQ Success" };
                 }
-                return new ServiceResponse<FAQ> { Success = true, Message = "Delete FAQ Success" };
+                else
+                {
+                    return new ServiceResponse<FAQ> { Success = false, Message = "Not Found FAQ" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<FAQ> { Success = false, Message = "Not Found FAQ" };
+                return new ServiceResponse<FAQ> { Success = false, Message = ex.Message };
             }
+
         }
 
         public async Task<FAQ> Find(Expression<Func<FAQ, bool>> expression = null,
@@ -66,20 +82,28 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FAQService
 
         public async Task<ServiceResponse<FAQ>> Update(FAQ updateFAQ)
         {
-            var FAQFromDb = await Find(x => x.Id == updateFAQ.Id);
-            if (FAQFromDb != null)
+            try
             {
-                _unitOfWork.FAQs.Update(updateFAQ);
-                if (!await SaveChange())
+                var FAQFromDb = await Find(x => x.Id == updateFAQ.Id);
+                if (FAQFromDb != null)
                 {
-                    return new ServiceResponse<FAQ> { Success = false, Message = "Something wrongs went update new FAQ" };
+                    _unitOfWork.FAQs.Update(updateFAQ);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<FAQ> { Success = false, Message = "Something wrongs went update new FAQ" };
+                    }
+                    return new ServiceResponse<FAQ> { Success = true, Message = "Update FAQ Success" };
                 }
-                return new ServiceResponse<FAQ> { Success = true, Message = "Update FAQ Success" };
+                else
+                {
+                    return new ServiceResponse<FAQ> { Success = false, Message = "Not Found FAQ" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<FAQ> { Success = false, Message = "Not Found FAQ" };
+                return new ServiceResponse<FAQ> { Success = false, Message = ex.Message };
             }
+
         }
     }
 }

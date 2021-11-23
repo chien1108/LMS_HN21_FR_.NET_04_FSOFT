@@ -23,30 +23,46 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorSer
 
         public async Task<ServiceResponse<Instructor>> Create(Instructor newInstructor)
         {
-            await _unitOfWork.Instructors.Create(newInstructor);
-            if (!await SaveChange())
+            try
             {
-                return new ServiceResponse<Instructor> { Success = false, Message = "Something wrongs went create new Instructor" };
+                await _unitOfWork.Instructors.Create(newInstructor);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<Instructor> { Success = false, Message = "Something wrongs went create new Instructor" };
+                }
+                return new ServiceResponse<Instructor> { Success = true, Message = "Add Instructor Success" };
             }
-            return new ServiceResponse<Instructor> { Success = true, Message = "Add Instructor Success" };
+            catch (Exception ex)
+            {
+                return new ServiceResponse<Instructor> { Success = true, Message = ex.Message };
+            }
+
         }
 
         public async Task<ServiceResponse<Instructor>> Delete(Instructor instructor)
         {
-            var instructorFromDb = await Find(x => x.Id == instructor.Id);
-            if (instructorFromDb != null)
+            try
             {
-                _unitOfWork.Instructors.Delete(instructor);
-                if (!await SaveChange())
+                var instructorFromDb = await Find(x => x.Id == instructor.Id);
+                if (instructorFromDb != null)
                 {
-                    return new ServiceResponse<Instructor> { Success = false, Message = "Something wrongs went delete new Instructor" };
+                    _unitOfWork.Instructors.Delete(instructor);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<Instructor> { Success = false, Message = "Something wrongs went delete new Instructor" };
+                    }
+                    return new ServiceResponse<Instructor> { Success = true, Message = "Delete Instructor Success" };
                 }
-                return new ServiceResponse<Instructor> { Success = true, Message = "Delete Instructor Success" };
+                else
+                {
+                    return new ServiceResponse<Instructor> { Success = false, Message = "Not Found Instructor" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<Instructor> { Success = false, Message = "Not Found Instructor" };
+                return new ServiceResponse<Instructor> { Success = false, Message = ex.Message};
             }
+
         }
 
         public async Task<Instructor> Find(Expression<Func<Instructor, bool>> expression = null,
@@ -66,20 +82,28 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorSer
 
         public async Task<ServiceResponse<Instructor>> Update(Instructor updateInstructor)
         {
-            var instructorFromDb = await Find(x => x.Id == updateInstructor.Id);
-            if (instructorFromDb != null)
+            try
             {
-                _unitOfWork.Instructors.Update(updateInstructor);
-                if (!await SaveChange())
+                var instructorFromDb = await Find(x => x.Id == updateInstructor.Id);
+                if (instructorFromDb != null)
                 {
-                    return new ServiceResponse<Instructor> { Success = false, Message = "Something wrongs went update new Instructor" };
+                    _unitOfWork.Instructors.Update(updateInstructor);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<Instructor> { Success = false, Message = "Something wrongs went update new Instructor" };
+                    }
+                    return new ServiceResponse<Instructor> { Success = true, Message = "Update Instructor Success" };
                 }
-                return new ServiceResponse<Instructor> { Success = true, Message = "Update Instructor Success" };
+                else
+                {
+                    return new ServiceResponse<Instructor> { Success = false, Message = "Not Found Instructor" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<Instructor> { Success = false, Message = "Not Found Instructor" };
+                return new ServiceResponse<Instructor> { Success = false, Message = ex.Message };
             }
+
         }
     }
 }
