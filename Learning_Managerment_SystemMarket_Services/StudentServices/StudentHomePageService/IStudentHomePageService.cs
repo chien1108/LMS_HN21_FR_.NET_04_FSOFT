@@ -21,6 +21,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
         Task<IList<Course>> FindAllCourse(Expression<Func<Course, bool>> expression = null, Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null, List<string> includes = null);
         Task<Course> FindCourse(Expression<Func<Course, bool>> expression = null, List<string> includes = null);
         Task<IList<StudentHomePageVM>> GetAllCourseIsActive();
+        Task<IList<CategoryDetailVM>> GetAllCategory();
         Task<CourseDetailVM> GetDetailsCourseById(int id);
         Task<bool> SaveChange();
         Task<ICollection<Course>> GetFeatureCourse(int size);

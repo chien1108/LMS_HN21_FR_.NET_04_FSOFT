@@ -1,0 +1,8 @@
+﻿@inject Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService.IStudentHomePageService service;
+@{
+    var categories = await service.GetAllCategory();
+}
+@foreach (var category in categories)
+{
+    <a asp-action="GetCourseByCategory" asp-controller="Student" asp-route-id="@category.Id" class="item channel_item">@category.CategoryName</a>
+}

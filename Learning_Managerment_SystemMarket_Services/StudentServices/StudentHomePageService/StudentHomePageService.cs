@@ -84,5 +84,11 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
             var course = await unitOfWork.Courses.GetNewestCourse(size);
             return course;
         }
+
+        public async Task<IList<CategoryDetailVM>> GetAllCategory()
+        {
+            var categories = await unitOfWork.Categories.GetAll();
+            return _map.Map<IList<CategoryDetailVM>>(categories);
+        }
     }
 }

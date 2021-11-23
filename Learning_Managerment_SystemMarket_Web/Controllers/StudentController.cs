@@ -22,5 +22,10 @@ namespace Learning_Managerment_SystemMarket_Web.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> GetCourseByCategory(int id)
+        {
+            var course = _studentHomePageService.FindCourse(c => c.CategoryId == id);
+        }
     }
 }
