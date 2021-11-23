@@ -23,13 +23,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.12" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Learning_Managerment_SystemMarket_Core\Learning_Managerment_SystemMarket_Core.csproj" />
-    <ProjectReference Include="..\Learning_Managerment_SystemMarket_Services\Learning_Managerment_SystemMarket_Services.csproj" />
-    <ProjectReference Include="..\Learning_Managerment_SystemMarket_ViewModels\Learning_Managerment_SystemMarket_ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

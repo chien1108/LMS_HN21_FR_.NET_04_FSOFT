@@ -7,8 +7,7 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
 {
     public class Instructor : BaseEntity
     {
-
-        //public string InstructorName { get; set; }
+        public string InstructorName { get; set; }
         public string HeadLine { get; set; } = null;
         public string Website { get; set; } = null;
         public string Facebook { get; set; } = null;

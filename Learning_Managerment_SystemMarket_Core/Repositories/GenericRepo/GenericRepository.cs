@@ -23,10 +23,8 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.GenericRepo
         public async Task Create(T entity) 
             => await _db.AddAsync(entity);
 
-        public void Delete(T entity)
-        { 
-            _db.Remove(entity);
-        }
+        public void Delete(T entity) 
+            => _db.Remove(entity);
 
         public async Task<T> FindByCondition(Expression<Func<T, bool>> expression, List<string> includes = null)
         {
@@ -77,11 +75,8 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.GenericRepo
             return await query.AnyAsync(expression);
         }
 
-        public void Update(T entity)
-        {
-            _db.Update(entity);
-
-        }
+        public void Update(T entity) 
+            => _db.Update(entity);
 
         public async Task<bool> Save()
         {

@@ -4,8 +4,4 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Learning_Managerment_SystemMarket_Core\Learning_Managerment_SystemMarket_Core.csproj" />
-  </ItemGroup>
-
 </Project>
