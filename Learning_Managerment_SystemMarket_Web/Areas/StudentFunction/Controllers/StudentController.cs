@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
+using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,17 +14,28 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
     {
         private readonly IStudentHomePageService _studentHomePageService;
         private readonly IMapper _mapper;
+        private readonly IStudentExploreService _studentExploreService;
 
-        public StudentController(IStudentHomePageService studentHomePageService, IMapper mapper)
+        public StudentController(IStudentHomePageService studentHomePageService, IMapper mapper, IStudentExploreService studentExploreService)
         {
-            this._studentHomePageService = studentHomePageService;
-            this._mapper = mapper;
+            _studentHomePageService = studentHomePageService;
+            _mapper = mapper;
+            _studentExploreService = studentExploreService;
         }
-        public IActionResult Index()
+
+        public  IActionResult Index()
         {
             return View();
         }
-       
+        public IActionResult Explore()
+        {
+            var courses = Task.Run(() => _studentExploreService.GetAllCourseIsActive()).Result;
+            StudentExploreVM studentExploreVM = new StudentExploreVM
+            {
+                Courses =  courses
+            };
+            return View(studentExploreVM);
+        }
         public IActionResult SavedCourses()
         {
             return View();

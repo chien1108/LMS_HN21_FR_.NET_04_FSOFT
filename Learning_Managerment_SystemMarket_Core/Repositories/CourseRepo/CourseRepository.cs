@@ -26,6 +26,7 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
         }
         public async Task<ICollection<Course>> GetFeatureCourse(int size)
         {
+          
             var course = await _context.Courses.OrderByDescending(x => x.Likes).Take(size).ToListAsync();
             return course;
         }
