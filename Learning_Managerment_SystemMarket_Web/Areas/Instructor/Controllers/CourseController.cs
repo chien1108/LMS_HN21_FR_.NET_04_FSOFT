@@ -1,5 +1,6 @@
 ﻿using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewModel;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

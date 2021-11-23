@@ -48,117 +48,120 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="step-content">
-                            <div class="step-tab-panel step-tab-info active" id="tab_step1">
-                                <div class="tab-from-content">
-                                    <div class="title-icon">
-                                        <h3 class="title"><i class="uil uil-info-circle"></i>General Information</h3>
-                                    </div>
-                                    <div class="course__form">
-                                        <div class="general_info10">
-                                            <div class="row">
-                                                <div class="col-lg-6 col-md-6 text-center">
-                                                    <div class="ui search focus mt-30 lbel25">
-                                                        <label>Course Title*</label>
-                                                        <div class="ui left icon input swdh19">
-                                                            <input class="prompt srch_explore" type="text" placeholder="Insert your course title." name="title" data-purpose="edit-course-title" maxlength="60" value="" required>
-                                                            <div class="badge_num" data-purpose="form-control-counter">
-                                                                60
-                                                            </div>
-                                                        </div>
+                        <form method="post" id="createCourse">
+                            <div class="step-content">
 
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-md-6 text-center">
-                                                    <div class="ui search focus mt-30 lbel25">
-                                                        <label>Course Subtitle*</label>
-                                                        <div class="ui left icon input swdh19">
-                                                            <input class="prompt srch_explore" type="text" placeholder="Insert your course Subtitle." name="subtitle" data-purpose="edit-course-title" maxlength="120" id="sub[title]" value="">
-                                                            <div class="badge_num2" data-purpose="form-control-counter">
-                                                                120
+                                <div class="step-tab-panel step-tab-info active" id="tab_step1">
+                                    <div class="tab-from-content">
+                                        <div class="title-icon">
+                                            <h3 class="title"><i class="uil uil-info-circle"></i>General Information</h3>
+                                        </div>
+                                        <div class="course__form">
+                                            <div class="general_info10">
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 text-center">
+                                                        <div class="ui search focus mt-30 lbel25">
+                                                            <label>Course Title*</label>
+                                                            <div class="ui left icon input swdh19">
+                                                                <input class="prompt srch_explore" type="text" placeholder="Insert your course title." name="title" data-purpose="edit-course-title" maxlength="60" value="" required>
+                                                                <div class="badge_num" data-purpose="form-control-counter">
+                                                                    60
+                                                                </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12 col-md-12 ">
-                                                    <div class="course_des_textarea mt-30 lbel25">
-                                                        <label>Course Description*</label>
-                                                        <div class="course_des_bg">
+                                                    <div class="col-lg-6 col-md-6 text-center">
+                                                        <div class="ui search focus mt-30 lbel25">
+                                                            <label>Course Subtitle*</label>
+                                                            <div class="ui left icon input swdh19">
+                                                                <input class="prompt srch_explore" type="text" placeholder="Insert your course Subtitle." name="subtitle" data-purpose="edit-course-title" maxlength="120" id="sub[title]" value="">
+                                                                <div class="badge_num2" data-purpose="form-control-counter">
+                                                                    120
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12 ">
+                                                        <div class="course_des_textarea mt-30 lbel25">
+                                                            <label>Course Description*</label>
+                                                            <div class="course_des_bg">
 
-                                                            <div class="textarea_dt">
-                                                                <div class="ui form swdh339">
-                                                                    <div class="field">
-                                                                        <textarea rows="5" name="description" class="id_course_description" placeholder="Insert your course description"></textarea>
+                                                                <div class="textarea_dt">
+                                                                    <div class="ui form swdh339">
+                                                                        <div class="field">
+                                                                            <textarea rows="5" name="description" class="id_course_description" placeholder="Insert your course description"></textarea>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-12 text-center">
-                                                    <div class="mt-30 lbel25">
-                                                        <label>Language*</label>
-                                                    </div>
-                                                    @Html.DropDownListFor(q => q.LanguageId, new SelectList(@listLanguage, "Id", "LanguageName"), "Select Language", new { @class = "ui hj145 dropdown cntry152 prompt srch_explore" })
+                                                    <div class="col-lg-4 col-md-12 text-center">
+                                                        <div class="mt-30 lbel25">
+                                                            <label>Language*</label>
+                                                        </div>
+                                                        @Html.DropDownListFor(q => q.LanguageId, new SelectList(@listLanguage, "Id", "LanguageName"), "Select Language", new { @class = "ui hj145 dropdown cntry152 prompt srch_explore" })
 
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 text-center">
-                                                    <div class="mt-30 lbel25">
-                                                        <label>Course Category*</label>
                                                     </div>
-                                                    @Html.DropDownListFor(q => q.CategoryId, new SelectList(@listCategory, "Id", "CategoryName"), "Select Category", new { @class = "ui hj145 dropdown cntry152 prompt srch_explore", @id = "category" })
-                                                    @*<select class="ui hj145 dropdown cntry152 prompt srch_explore" name="category_id" id="category">
-                                                            <option value="">Select Category</option>
+                                                    <div class="col-lg-4 col-md-6 text-center">
+                                                        <div class="mt-30 lbel25">
+                                                            <label>Course Category*</label>
+                                                        </div>
+                                                        @Html.DropDownListFor(q => q.CategoryId, new SelectList(@listCategory, "Id", "CategoryName"), "Select Category", new { @class = "ui hj145 dropdown cntry152 prompt srch_explore", @id = "category" })
+                                                        @*<select class="ui hj145 dropdown cntry152 prompt srch_explore" name="category_id" id="category">
+                                        <option value="">Select Category</option>
 
-                                                            <option value="1">Photography</option>
-                                                        </select>*@
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 text-center">
-                                                    <div class="mt-30 lbel25">
-                                                        <label>Course Subcategory*</label>
+                                        <option value="1">Photography</option>
+                                    </select>*@
                                                     </div>
-                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="subcategory_id" id="subCategory">
-                                                        <option value="">Select Subcategory</option>
-                                                    </select>
+                                                    <div class="col-lg-4 col-md-6 text-center">
+                                                        <div class="mt-30 lbel25">
+                                                            <label>Course Subcategory*</label>
+                                                        </div>
+                                                        <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="subcategory_id" id="subCategory">
+                                                            <option value="">Select Subcategory</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="price_course">
-                                            <div class="row">
-                                                <div class="col-lg-12 ">
-                                                    <div class="price_title">
-                                                        <h4><i class="uil uil-dollar-sign-alt"></i>Pricing</h4>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2 col-md-3 col-sm-12 text-center">
-                                                    <div class="mt-30 lbel25">
-                                                        <label>Is Free*</label>
-                                                    </div>
-                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore is_free" name="is_free">
-                                                        <option value="0" selected>
-                                                            No
-                                                        </option>
-                                                        <option value="1">
-                                                            Yes
-                                                        </option>
-                                                    </select>
-
-                                                </div>
-                                                <div class="col-lg-5 col-md-6 col-sm-6 text-center is_free_div">
-                                                    <div class="ui search focus mt-30 lbel25">
-                                                        <label>Price*</label>
-                                                        <div class="ui left icon input swdh19">
-                                                            <input class="prompt srch_explore" type="number" placeholder="Insert your course Price." name="price" data-purpose="edit-course-title" value="" required>
-
+                                            <div class="price_course">
+                                                <div class="row">
+                                                    <div class="col-lg-12 ">
+                                                        <div class="price_title">
+                                                            <h4><i class="uil uil-dollar-sign-alt"></i>Pricing</h4>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-5 col-md-6 col-sm-6 text-center is_free_div">
-                                                    <div class="ui search focus mt-30 lbel25">
-                                                        <label>Discount Price</label>
-                                                        <div class="ui left icon input swdh19">
-                                                            <input class="prompt srch_explore" type="number" placeholder="Discount Price if have ." name="discount_price" data-purpose="edit-course-title" value="0">
+                                                    <div class="col-lg-2 col-md-3 col-sm-12 text-center">
+                                                        <div class="mt-30 lbel25">
+                                                            <label>Is Free*</label>
+                                                        </div>
+                                                        <select class="ui hj145 dropdown cntry152 prompt srch_explore is_free" name="is_free">
+                                                            <option value="0" selected>
+                                                                No
+                                                            </option>
+                                                            <option value="1">
+                                                                Yes
+                                                            </option>
+                                                        </select>
 
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-6 col-sm-6 text-center is_free_div">
+                                                        <div class="ui search focus mt-30 lbel25">
+                                                            <label>Price*</label>
+                                                            <div class="ui left icon input swdh19">
+                                                                <input class="prompt srch_explore" type="number" placeholder="Insert your course Price." name="price" data-purpose="edit-course-title" value="" required>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5 col-md-6 col-sm-6 text-center is_free_div">
+                                                        <div class="ui search focus mt-30 lbel25">
+                                                            <label>Discount Price</label>
+                                                            <div class="ui left icon input swdh19">
+                                                                <input class="prompt srch_explore" type="number" placeholder="Discount Price if have ." name="discount_price" data-purpose="edit-course-title" value="0">
+
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -166,15 +169,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="step-tab-panel step-tab-gallery " id="tab_step2">
-                                <div class="tab-from-content">
-                                    <div class="title-icon">
-                                        <h3 class="title"><i class="uil uil-image-upload"></i>View</h3>
-                                    </div>
-                                    <div class="course__form">
-                                        <div class="view_info10">
+                                <div class="step-tab-panel step-tab-gallery " id="tab_step2">
+                                    <div class="tab-from-content">
+                                        <div class="title-icon">
+                                            <h3 class="title"><i class="uil uil-image-upload"></i>View</h3>
+                                        </div>
+                                        <div class="course__form">
+                                            <div class="view_info10">
                                                 <input type="hidden" name="_token" value="1I6KrpUtxSRxT4RmsC4NNBOUdmGgIOilQzXH4su3"> <input type="hidden" name="courseid" value="" id="courseid">
 
                                                 <div class="row">
@@ -223,217 +225,220 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="step-tab-panel step-tab-location " id="tab_step3">
-                                <div class="tab-from-content">
-                                    <div class="title-icon">
-                                        <h3 class="title"><i class="uil uil-film"></i>Course Content</h3>
-                                    </div>
-                                    <div class="course__form">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="extra_info">
-                                                    <h4 class="part__title">New Course Content</h4>
-                                                </div>
+                                <div class="step-tab-panel step-tab-location " id="tab_step3">
+                                    <div class="tab-from-content">
+                                        <div class="title-icon">
+                                            <h3 class="title"><i class="uil uil-film"></i>Course Content</h3>
+                                        </div>
+                                        <div class="course__form">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="extra_info">
+                                                        <h4 class="part__title">New Course Content</h4>
+                                                    </div>
 
-                                                <div class="view_info10">
-                                                    <div class="row">
-                                                        <div class="col-lg-12 col-md-12">
-                                                            <div class="ui search focus mt-30 lbel25">
-                                                                <label>Course Content Title*</label>
-                                                                <div class="ui left icon input swdh19">
-                                                                    <input class="prompt srch_explore" type="text" placeholder="Insert your course content title." name="title" data-purpose="edit-course-title" maxlength="60" id="ContentTitle" value="">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <form action="" method="post" enctype="multipart/form-data" id="lecturefrom" class="row">
+                                                    <div class="view_info10">
+                                                        <div class="row">
                                                             <div class="col-lg-12 col-md-12">
-                                                                <div class="lecture_title">
-                                                                    <h4>Add Lecture</h4>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-lg-4 col-md-12">
                                                                 <div class="ui search focus mt-30 lbel25">
-                                                                    <label>Lecture Title*</label>
+                                                                    <label>Course Content Title*</label>
                                                                     <div class="ui left icon input swdh19">
-                                                                        <input class="prompt srch_explore" type="text" placeholder="Insert your lecture title." name="title" data-purpose="edit-course-title" maxlength="60" id="title" value="" required>
+                                                                        <input class="prompt srch_explore" type="text" placeholder="Insert your course content title." name="title" data-purpose="edit-course-title" maxlength="60" id="ContentTitle" value="">
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-lg-4 col-md-6">
-                                                                <div class="part_input mt-30 lbel25">
-                                                                    <label>File*</label>
-                                                                    <div class="input-group">
-                                                                        <div class="custom-file">
-                                                                            <input type="file" class="custom-file-input" id="lectureFileInput" name="file" required onchange="onLectureFileChange()">
-                                                                            <label class="custom-file-label" for="inputGroupFile06">No Choose file - (Pdf, Video)</label>
+                                                            <form action="" method="post" enctype="multipart/form-data" id="lecturefrom" class="row">
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <div class="lecture_title">
+                                                                        <h4>Add Lecture</h4>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-lg-4 col-md-12">
+                                                                    <div class="ui search focus mt-30 lbel25">
+                                                                        <label>Lecture Title*</label>
+                                                                        <div class="ui left icon input swdh19">
+                                                                            <input class="prompt srch_explore" type="text" placeholder="Insert your lecture title." name="title" data-purpose="edit-course-title" maxlength="60" id="title" value="" required>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-lg-4 col-md-6">
-                                                                <div class="ui search focus mt-30 lbel25">
-                                                                    <label>Sort</label>
-                                                                    <div class="ui left icon input swdh19">
-                                                                        <input class="prompt srch_explore" type="number" min="0" max="100" placeholder="0" name="position" required>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12 col-md-12">
-                                                                <div class="course_des_textarea mt-30 lbel25">
-                                                                    <label>Description*</label>
-                                                                    <div class="course_des_bg">
-
-                                                                        <div class="textarea_dt">
-                                                                            <div class="ui form swdh339">
-                                                                                <div class="field">
-                                                                                    <textarea rows="5" name="description" class="id_course_description" placeholder="Insert your course description"></textarea>
-                                                                                </div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="part_input mt-30 lbel25">
+                                                                        <label>File*</label>
+                                                                        <div class="input-group">
+                                                                            <div class="custom-file">
+                                                                                <input type="file" class="custom-file-input" id="lectureFileInput" name="file" required onchange="onLectureFileChange()">
+                                                                                <label class="custom-file-label" for="inputGroupFile06">No Choose file - (Pdf, Video)</label>
                                                                             </div>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-lg-5 col-md-6">
-                                                                <div class="ui search focus mt-30 lbel25">
-                                                                    <label>Volume*</label>
-                                                                    <div class="ui left icon input swdh19 swdh95">
-                                                                        <input class="prompt srch_explore" type="number" min="0" required="" placeholder="0" name="volume">
-                                                                        <div class="badge_mb">MB</div>
+                                                                <div class="col-lg-4 col-md-6">
+                                                                    <div class="ui search focus mt-30 lbel25">
+                                                                        <label>Sort</label>
+                                                                        <div class="ui left icon input swdh19">
+                                                                            <input class="prompt srch_explore" type="number" min="0" max="100" placeholder="0" name="position" required>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-lg-5 col-md-6">
-                                                                <div class="ui search focus mt-30 lbel25">
-                                                                    <label>Duration*</label>
-                                                                    <div class="ui left icon input swdh19 swdh55">
-                                                                        <input class="prompt srch_explore" type="number" min="0" required="" placeholder="0" name="duration">
-                                                                        <div class="badge_min">Minutes</div>
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <div class="course_des_textarea mt-30 lbel25">
+                                                                        <label>Description*</label>
+                                                                        <div class="course_des_bg">
+
+                                                                            <div class="textarea_dt">
+                                                                                <div class="ui form swdh339">
+                                                                                    <div class="field">
+                                                                                        <textarea rows="5" name="description" class="id_course_description" placeholder="Insert your course description"></textarea>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-lg-5 col-md-6">
+                                                                    <div class="ui search focus mt-30 lbel25">
+                                                                        <label>Volume*</label>
+                                                                        <div class="ui left icon input swdh19 swdh95">
+                                                                            <input class="prompt srch_explore" type="number" min="0" required="" placeholder="0" name="volume">
+                                                                            <div class="badge_mb">MB</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-5 col-md-6">
+                                                                    <div class="ui search focus mt-30 lbel25">
+                                                                        <label>Duration*</label>
+                                                                        <div class="ui left icon input swdh19 swdh55">
+                                                                            <input class="prompt srch_explore" type="number" min="0" required="" placeholder="0" name="duration">
+                                                                            <div class="badge_min">Minutes</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-2 col-md-12">
+                                                                    <button class="part_btn_save prt-sv" type="button">Save Lecture</button>
+                                                                </div>
+                                                            </form>
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <div class="table-responsive mt-50 mb-0">
+                                                                    <table class="table ucp-table">
+                                                                        <thead class="thead-s">
+                                                                            <tr>
+                                                                                <th class="text-center" scope="col">
+                                                                                    Lecture
+                                                                                </th>
+                                                                                <th class="cell-ta">Title</th>
+                                                                                <th class="text-center" scope="col">
+                                                                                    Volume
+                                                                                </th>
+                                                                                <th class="text-center" scope="col">
+                                                                                    Duration
+                                                                                </th>
+                                                                                <th class="text-center" scope="col">
+                                                                                    Sort
+                                                                                </th>
+                                                                                <th class="text-center" scope="col">
+                                                                                    File
+                                                                                </th>
+                                                                                <th class="text-center" scope="col">
+                                                                                    Controls
+                                                                                </th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="tbodylecture">
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-lg-2 col-md-12">
-                                                                <button class="part_btn_save prt-sv" type="button">Save Lecture</button>
-                                                            </div>
-                                                        </form>
-                                                        <div class="col-lg-12 col-md-12">
-                                                            <div class="table-responsive mt-50 mb-0">
-                                                                <table class="table ucp-table">
-                                                                    <thead class="thead-s">
-                                                                        <tr>
-                                                                            <th class="text-center" scope="col">
-                                                                                Lecture
-                                                                            </th>
-                                                                            <th class="cell-ta">Title</th>
-                                                                            <th class="text-center" scope="col">
-                                                                                Volume
-                                                                            </th>
-                                                                            <th class="text-center" scope="col">
-                                                                                Duration
-                                                                            </th>
-                                                                            <th class="text-center" scope="col">
-                                                                                Sort
-                                                                            </th>
-                                                                            <th class="text-center" scope="col">
-                                                                                File
-                                                                            </th>
-                                                                            <th class="text-center" scope="col">
-                                                                                Controls
-                                                                            </th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody id="tbodylecture">
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12 col-md-12">
-                                                            <div class="save_content">
-                                                                <button class="save_content_btn" onclick="FinalCourseContent()">Save Course Content</button>
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <div class="save_content">
+                                                                    <button class="save_content_btn" onclick="FinalCourseContent()">Save Course Content</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="table-responsive mt-30">
-                                        <table class="table ucp-table" id="content-table">
-                                            <thead class="thead-s">
-                                                <tr>
-                                                    <th class="text-center" scope="col">Content</th>
-                                                    <th class="cell-ta">Title</th>
-                                                    <th class="text-center" scope="col">lectures</th>
-                                                    <th class="text-center" scope="col">Volume</th>
-                                                    <th class="text-center" scope="col">Duration</th>
-                                                    <th class="text-center" scope="col">Upload Date</th>
-                                                    <th class="text-center" scope="col">Controls</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                        </table>
+                                        <div class="table-responsive mt-30">
+                                            <table class="table ucp-table" id="content-table">
+                                                <thead class="thead-s">
+                                                    <tr>
+                                                        <th class="text-center" scope="col">Content</th>
+                                                        <th class="cell-ta">Title</th>
+                                                        <th class="text-center" scope="col">lectures</th>
+                                                        <th class="text-center" scope="col">Volume</th>
+                                                        <th class="text-center" scope="col">Duration</th>
+                                                        <th class="text-center" scope="col">Upload Date</th>
+                                                        <th class="text-center" scope="col">Controls</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="step-tab-panel step-tab-amenities " id="tab_step4">
-                                <div class="tab-from-content">
-                                    <div class="title-icon">
-                                        <h3 class="title">
-                                            <i class="uil uil-file-copy-alt"></i>Extra Information
-                                        </h3>
-                                    </div>
-                                    <div class="course__form">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="extra_info">
-                                                    <h4 class="part__title">Extra Information</h4>
-                                                </div>
-                                                <div class="view_info10">
+                                <div class="step-tab-panel step-tab-amenities " id="tab_step4">
+                                    <div class="tab-from-content">
+                                        <div class="title-icon">
+                                            <h3 class="title">
+                                                <i class="uil uil-file-copy-alt"></i>Extra Information
+                                            </h3>
+                                        </div>
+                                        <div class="course__form">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="extra_info">
+                                                        <h4 class="part__title">Extra Information</h4>
+                                                    </div>
+                                                    <div class="view_info10">
 
 
-                                                    <form action="~/instructor/public/instructor/courses/0" method="post" id="formId4" enctype="multipart/form-data" class="row">
-                                                        <input type="hidden" name="_token" value="1I6KrpUtxSRxT4RmsC4NNBOUdmGgIOilQzXH4su3">
-                                                        <input type="hidden" name="_method" value="PUT">
-                                                        <div class="col-lg-6 col-md-6 col-sm-12 text-center">
-                                                            <div class="mt-30 lbel25">
-                                                                <label>What you want save as*</label>
+                                                        <form action="~/instructor/public/instructor/courses/0" method="post" id="formId4" enctype="multipart/form-data" class="row">
+                                                            <input type="hidden" name="_token" value="1I6KrpUtxSRxT4RmsC4NNBOUdmGgIOilQzXH4su3">
+                                                            <input type="hidden" name="_method" value="PUT">
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+                                                                <div class="mt-30 lbel25">
+                                                                    <label>What you want save as*</label>
+                                                                </div>
+                                                                <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="status">
+                                                                    <option value="2">
+                                                                        Submit For Review
+                                                                    </option>
+                                                                    <option value="0">
+                                                                        Draft
+                                                                    </option>
+
+                                                                </select>
+
                                                             </div>
-                                                            <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="status">
-                                                                <option value="2">
-                                                                    Submit For Review
-                                                                </option>
-                                                                <option value="0">
-                                                                    Draft
-                                                                </option>
-
-                                                            </select>
-
-                                                        </div>
-                                                    </form>
+                                                        </form>
 
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                        </div>
-                        <div class="step-footer step-tab-pager">
-                            <button data-direction="prev" class="btn btn-default steps_btn">PREVIOUS</button>
-                            <button data-direction="next" class="btn btn-default steps_btn">Next</button>
-                            <button data-direction="finish" onclick="submitForm('#formId4')" class="btn btn-default steps_btn" type="button">Submit</button>
-                        </div>
+                            </div>
+                            <div class="step-footer step-tab-pager">
+                                <button data-direction="prev" class="btn btn-default steps_btn">PREVIOUS</button>
+                                <button data-direction="next" class="btn btn-default steps_btn">Next</button>
+                                @*<button data-direction="finish" onclick="submitForm('#formId4')" class="btn btn-default steps_btn" type="submit">Submit</button>*@
+                                <button data-direction="finish" class="btn btn-default steps_btn" type="submit">Submit</button>
+                            </div>
+                        </form>
+                        
                     </div>
                 </div>
             </div>
@@ -448,6 +453,21 @@
     <script src="~/instructor/public/admin/assets/js/summernote.min.js"></script>
     <script>
         $(document).ready(function () {
+            $('#createCourse').validate({
+                onfocusout: false,
+                onkeyup: false,
+                onclick: false,
+                rules: {
+                    "user": {
+                        required: true,
+                        maxlength: 15
+                    },
+                    "password": {
+                        required: true,
+                        minlength: 8
+                    },
+                }
+            });
             $('.id_course_description').summernote({
                 height: 120,
                 toolbar: [
