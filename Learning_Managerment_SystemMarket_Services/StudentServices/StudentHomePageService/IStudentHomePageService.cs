@@ -22,6 +22,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
         Task<Course> FindCourse(Expression<Func<Course, bool>> expression = null, List<string> includes = null);
         Task<IList<StudentHomePageVM>> GetAllCourseIsActive();
         Task<CourseDetailVM> GetDetailsCourseById(int id);
+        Task<IList<Course>> GetCourseByStudentId(int id);
         Task<bool> SaveChange();
     }
 }

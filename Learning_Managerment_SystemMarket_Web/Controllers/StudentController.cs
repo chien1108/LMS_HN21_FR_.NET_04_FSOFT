@@ -12,5 +12,15 @@ namespace Learning_Managerment_SystemMarket_Web.Controllers
         {
             return View();
         }
+       
+        public IActionResult SavedCourses()
+        {
+            return View();
+        }
+
+        public IActionResult Filter()
+        {
+            return View();
+        }
     }
 }
