@@ -1,0 +1,1133 @@
+﻿
+@{
+    ViewData["Title"] = "Filter";
+}
+
+<div class="">
+    <div class="row justify-content-between">
+        <div class="col-lg-3 col-md-4">
+            <form method="GET" id="srform">
+                <input type="hidden" name="sort" value="1" id="sort">
+                <div class="section3125 hstry142">
+                    <div class="result_stitles">
+                        <div class="rs6t_title">Filters</div>
+                        <div class="filter_selector">
+                            <div class="ui inline dropdown flt145" tabindex="0">
+                                <div class="text">Sort</div>
+                                <i class="dropdown icon"></i>
+                                <div class="menu transition hidden" tabindex="-1">
+                                    <div class="item" onclick="sortChange(1)">Newest</div>
+                                    <div class="item" onclick="sortChange(2)">Lowest Price</div>
+                                    <div class="item" onclick="sortChange(3)">Highest Price</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tb_145">
+                        <div class="panel-group accordion" id="accordionfilter">
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingOne">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapseOne" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Topic
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="1">
+                                                            <label>Photography</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="2">
+                                                            <label>Marketing</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="3">
+                                                            <label>Development</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="4">
+                                                            <label>Business</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="5">
+                                                            <label>Design</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="6">
+                                                            <label>Music</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="7">
+                                                            <label>IT &amp; Software</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="8">
+                                                            <label>Finance &amp; Accounting</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="9">
+                                                            <label>Office Productivity</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="10">
+                                                            <label>Personal Development</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="11">
+                                                            <label>Lifestyle</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="12">
+                                                            <label>Health &amp; Fitness</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="13">
+                                                            <label>Teaching &amp; Academics</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="14">
+                                                            <label>Human Development</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="15">
+                                                            <label>fgfgfg</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="16">
+                                                            <label>Jose</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="17">
+                                                            <label>Literature</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="18">
+                                                            <label>Motivational</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingThree">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapseThree" href="#" aria-expanded="false" aria-controls="collapseThree">
+                                            Language
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse" aria-labelledby="headingThree" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="1">
+                                                            <label>Hindi</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="3">
+                                                            <label>English</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="5">
+                                                            <label>Spanish</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="6">
+                                                            <label>Português</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="7">
+                                                            <label>العربية</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="9">
+                                                            <label>Türkçe</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="10">
+                                                            <label>French</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="13">
+                                                            <label>vn</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="14">
+                                                            <label>reeryrt</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="15">
+                                                            <label>Čeština</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="16">
+                                                            <label>Indonesia</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="17">
+                                                            <label>Russian</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="18">
+                                                            <label>Bangla</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="20">
+                                                            <label>Khmer</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="21">
+                                                            <label>Français</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="22">
+                                                            <label>Urdu</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="23">
+                                                            <label>omid198714</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="24">
+                                                            <label>Bangle</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="25">
+                                                            <label>Thailand</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="26">
+                                                            <label>汉语</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="27">
+                                                            <label>Korean</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="28">
+                                                            <label>UZBEK</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="29">
+                                                            <label>persian</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="30">
+                                                            <label>Romana</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingfour">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapsefour" href="#" aria-expanded="false" aria-controls="collapsefour">
+                                            Price
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapsefour" class="panel-collapse collapse" aria-labelledby="headingfour" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="price" value="1" tabindex="0" class="hidden">
+                                                            <label>Paid</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="price" value="0" tabindex="0" class="hidden">
+                                                            <label>Free</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingsix">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapsesix" href="#" aria-expanded="false" aria-controls="collapsesix">
+                                            Rating
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapsesix" class="panel-collapse collapse" aria-labelledby="headingsix" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="rating" value="5" tabindex="0" class="hidden">
+                                                            <label class="rating_filter">
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                5.0 &amp; up
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="rating" value="4" tabindex="0" class="hidden">
+                                                            <label class="rating_filter">
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                4.0 &amp; up
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="rating" value="3" tabindex="0" class="hidden">
+                                                            <label class="rating_filter">
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                3.0 &amp; up
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="rating" value="2" tabindex="0" class="hidden">
+                                                            <label class="rating_filter">
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                2.0 &amp; up
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingseven">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapseseven" href="#" aria-expanded="false" aria-controls="collapseseven">
+                                            Video Duration
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapseseven" class="panel-collapse collapse" aria-labelledby="headingseven" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="duration" value="0-120" tabindex="0" class="hidden">
+                                                            <label>0-2 Hours</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="duration" value="180-360" tabindex="0" class="hidden">
+                                                            <label>3-6 Hours</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="duration" value="420-1080" tabindex="0" class="hidden">
+                                                            <label>7-18 Hours</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="duration" value="1140-9999" tabindex="0" class="hidden">
+                                                            <label>19+ Hours</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-9 col-md-8">
+            <div class="_14d25 mb-20">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="mhs_title">
+                            Filters Results <span class="float-right cu" onclick="document.getElementById('srform').submit()" role="button">Search</span>
+                        </h4>
+
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                                <div class="item">
+                                    <div class="fcrse_1 mb-20">
+                                        <a href="https://coursearly.com/cursus/public/courses/geeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee/152" class="fcrse_img">
+                                            <img src="https://coursearly.com/cursus/public/upload/image/60fdde5e43bc2.jpg" alt="">
+                                            <div class="course-overlay">
+                                                <div class="crse_reviews">
+                                                    <i class="uil uil-star"></i>5.0
+                                                </div>
+
+                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
+
+                                                <div class="crse_timer">
+                                                    0 hours
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="fcrse_content">
+                                            <div class="eps_dots more_dropdown">
+                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                <div class="dropdown-content">
+                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/geeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee/152/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                        <span><i class="uil uil-share-alt"></i>Share</span>
+                                                    </a>
+                                                    <a href="https://coursearly.com/cursus/public/save/152/add">
+                                                        <span>
+                                                            <i class="uil uil-heart"></i>
+                                                            Save
+                                                        </span>
+                                                    </a>
+
+                                                    <a>
+                                                        <span class="text-danger"><i class="uil uil-windsock"></i>Reported</span>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="vdtodt">
+                                                <span class="vdt14">537 views</span>
+                                                <span class="vdt14">3 months ago</span>
+                                            </div>
+                                            <a href="https://coursearly.com/cursus/public/courses/geeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee/152" class="crse14s">geeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</a>
+                                            <a href="#" class="crse-cate">
+                                                Marketing |
+                                                Digital Marketing
+                                            </a>
+                                            <div class="auth1lnkprce">
+                                                <p class="cr1fot">
+                                                    By <a href="https://coursearly.com/cursus/public/instructors/jemmy/13">Jemmy</a>
+                                                </p>
+                                                <div class="prce142">$</div>
+                                                <button class="shrt-cart-btn text-success" title="cart"><i class="uil uil-bag"></i></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                                <div class="item">
+                                    <div class="fcrse_1 mb-20">
+                                        <a href="https://coursearly.com/cursus/public/courses/class-1-syllabys/133" class="fcrse_img">
+                                            <img src="https://coursearly.com/cursus/public/default.png" alt="">
+                                            <div class="course-overlay">
+
+                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
+
+                                                <div class="crse_timer">
+                                                    0 hours
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="fcrse_content">
+                                            <div class="eps_dots more_dropdown">
+                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                <div class="dropdown-content">
+                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/class-1-syllabys/133/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                        <span><i class="uil uil-share-alt"></i>Share</span>
+                                                    </a>
+                                                    <a href="https://coursearly.com/cursus/public/save/133/add">
+                                                        <span>
+                                                            <i class="uil uil-heart"></i>
+                                                            Save
+                                                        </span>
+                                                    </a>
+
+                                                    <a>
+                                                        <span class="text-danger"><i class="uil uil-windsock"></i>Reported</span>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="vdtodt">
+                                                <span class="vdt14">482 views</span>
+                                                <span class="vdt14">3 months ago</span>
+                                            </div>
+                                            <a href="https://coursearly.com/cursus/public/courses/class-1-syllabys/133" class="crse14s">Class 1 Syllabys</a>
+                                            <a href="#" class="crse-cate">
+                                                Photography |
+                                                JS
+                                            </a>
+                                            <div class="auth1lnkprce">
+                                                <p class="cr1fot">
+                                                    By <a href="https://coursearly.com/cursus/public/instructors/jemmy/13">Jemmy</a>
+                                                </p>
+                                                <div class="prce142">$</div>
+                                                <button class="shrt-cart-btn text-success" title="cart"><i class="uil uil-bag"></i></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                                <div class="item">
+                                    <div class="fcrse_1 mb-20">
+                                        <a href="https://coursearly.com/cursus/public/courses/wordpress-for-beginner-:-create-a-website-step-by-step/7" class="fcrse_img">
+                                            <img src="https://coursearly.com/cursus/public/upload/image/60d6cca34e000.jpg" alt="">
+                                            <div class="course-overlay">
+                                                <div class="badge_seller">Bestseller</div>
+                                                <div class="crse_reviews">
+                                                    <i class="uil uil-star"></i>5.0
+                                                </div>
+
+                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
+
+                                                <div class="crse_timer">
+                                                    0 hours
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="fcrse_content">
+                                            <div class="eps_dots more_dropdown">
+                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                <div class="dropdown-content">
+                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/wordpress-for-beginner-:-create-a-website-step-by-step/7/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                        <span><i class="uil uil-share-alt"></i>Share</span>
+                                                    </a>
+                                                    <a href="https://coursearly.com/cursus/public/save/7/add">
+                                                        <span>
+                                                            <i class="uil uil-heart"></i>
+                                                            Save
+                                                        </span>
+                                                    </a>
+
+                                                    <a>
+                                                        <span class="text-danger"><i class="uil uil-windsock"></i>Reported</span>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="vdtodt">
+                                                <span class="vdt14">1.4K views</span>
+                                                <span class="vdt14">4 months ago</span>
+                                            </div>
+                                            <a href="https://coursearly.com/cursus/public/courses/wordpress-for-beginner-:-create-a-website-step-by-step/7" class="crse14s">WordPress For Beginner : Create A Website Step By Step</a>
+                                            <a href="#" class="crse-cate">
+                                                Design |
+                                                WordPress
+                                            </a>
+                                            <div class="auth1lnkprce">
+                                                <p class="cr1fot">
+                                                    By <a href="https://coursearly.com/cursus/public/instructors/amritpal/12">Amritpal</a>
+                                                </p>
+                                                <div class="prce142">$18.00</div>
+                                                <button class="shrt-cart-btn text-success" title="cart"><i class="uil uil-bag"></i></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                                <div class="item">
+                                    <div class="fcrse_1 mb-20">
+                                        <a href="https://coursearly.com/cursus/public/courses/angular-8-:-the-complete-guide-%282021-edition%29/6" class="fcrse_img">
+                                            <img src="https://coursearly.com/cursus/public/upload/image/60d6cb38a40a1.jpg" alt="">
+                                            <div class="course-overlay">
+                                                <div class="crse_reviews">
+                                                    <i class="uil uil-star"></i>5.0
+                                                </div>
+
+                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
+
+                                                <div class="crse_timer">
+                                                    0 hours
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="fcrse_content">
+                                            <div class="eps_dots more_dropdown">
+                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                <div class="dropdown-content">
+                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/angular-8-:-the-complete-guide-%282021-edition%29/6/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                        <span><i class="uil uil-share-alt"></i>Share</span>
+                                                    </a>
+                                                    <a href="https://coursearly.com/cursus/public/save/6/add">
+                                                        <span>
+                                                            <i class="uil uil-heart"></i>
+                                                            Save
+                                                        </span>
+                                                    </a>
+
+                                                    <a>
+                                                        <span class="text-danger"><i class="uil uil-windsock"></i>Reported</span>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="vdtodt">
+                                                <span class="vdt14">2K views</span>
+                                                <span class="vdt14">4 months ago</span>
+                                            </div>
+                                            <a href="https://coursearly.com/cursus/public/courses/angular-8-:-the-complete-guide-%282021-edition%29/6" class="crse14s">Angular 8 : The Complete Guide (2021 Edition)</a>
+                                            <a href="#" class="crse-cate">
+                                                Development |
+                                                Angular
+                                            </a>
+                                            <div class="auth1lnkprce">
+                                                <p class="cr1fot">
+                                                    By <a href="https://coursearly.com/cursus/public/instructors/ridhima/11">Ridhima</a>
+                                                </p>
+                                                <div class="prce142">$48.00</div>
+                                                <button class="shrt-cart-btn text-success" title="cart"><i class="uil uil-bag"></i></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                                <div class="item">
+                                    <div class="fcrse_1 mb-20">
+                                        <a href="https://coursearly.com/cursus/public/courses/microsoft-excel-:-beginner-to-expert-level/5" class="fcrse_img">
+                                            <img src="https://coursearly.com/cursus/public/upload/image/60d6c975f0e19.jpg" alt="">
+                                            <div class="course-overlay">
+                                                <div class="badge_seller">Bestseller</div>
+                                                <div class="crse_reviews">
+                                                    <i class="uil uil-star"></i>5.0
+                                                </div>
+
+                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
+
+                                                <div class="crse_timer">
+                                                    0 hours
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="fcrse_content">
+                                            <div class="eps_dots more_dropdown">
+                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                <div class="dropdown-content">
+                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/microsoft-excel-:-beginner-to-expert-level/5/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                        <span><i class="uil uil-share-alt"></i>Share</span>
+                                                    </a>
+                                                    <a href="https://coursearly.com/cursus/public/save/5/add">
+                                                        <span>
+                                                            <i class="uil uil-heart"></i>
+                                                            Save
+                                                        </span>
+                                                    </a>
+
+                                                    <a>
+                                                        <span class="text-danger"><i class="uil uil-windsock"></i>Reported</span>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="vdtodt">
+                                                <span class="vdt14">429 views</span>
+                                                <span class="vdt14">4 months ago</span>
+                                            </div>
+                                            <a href="https://coursearly.com/cursus/public/courses/microsoft-excel-:-beginner-to-expert-level/5" class="crse14s">Microsoft Excel : Beginner To Expert Level</a>
+                                            <a href="#" class="crse-cate">
+                                                Office Productivity |
+                                                Excel
+                                            </a>
+                                            <div class="auth1lnkprce">
+                                                <p class="cr1fot">
+                                                    By <a href="https://coursearly.com/cursus/public/instructors/albert-dua/10">Albert Dua</a>
+                                                </p>
+                                                <div class="prce142">$22.00</div>
+                                                <button class="shrt-cart-btn text-success" title="cart"><i class="uil uil-bag"></i></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                                <div class="item">
+                                    <div class="fcrse_1 mb-20">
+                                        <a href="https://coursearly.com/cursus/public/courses/the-complete-digital-marketing-course-:-12-courses-in-1/4" class="fcrse_img">
+                                            <img src="https://coursearly.com/cursus/public/upload/image/60d6c84251931.jpg" alt="">
+                                            <div class="course-overlay">
+                                                <div class="crse_reviews">
+                                                    <i class="uil uil-star"></i>2.5
+                                                </div>
+
+                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
+
+                                                <div class="crse_timer">
+                                                    0 hours
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="fcrse_content">
+                                            <div class="eps_dots more_dropdown">
+                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                <div class="dropdown-content">
+                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/the-complete-digital-marketing-course-:-12-courses-in-1/4/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                        <span><i class="uil uil-share-alt"></i>Share</span>
+                                                    </a>
+                                                    <a href="https://coursearly.com/cursus/public/save/4/add">
+                                                        <span>
+                                                            <i class="uil uil-heart"></i>
+                                                            Save
+                                                        </span>
+                                                    </a>
+
+                                                    <a>
+                                                        <span class="text-danger"><i class="uil uil-windsock"></i>Reported</span>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="vdtodt">
+                                                <span class="vdt14">2K views</span>
+                                                <span class="vdt14">4 months ago</span>
+                                            </div>
+                                            <a href="https://coursearly.com/cursus/public/courses/the-complete-digital-marketing-course-:-12-courses-in-1/4" class="crse14s">The Complete Digital Marketing Course : 12 Courses In 1</a>
+                                            <a href="#" class="crse-cate">
+                                                Marketing |
+                                                Digital Marketing
+                                            </a>
+                                            <div class="auth1lnkprce">
+                                                <p class="cr1fot">
+                                                    By <a href="https://coursearly.com/cursus/public/instructors/zoena/9">Zoena</a>
+                                                </p>
+                                                <div class="prce142">$25.00</div>
+                                                <button class="shrt-cart-btn text-success" title="cart"><i class="uil uil-bag"></i></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                                <div class="item">
+                                    <div class="fcrse_1 mb-20">
+                                        <a href="https://coursearly.com/cursus/public/courses/beginning-c++-programming-:-from-beginner-to-beyond/3" class="fcrse_img">
+                                            <img src="https://coursearly.com/cursus/public/upload/image/60d6c6f3bce3e.jpg" alt="">
+                                            <div class="course-overlay">
+                                                <div class="badge_seller">Bestseller</div>
+                                                <div class="crse_reviews">
+                                                    <i class="uil uil-star"></i>4.0
+                                                </div>
+
+                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
+
+                                                <div class="crse_timer">
+                                                    0 hours
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="fcrse_content">
+                                            <div class="eps_dots more_dropdown">
+                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                <div class="dropdown-content">
+                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/beginning-c++-programming-:-from-beginner-to-beyond/3/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                        <span><i class="uil uil-share-alt"></i>Share</span>
+                                                    </a>
+                                                    <a href="https://coursearly.com/cursus/public/save/3/add">
+                                                        <span>
+                                                            <i class="uil uil-heart"></i>
+                                                            Save
+                                                        </span>
+                                                    </a>
+
+                                                    <a>
+                                                        <span class="text-danger"><i class="uil uil-windsock"></i>Reported</span>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="vdtodt">
+                                                <span class="vdt14">715 views</span>
+                                                <span class="vdt14">4 months ago</span>
+                                            </div>
+                                            <a href="https://coursearly.com/cursus/public/courses/beginning-c++-programming-:-from-beginner-to-beyond/3" class="crse14s">Beginning C++ Programming : From Beginner To Beyond</a>
+                                            <a href="#" class="crse-cate">
+                                                Development |
+                                                C++
+                                            </a>
+                                            <div class="auth1lnkprce">
+                                                <p class="cr1fot">
+                                                    By <a href="https://coursearly.com/cursus/public/instructors/joginder-singh/8">Joginder Singh</a>
+                                                </p>
+                                                <div class="prce142">$10.00</div>
+                                                <button class="shrt-cart-btn text-success" title="cart"><i class="uil uil-bag"></i></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                                <div class="item">
+                                    <div class="fcrse_1 mb-20">
+                                        <a href="https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2" class="fcrse_img">
+                                            <img src="https://coursearly.com/cursus/public/upload/image/60d6c503be16c.jpg" alt="">
+                                            <div class="course-overlay">
+                                                <div class="crse_reviews">
+                                                    <i class="uil uil-star"></i>3.5
+                                                </div>
+
+                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
+
+                                                <div class="crse_timer">
+                                                    0 hours
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="fcrse_content">
+                                            <div class="eps_dots more_dropdown">
+                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                <div class="dropdown-content">
+                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                        <span><i class="uil uil-share-alt"></i>Share</span>
+                                                    </a>
+                                                    <a href="https://coursearly.com/cursus/public/save/2/add">
+                                                        <span>
+                                                            <i class="uil uil-heart"></i>
+                                                            Save
+                                                        </span>
+                                                    </a>
+
+                                                    <a>
+                                                        <span class="text-danger"><i class="uil uil-windsock"></i>Reported</span>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="vdtodt">
+                                                <span class="vdt14">2.3K views</span>
+                                                <span class="vdt14">4 months ago</span>
+                                            </div>
+                                            <a href="https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2" class="crse14s">The Complete JavaScript Course 2021 : Build Real Project</a>
+                                            <a href="#" class="crse-cate">
+                                                Development |
+                                                Full Stack Development
+                                            </a>
+                                            <div class="auth1lnkprce">
+                                                <p class="cr1fot">
+                                                    By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">Jassica William</a>
+                                                </p>
+                                                <div class="prce142">$18.00</div>
+                                                <button class="shrt-cart-btn text-success" title="cart"><i class="uil uil-bag"></i></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-6">
+                                <div class="item">
+                                    <div class="fcrse_1 mb-20">
+                                        <a href="https://coursearly.com/cursus/public/courses/complete-python-bootcamp:-go-from-zero-to-hero-in-python-3/1" class="fcrse_img">
+                                            <img src="https://coursearly.com/cursus/public/upload/image/60d6bebf5d165.jpg" alt="">
+                                            <div class="course-overlay">
+                                                <div class="badge_seller">Bestseller</div>
+                                                <div class="crse_reviews">
+                                                    <i class="uil uil-star"></i>3.0
+                                                </div>
+
+                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
+
+                                                <div class="crse_timer">
+                                                    0 hours
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="fcrse_content">
+                                            <div class="eps_dots more_dropdown">
+                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                <div class="dropdown-content">
+                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/complete-python-bootcamp:-go-from-zero-to-hero-in-python-3/1/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                        <span><i class="uil uil-share-alt"></i>Share</span>
+                                                    </a>
+                                                    <a href="https://coursearly.com/cursus/public/save/1/add">
+                                                        <span>
+                                                            <i class="uil uil-heart"></i>
+                                                            Save
+                                                        </span>
+                                                    </a>
+
+                                                    <a>
+                                                        <span class="text-danger"><i class="uil uil-windsock"></i>Reported</span>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div class="vdtodt">
+                                                <span class="vdt14">1.3K views</span>
+                                                <span class="vdt14">4 months ago</span>
+                                            </div>
+                                            <a href="https://coursearly.com/cursus/public/courses/complete-python-bootcamp:-go-from-zero-to-hero-in-python-3/1" class="crse14s">Complete Python Bootcamp: Go from zero to hero in Python 3</a>
+                                            <a href="#" class="crse-cate">
+                                                Development |
+                                                Python
+                                            </a>
+                                            <div class="auth1lnkprce">
+                                                <p class="cr1fot">
+                                                    By <a href="https://coursearly.com/cursus/public/instructors/jaysen-batchelor/16">Jaysen Batchelor</a>
+                                                </p>
+                                                <div class="prce142">$20.00</div>
+                                                <button class="shrt-cart-btn text-success" title="cart"><i class="uil uil-bag"></i></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <div class="main-loader mt-50">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

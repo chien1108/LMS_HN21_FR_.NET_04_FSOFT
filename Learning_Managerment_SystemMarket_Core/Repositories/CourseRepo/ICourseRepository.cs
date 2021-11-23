@@ -7,6 +7,7 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
 {
     public interface ICourseRepository : IGenericRepository<Course>
     {
+        Task<IList<Course>> GetCoursesByStudentId(); 
         Task<ICollection<Course>> GetFeatureCourse(int size);
         Task<ICollection<Course>> GetNewestCourse(int size);
     }

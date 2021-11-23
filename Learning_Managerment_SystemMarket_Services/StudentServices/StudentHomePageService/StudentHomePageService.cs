@@ -3,6 +3,7 @@ using Learning_Managerment_SystemMarket_Core.Contracts;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,12 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
             unitOfWork.Courses.Update(course);
         }
 
+
+        public async Task<IList<Course>> GetCourseByStudentId(int id)
+        {
+            //var courses= this.unitOfWork.Courses.FindByCondition(x=>x.Id==id)
+            throw new System.NotImplementedException(); }
+
         public async Task<ICollection<Course>> GetFeatureCourse(int size)
         {
             var course = await unitOfWork.Courses.GetFeatureCourse(size);
@@ -91,6 +98,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
         {
             var categories = await unitOfWork.Categories.GetAll();
             return _map.Map<IList<CategoryDetailVM>>(categories);
+
         }
     }
 }
