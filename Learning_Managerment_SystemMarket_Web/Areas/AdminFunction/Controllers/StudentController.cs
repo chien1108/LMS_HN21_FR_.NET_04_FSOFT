@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Learning_Managerment_SystemMarket_Web.Controllers.AdminController
+namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
 {
     public class StudentController : Controller
     {

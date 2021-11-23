@@ -7,8 +7,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace Learning_Managerment_SystemMarket_Web.Controllers.AdminController
+namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
 {
+    [Area("AdminFunction")]
     public class CategoryController : Controller
     {
         private readonly ILogger<CategoryController> _logger;

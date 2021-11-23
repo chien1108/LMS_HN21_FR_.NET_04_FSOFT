@@ -32,4 +32,9 @@
     <ProjectReference Include="..\Learning_Managerment_SystemMarket_ViewModels\Learning_Managerment_SystemMarket_ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\AdminFunction\Data\" />
+    <Folder Include="Areas\AdminFunction\Models\" />
+  </ItemGroup>
+
 </Project>

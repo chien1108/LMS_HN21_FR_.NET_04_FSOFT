@@ -2,6 +2,7 @@
 @using Learning_Managerment_SystemMarket_Core.Modules.Enums
 @inject ICategoryService _service
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["IdCategory"] = ViewBag.IdCategory;
     var listCategory = await _service.FindAll();
 }
@@ -9,7 +10,7 @@
     <div class="section-header">
         <h1>Categories</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="#">Home</a></div>
+            <div class="breadcrumb-item active"><a asp-controller="Home" asp-action="Index">Home</a></div>
             <div class="breadcrumb-item"><a href="#">Categories</a></div>
         </div>
     </div>
@@ -53,9 +54,9 @@
                                         {
                                             <tr role="row">
                                                 <td class="sorting_1"><span>@i</span></td>
-                                                <td>@listCategory.ElementAt(i-1).CategoryName</td>
+                                                <td>@listCategory.ElementAt(i - 1).CategoryName</td>
                                                 <td>
-                                                    @if (@listCategory.ElementAt(i-1).Status == Status.IsActive)
+                                                    @if (@listCategory.ElementAt(i - 1).Status == Status.IsActive)
                                                     {
                                                         <span class="badge   badge-success m-1">Active</span>
                                                     }
@@ -66,11 +67,11 @@
 
                                                 </td>
                                                 <td class="d-flex">
-                                                    <a class="btn btn-sm btn-outline-info btn-icon m-1" asp-action="Edit" asp-route-id="@listCategory.ElementAt(i-1).Id">
+                                                    <a class="btn btn-sm btn-outline-info btn-icon m-1" asp-area="AdminFunction" asp-action="Edit" asp-route-id="@listCategory.ElementAt(i-1).Id">
                                                         <span class="ul-btn__icon"><i class="fas fa-pencil-alt"></i></span>
                                                     </a>|
-                                                    <a class="btn btn-outline-danger btn-icon m-1" asp-controller="Category" asp-action="Delete" asp-route-id="@listCategory.ElementAt(i-1).Id" onclick="return confirm('Are you sure you want delete this record?')">
-                                                        <i class="fa fa-trash"></i> 
+                                                    <a class="btn btn-outline-danger btn-icon m-1" asp-area="AdminFunction" asp-controller="Category" asp-action="Delete" asp-route-id="@listCategory.ElementAt(i-1).Id" onclick="return confirm('Are you sure you want delete this record?')">
+                                                        <i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -85,7 +86,7 @@
             <div class="col-12 col-md-4 col-lg-4">
                 @if (ViewBag.IdCategory > 0)
                 {
-                    <partial name="Edit.cshtml" view-data="ViewData"/>
+                    <partial name="Edit.cshtml" view-data="ViewData" />
                 }
                 else
                 {
