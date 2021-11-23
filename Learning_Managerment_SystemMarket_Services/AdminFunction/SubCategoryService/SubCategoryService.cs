@@ -23,30 +23,45 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategorySe
 
         public async Task<ServiceResponse<SubCategory>> Create(SubCategory newSubCategory)
         {
-            await _unitOfWork.SubCategories.Create(newSubCategory);
-            if (!await SaveChange())
+            try
             {
-                return new ServiceResponse<SubCategory> { Success = false, Message = "Something wrongs went create new SubCategory" };
+                await _unitOfWork.SubCategories.Create(newSubCategory);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<SubCategory> { Success = false, Message = "Something wrongs went create new SubCategory" };
+                }
+                return new ServiceResponse<SubCategory> { Success = true, Message = "Add SubCategory Success" };
             }
-            return new ServiceResponse<SubCategory> { Success = true, Message = "Add SubCategory Success" };
+            catch (Exception ex)
+            {
+                return new ServiceResponse<SubCategory> { Success = true, Message = ex.Message };
+            }
         }
 
         public async Task<ServiceResponse<SubCategory>> Delete(SubCategory subCategory)
         {
-            var subCategoryFromDb = await Find(x => x.Id == subCategory.Id);
-            if (subCategoryFromDb != null)
+            try
             {
-                _unitOfWork.SubCategories.Delete(subCategory);
-                if (!await SaveChange())
+                var subCategoryFromDb = await Find(x => x.Id == subCategory.Id);
+                if (subCategoryFromDb != null)
                 {
-                    return new ServiceResponse<SubCategory> { Success = false, Message = "Something wrongs went delete new SubCategory" };
+                    _unitOfWork.SubCategories.Delete(subCategory);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<SubCategory> { Success = false, Message = "Something wrongs went delete new SubCategory" };
+                    }
+                    return new ServiceResponse<SubCategory> { Success = true, Message = "Delete SubCategory Success" };
                 }
-                return new ServiceResponse<SubCategory> { Success = true, Message = "Delete SubCategory Success" };
+                else
+                {
+                    return new ServiceResponse<SubCategory> { Success = false, Message = "Not Found SubCategory" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<SubCategory> { Success = false, Message = "Not Found SubCategory" };
+                return new ServiceResponse<SubCategory> { Success = false, Message = ex.Message };
             }
+
         }
 
         public async Task<SubCategory> Find(Expression<Func<SubCategory, bool>> expression = null,
@@ -66,19 +81,26 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategorySe
 
         public async Task<ServiceResponse<SubCategory>> Update(SubCategory updateSubCategory)
         {
-            var subCategoryFromDb = await Find(x => x.Id == updateSubCategory.Id);
-            if (subCategoryFromDb != null)
+            try
             {
-                _unitOfWork.SubCategories.Update(updateSubCategory);
-                if (!await SaveChange())
+                var subCategoryFromDb = await Find(x => x.Id == updateSubCategory.Id);
+                if (subCategoryFromDb != null)
                 {
-                    return new ServiceResponse<SubCategory> { Success = false, Message = "Something wrongs went update new SubCategory" };
+                    _unitOfWork.SubCategories.Update(updateSubCategory);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<SubCategory> { Success = false, Message = "Something wrongs went update new SubCategory" };
+                    }
+                    return new ServiceResponse<SubCategory> { Success = true, Message = "Update SubCategory Success" };
                 }
-                return new ServiceResponse<SubCategory> { Success = true, Message = "Update SubCategory Success" };
+                else
+                {
+                    return new ServiceResponse<SubCategory> { Success = false, Message = "Not Found SubCategory" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<SubCategory> { Success = false, Message = "Not Found SubCategory" };
+                return new ServiceResponse<SubCategory> { Success = false, Message = ex.Message };
             }
         }
     }

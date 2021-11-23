@@ -23,33 +23,51 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServi
 
         public async Task<ServiceResponse<Category>> Create(Category category)
         {
-            await _unitOfWork.Categories.Create(category);
-            if (await SaveChange())
+            try
             {
-                return new ServiceResponse<Category> { Success = true, Message = "Add category Success" };
+                await _unitOfWork.Categories.Create(category);
+                if (await SaveChange())
+                {
+                    return new ServiceResponse<Category> { Success = true, Message = "Add category Success" };
+                }
+                else
+                {
+                    return new ServiceResponse<Category> { Success = false, Message = "Error when create new category" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<Category> { Success = false, Message = "Error when create new category" };
+
+                return new ServiceResponse<Category> { Success = false, Message = ex.Message };
             }
+
         }
 
         public async Task<ServiceResponse<Category>> Delete(Category category)
         {
-            var feedBackFromDB = await Find(x => x.Id == category.Id);
-            if (feedBackFromDB != null)
+            try
             {
-                _unitOfWork.Categories.Delete(category);
-                if (!await SaveChange())
+                var feedBackFromDB = await Find(x => x.Id == category.Id);
+                if (feedBackFromDB != null)
                 {
-                    return new ServiceResponse<Category> { Success = false, Message = "Error when delete category" };
+                    _unitOfWork.Categories.Delete(category);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<Category> { Success = false, Message = "Error when delete category" };
+                    }
+                    return new ServiceResponse<Category> { Success = true, Message = "Delete category Success" };
                 }
-                return new ServiceResponse<Category> { Success = true, Message = "Delete category Success" };
+                else
+                {
+                    return new ServiceResponse<Category> { Success = false, Message = "Not Found Category" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<Category> { Success = false, Message = "Not Found Category" };
+
+                return new ServiceResponse<Category> { Success = false, Message = ex.Message };
             }
+
         }
 
         public async Task<Category> Find(Expression<Func<Category, bool>> expression = null, List<string> includes = null)
@@ -73,21 +91,29 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServi
 
         public async Task<ServiceResponse<Category>> Update(Category category)
         {
-            var feedBackFromDB = await Find(x => x.Id == category.Id);
-            if (feedBackFromDB != null)
+            try
             {
-                _unitOfWork.Categories.Update(category);
-                _unitOfWork.Categories.Delete(category);
-                if (!await SaveChange())
+                var feedBackFromDB = await Find(x => x.Id == category.Id);
+                if (feedBackFromDB != null)
                 {
-                    return new ServiceResponse<Category> { Success = false, Message = "Error when update category" };
+                    _unitOfWork.Categories.Update(category);
+                    _unitOfWork.Categories.Delete(category);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<Category> { Success = false, Message = "Error when update category" };
+                    }
+                    return new ServiceResponse<Category> { Success = true, Message = "Update Category Success" };
                 }
-                return new ServiceResponse<Category> { Success = true, Message = "Update Category Success" };
+                else
+                {
+                    return new ServiceResponse<Category> { Success = false, Message = "Not Found Category" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<Category> { Success = false, Message = "Not Found Category" };
+                return new ServiceResponse<Category> { Success = false, Message = ex.Message };
             }
+
         }
     }
 }

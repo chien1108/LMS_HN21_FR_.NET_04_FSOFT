@@ -23,30 +23,46 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FeedBackServi
 
         public async Task<ServiceResponse<FeedBack>> Create(FeedBack newFeedBack)
         {
-            await _unitOfWork.FeedBacks.Create(newFeedBack);
-            if (!await SaveChange())
+            try
             {
-                return new ServiceResponse<FeedBack> { Success = false, Message = "Something wrongs went create new FeedBack" };
+                await _unitOfWork.FeedBacks.Create(newFeedBack);
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<FeedBack> { Success = false, Message = "Something wrongs went create new FeedBack" };
+                }
+                return new ServiceResponse<FeedBack> { Success = true, Message = "Add FeedBack Success" };
             }
-            return new ServiceResponse<FeedBack> { Success = true, Message = "Add FeedBack Success" };
+            catch (Exception ex)
+            {
+                return new ServiceResponse<FeedBack> { Success = true, Message = ex.Message};
+            }
+
         }
 
         public async Task<ServiceResponse<FeedBack>> Delete(FeedBack feedBack)
         {
-            var feedBackFromDB = await Find(x => x.Id == feedBack.Id);
-            if (feedBackFromDB != null)
+            try
             {
-                _unitOfWork.FeedBacks.Delete(feedBack);
-                if (!await SaveChange())
+                var feedBackFromDB = await Find(x => x.Id == feedBack.Id);
+                if (feedBackFromDB != null)
                 {
-                    return new ServiceResponse<FeedBack> { Success = false, Message = "Something wrongs went delete new FeedBack" };
+                    _unitOfWork.FeedBacks.Delete(feedBack);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<FeedBack> { Success = false, Message = "Something wrongs went delete new FeedBack" };
+                    }
+                    return new ServiceResponse<FeedBack> { Success = true, Message = "Delete AdminSetting Success" };
                 }
-                return new ServiceResponse<FeedBack> { Success = true, Message = "Delete AdminSetting Success" };
+                else
+                {
+                    return new ServiceResponse<FeedBack> { Success = false, Message = "Not Found AdminSetting" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<FeedBack> { Success = false, Message = "Not Found AdminSetting" };
+                return new ServiceResponse<FeedBack> { Success = false, Message = ex.Message };
             }
+
         }
 
         public async Task<FeedBack> Find(Expression<Func<FeedBack, bool>> expression = null,
@@ -66,20 +82,28 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.FeedBackServi
 
         public async Task<ServiceResponse<FeedBack>> Update(FeedBack updateFeedBack)
         {
-            var feedBackFromDB = await Find(x => x.Id == updateFeedBack.Id);
-            if (feedBackFromDB != null)
+            try
             {
-                _unitOfWork.FeedBacks.Update(updateFeedBack);
-                if (!await SaveChange())
+                var feedBackFromDB = await Find(x => x.Id == updateFeedBack.Id);
+                if (feedBackFromDB != null)
                 {
-                    return new ServiceResponse<FeedBack> { Success = false, Message = "Something wrongs went update new FeedBack" };
+                    _unitOfWork.FeedBacks.Update(updateFeedBack);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<FeedBack> { Success = false, Message = "Something wrongs went update new FeedBack" };
+                    }
+                    return new ServiceResponse<FeedBack> { Success = true, Message = "Update AdminSetting Success" };
                 }
-                return new ServiceResponse<FeedBack> { Success = true, Message = "Update AdminSetting Success" };
+                else
+                {
+                    return new ServiceResponse<FeedBack> { Success = false, Message = "Not Found AdminSetting" };
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<FeedBack> { Success = false, Message = "Not Found AdminSetting" };
+                return new ServiceResponse<FeedBack> { Success = false, Message = ex.Message };
             }
+
         }
     }
 }

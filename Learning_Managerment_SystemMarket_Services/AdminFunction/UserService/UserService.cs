@@ -4,6 +4,7 @@ using Learning_Managerment_SystemMarket_Core.Models;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -24,44 +25,60 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
 
         public async Task<ServiceResponse<User>> Create(User newUser)
         {
-            var userFromDb = await Find(newUser.UserName);
-            if (userFromDb == null)
+            try
             {
-                var result = await _userManager.CreateAsync(newUser);
-                if (result.Succeeded)
+                var userFromDb = await Find(newUser.UserName);
+                if (userFromDb == null)
                 {
-                    return new ServiceResponse<User> { Success = true, Message = "Add User Success" };
+                    var result = await _userManager.CreateAsync(newUser);
+                    if (result.Succeeded)
+                    {
+                        return new ServiceResponse<User> { Success = true, Message = "Add User Success" };
+                    }
+                    else
+                    {
+                        return new ServiceResponse<User> { Success = false, Message = "An error while creating User" };
+                    }
                 }
                 else
                 {
-                    return new ServiceResponse<User> { Success = false, Message = "An error while creating User" };
+                    return new ServiceResponse<User> { Success = false, Message = "User is Exist" };
                 }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<User> { Success = false, Message = "User is Exist" };
+                return new ServiceResponse<User> { Success = false, Message = ex.Message };
             }
+
         }
 
         public async Task<ServiceResponse<User>> Delete(User user)
         {
-            var userFromDb = await Find(user.UserName);
-            if (userFromDb != null)
+            try
             {
-                var result = await _userManager.DeleteAsync(user);
-                if (result.Succeeded)
+                var userFromDb = await Find(user.UserName);
+                if (userFromDb != null)
                 {
-                    return new ServiceResponse<User> { Success = true, Message = "Delete User Success" };
+                    var result = await _userManager.DeleteAsync(user);
+                    if (result.Succeeded)
+                    {
+                        return new ServiceResponse<User> { Success = true, Message = "Delete User Success" };
+                    }
+                    else
+                    {
+                        return new ServiceResponse<User> { Success = false, Message = "An error while deleting User" };
+                    }
                 }
                 else
                 {
-                    return new ServiceResponse<User> { Success = false, Message = "An error while deleting User" };
+                    return new ServiceResponse<User> { Success = false, Message = "Not Found User" };
                 }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<User> { Success = false, Message = "Not Found User" };
+                return new ServiceResponse<User> { Success = false, Message = ex.Message };
             }
+
         }
 
         public async Task<User> Find(string userName)
@@ -78,23 +95,31 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
 
         public async Task<ServiceResponse<User>> Update(User updateUser)
         {
-            var userFromDb = await Find(updateUser.UserName);
-            if (userFromDb == null)
+            try
             {
-                var result = await _userManager.UpdateAsync(updateUser);
-                if (result.Succeeded)
+                var userFromDb = await Find(updateUser.UserName);
+                if (userFromDb == null)
                 {
-                    return new ServiceResponse<User> { Success = true, Message = "Add User Success" };
+                    var result = await _userManager.UpdateAsync(updateUser);
+                    if (result.Succeeded)
+                    {
+                        return new ServiceResponse<User> { Success = true, Message = "Add User Success" };
+                    }
+                    else
+                    {
+                        return new ServiceResponse<User> { Success = false, Message = "An error while updating User" };
+                    }
                 }
                 else
                 {
-                    return new ServiceResponse<User> { Success = false, Message = "An error while updating User" };
+                    return new ServiceResponse<User> { Success = false, Message = "User is Exist" };
                 }
             }
-            else
+            catch (Exception ex)
             {
-                return new ServiceResponse<User> { Success = false, Message = "User is Exist" };
+                return new ServiceResponse<User> { Success = false, Message = ex.Message };
             }
+
         }
     }
 }
