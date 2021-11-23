@@ -72,5 +72,17 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
             var course = _map.Map<Course>(studentHomeVM);
             unitOfWork.Courses.Update(course);
         }
+
+        public async Task<ICollection<Course>> GetFeatureCourse(int size)
+        {
+            var course = await unitOfWork.Courses.GetFeatureCourse(size);
+            return course;
+        }
+
+        public async Task<ICollection<Course>> GetNewestCourse(int size)
+        {
+            var course = await unitOfWork.Courses.GetNewestCourse(size);
+            return course;
+        }
     }
 }

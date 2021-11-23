@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/components.css">
-    <link href='frontend/vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
+    <link href='frontend/vendor/unicons-2.0.1/css/animation.css' rel='stylesheet'>
 
     <link href="frontend/css/vertical-responsive-menu.min.css" rel="stylesheet">
 
@@ -268,7 +268,7 @@
             <div class="left_section">
                 <ul>
                     <li class="menu--item">
-                        <a href="https://coursearly.com/cursus/public" class="menu--link active" title="Home">
+                        <a asp-action="Index" asp-controller="Student" class="menu--link active" title="Home">
                             <i class="uil uil-home-alt menu--icon"></i>
                             <span class="menu--label">Home</span>
                         </a>
@@ -471,25 +471,21 @@
 
         </div>
     </nav>
-    
-    <div class="main-content" style="min-height: 861px;">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+    <div class="wrapper">
+        <div class="sa4d25">
+            <div class="container-fluid">
+                <div class="row">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
     </div>
-    <footer class="main-footer">
-        <div class="footer-left">
-            &copy; 2021 - Learning_Managerment_SystemMarket_Web <div class="bullet"></div> Design By <a href="">Team</a>
-        </div>
-        <div class="footer-right">
-            1.0.2
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="/frontend/js/jquery.min.js"></script>
-    <script src="/js/popper.min.js')}}">
+    <script src="/js/popper.min.js">
     </script>
     <script src="/frontend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/nicescroll.min.js"></script>
