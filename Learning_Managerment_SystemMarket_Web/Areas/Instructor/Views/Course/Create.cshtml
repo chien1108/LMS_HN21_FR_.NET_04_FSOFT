@@ -1,0 +1,500 @@
+﻿@model Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel.CreateCourseVm;
+@using Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService;
+@using Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService;
+
+@inject ICategoryService categoryService
+@inject ILanguageService languageService
+
+@{
+    Layout = "~/Areas/Instructor/Views/Shared/_InstructorLayout.cshtml";
+    var listCategory = await categoryService.GetAllCategory();
+    var listLanguage = await languageService.GetAllLanguage();
+}
+
+<div class="sa4d25">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="st_title"><i class="uil uil-analysis"></i> Create New Course</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="course_tabs_1">
+                    <div id="add-course-tab" class="step-app">
+                        <ul class="step-steps">
+                            <li class=" active">
+                                <a href="#tab_step1">
+                                    <span class="number"></span>
+                                    <span class="step-name">General Information</span>
+                                </a>
+                            </li>
+                            <li class=" ">
+                                <a href="#tab_step2">
+                                    <span class="number"></span>
+                                    <span class="step-name">View</span>
+                                </a>
+                            </li>
+                            <li class=" ">
+                                <a href="#tab_step3">
+                                    <span class="number"></span>
+                                    <span class="step-name">Course Content</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#tab_step4">
+                                    <span class="number"></span>
+                                    <span class="step-name">Extra Information</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="step-content">
+                            <div class="step-tab-panel step-tab-info active" id="tab_step1">
+                                <div class="tab-from-content">
+                                    <div class="title-icon">
+                                        <h3 class="title"><i class="uil uil-info-circle"></i>General Information</h3>
+                                    </div>
+                                    <div class="course__form">
+                                        <div class="general_info10">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 text-center">
+                                                    <div class="ui search focus mt-30 lbel25">
+                                                        <label>Course Title*</label>
+                                                        <div class="ui left icon input swdh19">
+                                                            <input class="prompt srch_explore" type="text" placeholder="Insert your course title." name="title" data-purpose="edit-course-title" maxlength="60" value="" required>
+                                                            <div class="badge_num" data-purpose="form-control-counter">
+                                                                60
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 text-center">
+                                                    <div class="ui search focus mt-30 lbel25">
+                                                        <label>Course Subtitle*</label>
+                                                        <div class="ui left icon input swdh19">
+                                                            <input class="prompt srch_explore" type="text" placeholder="Insert your course Subtitle." name="subtitle" data-purpose="edit-course-title" maxlength="120" id="sub[title]" value="">
+                                                            <div class="badge_num2" data-purpose="form-control-counter">
+                                                                120
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12 ">
+                                                    <div class="course_des_textarea mt-30 lbel25">
+                                                        <label>Course Description*</label>
+                                                        <div class="course_des_bg">
+
+                                                            <div class="textarea_dt">
+                                                                <div class="ui form swdh339">
+                                                                    <div class="field">
+                                                                        <textarea rows="5" name="description" class="id_course_description" placeholder="Insert your course description"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12 text-center">
+                                                    <div class="mt-30 lbel25">
+                                                        <label>Language*</label>
+                                                    </div>
+                                                    @Html.DropDownListFor(q => q.LanguageId, new SelectList(@listLanguage, "Id", "LanguageName"), "Select Language", new { @class = "ui hj145 dropdown cntry152 prompt srch_explore" })
+
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 text-center">
+                                                    <div class="mt-30 lbel25">
+                                                        <label>Course Category*</label>
+                                                    </div>
+                                                    @Html.DropDownListFor(q => q.CategoryId, new SelectList(@listCategory, "Id", "CategoryName"), "Select Category", new { @class = "ui hj145 dropdown cntry152 prompt srch_explore", @id = "category" })
+                                                    @*<select class="ui hj145 dropdown cntry152 prompt srch_explore" name="category_id" id="category">
+                                                            <option value="">Select Category</option>
+
+                                                            <option value="1">Photography</option>
+                                                        </select>*@
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 text-center">
+                                                    <div class="mt-30 lbel25">
+                                                        <label>Course Subcategory*</label>
+                                                    </div>
+                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="subcategory_id" id="subCategory">
+                                                        <option value="">Select Subcategory</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="price_course">
+                                            <div class="row">
+                                                <div class="col-lg-12 ">
+                                                    <div class="price_title">
+                                                        <h4><i class="uil uil-dollar-sign-alt"></i>Pricing</h4>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-3 col-sm-12 text-center">
+                                                    <div class="mt-30 lbel25">
+                                                        <label>Is Free*</label>
+                                                    </div>
+                                                    <select class="ui hj145 dropdown cntry152 prompt srch_explore is_free" name="is_free">
+                                                        <option value="0" selected>
+                                                            No
+                                                        </option>
+                                                        <option value="1">
+                                                            Yes
+                                                        </option>
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-lg-5 col-md-6 col-sm-6 text-center is_free_div">
+                                                    <div class="ui search focus mt-30 lbel25">
+                                                        <label>Price*</label>
+                                                        <div class="ui left icon input swdh19">
+                                                            <input class="prompt srch_explore" type="number" placeholder="Insert your course Price." name="price" data-purpose="edit-course-title" value="" required>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5 col-md-6 col-sm-6 text-center is_free_div">
+                                                    <div class="ui search focus mt-30 lbel25">
+                                                        <label>Discount Price</label>
+                                                        <div class="ui left icon input swdh19">
+                                                            <input class="prompt srch_explore" type="number" placeholder="Discount Price if have ." name="discount_price" data-purpose="edit-course-title" value="0">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step-tab-panel step-tab-gallery " id="tab_step2">
+                                <div class="tab-from-content">
+                                    <div class="title-icon">
+                                        <h3 class="title"><i class="uil uil-image-upload"></i>View</h3>
+                                    </div>
+                                    <div class="course__form">
+                                        <div class="view_info10">
+                                                <input type="hidden" name="_token" value="1I6KrpUtxSRxT4RmsC4NNBOUdmGgIOilQzXH4su3"> <input type="hidden" name="courseid" value="" id="courseid">
+
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="view_all_dt">
+                                                            <div class="view_img_left">
+                                                                <div class="view__img">
+                                                                    <img src="~/instructor/public/frontend/images/courses/add_img.jpg" alt="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="view_img_right">
+                                                                <h4>Cover Image</h4>
+                                                                <p>
+                                                                    Upload your course image here. It must meet our course image quality standards to be accepted. Important guidelines: 750x422 pixels; .jpg, .jpeg,. gif, or .png. no text on the image max file size 1mb.
+                                                                </p>
+                                                                <div class="upload__input">
+                                                                    <div class="input-group">
+                                                                        <div class="custom-file">
+                                                                            <input type="file" class="custom-file-input" id="inputGroupFile04" name="cover_image" accept="image/*">
+                                                                            <label class="custom-file-label" for="inputGroupFile04">No Choose file</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="view_all_dt">
+                                                            <div class="view_img_left">
+                                                                <div class="view__img">
+                                                                    <img src="~/instructor/public/frontend/images/courses/add_video.jpg" alt="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="view_img_right">
+                                                                <h4>Promotional Video</h4>
+                                                                <p>
+                                                                    Students who watch a well-made promo video are 5X more likely to enroll in your course. We`ve seen that statistic go up to 10X for exceptionally awesome videos. Learn how to make yours awesome!. max file size 5mb
+                                                                </p>
+                                                                <div class="upload__input">
+                                                                    <div class="input-group">
+                                                                        <div class="custom-file">
+                                                                            <input type="file" class="custom-file-input" id="inputGroupFile05" accept="video/*" name="promotional_video">
+                                                                            <label class="custom-file-label" for="inputGroupFile05">Choose file</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step-tab-panel step-tab-location " id="tab_step3">
+                                <div class="tab-from-content">
+                                    <div class="title-icon">
+                                        <h3 class="title"><i class="uil uil-film"></i>Course Content</h3>
+                                    </div>
+                                    <div class="course__form">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="extra_info">
+                                                    <h4 class="part__title">New Course Content</h4>
+                                                </div>
+
+                                                <div class="view_info10">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-md-12">
+                                                            <div class="ui search focus mt-30 lbel25">
+                                                                <label>Course Content Title*</label>
+                                                                <div class="ui left icon input swdh19">
+                                                                    <input class="prompt srch_explore" type="text" placeholder="Insert your course content title." name="title" data-purpose="edit-course-title" maxlength="60" id="ContentTitle" value="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <form action="" method="post" enctype="multipart/form-data" id="lecturefrom" class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <div class="lecture_title">
+                                                                    <h4>Add Lecture</h4>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-lg-4 col-md-12">
+                                                                <div class="ui search focus mt-30 lbel25">
+                                                                    <label>Lecture Title*</label>
+                                                                    <div class="ui left icon input swdh19">
+                                                                        <input class="prompt srch_explore" type="text" placeholder="Insert your lecture title." name="title" data-purpose="edit-course-title" maxlength="60" id="title" value="" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4 col-md-6">
+                                                                <div class="part_input mt-30 lbel25">
+                                                                    <label>File*</label>
+                                                                    <div class="input-group">
+                                                                        <div class="custom-file">
+                                                                            <input type="file" class="custom-file-input" id="lectureFileInput" name="file" required onchange="onLectureFileChange()">
+                                                                            <label class="custom-file-label" for="inputGroupFile06">No Choose file - (Pdf, Video)</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4 col-md-6">
+                                                                <div class="ui search focus mt-30 lbel25">
+                                                                    <label>Sort</label>
+                                                                    <div class="ui left icon input swdh19">
+                                                                        <input class="prompt srch_explore" type="number" min="0" max="100" placeholder="0" name="position" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <div class="course_des_textarea mt-30 lbel25">
+                                                                    <label>Description*</label>
+                                                                    <div class="course_des_bg">
+
+                                                                        <div class="textarea_dt">
+                                                                            <div class="ui form swdh339">
+                                                                                <div class="field">
+                                                                                    <textarea rows="5" name="description" class="id_course_description" placeholder="Insert your course description"></textarea>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-5 col-md-6">
+                                                                <div class="ui search focus mt-30 lbel25">
+                                                                    <label>Volume*</label>
+                                                                    <div class="ui left icon input swdh19 swdh95">
+                                                                        <input class="prompt srch_explore" type="number" min="0" required="" placeholder="0" name="volume">
+                                                                        <div class="badge_mb">MB</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-5 col-md-6">
+                                                                <div class="ui search focus mt-30 lbel25">
+                                                                    <label>Duration*</label>
+                                                                    <div class="ui left icon input swdh19 swdh55">
+                                                                        <input class="prompt srch_explore" type="number" min="0" required="" placeholder="0" name="duration">
+                                                                        <div class="badge_min">Minutes</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-2 col-md-12">
+                                                                <button class="part_btn_save prt-sv" type="button">Save Lecture</button>
+                                                            </div>
+                                                        </form>
+                                                        <div class="col-lg-12 col-md-12">
+                                                            <div class="table-responsive mt-50 mb-0">
+                                                                <table class="table ucp-table">
+                                                                    <thead class="thead-s">
+                                                                        <tr>
+                                                                            <th class="text-center" scope="col">
+                                                                                Lecture
+                                                                            </th>
+                                                                            <th class="cell-ta">Title</th>
+                                                                            <th class="text-center" scope="col">
+                                                                                Volume
+                                                                            </th>
+                                                                            <th class="text-center" scope="col">
+                                                                                Duration
+                                                                            </th>
+                                                                            <th class="text-center" scope="col">
+                                                                                Sort
+                                                                            </th>
+                                                                            <th class="text-center" scope="col">
+                                                                                File
+                                                                            </th>
+                                                                            <th class="text-center" scope="col">
+                                                                                Controls
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="tbodylecture">
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-12">
+                                                            <div class="save_content">
+                                                                <button class="save_content_btn" onclick="FinalCourseContent()">Save Course Content</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive mt-30">
+                                        <table class="table ucp-table" id="content-table">
+                                            <thead class="thead-s">
+                                                <tr>
+                                                    <th class="text-center" scope="col">Content</th>
+                                                    <th class="cell-ta">Title</th>
+                                                    <th class="text-center" scope="col">lectures</th>
+                                                    <th class="text-center" scope="col">Volume</th>
+                                                    <th class="text-center" scope="col">Duration</th>
+                                                    <th class="text-center" scope="col">Upload Date</th>
+                                                    <th class="text-center" scope="col">Controls</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="step-tab-panel step-tab-amenities " id="tab_step4">
+                                <div class="tab-from-content">
+                                    <div class="title-icon">
+                                        <h3 class="title">
+                                            <i class="uil uil-file-copy-alt"></i>Extra Information
+                                        </h3>
+                                    </div>
+                                    <div class="course__form">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="extra_info">
+                                                    <h4 class="part__title">Extra Information</h4>
+                                                </div>
+                                                <div class="view_info10">
+
+
+                                                    <form action="~/instructor/public/instructor/courses/0" method="post" id="formId4" enctype="multipart/form-data" class="row">
+                                                        <input type="hidden" name="_token" value="1I6KrpUtxSRxT4RmsC4NNBOUdmGgIOilQzXH4su3">
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                        <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+                                                            <div class="mt-30 lbel25">
+                                                                <label>What you want save as*</label>
+                                                            </div>
+                                                            <select class="ui hj145 dropdown cntry152 prompt srch_explore" name="status">
+                                                                <option value="2">
+                                                                    Submit For Review
+                                                                </option>
+                                                                <option value="0">
+                                                                    Draft
+                                                                </option>
+
+                                                            </select>
+
+                                                        </div>
+                                                    </form>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="step-footer step-tab-pager">
+                            <button data-direction="prev" class="btn btn-default steps_btn">PREVIOUS</button>
+                            <button data-direction="next" class="btn btn-default steps_btn">Next</button>
+                            <button data-direction="finish" onclick="submitForm('#formId4')" class="btn btn-default steps_btn" type="button">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/instructor/public/frontend/js/jquery-steps.min.js"></script>
+    <script src="~/instructor/public/frontend/js/course.js"></script>
+    <link href="~/instructor/public/admin/assets/js/summernote.min.css" rel="stylesheet">
+    <script src="~/instructor/public/admin/assets/js/summernote.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.id_course_description').summernote({
+                height: 120,
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'underline', 'clear']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+            $('#category').change(function () {
+                var id = $(this).val();
+
+                $('#subCategory').find('option').not(':first').remove();
+
+                $.ajax({
+                    url: "GetSubCategory" + '/' + id,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        var len = 0;
+                        if (response != null) {
+                            len = response.length;
+                        }
+
+                        if (len > 0) {
+                            for (var i = 0; i < len; i++) {
+                                var id = response[i].id;
+                                var name = response[i].subCategoryName;
+                                var option = "<option value='" +
+                                    id + "'>" + name + "</option>";
+
+                                $("#subCategory").append(option);
+                            }
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                    }
+                })
+            });
+        });
+        var currantstep = '0'
+        $('#add-course-tab').steps({
+            onFinish: function () { }
+        });
+    </script>
+}

@@ -23,6 +23,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.12">
       <PrivateAssets>all</PrivateAssets>
@@ -34,6 +35,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Learning_Managerment_SystemMarket_Core\Learning_Managerment_SystemMarket_Core.csproj" />
+    <ProjectReference Include="..\Learning_Managerment_SystemMarket_Services\Learning_Managerment_SystemMarket_Services.csproj" />
+    <ProjectReference Include="..\Learning_Managerment_SystemMarket_ViewModels\Learning_Managerment_SystemMarket_ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -22,6 +22,9 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
 using Learning_Managerment_SystemMarket_Web.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -79,6 +82,11 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IPayOutRepository, PayOutRepository>();
             services.AddScoped<IPaytabsInvoiceRepository, PaytabsInvoiceRepository>();
+
+            //Instructor service
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<ISubCategoryService, SubCategoryService>();
 
             //Config for Dependence Service
 

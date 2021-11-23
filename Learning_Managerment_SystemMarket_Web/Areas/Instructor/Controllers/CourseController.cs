@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,8 +9,15 @@ using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
 {
+    [Area("Instructor")]
     public class CourseController : Controller
     {
+        private readonly ISubCategoryService _subCategoryService;
+
+        public CourseController(ISubCategoryService subCategoryService)
+        {
+            _subCategoryService = subCategoryService;
+        }
         // GET: CourseController
         public ActionResult Index()
         {
@@ -30,7 +39,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
         // POST: CourseController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CreateCourseVm model)
         {
             try
             {
@@ -40,6 +49,13 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public ActionResult GetSubCategory(int id)
+        {
+            var result = _subCategoryService.GetSubCategoryByCategoryId(id);
+            return Json(result.Result);
         }
 
         // GET: CourseController/Edit/5
