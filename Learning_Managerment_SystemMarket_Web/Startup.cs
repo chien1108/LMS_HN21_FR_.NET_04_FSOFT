@@ -22,6 +22,7 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
 using Learning_Managerment_SystemMarket_Web.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -53,7 +54,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddDbContext<LMSDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            });
+            }, ServiceLifetime.Transient);
 
             //Config for Dependence Repository
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -79,6 +80,8 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IPayOutRepository, PayOutRepository>();
             services.AddScoped<IPaytabsInvoiceRepository, PaytabsInvoiceRepository>();
+
+            services.AddTransient<ICourseServices, CourseServices>();
 
             //Config for Dependence Service
 

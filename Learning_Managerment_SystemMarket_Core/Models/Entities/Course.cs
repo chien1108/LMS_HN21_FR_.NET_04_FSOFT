@@ -31,6 +31,7 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public Instructor Instructor { get; set; }
         public Language Language { get; set; }
         public SubCategory SubCategory { get; set; }
+        public Category Category { get; set; }
 
 
 

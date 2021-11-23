@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
 {
+    [Area("Instructor")]
     public class CourseController : Controller
     {
         // GET: CourseController
