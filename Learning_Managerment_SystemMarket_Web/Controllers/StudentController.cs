@@ -22,7 +22,6 @@ namespace Learning_Managerment_SystemMarket_Web.Controllers
         {
             return View();
         }
-<<<<<<< HEAD
        
         public IActionResult SavedCourses()
         {
@@ -31,13 +30,13 @@ namespace Learning_Managerment_SystemMarket_Web.Controllers
 
         public IActionResult Filter()
         {
-            return View();
-=======
+            return View(); 
+        }
 
         public async Task<IActionResult> GetCourseByCategory(int id)
         {
-            var course = _studentHomePageService.FindCourse(c => c.CategoryId == id);
->>>>>>> 5835e0a7621e12a39d9e11c90864fa7e75c1ac0c
+            var course = await _studentHomePageService.FindCourse(c => c.CategoryId == id);
+            return View();
         }
     }
 }
