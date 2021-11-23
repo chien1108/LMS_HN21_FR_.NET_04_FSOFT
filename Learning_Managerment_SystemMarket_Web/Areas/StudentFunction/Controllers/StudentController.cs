@@ -32,18 +32,15 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         {
             return View(); 
         }
-
-        //public async Task<IActionResult> GetCourseByCategory(int id)
-        //{
-        //    var course = _studentHomePageService.FindCourse(c => c.CategoryId == id);
-        //}
-
+        /// <summary>
+        /// Get all course by category id VuTV10
+        /// </summary>
+        /// <param name="id">CategoryId</param>
+        /// <returns>List course</returns>
         public async Task<IActionResult> GetCourseByCategory(int id)
         {
             var courses = await _studentHomePageService.FindAllCourse(c => c.CategoryId == id);
             return View(courses);
-            var course = await _studentHomePageService.FindCourse(c => c.CategoryId == id);
-            return View();
         }
     }
 }

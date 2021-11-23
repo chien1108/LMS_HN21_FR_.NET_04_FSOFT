@@ -23,7 +23,16 @@ namespace Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
         public int Share { get; set; }
         public int Views { get; set; }
         public string Requirements { get; set; }
+        public DateTime CreatedDate { get; set; }
         public CourseContent CourseContent { get; set; }
         public CourseRate CourseRate { get; set; }
+
+        public int InstructorId { get; set; }
+        public int CategoryId { get; set; }
+        public int SubcategoryId { get; set; }
+        public int LanguageId { get; set; }
+        public Instructor Instructor { get; set; }
+        public Language Language { get; set; }
+        public SubCategory SubCategory { get; set; }
     }
 }
