@@ -2,6 +2,7 @@
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices;
 using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.CategoryViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -15,12 +16,14 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
         private readonly ILogger<CategoryController> _logger;
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
+        private readonly RoleManager<Role> roleManager;
 
-        public CategoryController(ILogger<CategoryController> logger, ICategoryService categoryService, IMapper mapper)
+        public CategoryController(ILogger<CategoryController> logger, ICategoryService categoryService, IMapper mapper,RoleManager<Role> roleManager)
         {
             _logger = logger;
             _categoryService = categoryService;
             _mapper = mapper;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()

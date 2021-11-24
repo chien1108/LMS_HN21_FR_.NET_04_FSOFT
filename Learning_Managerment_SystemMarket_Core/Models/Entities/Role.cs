@@ -7,6 +7,5 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
     {
         //public string RoleName { get; set; }
         public string GuardName { get; set; }
-
     }
 }
