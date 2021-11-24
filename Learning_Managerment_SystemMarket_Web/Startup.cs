@@ -22,6 +22,7 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
+using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
 using Learning_Managerment_SystemMarket_Web.Mapper;
@@ -78,6 +79,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IPaytabsInvoiceRepository, PaytabsInvoiceRepository>();
             services.AddScoped<IStudentHomePageService, StudentHomePageService>();
             services.AddScoped<IStudentExploreService, StudentExploreService>();
+            services.AddScoped<ISavedCourseService, SavedCourseService>();
 
             //Config for Dependence Service
 

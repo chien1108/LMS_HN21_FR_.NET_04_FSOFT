@@ -3,12 +3,10 @@ using Learning_Managerment_SystemMarket_Core.Contracts;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService
@@ -24,18 +22,13 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
             _map = map;
         }
 
-        public void Create(StudentHomePageVM studentHomeVM)
+        public async Task Create(StudentHomePageVM studentHomeVM)
         {
             var course = _map.Map<Course>(studentHomeVM);
-            unitOfWork.Courses.Create(course);
+            await unitOfWork.Courses.Create(course);
         }
 
-        public void Delete(StudentHomePageVM studentHomeVM)
-        {
-            var course = _map.Map<Course>(studentHomeVM);
-            unitOfWork.Courses.Delete(course);
-        }
-
+       
         public async Task<CourseDetailVM> FindCourse(Expression<Func<Course, bool>> expression = null, List<string> includes = null)
         {
             var course = await unitOfWork.Courses.FindByCondition(expression, includes);
@@ -75,6 +68,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
             var course = _map.Map<Course>(studentHomeVM);
             unitOfWork.Courses.Update(course);
         }
+
         public async Task<ICollection<Course>> GetFeatureCourse(int size)
         {
             var course = await unitOfWork.Courses.GetFeatureCourse(size);
@@ -91,18 +85,8 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
         {
             var categories = await unitOfWork.Categories.GetAll();
             return _map.Map<IList<CategoryDetailVM>>(categories);
-
         }
 
-        public async Task<ICollection<Course>> GetCourseByStudentId(int id)
-        {
-            var courses = await unitOfWork.Courses.GetCoursesByStudentId(id);
-            return courses;
-        }
-        public async Task<ICollection<Course>> GetCourseByStudent()
-        {
-            var courses = await unitOfWork.Courses.GetCoursesByStudent();
-            return courses;
-        }
+       
     }
 }

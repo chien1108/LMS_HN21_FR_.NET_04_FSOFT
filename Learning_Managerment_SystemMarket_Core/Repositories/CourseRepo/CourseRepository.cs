@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 
 namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
 {
@@ -17,34 +18,62 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
         {
             _context = context;
         }
-
-        public async Task<ICollection<Course>> GetCoursesByStudent()
+        /// <summary>
+        /// TamLV10 delete savecourse
+        /// </summary>
+        /// <param name="savedCourse"></param>
+        public void DeleteSaveCourse(SavedCourse savedCourse)
         {
-            var courses = await _context.Courses
-                .Include(c => c.CourseRates)
-                .ToListAsync();
-            return courses;
+            _context.SavedCourses.Remove(savedCourse);
         }
 
-        public async Task<ICollection<Course>> GetCoursesByStudentId(int id)
+        /// <summary>
+        ///TamLV10 Find savedCourse by studentId and courseId
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <param name="courseId"></param>
+        /// <returns>SavedCourse</returns>
+        public async Task<SavedCourse> FindSavedCourse(int studentId, int courseId)
         {
-            var courses = await _context.Courses
-                .Include(c => c.CourseRates)
-                .ThenInclude(c => c.StudentId == id)
+            var savedCourse = await _context.SavedCourses
+                             .Include(x=>x.Course)
+                            .FirstOrDefaultAsync(x => x.StudentId == studentId 
+                            && x.CourseId == courseId);
+            return savedCourse;
+        }
+
+        /// <summary>
+        /// TamLV10 GetCoursesByStudentId
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
+        public async Task<ICollection<SavedCourse>> GetCoursesByStudentId(int studentId)
+        {
+            var savedCourses = await _context.SavedCourses
+                .Include(x=>x.Course)
+                .Where(x=>x.StudentId==studentId)
                 .ToListAsync();
-            return courses;
+            return savedCourses;
         }
         public async Task<ICollection<Course>> GetFeatureCourse(int size)
         {
           
-            var course = await _context.Courses.OrderByDescending(x => x.Likes).Take(size).ToListAsync();
+            var course = await _context.Courses
+                .OrderByDescending(x => x.Likes)
+                .Take(size)
+                .ToListAsync();
             return course;
         }
 
         public async Task<ICollection<Course>> GetNewestCourse(int size)
         {
-            var course = await _context.Courses.OrderByDescending(x => x.ModifiedDate).Take(size).ToListAsync();
+            var course = await _context.Courses
+                .OrderByDescending(x => x.ModifiedDate)
+                .Take(size)
+                .ToListAsync();
             return course;
         }
+
+      
     }
 }
