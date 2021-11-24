@@ -23,7 +23,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentExpl
 
         public async Task<IList<Course>> GetAllCourseIsActive()
         {
-            var listCourse = await unitOfWork.Courses.GetAll(x => x.Status == StatusCourse.Active);
+            var listCourse = await unitOfWork.Courses.GetAllCoursesIsActive();
             return listCourse;
         }
 

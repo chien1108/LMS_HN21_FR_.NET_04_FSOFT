@@ -20,6 +20,12 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
             _context = context;
         }
 
+        public async Task<IList<Course>> GetAllCoursesIsActive()
+        {
+            var result = await _context.Courses.Include(q => q.Instructor).Include(q => q.SubCategory).Where(x => x.Status == StatusCourse.Active).ToListAsync();
+            return result;
+        }
+
         public async Task<ICollection<Course>> GetCoursesByStudent()
         {
             var courses = await _context.Courses
@@ -51,6 +57,7 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
 
         public async Task<ICollection<Course>> SearchCourse(string searchString)
         {
+            
             var course = await _context.Courses.Include(q => q.Instructor).Include(q => q.SubCategory).Where(x => x.Status == StatusCourse.Active).ToListAsync();
             
             if (!String.IsNullOrEmpty(searchString))
