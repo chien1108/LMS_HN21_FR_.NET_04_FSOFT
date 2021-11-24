@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Explore";
     Layout = "~/Areas/StudentFunction/Views/Shared/_StudentLayout.cshtml";
 }
@@ -8,16 +9,10 @@
     <div class="section3125">
         <div class="explore_search">
             <div class="ui search focus">
-<<<<<<< HEAD
-                <form action="https://coursearly.com/cursus/public/explore" method="post">
-                    <input type="hidden" name="_token" value="sBQtZsEX4wMnFrTJQy0q2q3RBf9AmxZ1d0Vmcb13">                        <div class="ui left icon input swdh11">
-                        <input class="prompt srch_explore" type="text" placeholder="Search Courses..." name="q">
-=======
                 <form asp-action="Explore">
                     <input type="hidden" name="_token" value="sBQtZsEX4wMnFrTJQy0q2q3RBf9AmxZ1d0Vmcb13">
                     <div class="ui left icon input swdh11">
-                        <input class="prompt srch_explore" asp-for="SearchString" type="text" placeholder="Search Courses..." >
->>>>>>> 4f3f97ba622514f16c292067d87b502bb5e81732
+                        <input class="prompt srch_explore" asp-for="SearchString" type="text" placeholder="Search Courses...">
                         <i class="uil uil-search-alt icon icon2"></i>
                     </div>
                 </form>
@@ -27,60 +22,6 @@
 </div>
 <div class="col-md-12">
     <div class="_14d25">
-<<<<<<< HEAD
-        <div class="row mt-30">
-            <div class="col-12"><h4 class="item_title">Courses</h4></div>
-            @foreach (var item in Model.Courses)
-            {
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="item">
-                        <div class="fcrse_1 mb-20">
-                            <a href="https://coursearly.com/cursus/public/courses/class-1-syllabys/133" class="fcrse_img">
-                                <img src="./Explore now Cursus_files/default.png" alt="">
-                                <div class="course-overlay">
-
-                                    <span class="play_btn1"><i class="uil uil-play"></i></span>
-
-                                    <div class="crse_timer">
-                                        0 hours
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="fcrse_content">
-                                <div class="eps_dots more_dropdown">
-                                    <a href="https://coursearly.com/cursus/public/explore#"><i class="uil uil-ellipsis-v"></i></a>
-                                    <div class="dropdown-content">
-                                        <a target="popup" onclick="window.open(&#39;https://coursearly.com/cursus/public/courses/class-1-syllabys/133/share&#39;,&#39;popup&#39;,&#39;width=600,height=600,scrollbars=no,resizable=no&#39;); return false;">
-                                            <span><i class="uil uil-share-alt"></i>Share</span>
-                                        </a>
-                                        <a href="https://coursearly.com/cursus/public/save/133/add">
-                                            <span>
-                                                <i class="uil uil-heart"></i>
-                                                Save
-                                            </span>
-                                        </a>
-
-                                        <a href="https://coursearly.com/cursus/public/report/133/add">
-                                            <span><i class="uil uil-windsock"></i>Report</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="vdtodt">
-                                    <span class="vdt14">485 views</span>
-                                    <span class="vdt14">4 months ago</span>
-                                </div>
-                                <a href="https://coursearly.com/cursus/public/courses/class-1-syllabys/133" class="crse14s">Class 1 Syllabys</a>
-                                <a href="https://coursearly.com/cursus/public/explore#" class="crse-cate">
-                                    Photography |
-                                    JS
-                                </a>
-                                <div class="auth1lnkprce">
-                                    <p class="cr1fot">
-                                        By <a href="https://coursearly.com/cursus/public/instructors/jemmy/13">Jemmy</a>
-                                    </p>
-                                    <div class="prce142">$</div>
-                                    <button onclick="window.location.href = &#39;https://coursearly.com/cursus/public/cart/133//add&#39;;" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
-=======
         @if (Model.Courses.Count != 0)
         {
             <div class="row mt-30">
@@ -141,7 +82,6 @@
                                         <button onclick="window.location.href = &#39;https://coursearly.com/cursus/public/cart/133//add&#39;;" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
 
                                     </div>
->>>>>>> 4f3f97ba622514f16c292067d87b502bb5e81732
                                 </div>
                             </div>
                         </div>
@@ -153,10 +93,8 @@
 
                     </div>
                 </div>
-<<<<<<< HEAD
-            }
-=======
             </div>
+
         }
         else
         {
@@ -164,16 +102,8 @@
             <div class="row mt-30">
                 <div class="col-12"><h4 class="item_title">Not Found Any Course</h4></div>
             </div>
-        
-    }
-    </div>
-</div>
->>>>>>> 4f3f97ba622514f16c292067d87b502bb5e81732
 
-            <div class="col-md-12 text-center">
-                <div class="main-loader mt-50">
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>
+

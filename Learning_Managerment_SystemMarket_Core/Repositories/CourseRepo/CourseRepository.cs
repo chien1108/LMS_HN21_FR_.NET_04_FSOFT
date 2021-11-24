@@ -6,11 +6,8 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Learning_Managerment_SystemMarket_Core.Modules.Enums;
-<<<<<<< HEAD
-=======
 using System;
->>>>>>> 4f3f97ba622514f16c292067d87b502bb5e81732
+using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 
 namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
 {
@@ -30,8 +27,6 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
         {
             _context.SavedCourses.Remove(savedCourse);
         }
-
-<<<<<<< HEAD
         /// <summary>
         ///TamLV10 Find savedCourse by studentId and courseId
         /// </summary>
@@ -39,21 +34,21 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
         /// <param name="courseId"></param>
         /// <returns>SavedCourse</returns>
         public async Task<SavedCourse> FindSavedCourse(int studentId, int courseId)
-=======
-        public async Task<IList<Course>> GetAllCoursesIsActive()
-        {
-            var result = await _context.Courses.Include(q => q.Instructor).Include(q => q.SubCategory).Where(x => x.Status == StatusCourse.Active).ToListAsync();
-            return result;
-        }
-
-        public async Task<ICollection<Course>> GetCoursesByStudent()
->>>>>>> 4f3f97ba622514f16c292067d87b502bb5e81732
         {
             var savedCourse = await _context.SavedCourses
-                             .Include(x=>x.Course)
-                            .FirstOrDefaultAsync(x => x.StudentId == studentId 
-                            && x.CourseId == courseId);
+                           .Include(x => x.Course)
+                          .FirstOrDefaultAsync(x => x.StudentId == studentId
+                          && x.CourseId == courseId);
             return savedCourse;
+        }
+        public async Task<IList<Course>> GetAllCoursesIsActive()
+        {
+            var result = await _context.Courses
+                .Include(q => q.Instructor)
+                .Include(q => q.SubCategory)
+                .Where(x => x.Status == StatusCourse.Active)
+                .ToListAsync();
+            return result;
         }
 
         /// <summary>
@@ -72,26 +67,19 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
         public async Task<ICollection<Course>> GetFeatureCourse(int size)
         {
           
-<<<<<<< HEAD
             var course = await _context.Courses
                 .OrderByDescending(x => x.Likes)
                 .Take(size)
                 .ToListAsync();
-=======
-            var course = await _context.Courses.Include(q => q.Instructor).Include(q => q.SubCategory).OrderByDescending(x => x.Likes).Take(size).ToListAsync();
->>>>>>> 4f3f97ba622514f16c292067d87b502bb5e81732
             return course;
         }
 
         public async Task<ICollection<Course>> GetNewestCourse(int size)
         {
-<<<<<<< HEAD
             var course = await _context.Courses
                 .OrderByDescending(x => x.ModifiedDate)
                 .Take(size)
                 .ToListAsync();
-=======
-            var course = await _context.Courses.Include(q => q.Instructor).Include(q => q.SubCategory).OrderByDescending(x => x.ModifiedDate).Take(size).ToListAsync();
             return course;
         }
 
@@ -105,7 +93,6 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
                 course = course.Where(x => x.Title.Contains(searchString)).ToList();
             }
           
->>>>>>> 4f3f97ba622514f16c292067d87b502bb5e81732
             return course;
             
         }
