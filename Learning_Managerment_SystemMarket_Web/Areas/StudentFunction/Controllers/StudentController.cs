@@ -27,10 +27,9 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         {
             return View();
         }
-<<<<<<< HEAD
+
+
        
-        public async Task<IActionResult> SavedCourses()
-=======
         public IActionResult Explore()
         {
             var courses = Task.Run(() => _studentExploreService.GetAllCourseIsActive()).Result;
@@ -40,8 +39,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             };
             return View(studentExploreVM);
         }
-        public IActionResult SavedCourses()
->>>>>>> 8a0abaa6fccc1d67a25b389ec441a553168f6cc7
+        public async Task<IActionResult> SavedCourses()
+
         {
             //var courses = await _studentHomePageService.GetCourseByStudentId(0);
             var courses = await _studentHomePageService.GetCourseByStudent();
