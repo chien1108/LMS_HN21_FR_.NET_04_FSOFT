@@ -12,7 +12,7 @@
                 <form asp-action="Explore">
                     <input type="hidden" name="_token" value="sBQtZsEX4wMnFrTJQy0q2q3RBf9AmxZ1d0Vmcb13">
                     <div class="ui left icon input swdh11">
-                        <input class="prompt srch_explore" asp-for="SearchString" type="text" placeholder="Search Courses...">
+                        <input class="prompt srch_explore" asp-for="SearchString" type="text" placeholder="Search Courses..." >
                         <i class="uil uil-search-alt icon icon2"></i>
                     </div>
                 </form>
@@ -93,6 +93,14 @@
                 </div>
             </div>
         }
+        else
+        {
+
+            <div class="row mt-30">
+                <div class="col-12"><h4 class="item_title">Not Found Any Course</h4></div>
+            </div>
+        
+    }
     </div>
 </div>
 

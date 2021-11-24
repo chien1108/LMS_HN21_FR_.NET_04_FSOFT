@@ -52,13 +52,14 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
         public async Task<ICollection<Course>> SearchCourse(string searchString)
         {
             var course = await _context.Courses.Include(q => q.Instructor).Include(q => q.SubCategory).Where(x => x.Status == StatusCourse.Active).ToListAsync();
-            List<Course> courses;
+            
             if (!String.IsNullOrEmpty(searchString))
             {
-                courses = course.Where(x => x.Title == searchString).ToList();
-                return courses;
+                course = course.Where(x => x.Title.Contains(searchString)).ToList();
             }
-            return null;
+          
+            return course;
+            
         }
     }
 }

@@ -45,7 +45,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             var courses = Task.Run(() => _studentExploreService.SearchCourse(searchString)).Result;
             StudentExploreVM studentExploreVM = new StudentExploreVM
             {
-                Courses = courses
+                Courses = courses,
+                SearchString = searchString
             };
             return View(studentExploreVM);
         }
