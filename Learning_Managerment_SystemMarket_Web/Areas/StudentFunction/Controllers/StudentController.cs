@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
+using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,12 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             return View();
         }
        
-        public IActionResult SavedCourses()
+        public async Task<IActionResult> SavedCourses()
         {
-            return View();
+            //var courses = await _studentHomePageService.GetCourseByStudentId(0);
+            var courses = await _studentHomePageService.GetCourseByStudent();
+        
+            return View(courses);
         }
 
         public IActionResult Filter()

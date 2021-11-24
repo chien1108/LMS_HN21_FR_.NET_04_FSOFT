@@ -4,7 +4,6 @@ using Learning_Managerment_SystemMarket_Core.Repositories.GenericRepo;
 
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,10 +18,21 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
             _context = context;
         }
 
-
-        public Task<IList<Course>> GetCoursesByStudentId()
+        public async Task<ICollection<Course>> GetCoursesByStudent()
         {
-            throw new System.NotImplementedException();
+            var courses = await _context.Courses
+                .Include(c => c.CourseRates)
+                .ToListAsync();
+            return courses;
+        }
+
+        public async Task<ICollection<Course>> GetCoursesByStudentId(int id)
+        {
+            var courses = await _context.Courses
+                .Include(c => c.CourseRates)
+                .ThenInclude(c => c.StudentId == id)
+                .ToListAsync();
+            return courses;
         }
         public async Task<ICollection<Course>> GetFeatureCourse(int size)
         {
