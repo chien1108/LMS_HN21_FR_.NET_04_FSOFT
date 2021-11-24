@@ -39,6 +39,16 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             };
             return View(studentExploreVM);
         }
+        [HttpPost]
+        public IActionResult Explore(string searchString)
+        {
+            var courses = Task.Run(() => _studentExploreService.SearchCourse(searchString)).Result;
+            StudentExploreVM studentExploreVM = new StudentExploreVM
+            {
+                Courses = courses
+            };
+            return View(studentExploreVM);
+        }
         public async Task<IActionResult> SavedCourses()
 
         {

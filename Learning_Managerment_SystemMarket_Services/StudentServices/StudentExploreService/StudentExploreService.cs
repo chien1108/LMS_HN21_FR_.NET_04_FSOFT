@@ -29,14 +29,8 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentExpl
 
         public async Task<ICollection<Course>> SearchCourse(string searchString)
         {
-            var course = await GetAllCourseIsActive();
-            List<Course> courses;
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                courses = course.Where(x => x.Title == searchString).ToList();
-                return courses;
-            }
-            return null;
+            var result = await unitOfWork.Courses.SearchCourse(searchString);
+            return result;
             
         }
     }

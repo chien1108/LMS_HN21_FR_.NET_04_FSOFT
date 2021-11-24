@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using Learning_Managerment_SystemMarket_Core.Modules.Enums;
+using System;
 
 namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
 {
@@ -45,6 +47,18 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
         {
             var course = await _context.Courses.Include(q => q.Instructor).Include(q => q.SubCategory).OrderByDescending(x => x.ModifiedDate).Take(size).ToListAsync();
             return course;
+        }
+
+        public async Task<ICollection<Course>> SearchCourse(string searchString)
+        {
+            var course = await _context.Courses.Include(q => q.Instructor).Include(q => q.SubCategory).Where(x => x.Status == StatusCourse.Active).ToListAsync();
+            List<Course> courses;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                courses = course.Where(x => x.Title == searchString).ToList();
+                return courses;
+            }
+            return null;
         }
     }
 }

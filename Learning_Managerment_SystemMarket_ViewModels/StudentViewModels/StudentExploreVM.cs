@@ -9,6 +9,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
 {
     public class StudentExploreVM
     {
-        public ICollection<Course> Courses;
+        public ICollection<Course> Courses { get; set; }
+        public string SearchString { get; set; }
     }
 }

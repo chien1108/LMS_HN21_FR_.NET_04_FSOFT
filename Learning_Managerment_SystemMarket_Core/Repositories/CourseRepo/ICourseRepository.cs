@@ -11,5 +11,8 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
         Task<ICollection<Course>> GetCoursesByStudent(); 
         Task<ICollection<Course>> GetFeatureCourse(int size);
         Task<ICollection<Course>> GetNewestCourse(int size);
+        Task<ICollection<Course>> SearchCourse(string searchString);
+        
+
     }
 }
