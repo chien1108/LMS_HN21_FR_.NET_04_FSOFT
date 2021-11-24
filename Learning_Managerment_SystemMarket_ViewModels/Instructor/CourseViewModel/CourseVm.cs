@@ -1,6 +1,4 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Modules.Enums;
-﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
-using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.InstructorViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.LanguageViewModel;
@@ -18,11 +16,17 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
     {
         public int Id { get; set; }
         public string Title { get; set; }
+
         public StatusCourse Status { get; set; } // 0 Draft, 1 Active , 2 WaitFor Approced, 3 Block, 4 Deactive
+
         public DateTime ModifiedDate { get; set; }
+
         public int Sales { get; set; }
+
         public decimal Price { get; set; }
+
         public int Parts { get; set; }
+
         public string CategoryName { get; set; }
 
         public string SubTitile { get; set; }
@@ -65,7 +69,23 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
 
         public ICollection<CourseContentVm> CourseContent { get; set; }
     }
+    public class CreateCourseTest
+    {
+        public string Title { get; set; }
 
+        public string SubTitile { get; set; }
+
+        public string Description { get; set; }
+
+        public bool IsFree { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public int SubcategoryId { get; set; }
+
+        public int LanguageId { get; set; }
+
+    }
     public class CreateCourseVm
     {
         [Required]
@@ -88,7 +108,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
 
         public bool IsBestseller { get; set; }
 
-        [Required]
+        //[Required]
         public int CoverImage { get; set; }// default img.png
 
         public string PromotionVideo { get; set; } // null
@@ -103,7 +123,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
 
         public int Views { get; set; }
 
-        [Required]
+        //[Required]
         public int InstructorId { get; set; }
 
         [Required]
