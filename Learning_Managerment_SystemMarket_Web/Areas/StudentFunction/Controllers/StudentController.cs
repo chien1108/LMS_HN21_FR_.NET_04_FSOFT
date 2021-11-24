@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
 using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +14,34 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
     {
         private readonly IStudentHomePageService _studentHomePageService;
         private readonly IMapper _mapper;
+        private readonly IStudentExploreService _studentExploreService;
 
-        public StudentController(IStudentHomePageService studentHomePageService, IMapper mapper)
+        public StudentController(IStudentHomePageService studentHomePageService, IMapper mapper, IStudentExploreService studentExploreService)
         {
-            this._studentHomePageService = studentHomePageService;
-            this._mapper = mapper;
+            _studentHomePageService = studentHomePageService;
+            _mapper = mapper;
+            _studentExploreService = studentExploreService;
         }
-        public IActionResult Index()
+
+        public  IActionResult Index()
         {
             return View();
         }
+<<<<<<< HEAD
        
         public async Task<IActionResult> SavedCourses()
+=======
+        public IActionResult Explore()
+        {
+            var courses = Task.Run(() => _studentExploreService.GetAllCourseIsActive()).Result;
+            StudentExploreVM studentExploreVM = new StudentExploreVM
+            {
+                Courses =  courses
+            };
+            return View(studentExploreVM);
+        }
+        public IActionResult SavedCourses()
+>>>>>>> 8a0abaa6fccc1d67a25b389ec441a553168f6cc7
         {
             //var courses = await _studentHomePageService.GetCourseByStudentId(0);
             var courses = await _studentHomePageService.GetCourseByStudent();
@@ -36,18 +53,15 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         {
             return View(); 
         }
-
-        //public async Task<IActionResult> GetCourseByCategory(int id)
-        //{
-        //    var course = _studentHomePageService.FindCourse(c => c.CategoryId == id);
-        //}
-
+        /// <summary>
+        /// Get all course by category id VuTV10
+        /// </summary>
+        /// <param name="id">CategoryId</param>
+        /// <returns>List course</returns>
         public async Task<IActionResult> GetCourseByCategory(int id)
         {
             var courses = await _studentHomePageService.FindAllCourse(c => c.CategoryId == id);
             return View(courses);
-            var course = await _studentHomePageService.FindCourse(c => c.CategoryId == id);
-            return View();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
 
         public async Task<IList<CourseDetailVM>> FindAllCourse(Expression<Func<Course, bool>> expression = null, Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null, List<string> includes = null)
         {
-            var course = await this.unitOfWork.Courses.GetAll();
+            var course = await this.unitOfWork.Courses.GetAll(expression, orderBy, includes: new List<string> { "Instructor" });
             return _map.Map<IList<CourseDetailVM>>(course);
         }
 
