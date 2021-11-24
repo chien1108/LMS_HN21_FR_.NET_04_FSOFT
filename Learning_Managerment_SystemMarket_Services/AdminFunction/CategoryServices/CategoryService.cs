@@ -97,7 +97,6 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServi
                 if (feedBackFromDB != null)
                 {
                     _unitOfWork.Categories.Update(category);
-                    _unitOfWork.Categories.Delete(category);
                     if (!await SaveChange())
                     {
                         return new ServiceResponse<Category> { Success = false, Message = "Error when update category" };

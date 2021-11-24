@@ -47,7 +47,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(model);
+                    return RedirectToAction(nameof(ManagerCategory));
                 }
                 var category = await _categoryService.Find(x=>x.Id == model.Id);
                 if (category == null)
