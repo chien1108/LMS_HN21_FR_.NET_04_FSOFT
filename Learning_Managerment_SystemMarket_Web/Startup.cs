@@ -25,6 +25,7 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
 using Learning_Managerment_SystemMarket_Web.Mapper;
@@ -86,6 +87,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IPaytabsInvoiceRepository, PaytabsInvoiceRepository>();
             //Add service
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ISubCategoryService, SubCategoryService>();
             services.AddScoped<ILanguageService, LanguageService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoleService, RoleService>();
