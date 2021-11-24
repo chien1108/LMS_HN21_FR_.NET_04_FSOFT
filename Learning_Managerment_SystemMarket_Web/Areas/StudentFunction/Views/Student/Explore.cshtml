@@ -65,7 +65,10 @@
                                     </div>
                                     <div class="vdtodt">
                                         <span class="vdt14">@item.Views views</span>
-                                        <span class="vdt14">4 months ago</span>
+                                        @{
+                                            var month = (@DateTime.Now - item.CreatedDate);
+                                        }
+                                        <span class="vdt14">@month.TotalDays days ago</span>
                                     </div>
                                     <a href="https://coursearly.com/cursus/public/courses/class-1-syllabys/133" class="crse14s">@item.Title</a>
                                     <a href="https://coursearly.com/cursus/public/explore#" class="crse-cate">
