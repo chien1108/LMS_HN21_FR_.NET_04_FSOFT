@@ -1,5 +1,6 @@
 using Learning_Managerment_SystemMarket_Core.Contracts;
 using Learning_Managerment_SystemMarket_Core.Data;
+using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseContentRepo;
@@ -24,6 +25,8 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
 using Learning_Managerment_SystemMarket_Web.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -84,10 +87,16 @@ namespace Learning_Managerment_SystemMarket_Web
             //Add service
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ILanguageService, LanguageService>();
-            
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
             //Config for Dependence Service
 
             services.AddAutoMapper(typeof(MapperProfile));
+
+            services.AddIdentityCore<User>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<Role>()
+                .AddEntityFrameworkStores<LMSDbContext>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

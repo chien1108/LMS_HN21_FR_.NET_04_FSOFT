@@ -2,7 +2,6 @@
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -20,7 +19,7 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
 
         Task<IList<Role>> FindAll();
 
-        Task<Role> Find(string roleName);
+        Task<Role> Find(Expression<Func<Role, bool>> expression);
 
         Task<bool> SaveChange();
     }

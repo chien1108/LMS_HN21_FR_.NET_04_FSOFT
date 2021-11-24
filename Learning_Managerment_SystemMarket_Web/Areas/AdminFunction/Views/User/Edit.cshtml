@@ -1,0 +1,55 @@
+﻿@model Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.UserViewModels.UserDetailsVm
+@using Learning_Managerment_SystemMarket_Core.Models.Entities
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
+@inject IRoleService _roleService
+@inject IUserService _userService
+
+@{
+    var idUser = Convert.ToInt32(ViewData["IdUser"].ToString());
+    var user = await _userService.Find(x => x.Id == idUser);
+
+    var userRoles = await _userService.GetUserRoles(user);
+    List<Role> listUserRoles = new List<Role>();
+
+    foreach (var item in userRoles)
+    {
+        var role = await _roleService.Find(x => x.Name == item);
+        listUserRoles.Add(role);
+    }
+
+    var allRoles = await _roleService.FindAll();
+    var roleItems = new MultiSelectList(allRoles, "Id", "Name", listUserRoles.Select(x => x.Id));
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Edit User</h4>
+    </div>
+    <form asp-action="Edit" asp-controller="User">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Email" value="@user.Email" />
+            <input type="hidden" asp-for="Password" value="@user.PasswordHash" />
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" value="@user.UserName" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RolesId" class="control-label"></label>
+                <br />
+                @Html.DropDownList("RolesId", roleItems, new { multiple = "multiple", @class = "chosen-select w-100" })
+                <span asp-validation-for="RolesId" class="text-danger"></span>
+            </div>
+            <div class="card-footer text-right">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
@@ -25,62 +26,48 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
 
         public async Task<ServiceResponse<Role>> Create(Role newRole)
         {
-            try
+            var roleFromDb = await Find(x => x.Name == newRole.Name);
+            if (roleFromDb == null)
             {
-                var roleFromDb = await Find(newRole.Name);
-                if (roleFromDb == null)
+                var result = await _roleManager.CreateAsync(newRole);
+                if (result.Succeeded)
                 {
-                    var result = await _roleManager.CreateAsync(newRole);
-                    if (result.Succeeded)
-                    {
-                        return new ServiceResponse<Role> { Success = true, Message = "Add Role Success" };
-                    }
-                    else
-                    {
-                        return new ServiceResponse<Role> { Success = false, Message = "An error while creating Role" };
-                    }
+                    return new ServiceResponse<Role> { Success = true, Message = "Add Role Success" };
                 }
                 else
                 {
-                    return new ServiceResponse<Role> { Success = false, Message = "Role is Exist" };
+                    return new ServiceResponse<Role> { Success = false, Message = "An error while creating Role" };
                 }
             }
-            catch (Exception ex)
+            else
             {
-                return new ServiceResponse<Role> { Success = false, Message = ex.Message};
+                return new ServiceResponse<Role> { Success = false, Message = "Role is Exist" };
             }
         }
 
         public async Task<ServiceResponse<Role>> Delete(Role role)
         {
-            try
+            var roleFromDb = await Find(x => x.Name == role.Name);
+            if (roleFromDb != null)
             {
-                var roleFromDb = await Find(role.Name);
-                if (roleFromDb != null)
+                var result = await _roleManager.DeleteAsync(role);
+                if (result.Succeeded)
                 {
-                    var result = await _roleManager.DeleteAsync(role);
-                    if (result.Succeeded)
-                    {
-                        return new ServiceResponse<Role> { Success = true, Message = "Delete Role Success" };
-                    }
-                    else
-                    {
-                        return new ServiceResponse<Role> { Success = false, Message = "An error while deleting Role" };
-                    }
+                    return new ServiceResponse<Role> { Success = true, Message = "Delete Role Success" };
                 }
                 else
                 {
-                    return new ServiceResponse<Role> { Success = false, Message = "Not Found Role" };
+                    return new ServiceResponse<Role> { Success = false, Message = "An error while deleting Role" };
                 }
             }
-            catch (Exception ex)
+            else
             {
-                return new ServiceResponse<Role> { Success = false, Message = ex.Message };
+                return new ServiceResponse<Role> { Success = false, Message = "Not Found Role" };
             }
         }
 
-        public async Task<Role> Find(string roleName)
-            => await _roleManager.FindByNameAsync(roleName);
+        public async Task<Role> Find(Expression<Func<Role, bool>> expression)
+            => await _roleManager.Roles.FirstOrDefaultAsync(expression);
 
         public async Task<IList<Role>> FindAll()
             => await _roleManager.Roles.ToListAsync();
@@ -93,31 +80,23 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
 
         public async Task<ServiceResponse<Role>> Update(Role updateRole)
         {
-            try
+            var roleFromDb = await Find(x => x.Name == updateRole.Name);
+            if (roleFromDb != null)
             {
-                var roleFromDb = await Find(updateRole.Name);
-                if (roleFromDb == null)
+                var result = await _roleManager.UpdateAsync(updateRole);
+                if (result.Succeeded)
                 {
-                    var result = await _roleManager.UpdateAsync(updateRole);
-                    if (result.Succeeded)
-                    {
-                        return new ServiceResponse<Role> { Success = true, Message = "Add Role Success" };
-                    }
-                    else
-                    {
-                        return new ServiceResponse<Role> { Success = false, Message = "An error while updating Role" };
-                    }
+                    return new ServiceResponse<Role> { Success = true, Message = "Add Role Success" };
                 }
                 else
                 {
-                    return new ServiceResponse<Role> { Success = false, Message = "Role is Exist" };
+                    return new ServiceResponse<Role> { Success = false, Message = "An error while updating Role" };
                 }
             }
-            catch (Exception ex)
+            else
             {
-                return new ServiceResponse<Role> { Success = false, Message = ex.Message };
+                return new ServiceResponse<Role> { Success = false, Message = "Not Found Role" };
             }
-
         }
     }
 }
