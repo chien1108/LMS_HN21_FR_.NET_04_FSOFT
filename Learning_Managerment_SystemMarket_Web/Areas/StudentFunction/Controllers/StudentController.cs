@@ -43,11 +43,25 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             };
             return View(studentExploreVM);
         }
+<<<<<<< HEAD
 
         /// <summary>
         /// TamLV10 SavedCourses
         /// </summary>
         /// <returns>List Savedcourses include courses</returns>
+=======
+        [HttpPost]
+        public IActionResult Explore(string searchString)
+        {
+            var courses = Task.Run(() => _studentExploreService.SearchCourse(searchString)).Result;
+            StudentExploreVM studentExploreVM = new StudentExploreVM
+            {
+                Courses = courses,
+                SearchString = searchString
+            };
+            return View(studentExploreVM);
+        }
+>>>>>>> 4f3f97ba622514f16c292067d87b502bb5e81732
         public async Task<IActionResult> SavedCourses()
 
         {
