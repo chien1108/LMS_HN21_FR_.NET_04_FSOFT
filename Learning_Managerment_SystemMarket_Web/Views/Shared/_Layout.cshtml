@@ -17,6 +17,28 @@
 
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/components.css">
+
+    @*CuongNM53*@
+    <script src="https://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.css">
+    <script type="text/javascript">
+        var jq183 = jQuery.noConflict();
+    </script>
+    <script type="text/javascript">
+        jq183(document).ready(function () {
+            jq183('.chosen-select').chosen();
+
+            jq183("#btn").click(function () {
+                console.log("Button Clicked To Reset");
+                jq183('.chosen-select').val("").trigger("chosen:updated");
+                jq183('.chosen-select').val("").trigger("liszt:updated");
+            });
+        });
+    </script>
+    @*CuongNM53*@
+
+
 </head>
 <body>
     <div class="navbar-bg"></div>
@@ -116,7 +138,10 @@
                 </li>
 
                 <li class="">
-                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/users"><i class="far fa-user"></i> <span>Users</span></a>
+                    <a class="nav-link" asp-area="AdminFunction" asp-controller="User" asp-action="ManagerUser">
+                        <i class="far fa-user"></i> 
+                        <span>Users</span>
+                    </a>
                 </li>
 
                 <li class="">
