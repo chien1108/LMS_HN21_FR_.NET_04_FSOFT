@@ -20,17 +20,29 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Claims">Permissions</label>
-                <select asp-for="Claims" name="permissions[]"
+                <select asp-for="Claims"
                         class="form-control select2-dd" required
                         multiple>
                     @foreach (var item in ClaimStore.AllClaims)
                     {
-                        <option value="@item.Type">@item.Type</option>
+                        <option value="@item">@item.Type</option>
                     }
                 </select>
                 <span asp-validation-for="Claims" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="ClaimsFake">Permissions</label>
+                <select asp-for="ClaimsFake"
+                        class="form-control select2-dd" required
+                        multiple>
+                    @foreach (var item in ClaimStore.AllClaims)
+                    {
+                        <option >@item.Type</option>
+                    }
+                </select>
+                <span asp-validation-for="ClaimsFake" class="text-danger"></span>
             </div>
             <div class="card-footer text-right">
                 <button class="btn btn-primary" type="submit">Submit</button>

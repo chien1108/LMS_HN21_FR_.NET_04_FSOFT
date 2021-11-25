@@ -121,7 +121,8 @@ namespace Learning_Managerment_SystemMarket_Core.Data
             modelBuilder.Entity<PaytabsInvoice>(entity =>
             {
             });
-
+            modelBuilder.Entity<Claim>(entity => { 
+            });
             modelBuilder.Entity<ReportAbuse>(entity =>
             {
             });

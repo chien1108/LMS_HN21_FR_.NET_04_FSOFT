@@ -73,7 +73,10 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
             => await _roleManager.Roles.FirstOrDefaultAsync(expression);
 
         public async Task<IList<Role>> FindAll()
-            => await _roleManager.Roles.ToListAsync();
+        {
+            var result = await _roleManager.Roles.ToListAsync();
+            return result;
+        }
 
         public async Task<bool> IsExisted(string roleName)
             => await _roleManager.RoleExistsAsync(roleName);

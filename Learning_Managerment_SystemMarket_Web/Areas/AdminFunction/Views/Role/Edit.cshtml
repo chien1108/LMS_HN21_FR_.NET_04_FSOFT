@@ -1,11 +1,25 @@
 ﻿@model Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleViewModels.RoleVM
 @using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService
 @using Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Models
+@using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleViewModels
+@using System.Linq
+@using AutoMapper
 @inject IRoleService _service
+@inject IClaimService _serviceClaim
+@inject IMapper _map
 @{
     var idRole = Convert.ToInt32(ViewData["IdRole"].ToString());
     var role = await _service.Find(x => x.Id == idRole);
-
+    var roleVm = _map.Map<RoleVM>(role);
+    var claims = await _serviceClaim.FindAll(x => x.RoleId == idRole);
+    foreach (var item in claims)
+    {
+        if (item != null)
+        {
+            roleVm.ClaimsFake.Add(item.ClaimType);
+        }
+    }
 }
 
 <div class="card">
@@ -18,20 +32,27 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" value="@role.Name" />
+                <input asp-for="Name" class="form-control" value="@roleVm.Name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Claims">Permissions</label>
-                <select asp-for="Claims" name="permissions[]"
+                <label asp-for="ClaimsFake">Permissions</label>
+                <select asp-for="ClaimsFake"
                         class="form-control select2-dd" required
-                        multiple="">
+                        multiple>
                     @foreach (var item in ClaimStore.AllClaims)
                     {
-                        <option value="@item.Type">@item.Type</option>
+                        @if (@roleVm.ClaimsFake.Contains(item.Type.ToString()))
+                        {
+                            <option selected="selected">@item.Type</option>
+                        }
+                        else
+                        {
+                            <option>@item.Type</option>
+                        }
                     }
                 </select>
-                <span asp-validation-for="Claims" class="text-danger"></span>
+                <span asp-validation-for="ClaimsFake" class="text-danger"></span>
             </div>
             <div class="card-footer text-right">
                 <button class="btn btn-primary" type="submit">Submit</button>

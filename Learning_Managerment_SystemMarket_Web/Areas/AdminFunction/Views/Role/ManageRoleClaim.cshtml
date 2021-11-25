@@ -62,7 +62,7 @@
                                                     var claims = await _claimService.FindAll(x => x.RoleId == listRole.ElementAt(i - 1).Id);
                                                     foreach (var claim in claims)
                                                     {
-                                                            <span class="badge badge-success m-1">@claim</span>
+                                                            <span class="badge badge-success m-1">@claim.ClaimValue</span>
                                                     }
                                                 }
                                             </td>

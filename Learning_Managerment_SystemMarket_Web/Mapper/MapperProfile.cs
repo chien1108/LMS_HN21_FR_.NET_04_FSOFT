@@ -2,6 +2,7 @@
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.CategoryViewModels;
 using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.LanguageViewModels;
+using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleViewModels;
 using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.SubCategoryViewModels;
 using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.UserViewModels;
 
@@ -15,7 +16,8 @@ namespace Learning_Managerment_SystemMarket_Web.Mapper
             CreateMap<SubCategory, SubCategoryDetailsVm>().ReverseMap();
             CreateMap<User, UserDetailsVm>().ReverseMap();
             CreateMap<Language, LanguageVM>().ReverseMap();
-            
+            CreateMap<Role,RoleVM>().ReverseMap();
+
         }
     }
 }

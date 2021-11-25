@@ -86,11 +86,11 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
                 }
                 var role = await _roleService.Find(x => x.Name.ToLower().Trim() == newRoleVM.Name.ToLower().Trim());
 
-                if (newRoleVM.Claims != null)
+                if (newRoleVM.ClaimsFake != null)
                 {
-                    foreach (var item in newRoleVM.Claims)
+                    foreach (var item in newRoleVM.ClaimsFake)
                     {
-                            var response1 = await _claimService.Create(new Claim() { RoleId = role.Id, ClaimType = item.ClaimType, ClaimValue = item.ClaimType });
+                            var response1 = await _claimService.Create(new Claim() { RoleId = role.Id, ClaimType = item.Trim(), ClaimValue = item.Trim() });
                             if (response1.Success == false)
                             {
                                 ModelState.AddModelError("", response.Message);
@@ -129,9 +129,16 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
                 {
                     return RedirectToAction(nameof(ManageRoleClaim), new { id = roleVM.Id });
                 }
-                //category.CategoryName = model.CategoryName;
-                //category.Status = model.Status;
                 role.Name = roleVM.Name;
+                var claims = await _claimService.FindAll(x => x.RoleId == roleVM.Id);
+                foreach (var item in claims)
+                {
+                    if (item != null)
+                    {
+                        roleVm.ClaimsFake.Add(item.ClaimType);
+                    }
+                }
+                var claims = role
                 var respone = await _roleService.Update(role);
                 if (!respone.Success)
                 {

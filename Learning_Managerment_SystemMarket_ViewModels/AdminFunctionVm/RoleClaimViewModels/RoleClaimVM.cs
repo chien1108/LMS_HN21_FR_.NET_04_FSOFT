@@ -3,11 +3,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleClaim
 {
     public class RoleClaimVM
     {
-        public RoleClaimVM()
-        {
-            Cliams = new List<RoleClaim>();
-        }
         public int RoleId { get; set; } 
-        public List<RoleClaim> Cliams{ get; set; }
+        public List<string> Cliams{ get; set; }
     }
 }
