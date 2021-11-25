@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService
@@ -43,17 +42,20 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService
             }
         }
 
-        public async Task<ServiceResponse<Claim>> Delete(Claim claim)
+        public async Task<ServiceResponse<Claim>> Delete(int idRole)
         {
             try
             {
-                var claimFromDB = await Find(x => x.Id == claim.Id);
+                var claimFromDB = await FindAll(x => x.RoleId == idRole);
                 if (claimFromDB != null)
                 {
-                    _unitOfWork.Claims.Delete(claim);
-                    if (!await SaveChange())
+                    foreach (var item in claimFromDB)
                     {
-                        return new ServiceResponse<Claim> { Success = false, Message = "Error when delete claim" };
+                        _unitOfWork.Claims.Delete(item);
+                        if (!await SaveChange())
+                        {
+                            return new ServiceResponse<Claim> { Success = false, Message = "Error when delete claim" };
+                        }
                     }
                     return new ServiceResponse<Claim> { Success = true, Message = "Delete claim Success" };
                 }
@@ -114,5 +116,8 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService
             }
 
         }
+
+        public async Task<ICollection<Claim>> GetAllClaimInUser(int idRole) 
+            => await FindAll(x => x.RoleId == idRole);
     }
 }

@@ -101,6 +101,5 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
                 return new ServiceResponse<Role> { Success = false, Message = "Not Found Role" };
             }
         }
-     
     }
 }

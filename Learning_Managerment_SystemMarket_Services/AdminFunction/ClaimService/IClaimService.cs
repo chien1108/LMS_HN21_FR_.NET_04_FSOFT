@@ -12,7 +12,7 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService
     {
         Task<ServiceResponse<Claim>> Create(Claim newClaim);
 
-        Task<ServiceResponse<Claim>> Delete(Claim claim);
+        Task<ServiceResponse<Claim>> Delete(int idRole);
         Task<ServiceResponse<Claim>> Update(Claim updateClaim);
         Task<bool> IsExisted(Expression<Func<Claim, bool>> expression = null);
         Task<ICollection<Claim>> FindAll(Expression<Func<Claim,
@@ -21,6 +21,7 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService
                                IOrderedQueryable<Claim>> orderBy = null,
                                 List<string> includes = null);
         Task<Claim> Find(Expression<Func<Claim, bool>> expression = null, List<string> includes = null);
+        Task<ICollection<Claim>> GetAllClaimInUser(int idRole);
         Task<bool> SaveChange();
     }
 }

@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
-using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.UserClaimViewModles;
+using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleClaimViewModels;
+using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
@@ -22,15 +21,17 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
         private readonly IUserService _userService;
+        private readonly IClaimService _claimService;
         private readonly IRoleService _roleService;
         private readonly IMapper _mapper;
 
-        public RoleController(ILogger<RoleController> logger, 
-                            IMapper mapper, 
-                            UserManager<User> userManager, 
+        public RoleController(ILogger<RoleController> logger,
+                            IMapper mapper,
+                            UserManager<User> userManager,
                             RoleManager<Role> roleManager,
                             IUserService userService,
-                            IRoleService roleService)
+                            IRoleService roleService,
+                            IClaimService claimService)
         {
             _logger = logger;
             _mapper = mapper;
@@ -38,30 +39,13 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
             _roleManager = roleManager;
             _userService = userService;
             _roleService = roleService;
+            _claimService = claimService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ManageUserClaims(UserClaimVM userVM)
+
+        public IActionResult ManageRoleClaim(int id)
         {
-            var user = await _userService.Find(x => x.Id == userVM.UserId);
-            if(user == null)
-            {
-                ViewBag.ErrorMessage = $"User with Id = {userVM.UserId} cannot be found";
-                return View("Not Found");
-            }
-            var claims = await _userManager.GetClaimsAsync(user);
-            var result = await _userManager.RemoveClaimsAsync(user, claims);
-            if(!result.Succeeded)
-            {
-                ModelState.AddModelError("", "Cannot remove user existing claims");
-                return View(userVM);
-            }
-            result = await _userManager.AddClaimsAsync(user, userVM.Cliams.Where(c => c.IsSelected).Select(c => new System.Security.Claims.Claim(c.ClaimType, c.ClaimType)));
-            if(!result.Succeeded)
-            {
-                ModelState.AddModelError("","Cannot add select claims to user");
-                return View(userVM);
-            }
+            ViewBag.IdRole = id;
             return View();
         }
         // GET: RoleController
@@ -85,44 +69,113 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
         // POST: RoleController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Role newRole)
+        public async Task<ActionResult> Create(RoleVM newRoleVM)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return RedirectToAction(nameof(ManageRoleClaim));
+                }
 
-                return RedirectToAction(nameof(Index));
+                var response = await _roleService.Create(new Role { Name = newRoleVM.Name });
+                if (response.Success == false)
+                {
+                    ModelState.AddModelError("", response.Message);
+                    return RedirectToAction(nameof(ManageRoleClaim));
+                }
+                var role = await _roleService.Find(x => x.Name.ToLower().Trim() == newRoleVM.Name.ToLower().Trim());
+
+                if (newRoleVM.Claims != null)
+                {
+                    foreach (var item in newRoleVM.Claims)
+                    {
+                            var response1 = await _claimService.Create(new Claim() { RoleId = role.Id, ClaimType = item.ClaimType, ClaimValue = item.ClaimType });
+                            if (response1.Success == false)
+                            {
+                                ModelState.AddModelError("", response.Message);
+                                return RedirectToAction(nameof(ManageRoleClaim));
+                            }
+                    }
+                }
+
+                return RedirectToAction(nameof(ManageRoleClaim));
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(ManageRoleClaim));
             }
         }
 
         // GET: RoleController/Edit/5
         public ActionResult Edit(int id)
         {
-            return RedirectToAction(nameof(ManageUserClaims), new { id = id });
+            return RedirectToAction(nameof(ManageRoleClaim), new { id = id });
         }
 
         // POST: RoleController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(RoleVM roleVM)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (!ModelState.IsValid)
+                {
+                    return RedirectToAction(nameof(ManageRoleClaim));
+                }
+                var role = await _roleService.Find(x => x.Id == roleVM.Id);
+                if (role == null)
+                {
+                    return RedirectToAction(nameof(ManageRoleClaim), new { id = roleVM.Id });
+                }
+                //category.CategoryName = model.CategoryName;
+                //category.Status = model.Status;
+                role.Name = roleVM.Name;
+                var respone = await _roleService.Update(role);
+                if (!respone.Success)
+                {
+                    ModelState.AddModelError("", respone.Message);
+                    return RedirectToAction(nameof(ManageRoleClaim), new { id = roleVM.Id });
+                }
+                return RedirectToAction(nameof(ManageRoleClaim));
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                ModelState.AddModelError("", "Update not success");
+                return RedirectToAction(nameof(ManageRoleClaim));
             }
         }
 
         // GET: RoleController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return RedirectToAction(nameof(ManageRoleClaim));
+                }
+                var role = await _roleService.Find(x => x.Id == id);
+
+                if (role == null)
+                {
+                    ModelState.AddModelError("", "Record not exist");
+                    return RedirectToAction(nameof(ManageRoleClaim));
+                }
+                var respone = await _roleService.Delete(role);
+                var responeClaim = await _claimService.Delete(role.Id);
+                if (!respone.Success || !responeClaim.Success)
+                {
+                    return BadRequest();
+                }
+                return RedirectToAction(nameof(ManageRoleClaim));
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Delete not success");
+                return RedirectToAction(nameof(ManageRoleClaim));
+            }
         }
 
         // POST: RoleController/Delete/5

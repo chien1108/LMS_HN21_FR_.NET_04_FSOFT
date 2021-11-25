@@ -40,6 +40,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
 
 namespace Learning_Managerment_SystemMarket_Web
 {
@@ -85,10 +87,12 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IPayOutRepository, PayOutRepository>();
             services.AddScoped<IPaytabsInvoiceRepository, PaytabsInvoiceRepository>();
+            services.AddScoped<IClaimRepository, ClaimRepository>();
             //Add service
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ISubCategoryService, SubCategoryService>();
             services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<IClaimService, ClaimService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoleService, RoleService>();
             //Config for Dependence Service

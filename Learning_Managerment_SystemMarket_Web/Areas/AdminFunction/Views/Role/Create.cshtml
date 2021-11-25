@@ -1,8 +1,11 @@
-﻿@using Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Models
-@using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.UserClaimViewModles
-
-@{ 
-    var claim = new UserClaimVM();
+﻿@model Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleViewModels.RoleVM
+@using Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Models
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService
+@inject IClaimService _claimService 
+@inject IRoleService _roleService
+@{
+    
 }
 
 <div class="card">
@@ -10,33 +13,40 @@
         <h4>Add New Role</h4>
     </div>
     <form asp-action="Create" asp-controller="Role">
-
         <div class="card-body">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="row ">
-                <div class="col-12 col-md-12 col-lg-12">
-                    <div class="form-group">
-                        <label></label>
-                        <input type="text" name="name" class="form-control">
-                    </div>
-                </div>
-                <div class="col-12 col-md-12 col-lg-12">
-                    <div class="form-group">
-                        <label>Permissions</label>
-                        <select name="permissions[]"
-                                class="form-control select2-dd" multiple>
-                            @foreach (var item in ClaimStore.AllClaims)
-                            {
-                                <option value="@item.Value">@item.ValueType</option>
-                            }
-                        </select>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="card-footer text-right">
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <div class="form-group">
+                <label asp-for="Claims">Permissions</label>
+                <select asp-for="Claims" name="permissions[]"
+                        class="form-control select2-dd" required
+                        multiple>
+                    @foreach (var item in ClaimStore.AllClaims)
+                    {
+                        <option value="@item.Type">@item.Type</option>
+                    }
+                </select>
+                <span asp-validation-for="Claims" class="text-danger"></span>
+            </div>
+            <div class="card-footer text-right">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
         </div>
     </form>
 </div>
+<div class="row">
+    <div class="col-md-4">
+    </div>
+</div>
+
+<div>
+    <a asp-action="ManageRoleClaim">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
