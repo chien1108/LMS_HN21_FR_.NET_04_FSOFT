@@ -6,7 +6,10 @@ using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreS
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
 using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Models;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controllers
@@ -57,28 +60,32 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
 
 
 
-        public IActionResult Explore()
-        {
-            var courses = Task.Run(() => _studentExploreService.GetAllCourseIsActive()).Result;
-            StudentExploreVM studentExploreVM = new StudentExploreVM
-            {
-                Courses = courses
-            };
-            return View(studentExploreVM);
-        }
-
-
-        /// <summary>
-        /// TamLV10 SavedCourses
-        /// </summary>
-        /// <returns>List Savedcourses include courses</returns>
-        [HttpPost]
-        public IActionResult Explore(string searchString)
+        public IActionResult Explore(string searchString, int? page)
         {
             var courses = Task.Run(() => _studentExploreService.SearchCourse(searchString)).Result;
+            if (page <= 0 || page == null)
+            {
+                page = 1;
+            }
+            int pageSize = 12;
+            int start = (int)(page - 1) * pageSize;
+
+
+            int totalPage = courses.Count;
+            float totalNumsize = (totalPage / (float)pageSize);
+            int numSize = (int)Math.Ceiling(totalNumsize);
+
+            var ExplorePagingModel = new ExplorePagingModel
+            {
+                CurrentPage = page,
+                NumSize = numSize,
+                SearchString = searchString
+            };
+            ViewBag.ExplorePagingModel = ExplorePagingModel;
+
             StudentExploreVM studentExploreVM = new StudentExploreVM
             {
-                Courses = courses,
+                Courses = courses.Skip(start).Take(pageSize).ToList(),
                 SearchString = searchString
             };
             return View(studentExploreVM);

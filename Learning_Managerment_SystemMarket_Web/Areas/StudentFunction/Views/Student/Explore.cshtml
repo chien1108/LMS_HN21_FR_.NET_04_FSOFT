@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewData["Title"] = "Explore";
-    Layout = "~/Areas/StudentFunction/Views/Shared/_StudentLayout.cshtml";
+
 }
 @model Learning_Managerment_SystemMarket_ViewModels.StudentViewModels.StudentExploreVM
 
@@ -31,8 +31,8 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="item">
                             <div class="fcrse_1 mb-20">
-                                <a href="https://coursearly.com/cursus/public/courses/class-1-syllabys/133" class="fcrse_img">
-                                    <img src="./Explore now Cursus_files/default.png" alt="">
+                                <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
+                                    <img src="~/frontend/images/courses/@item.CoverImage" alt="">
                                     <div class="course-overlay">
 
                                         <span class="play_btn1"><i class="uil uil-play"></i></span>
@@ -70,7 +70,7 @@
                                         }
                                         <span class="vdt14">@month.TotalDays days ago</span>
                                     </div>
-                                    <a href="https://coursearly.com/cursus/public/courses/class-1-syllabys/133" class="crse14s">@item.Title</a>
+                                    <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="crse14s">@item.Title</a>
                                     <a href="https://coursearly.com/cursus/public/explore#" class="crse-cate">
                                         @item.SubCategory.SubCategoryName
                                     </a>
@@ -78,7 +78,7 @@
                                         <p class="cr1fot">
                                             By <a href="https://coursearly.com/cursus/public/instructors/jemmy/13">@item.Instructor.InstructorName</a>
                                         </p>
-                                        <div class="prce142">$</div>
+                                        <div class="prce142">$@item.Price</div>
                                         <button onclick="window.location.href = &#39;https://coursearly.com/cursus/public/cart/133//add&#39;;" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
 
                                     </div>
@@ -88,10 +88,10 @@
                     </div>
                 }
 
-                <div class="col-md-12 text-center">
-                    <div class="main-loader mt-50">
+                <div class="col-md-10 d-flex justify-content-lg-end ">
 
-                    </div>
+                    <partial name="/Areas/StudentFunction/Views/Student/_ExplorePaging.cshtml" model="ViewBag.ExplorePagingModel" />
+
                 </div>
             </div>
 
@@ -100,10 +100,67 @@
         {
 
             <div class="row mt-30">
-                <div class="col-12"><h4 class="item_title">Not Found Any Course</h4></div>
+                <div class="col-12"><h4 class="item_title">Courses</h4></div>
+                <div class="col-md-12 text-center">
+                    <div class="no-data-div">
+                        <img src="https://coursearly.com/cursus/public/nodata.svg" alt="No Data" srcset="">
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <div class="main-loader mt-50">
+
+                    </div>
+                </div>
             </div>
 
         }
     </div>
 </div>
+<footer class="footer mt-40">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-lg-9 col-md-9">
+                <div class="item_f1">
+                    <a href="https://coursearly.com/cursus/public/legal/copyright-policy">Copyright Policy</a>
+                    <a href="https://coursearly.com/cursus/public/legal/terms-conditions">Terms</a>
+                    <a href="https://coursearly.com/cursus/public/legal/privacy-policy">Privacy Policy</a>
+                </div>
+            </div>
 
+            <div class="col-lg-12">
+                <div class="footer_bottm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="fotb_left">
+                                <li>
+                                    <a href="https://coursearly.com/cursus/public">
+                                        <div class="footer_logo">
+                                            <img src="./Explore now Cursus_files/logo1.svg" alt="">
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <p>
+                                        © 2021
+                                        <strong>Cursus</strong>. All Rights Reserved.
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="edu_social_links">
+                                <a href="http://facebook.com/facebook1"><i class="fab fa-facebook-f"></i></a>
+                                <a href="http://twitter.com/twitter2"><i class="fab fa-twitter"></i></a>
+                                <a href="http://www.linkedin.com/linkdin5"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="http://www.instagram.com/Instagram3"><i class="fab fa-instagram"></i></a>
+                                <a href="http://www.youtube.com/youtube4"><i class="fab fa-youtube"></i></a>
+                                <a href="http://www.pinterest.com/pinterest6"><i class="fab fa-pinterest-p"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
