@@ -7,9 +7,14 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
 {
     public interface ICourseRepository : IGenericRepository<Course>
     {
-        Task<ICollection<Course>> GetCoursesByStudentId(int id); 
-        Task<ICollection<Course>> GetCoursesByStudent(); 
+        Task<ICollection<SavedCourse>> GetCoursesByStudentId(int id); 
         Task<ICollection<Course>> GetFeatureCourse(int size);
         Task<ICollection<Course>> GetNewestCourse(int size);
+        Task<SavedCourse> FindSavedCourse(int studentId, int courseId);
+        void DeleteSaveCourse(SavedCourse savedCourse);
+        Task<ICollection<Course>> SearchCourse(string searchString);
+        Task<IList<Course>> GetAllCoursesIsActive();
+        
+
     }
 }

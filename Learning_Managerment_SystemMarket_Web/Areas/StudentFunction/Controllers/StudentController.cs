@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using Learning_Managerment_SystemMarket_Core.Contracts;
+using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
 using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controllers
@@ -17,22 +17,32 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         private readonly IMapper _mapper;
         private readonly IStudentExploreService _studentExploreService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ISavedCourseService _savedCourseService;
 
-        public StudentController(IStudentHomePageService studentHomePageService, 
-                                 IMapper mapper, 
-                                 IStudentExploreService studentExploreService,
-                                 IUnitOfWork unitOfWork)
+
+        public StudentController(
+            IStudentHomePageService studentHomePageService
+            , ISavedCourseService savedCourseService
+            , IUnitOfWork unitOfWork
+            , IMapper mapper
+            , IStudentExploreService studentExploreService)
+
         {
             _studentHomePageService = studentHomePageService;
             _mapper = mapper;
             _studentExploreService = studentExploreService;
+
             _unitOfWork = unitOfWork;
+
+            _savedCourseService = savedCourseService;
+
         }
 
-        public  IActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
+
 
         public async Task<IActionResult> CourseDetails(int id)
         {
@@ -46,28 +56,45 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         }
 
 
+
         public IActionResult Explore()
         {
             var courses = Task.Run(() => _studentExploreService.GetAllCourseIsActive()).Result;
             StudentExploreVM studentExploreVM = new StudentExploreVM
             {
-                Courses =  courses
+                Courses = courses
+            };
+            return View(studentExploreVM);
+        }
+
+
+        /// <summary>
+        /// TamLV10 SavedCourses
+        /// </summary>
+        /// <returns>List Savedcourses include courses</returns>
+        [HttpPost]
+        public IActionResult Explore(string searchString)
+        {
+            var courses = Task.Run(() => _studentExploreService.SearchCourse(searchString)).Result;
+            StudentExploreVM studentExploreVM = new StudentExploreVM
+            {
+                Courses = courses,
+                SearchString = searchString
             };
             return View(studentExploreVM);
         }
         public async Task<IActionResult> SavedCourses()
 
         {
-            //var courses = await _studentHomePageService.GetCourseByStudentId(0);
-            var courses = await _studentHomePageService.GetCourseByStudent();
-        
+            var courses = await _savedCourseService.GetSavedCoursesByStudentId(1);
             return View(courses);
         }
 
         public IActionResult Filter()
         {
-            return View(); 
+            return View();
         }
+
         /// <summary>
         /// Get all course by category id VuTV10
         /// </summary>
@@ -76,7 +103,55 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         public async Task<IActionResult> GetCourseByCategory(int id)
         {
             var courses = await _studentHomePageService.FindAllCourse(c => c.CategoryId == id);
-            return View(courses);
+            var model = _mapper.Map<ICollection<CourseDetailVM>>(courses);
+            return View(model);
+        }
+
+        /// <summary>
+        /// Delete SavedCourse
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <param name="courseId"></param>
+        /// <returns>SavedCoure</returns>
+        public async Task<IActionResult> Delete(int studentId, int courseId)
+        {
+            var savedCourse = await _savedCourseService.FindSavedCourse(studentId, courseId);
+            if (savedCourse == null)
+            {
+                return NotFound();
+            }
+            _savedCourseService.Delete(savedCourse);
+            await _studentHomePageService.SaveChange();
+            return RedirectToAction(nameof(SavedCourses));
+        }
+
+        /// <summary>
+        /// Delete SavedCourse
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <param name="courseId"></param>
+        /// <param name="savedCourse"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int studentId, int courseId, SavedCourse savedCourse)
+        {
+            try
+            {
+                savedCourse = await _savedCourseService.FindSavedCourse(studentId, courseId);
+                if (savedCourse == null)
+                {
+                    return NotFound();
+                }
+                _savedCourseService.Delete(savedCourse);
+                await _studentHomePageService.SaveChange();
+
+                return RedirectToAction(nameof(SavedCourses));
+            }
+            catch
+            {
+                return View(savedCourse);
+            }
         }
     }
 }

@@ -40,5 +40,7 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public ICollection<CourseContent> CourseContent { get; set; }
         public ICollection<Cart> Carts { get; set; }
 
+        public ICollection<SavedCourse> SavedCourses { get; set; }
+
     }
 }
