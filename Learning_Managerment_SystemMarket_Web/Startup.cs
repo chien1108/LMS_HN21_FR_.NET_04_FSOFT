@@ -108,14 +108,9 @@ namespace Learning_Managerment_SystemMarket_Web
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapAreaControllerRoute(
-                    name: "StudentFunction",
-                    areaName: "StudentFunction",
-                    pattern: "StudentFunction/{controller=Student}/{action=Index}/{id?}");
-
                 endpoints.MapControllerRoute(
                     name: "areaRoute",
-                    pattern: "{area:exists}/{controller}/{action}");
+                    pattern: "{area:exists}/{controller}/{action}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",

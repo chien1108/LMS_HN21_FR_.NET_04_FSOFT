@@ -1,4 +1,5 @@
-﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
+﻿using Learning_Managerment_SystemMarket_Core.Models;
+using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
     public interface IStudentHomePageService
     {
 
-        void Create(StudentHomePageVM studentHomeVM);
+        Task<ServiceResponse<StudentHomePageVM>> Create(StudentHomePageVM studentHomeVM);
 
         void Delete(StudentHomePageVM studentHomeVM);
 

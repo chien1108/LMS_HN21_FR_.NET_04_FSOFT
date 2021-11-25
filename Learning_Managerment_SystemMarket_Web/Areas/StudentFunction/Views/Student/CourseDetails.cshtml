@@ -1,0 +1,132 @@
+﻿@model Learning_Managerment_SystemMarket_ViewModels.StudentViewModels.CourseDetailVM;
+
+@{
+    ViewData["Title"] = "CourseDetails";
+    Layout = "~/Areas/StudentFunction/Views/Shared/_StudentLayout.cshtml";
+}
+
+<div class="_215b01">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section3125">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-4 col-lg-5 col-md-6">
+                            <div class="preview_video">
+                                <a href="#" class="fcrse_img" data-toggle="modal" data-target="#videoModal">
+                                    <img src="~/frontend/images/courses/@Model.CoverImage" alt="">
+                                    <div class="course-overlay">
+                                        <div class="badge_seller">Bestseller</div>
+                                        <span class="play_btn1"><i class="uil uil-play"></i></span>
+                                        <span class="_215b02">Preview this course</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="_215b10">
+                                <a href="https://coursearly.com/cursus/public/save/1/add" class="_215b11">
+                                    <span><i class="uil uil-heart"></i></span>Save
+                                </a>
+                                <a href="https://coursearly.com/cursus/public/report/1/add" class="_215b12">
+                                    <span><i class="uil uil-windsock"></i></span>Report abuse
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-7 col-md-6">
+                            <div class="_215b03">
+                                <h2>@Model.Title</h2>
+                                <span class="_215b04">@Model.SubTitile</span>
+                            </div>
+                            <div class="_215b05">
+                                <div class="crse_reviews mr-2">
+                                    <i class="uil uil-star"></i>3.0
+                                </div>
+                                (1 ratings)
+                            </div>
+                            <div class="_215b05">
+                                1 students enrolled
+                            </div>
+                            <div class="_215b06">
+                                <div class="_215b07">
+                                    <span><i class="uil uil-comment"></i></span>
+                                    English
+                                </div>
+
+                            </div>
+                            <div class="_215b05">
+                                Last updated 11/2021
+                            </div>
+                            <ul class="_215b31">
+                                <li>
+                                    <button class="btn_adcart" onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/1//add';">
+                                        Add
+                                        to Cart
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="btn_buy" onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/1/buy/add';">Buy Now</button>
+                                </li>
+                            </ul>
+                            <div class="_215fgt1">
+                                30-Day Money-Back Guarantee
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="_215b15 _byt1458">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="user_dt5">
+                    <div class="user_dt_left">
+                        <div class="live_user_dt">
+                            <div class="user_img5">
+                                <a href="#"><img src="https://coursearly.com/cursus/public/upload/image/60d6bc7513dd0.jpg" alt=""></a>
+                            </div>
+                            <div class="user_cntnt">
+                                <a href="#" class="_df7852">Jaysen Batchelor</a>
+                                <button class="subscribe-btn" onclick="window.location.href = 'https://coursearly.com/cursus/public/subscription/16/add';">Subscribe</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="user_dt_right">
+                        <ul>
+                            <li>
+                                <a class="lkcm152"><i class="uil uil-eye"></i><span>1.4K</span></a>
+                            </li>
+                            <li>
+                                <a href="https://coursearly.com/cursus/public/like/1/0" class="lkcm152">
+                                    <i class="uil uil-thumbs-up"></i>
+                                    <span>-2</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="https://coursearly.com/cursus/public/like/1/1" class="lkcm152">
+                                    <i class="uil uil-thumbs-down"></i>
+                                    <span>2</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a onclick="window.open('https://coursearly.com/cursus/public/courses/complete-python-bootcamp:-go-from-zero-to-hero-in-python-3/1/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;" class="lkcm152"><i class="uil uil-share-alt"></i><span>50</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course_tabs">
+                    <nav>
+                        <div class="nav nav-tabs tab_crse justify-content-center" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-selected="true">About</a>
+                            <a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-courses" role="tab" aria-selected="false">Courses Content</a>
+                            <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-selected="false">Reviews</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

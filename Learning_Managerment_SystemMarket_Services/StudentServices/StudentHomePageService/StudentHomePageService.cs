@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Learning_Managerment_SystemMarket_Core.Contracts;
+using Learning_Managerment_SystemMarket_Core.Models;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
@@ -24,10 +25,23 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
             _map = map;
         }
 
-        public void Create(StudentHomePageVM studentHomeVM)
+        public async Task<ServiceResponse<StudentHomePageVM>> Create(StudentHomePageVM studentHomeVM)
         {
-            var course = _map.Map<Course>(studentHomeVM);
-            unitOfWork.Courses.Create(course);
+            try
+            {
+                var course = _map.Map<Course>(studentHomeVM);
+                await unitOfWork.Courses.Create(course);
+                if(!await SaveChange())
+                {
+                    return new ServiceResponse<StudentHomePageVM> { Success = false, Message="Create fail" };
+                }
+                return new ServiceResponse<StudentHomePageVM> { Success = false, Message = "Create successfull" };
+            }
+            catch (Exception)
+            {
+                return new ServiceResponse<StudentHomePageVM> { Success = false, Message = "Create fail" };
+            }
+           
         }
 
         public void Delete(StudentHomePageVM studentHomeVM)

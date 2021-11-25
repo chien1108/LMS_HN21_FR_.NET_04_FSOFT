@@ -8,270 +8,273 @@
     ICollection<Course> courseFeature = await studentHomePage.GetFeatureCourse(5);
     ICollection<Course> courseNew = await studentHomePage.GetNewestCourse(5);
 }
-<div class="col-xl-9 col-lg-8">
-    <div class="section3125 mt-50">
-        <h4 class="item_title">Featured Courses</h4>
-        <a href="https://coursearly.com/cursus/public/courses/featured" class="see150">See all</a>
-        <div class="la5lo1">
-            <div class="owl-carousel featured_courses owl-theme owl-loaded owl-drag">
-                <div class="owl-stage-outer">
-                    <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1212px;">
-                        @foreach (var item in courseFeature)
-                        {
-                            <div class="owl-item active" style="width: 283px; margin-right: 20px;">
-                                <div class="item">
-                                    <div class="fcrse_1 mb-20">
-                                        <a href="https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2" class="fcrse_img">
-                                            <img src="~/frontend/images/@item.CoverImage" alt="">
-                                            <div class="course-overlay">
-                                                <div class="crse_reviews">
-                                                    <i class="uil uil-star"></i>3.5
+<div class="row">
+    <div class="col-xl-9 col-lg-8">
+        <div class="section3125 mt-50">
+            <h4 class="item_title">Featured Courses</h4>
+            <a href="https://coursearly.com/cursus/public/courses/featured" class="see150">See all</a>
+            <div class="la5lo1">
+                <div class="owl-carousel featured_courses owl-theme owl-loaded owl-drag">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1212px;">
+                            @foreach (var item in courseFeature)
+                            {
+                                <div class="owl-item active" style="width: 283px; margin-right: 20px;">
+                                    <div class="item">
+                                        <div class="fcrse_1 mb-20">
+                                            <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
+                                                <img src="~/frontend/images/courses/@item.CoverImage" alt="">
+                                                <div class="course-overlay">
+                                                    <div class="crse_reviews">
+                                                        <i class="uil uil-star"></i>3.5
+                                                    </div>
+                                                    <span class="play_btn1"><i class="uil uil-play"></i></span>
                                                 </div>
-                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
-                                            </div>
-                                        </a>
-                                        <div class="fcrse_content">
-                                            <div class="eps_dots more_dropdown">
-                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
-                                                <div class="dropdown-content">
-                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
-                                                        <span><i class="uil uil-share-alt"></i>Share</span>
-                                                    </a>
-                                                    <a href="https://coursearly.com/cursus/public/save/2/add">
-                                                        <span>
-                                                            <i class="uil uil-heart"></i>
-                                                            Save
-                                                        </span>
-                                                    </a>
-                                                    <a href="https://coursearly.com/cursus/public/report/2/add">
-                                                        <span><i class="uil uil-windsock"></i>Report</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="vdtodt">
-                                                <span class="vdt14">@item.Views</span>
-                                                <span class="vdt14">@item.CreatedDate</span>
-                                            </div>
-                                            <a href="https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2" class="crse14s">@item.Title</a>
-                                            <a href="#" class="crse-cate">
-                                                @item.SubCategory.SubCategoryName
                                             </a>
-                                            <div class="auth1lnkprce">
-                                                <p class="cr1fot">
-                                                    By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">@item.Instructor.InstructorName</a>
-                                                </p>
-                                                <div class="prce142">$@item.Price</div>
-                                                <button onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/2//add';" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
+                                            <div class="fcrse_content">
+                                                <div class="eps_dots more_dropdown">
+                                                    <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                    <div class="dropdown-content">
+                                                        <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                            <span><i class="uil uil-share-alt"></i>Share</span>
+                                                        </a>
+                                                        <a href="https://coursearly.com/cursus/public/save/2/add">
+                                                            <span>
+                                                                <i class="uil uil-heart"></i>
+                                                                Save
+                                                            </span>
+                                                        </a>
+                                                        <a href="https://coursearly.com/cursus/public/report/2/add">
+                                                            <span><i class="uil uil-windsock"></i>Report</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="vdtodt">
+                                                    <span class="vdt14">@item.Views</span>
+                                                    <span class="vdt14">@(DateTime.Now.Month-Convert.ToInt32(item.CreatedDate.Month)) month ago</span>
+                                                </div>
+                                                <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="crse14s">@item.Title</a>
+                                                <a href="#" class="crse-cate">
+                                                    @item.SubCategory.SubCategoryName
+                                                </a>
+                                                <div class="auth1lnkprce">
+                                                    <p class="cr1fot">
+                                                        By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">@item.Instructor.InstructorName</a>
+                                                    </p>
+                                                    <div class="prce142">$@item.Price</div>
+                                                    <button onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/2//add';" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                     </div>
+                    <div class="owl-nav">
+                        <button type="button" role="presentation" class="owl-prev disabled"><i class="fa fa-angle-left"></i></button>
+                        <button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right"></i></button>
+                    </div><div class="owl-dots disabled"></div>
                 </div>
-                <div class="owl-nav"><button type="button" role="presentation" class="owl-prev disabled"><i class="fa fa-angle-left"></i></button>
-                <button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right"></i></button></div><div class="owl-dots disabled"></div>
             </div>
         </div>
-    </div>
 
-    <div class="section3125 mt-50">
-        <h4 class="item_title">Newest Courses</h4>
-        <a href="https://coursearly.com/cursus/public/courses/featured" class="see150">See all</a>
-        <div class="la5lo1">
-            <div class="owl-carousel featured_courses owl-theme owl-loaded owl-drag">
-                <div class="owl-stage-outer">
-                    <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1212px;">
-                        @foreach (var item in courseNew)
-                        {
-                            <div class="owl-item active" style="width: 283px; margin-right: 20px;">
-                                <div class="item">
-                                    <div class="fcrse_1 mb-20">
-                                        <a href="https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2" class="fcrse_img">
-                                            <img src="~/frontend/images/@item.CoverImage" alt="">
-                                            <div class="course-overlay">
-                                                <div class="crse_reviews">
-                                                    <i class="uil uil-star"></i>3.5
+        <div class="section3125 mt-50">
+            <h4 class="item_title">Newest Courses</h4>
+            <a href="https://coursearly.com/cursus/public/courses/featured" class="see150">See all</a>
+            <div class="la5lo1">
+                <div class="owl-carousel featured_courses owl-theme owl-loaded owl-drag">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1212px;">
+                            @foreach (var item in courseNew)
+                            {
+                                <div class="owl-item active" style="width: 283px; margin-right: 20px;">
+                                    <div class="item">
+                                        <div class="fcrse_1 mb-20">
+                                            <a asp-area="SudentFunction" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
+                                                <img src="~/frontend/images/courses/@item.CoverImage" alt="">
+                                                <div class="course-overlay">
+                                                    <div class="crse_reviews">
+                                                        <i class="uil uil-star"></i>3.5
+                                                    </div>
+                                                    <span class="play_btn1"><i class="uil uil-play"></i></span>
                                                 </div>
-                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
-                                            </div>
-                                        </a>
-                                        <div class="fcrse_content">
-                                            <div class="eps_dots more_dropdown">
-                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
-                                                <div class="dropdown-content">
-                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
-                                                        <span><i class="uil uil-share-alt"></i>Share</span>
-                                                    </a>
-                                                    <a href="https://coursearly.com/cursus/public/save/2/add">
-                                                        <span>
-                                                            <i class="uil uil-heart"></i>
-                                                            Save
-                                                        </span>
-                                                    </a>
-                                                    <a href="https://coursearly.com/cursus/public/report/2/add">
-                                                        <span><i class="uil uil-windsock"></i>Report</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="vdtodt">
-                                                <span class="vdt14">@item.Views</span>
-                                                <span class="vdt14">@item.CreatedDate</span>
-                                            </div>
-                                            <a href="https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2" class="crse14s">@item.Title</a>
-                                            <a href="#" class="crse-cate">
-                                                @item.SubCategory.SubCategoryName
                                             </a>
-                                            <div class="auth1lnkprce">
-                                                <p class="cr1fot">
-                                                    By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">@item.Instructor.InstructorName</a>
-                                                </p>
-                                                <div class="prce142">$@item.Price</div>
-                                                <button onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/2//add';" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
+                                            <div class="fcrse_content">
+                                                <div class="eps_dots more_dropdown">
+                                                    <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                    <div class="dropdown-content">
+                                                        <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                            <span><i class="uil uil-share-alt"></i>Share</span>
+                                                        </a>
+                                                        <a href="https://coursearly.com/cursus/public/save/2/add">
+                                                            <span>
+                                                                <i class="uil uil-heart"></i>
+                                                                Save
+                                                            </span>
+                                                        </a>
+                                                        <a href="https://coursearly.com/cursus/public/report/2/add">
+                                                            <span><i class="uil uil-windsock"></i>Report</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="vdtodt">
+                                                    <span class="vdt14">@item.Views</span>
+                                                    <span class="vdt14">@(DateTime.Now.Month-Convert.ToInt32(item.CreatedDate.Month)) month ago</span>
+                                                </div>
+                                                <a href="https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2" class="crse14s">@item.Title</a>
+                                                <a href="#" class="crse-cate">
+                                                    @item.SubCategory.SubCategoryName
+                                                </a>
+                                                <div class="auth1lnkprce">
+                                                    <p class="cr1fot">
+                                                        By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">@item.Instructor.InstructorName</a>
+                                                    </p>
+                                                    <div class="prce142">$@item.Price</div>
+                                                    <button onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/2//add';" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                     </div>
+                    <div class="owl-nav">
+                        <button type="button" role="presentation" class="owl-prev disabled"><i class="fa fa-angle-left"></i></button>
+                        <button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right"></i></button>
+                    </div><div class="owl-dots disabled"></div>
                 </div>
-                <div class="owl-nav">
-                    <button type="button" role="presentation" class="owl-prev disabled"><i class="fa fa-angle-left"></i></button>
-                    <button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-right"></i></button>
-                </div><div class="owl-dots disabled"></div>
             </div>
         </div>
-    </div>
 
-    <div class="section3126">
-        <div class="row">
-            <div class="col-xl-6 col-lg-12 col-md-6">
-                <div class="value_props">
-                    <div class="value_icon">
-                        <i class="fa fa-history"></i>
-                    </div>
-                    <div class="value_content">
-                        <h4>Go at your own pace</h4>
-                        <p>Enjoy lifetime access to courses on  website</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6 col-lg-12 col-md-6">
-                <div class="value_props">
-                    <div class="value_icon">
-                        <i class="fa fa-check-circle"></i>
-                    </div>
-                    <div class="value_content">
-                        <h4>Learn from industry experts</h4>
-                        <p>Select from top instructors around the world</p>
+        <div class="section3126">
+            <div class="row">
+                <div class="col-xl-6 col-lg-12 col-md-6">
+                    <div class="value_props">
+                        <div class="value_icon">
+                            <i class="fa fa-history"></i>
+                        </div>
+                        <div class="value_content">
+                            <h4>Go at your own pace</h4>
+                            <p>Enjoy lifetime access to courses on  website</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-6 col-lg-12 col-md-6">
-                <div class="value_props">
-                    <div class="value_icon">
-                        <i class="fa fa-play-circle"></i>
-                    </div>
-                    <div class="value_content">
-                        <h4>Find video courses on almost any topic</h4>
-                        <p>Build your library for your career and personal growth</p>
+                <div class="col-xl-6 col-lg-12 col-md-6">
+                    <div class="value_props">
+                        <div class="value_icon">
+                            <i class="fa fa-check-circle"></i>
+                        </div>
+                        <div class="value_content">
+                            <h4>Learn from industry experts</h4>
+                            <p>Select from top instructors around the world</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-6 col-lg-12 col-md-6">
-                <div class="value_props">
-                    <div class="value_icon">
-                        <i class="fa fa-video"></i>
+                <div class="col-xl-6 col-lg-12 col-md-6">
+                    <div class="value_props">
+                        <div class="value_icon">
+                            <i class="fa fa-play-circle"></i>
+                        </div>
+                        <div class="value_content">
+                            <h4>Find video courses on almost any topic</h4>
+                            <p>Build your library for your career and personal growth</p>
+                        </div>
                     </div>
-                    <div class="value_content">
-                        <h4>100,000 online courses</h4>
-                        <p>Explore a variety of fresh topics</p>
+                </div>
+                <div class="col-xl-6 col-lg-12 col-md-6">
+                    <div class="value_props">
+                        <div class="value_icon">
+                            <i class="fa fa-video"></i>
+                        </div>
+                        <div class="value_content">
+                            <h4>100,000 online courses</h4>
+                            <p>Explore a variety of fresh topics</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="col-xl-3 col-lg-4">
-    <div class="right_side">
-        <div class="fcrse_2 mb-30">
-            <div class="tutor_img">
-                <a href="https://coursearly.com/cursus/public/instructors/test/25"><img src="https://coursearly.com/cursus/public/default.png" alt=""></a>
-            </div>
-            <div class="tutor_content_dt">
-                <div class="tutor150">
-                    <a href="https://coursearly.com/cursus/public/instructors/test/25" class="tutor_name">Test</a>
+    <div class="col-xl-3 col-lg-4">
+        <div class="right_side">
+            <div class="fcrse_2 mb-30">
+                <div class="tutor_img">
+                    <a href="https://coursearly.com/cursus/public/instructors/test/25"><img src="https://coursearly.com/cursus/public/default.png" alt=""></a>
                 </div>
-                <div class="tutor_cate"></div>
-                <ul class="tutor_social_links">
-                    <li><a href="http://facebook.com/" class="fb"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href="http://twitter.com/" class="tw"><i class="fab fa-twitter"></i></a></li>
-                    <li><a href="http://www.linkedin.com/" class="ln"><i class="fab fa-linkedin-in"></i></a></li>
-                    <li><a href="http://www.youtube.com/" class="yu"><i class="fab fa-youtube"></i></a></li>
+                <div class="tutor_content_dt">
+                    <div class="tutor150">
+                        <a href="https://coursearly.com/cursus/public/instructors/test/25" class="tutor_name">Test</a>
+                    </div>
+                    <div class="tutor_cate"></div>
+                    <ul class="tutor_social_links">
+                        <li><a href="http://facebook.com/" class="fb"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="http://twitter.com/" class="tw"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="http://www.linkedin.com/" class="ln"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li><a href="http://www.youtube.com/" class="yu"><i class="fab fa-youtube"></i></a></li>
+                    </ul>
+                    <div class="tut1250">
+                        <span class="vdt15">0 Students</span>
+                        <span class="vdt15">0 Courses</span>
+                    </div>
+                    <a href="https://coursearly.com/cursus/public/instructors/test/25" class="prfle12link">Go To Profile</a>
+                </div>
+            </div>
+            <div class="get1452">
+                <h4>Become an Instructor</h4>
+                <p>
+                    Top instructors from around the world teach millions of students on Cursus. We provide the tools and
+                    skills to teach what you love.
+                </p>
+                <button class="Get_btn" onclick="window.location.href = 'https://coursearly.com/cursus/public/instructor/register';">
+                    Start
+                    Teaching
+                </button>
+            </div>
+            <div class="fcrse_3">
+                <div class="cater_ttle">
+                    <h4>Live Streaming</h4>
+                </div>
+                <div class="live_text">
+                    <div class="live_icon"><i class="uil uil-kayak"></i></div>
+                    <div class="live-content">
+                        <p>Set up your channel and stream live to your students</p>
+                        <button class="live_link" onclick="window.location.href = 'https://coursearly.com/cursus/public/instructor/live-stream';">
+                            Comming Soon
+                        </button>
+                        <span class="livinfo">Info : This feature only for Instructors.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fcrse_3">
+                <div class="cater_ttle">
+                    <h4>Top Categories</h4>
+                </div>
+                <ul class="allcate15">
+                    <li><a href="https://coursearly.com/cursus/public/categories/human-development/14" class="ct_item">Human Development</a></li>
+                    <li><a href="https://coursearly.com/cursus/public/categories/literature/17" class="ct_item">Literature</a></li>
+                    <li><a href="https://coursearly.com/cursus/public/categories/finance-&amp;-accounting/8" class="ct_item">Finance &amp; Accounting</a></li>
+                    <li><a href="https://coursearly.com/cursus/public/categories/jose/16" class="ct_item">Jose</a></li>
+                    <li><a href="https://coursearly.com/cursus/public/categories/marketing/2" class="ct_item">Marketing</a></li>
                 </ul>
-                <div class="tut1250">
-                    <span class="vdt15">0 Students</span>
-                    <span class="vdt15">0 Courses</span>
-                </div>
-                <a href="https://coursearly.com/cursus/public/instructors/test/25" class="prfle12link">Go To Profile</a>
             </div>
-        </div>
-        <div class="get1452">
-            <h4>Become an Instructor</h4>
-            <p>
-                Top instructors from around the world teach millions of students on Cursus. We provide the tools and
-                skills to teach what you love.
-            </p>
-            <button class="Get_btn" onclick="window.location.href = 'https://coursearly.com/cursus/public/instructor/register';">
-                Start
-                Teaching
-            </button>
-        </div>
-        <div class="fcrse_3">
-            <div class="cater_ttle">
-                <h4>Live Streaming</h4>
+            <div class="strttech120">
+                <h4>Become an Instructor</h4>
+                <p>
+                    Top instructors from around the world teach millions of students on Cursus. We provide the tools and
+                    skills to teach what you love.
+                </p>
+                <button class="Get_btn" onclick="window.location.href = 'https://coursearly.com/cursus/public/instructor/register';">
+                    Start
+                    Teaching
+                </button>
             </div>
-            <div class="live_text">
-                <div class="live_icon"><i class="uil uil-kayak"></i></div>
-                <div class="live-content">
-                    <p>Set up your channel and stream live to your students</p>
-                    <button class="live_link" onclick="window.location.href = 'https://coursearly.com/cursus/public/instructor/live-stream';">
-                        Comming Soon
-                    </button>
-                    <span class="livinfo">Info : This feature only for Instructors.</span>
-                </div>
-            </div>
-        </div>
-        <div class="fcrse_3">
-            <div class="cater_ttle">
-                <h4>Top Categories</h4>
-            </div>
-            <ul class="allcate15">
-                <li><a href="https://coursearly.com/cursus/public/categories/human-development/14" class="ct_item">Human Development</a></li>
-                <li><a href="https://coursearly.com/cursus/public/categories/literature/17" class="ct_item">Literature</a></li>
-                <li><a href="https://coursearly.com/cursus/public/categories/finance-&amp;-accounting/8" class="ct_item">Finance &amp; Accounting</a></li>
-                <li><a href="https://coursearly.com/cursus/public/categories/jose/16" class="ct_item">Jose</a></li>
-                <li><a href="https://coursearly.com/cursus/public/categories/marketing/2" class="ct_item">Marketing</a></li>
-            </ul>
-        </div>
-        <div class="strttech120">
-            <h4>Become an Instructor</h4>
-            <p>
-                Top instructors from around the world teach millions of students on Cursus. We provide the tools and
-                skills to teach what you love.
-            </p>
-            <button class="Get_btn" onclick="window.location.href = 'https://coursearly.com/cursus/public/instructor/register';">
-                Start
-                Teaching
-            </button>
         </div>
     </div>
 </div>
-
 
 
 

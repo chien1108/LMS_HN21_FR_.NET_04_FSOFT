@@ -17,7 +17,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
         public bool IsFree { get; set; }
         public bool IsFeatured { get; set; }
         public bool IsBestseller { get; set; }
-        public int CoverImage { get; set; }// default img.png
+        public string CoverImage { get; set; }// default img.png
         public int Likes { get; set; }
         public int Dislike { get; set; }
         public int Share { get; set; }
