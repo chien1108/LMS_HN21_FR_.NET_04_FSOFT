@@ -1,5 +1,4 @@
-﻿using Learning_Managerment_SystemMarket_Core.Models.Base;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Learning_Managerment_SystemMarket_Core.Models.Entities
 {

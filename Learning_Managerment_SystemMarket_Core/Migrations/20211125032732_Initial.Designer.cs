@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Learning_Managerment_SystemMarket_Core.Migrations
 {
     [DbContext(typeof(LMSDbContext))]
-    [Migration("20211124025303_CreateDbLMS")]
-    partial class CreateDbLMS
+    [Migration("20211125032732_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -874,7 +874,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FistName")
+                    b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("IdUser")

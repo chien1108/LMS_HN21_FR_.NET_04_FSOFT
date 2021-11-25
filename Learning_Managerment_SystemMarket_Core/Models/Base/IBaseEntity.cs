@@ -1,5 +1,4 @@
-﻿using Learning_Managerment_SystemMarket_Core.Modules.Enums;
-using System;
+﻿using System;
 
 namespace Learning_Managerment_SystemMarket_Core.Models.Base
 {

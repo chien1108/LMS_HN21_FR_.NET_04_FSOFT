@@ -2,7 +2,6 @@
 using Learning_Managerment_SystemMarket_Core.Contracts;
 using Learning_Managerment_SystemMarket_Core.Models;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
-using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,30 +16,17 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly RoleManager<Role> _roleManager;
-        private readonly UserManager<User> userManager;
+        private readonly UserManager<User> _userManager;
 
         public RoleService(IUnitOfWork unitOfWork, IMapper mapper, RoleManager<Role> roleManager, UserManager<User> userManager)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _roleManager = roleManager;
-            this.userManager = userManager;
+            _userManager = userManager;
         }
 
-        public async Task<IEnumerable<RoleDetailsVm>> GetRoleClaim()
-        {
-            var roles = await _roleManager.Roles.ToListAsync();
-            List<RoleDetailsVm> roleDetails = new List<RoleDetailsVm>();
-            foreach (var item in roles)
-            {
-                RoleDetailsVm role = new RoleDetailsVm();
-                role.Role = item;
-                role.Claim = await _roleManager.GetClaimsAsync(item) as IList<Claim>;
-                roleDetails.Add(role);
-            }
-            return roleDetails;
-        }
-
+        
         public async Task<ServiceResponse<Role>> Create(Role newRole)
         {
             var roleFromDb = await Find(x => x.Name == newRole.Name);
@@ -115,5 +101,6 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
                 return new ServiceResponse<Role> { Success = false, Message = "Not Found Role" };
             }
         }
+     
     }
 }

@@ -7,9 +7,9 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
 {
     public class Instructor : BaseEntity
     {
-
         //public string InstructorName { get; set; }
         public string HeadLine { get; set; } = null;
+
         public string Website { get; set; } = null;
         public string Facebook { get; set; } = null;
         public string LinkedIn { get; set; } = null;
@@ -22,9 +22,11 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public decimal Balance { get; set; }
 
         public ICollection<Notification> Notifications { get; set; }
+
         //public ICollection<ChatGroup> ChatGroups { get; set; }
         //public ICollection<Order> Orders { get; set; }
         public ICollection<Course> Courses { get; set; }
+
         public ICollection<InstructorDiscusstion> InstructorDiscusstions { get; set; }
         public ICollection<SubScription> SubScriptions { get; set; }
     }

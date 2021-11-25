@@ -1,0 +1,42 @@
+﻿@using Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Models
+@using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.UserClaimViewModles
+
+@{ 
+    var claim = new UserClaimVM();
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Add New Role</h4>
+    </div>
+    <form asp-action="Create" asp-controller="Role">
+
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row ">
+                <div class="col-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                        <label></label>
+                        <input type="text" name="name" class="form-control">
+                    </div>
+                </div>
+                <div class="col-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                        <label>Permissions</label>
+                        <select name="permissions[]"
+                                class="form-control select2-dd" multiple>
+                            @foreach (var item in ClaimStore.AllClaims)
+                            {
+                                <option value="@item.Value">@item.ValueType</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer text-right">
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+    </form>
+</div>

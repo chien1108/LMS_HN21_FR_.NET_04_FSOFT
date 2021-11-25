@@ -5,8 +5,10 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
     public class Lecture : BaseEntity
     {
         public int CourseContentId { get; set; }
+
         //public int CourseId { get; set; }
         public string Title { get; set; }
+
         public string Description { get; set; }
         public string File { get; set; }
         public int Volume { get; set; }

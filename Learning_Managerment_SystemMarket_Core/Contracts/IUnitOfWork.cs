@@ -1,5 +1,6 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CategoryRepo;
+using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseContentRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseRateRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo;
@@ -47,6 +48,7 @@ namespace Learning_Managerment_SystemMarket_Core.Contracts
         ISpecialDiscountRepository SpecialDiscounts { get; }
         IStudentRepository Students { get; }
         ISubCategoryRepository SubCategories { get; }
+        IClaimRepository Claims { get; }
 
         Task<bool> Save();
     }

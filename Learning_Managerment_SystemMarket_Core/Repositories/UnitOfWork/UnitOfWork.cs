@@ -2,6 +2,7 @@
 using Learning_Managerment_SystemMarket_Core.Data;
 using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CategoryRepo;
+using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseContentRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseRateRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo;
@@ -50,7 +51,7 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork
         private IPayOutRepository _payOutRepository;
         private IPaytabsInvoiceRepository _paytabsInvoiceRepository;
         private ISubCategoryRepository _subCategoryRepository;
-
+        private IClaimRepository _claimRepository;
         public UnitOfWork(LMSDbContext context)
         {
             _context = context;
@@ -98,6 +99,7 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork
 
         public ISubCategoryRepository SubCategories => _subCategoryRepository ??= new SubCategoryRepository(_context);
 
+        public IClaimRepository Claims => _claimRepository ??= new ClaimRepository(_context);
         public void Dispose()
         {
             Dispose(true);

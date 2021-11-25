@@ -23,7 +23,6 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public int Views { get; set; }
         //public int ReportAbuseId { get; set; } // error
 
-
         public int InstructorId { get; set; }
         public int CategoryId { get; set; }
         public int SubcategoryId { get; set; }
@@ -32,13 +31,10 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public Language Language { get; set; }
         public SubCategory SubCategory { get; set; }
 
-
-
         //public ICollection<ReportAbuse> ReportAbuses { get; set; }
         public ICollection<CourseRate> CourseRates { get; set; }
 
         public ICollection<CourseContent> CourseContent { get; set; }
         public ICollection<Cart> Carts { get; set; }
-
     }
 }

@@ -20,7 +20,6 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
         Task<IList<Role>> FindAll();
 
         Task<Role> Find(Expression<Func<Role, bool>> expression);
-
         Task<bool> SaveChange();
     }
 }
