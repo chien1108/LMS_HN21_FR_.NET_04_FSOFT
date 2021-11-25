@@ -15,6 +15,8 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourse
     public interface ISavedCourseService
     {
         void Delete(SavedCourse savedCourse);
+        void DeleteSaveCourses(int studentId);
+        Task<bool> SaveChanges();
         Task<SavedCourse> FindSavedCourse(int studentId, int courseId);
         Task<ICollection<SavedCourse>> GetSavedCoursesByStudentId(int studentId);
     }

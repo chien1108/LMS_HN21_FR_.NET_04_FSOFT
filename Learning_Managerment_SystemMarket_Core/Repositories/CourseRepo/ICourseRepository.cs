@@ -12,6 +12,7 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
         Task<ICollection<Course>> GetNewestCourse(int size);
         Task<SavedCourse> FindSavedCourse(int studentId, int courseId);
         void DeleteSaveCourse(SavedCourse savedCourse);
+        void DeleteSaveCourses(int studentId);
         Task<ICollection<Course>> SearchCourse(string searchString);
         Task<IList<Course>> GetAllCoursesIsActive();
         

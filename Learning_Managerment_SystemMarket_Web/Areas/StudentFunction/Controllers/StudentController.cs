@@ -94,6 +94,10 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
 
         {
             var courses = await _savedCourseService.GetSavedCoursesByStudentId(1);
+            if (courses == null)
+            {
+                return NotFound();
+            }
             return View(courses);
         }
 
@@ -113,7 +117,26 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             var model = _mapper.Map<ICollection<CourseDetailVM>>(courses);
             return View(model);
         }
+        /// <summary>
+        /// TamLV10 RemoveAll savedcorse by studentId
+        /// </summary>
+        /// <param name="studentId"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> RemoveAll(int studentId)
+        {
+            try
+            {
+                _savedCourseService.DeleteSaveCourses(studentId);
+                await _savedCourseService.SaveChanges();
+                return RedirectToAction(nameof(SavedCourses));
+            }
+            catch (Exception)
+            {
 
+                return NotFound();
+            }
+            
+        }
         /// <summary>
         /// Delete SavedCourse
         /// </summary>
@@ -128,7 +151,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
                 return NotFound();
             }
             _savedCourseService.Delete(savedCourse);
-            await _studentHomePageService.SaveChange();
+            await _savedCourseService.SaveChanges();
             return RedirectToAction(nameof(SavedCourses));
         }
 

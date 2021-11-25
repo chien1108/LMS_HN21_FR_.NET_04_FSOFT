@@ -28,6 +28,11 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourse
             _unitOfWork.Courses.DeleteSaveCourse(savedCourse);
         }
 
+        public void DeleteSaveCourses(int studentId)
+        {
+            _unitOfWork.Courses.DeleteSaveCourses(studentId);
+        }
+
         public async Task<SavedCourse> FindSavedCourse(int studentId,int courseId)
         {
             var savedCourse = await _unitOfWork.Courses.FindSavedCourse(studentId, courseId);
@@ -45,6 +50,11 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourse
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task<bool> SaveChanges()
+        {
+            return await _unitOfWork.Save();
         }
     }
 }

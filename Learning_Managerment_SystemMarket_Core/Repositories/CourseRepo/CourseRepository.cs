@@ -20,13 +20,26 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
             _context = context;
         }
         /// <summary>
-        /// TamLV10 delete savecourse
+        /// TamLV10 delete savecourse remove 1 file savedcorse
         /// </summary>
         /// <param name="savedCourse"></param>
         public void DeleteSaveCourse(SavedCourse savedCourse)
         {
             _context.SavedCourses.Remove(savedCourse);
         }
+        /// <summary>
+        /// TamLV10 DeleteSaveCourses using remove all
+        /// </summary>
+        /// <param name="studentId"></param>
+        public void DeleteSaveCourses(int studentId)
+        {
+            var savedCourses = _context.SavedCourses.Where(x => x.StudentId == studentId).ToList();
+            foreach (var item in savedCourses)
+            {
+                DeleteSaveCourse(item);
+            }
+        }
+
         /// <summary>
         ///TamLV10 Find savedCourse by studentId and courseId
         /// </summary>

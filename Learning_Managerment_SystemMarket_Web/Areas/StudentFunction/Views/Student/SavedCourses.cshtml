@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<Learning_Managerment_SystemMarket_Core.Models.Entities.SavedCourse>
-
-
 @{
     ViewData["Title"] = "SavedCourses";
+    var studentId = Model.Select(x=>x.StudentId).FirstOrDefault();
 }
 
 <div class="container-fluid">
@@ -11,7 +10,7 @@
             <div class="section3125 hstry142">
                 <div class="grp_titles pt-0">
                     <div class="ht_title">Saved Courses</div>
-                    <a href="#" class="ht_clr">Remove All</a>
+                    <a asp-action="RemoveAll" asp-route-studentid="@studentId" class="ht_clr">Remove All</a>
                 </div>
                 <div class="tb_145">
                     <div class="wtch125">
