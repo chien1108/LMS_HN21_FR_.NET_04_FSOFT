@@ -12,7 +12,9 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService
     {
         Task<ServiceResponse<Claim>> Create(Claim newClaim);
 
-        Task<ServiceResponse<Claim>> Delete(int idRole);
+        Task<ServiceResponse<Claim>> Delete(int id);
+        Task<ServiceResponse<Claim>> Delete(Claim claim);
+        Task<ServiceResponse<Claim>> DeleteArrange(IList<Claim> claims);
         Task<ServiceResponse<Claim>> Update(Claim updateClaim);
         Task<bool> IsExisted(Expression<Func<Claim, bool>> expression = null);
         Task<ICollection<Claim>> FindAll(Expression<Func<Claim,

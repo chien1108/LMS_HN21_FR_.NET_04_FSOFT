@@ -3,13 +3,14 @@ using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
-using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleClaimViewModels;
 using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
@@ -42,12 +43,12 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
             _claimService = claimService;
         }
 
-
         public IActionResult ManageRoleClaim(int id)
         {
             ViewBag.IdRole = id;
             return View();
         }
+
         // GET: RoleController
         public ActionResult Index()
         {
@@ -77,28 +78,22 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
                 {
                     return RedirectToAction(nameof(ManageRoleClaim));
                 }
+                var role = new Role() { Name = newRoleVM.Name };
+                var claims = new List<Claim>(); 
+                foreach (var item in newRoleVM.ClaimsFake)
+                {
+                    if (item != null)
+                    {
+                        claims.Add(new Claim() {ClaimType = item.Trim(),ClaimValue = item.Trim() });
+                    }
+                }
 
-                var response = await _roleService.Create(new Role { Name = newRoleVM.Name });
-                if (response.Success == false)
+                var response = await _roleService.Create(role,claims);
+                if (!response.Success)
                 {
                     ModelState.AddModelError("", response.Message);
                     return RedirectToAction(nameof(ManageRoleClaim));
                 }
-                var role = await _roleService.Find(x => x.Name.ToLower().Trim() == newRoleVM.Name.ToLower().Trim());
-
-                if (newRoleVM.ClaimsFake != null)
-                {
-                    foreach (var item in newRoleVM.ClaimsFake)
-                    {
-                            var response1 = await _claimService.Create(new Claim() { RoleId = role.Id, ClaimType = item.Trim(), ClaimValue = item.Trim() });
-                            if (response1.Success == false)
-                            {
-                                ModelState.AddModelError("", response.Message);
-                                return RedirectToAction(nameof(ManageRoleClaim));
-                            }
-                    }
-                }
-
                 return RedirectToAction(nameof(ManageRoleClaim));
             }
             catch
@@ -131,15 +126,31 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
                 }
                 role.Name = roleVM.Name;
                 var claims = await _claimService.FindAll(x => x.RoleId == roleVM.Id);
+                var claimsOlder = claims.Where(x =>!roleVM.ClaimsFake.Contains(x.ClaimType.ToString().Trim())).ToList();
+                var claimOlderNotRemove = claims.Where(x => roleVM.ClaimsFake.Contains(x.ClaimType.ToString().Trim())).Select(x=>x.ClaimValue).ToList();
                 foreach (var item in claims)
                 {
                     if (item != null)
                     {
-                        roleVm.ClaimsFake.Add(item.ClaimType);
+                        if (roleVM.ClaimsFake.Contains(item.ClaimValue.Trim()))
+                        {
+                            roleVM.ClaimsFake.Remove(item.ClaimValue.Trim());
+                        }
                     }
                 }
-                var claims = role
-                var respone = await _roleService.Update(role);
+                var newClaim = new List<Claim>();
+                if (roleVM.ClaimsFake != null)
+                {
+                    foreach (var item in roleVM.ClaimsFake)
+                    {
+                        if (item != null && !claimOlderNotRemove.Contains(item))
+                        {
+                            newClaim.Add(new Claim() {ClaimType = item,ClaimValue = item });
+                        }
+                    }
+                }
+                //var claims = role
+                var respone = await _roleService.Update(role,newClaim,claimsOlder);
                 if (!respone.Success)
                 {
                     ModelState.AddModelError("", respone.Message);

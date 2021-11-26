@@ -54,12 +54,12 @@
                                         @for (int i = 1; i <= listRole.Count; i++)
                                         {
                                         <tr role="row">
-                                            <td class="sorting_1"><span>@i</span></td>
+                                            <td class="sorting_1"><span>@listRole.ElementAt(i-1).Id</span></td>
                                             <td>@listRole.ElementAt(i - 1).Name</td>
                                             <td>
                                                 @{
                                                     //var roles = await _service.(listUser.ElementAt(i - 1));
-                                                    var claims = await _claimService.FindAll(x => x.RoleId == listRole.ElementAt(i - 1).Id);
+                                                    var claims = await _claimService.FindAll(x => x.RoleId == @listRole.ElementAt(i - 1).Id);
                                                     foreach (var claim in claims)
                                                     {
                                                             <span class="badge badge-success m-1">@claim.ClaimValue</span>

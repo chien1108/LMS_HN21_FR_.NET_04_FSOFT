@@ -11,6 +11,7 @@ namespace Learning_Managerment_SystemMarket_Core.Data
 {
     public class LMSDbContext : IdentityDbContext<User, Role, int>
     {
+        
         public LMSDbContext()
         {
         }
@@ -57,12 +58,6 @@ namespace Learning_Managerment_SystemMarket_Core.Data
             modelBuilder.Entity<Cart>(entity =>
             {
                 entity.HasKey(k => new { k.StudentId, k.CourseId });
-                //entity.HasOne(pk => pk.Student)
-                //        .WithMany(m => m.Carts)
-                //        .HasForeignKey(fk => fk.Student);
-                //entity.HasOne(pk => pk.Course)
-                //        .WithMany(m => m.Carts)
-                //        .HasForeignKey(fk => fk.CourseId);
             });
             modelBuilder.Entity<Category>(entity =>
             {
@@ -121,7 +116,7 @@ namespace Learning_Managerment_SystemMarket_Core.Data
             modelBuilder.Entity<PaytabsInvoice>(entity =>
             {
             });
-            modelBuilder.Entity<Claim>(entity => { 
+            modelBuilder.Entity<Claim>(entity => {
             });
             modelBuilder.Entity<ReportAbuse>(entity =>
             {
@@ -141,8 +136,6 @@ namespace Learning_Managerment_SystemMarket_Core.Data
             modelBuilder.Entity<Student>(entity =>
             {
                 entity.HasKey(k => new { k.Id });
-                //entity.HasMany(m => m.Carts)
-                //       .WithOne(o => o.Student);
             });
             modelBuilder.Entity<SubCategory>(entity =>
             {

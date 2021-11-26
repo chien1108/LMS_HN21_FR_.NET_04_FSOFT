@@ -9,11 +9,11 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
 {
     public interface IRoleService
     {
-        Task<ServiceResponse<Role>> Create(Role newRole);
+        Task<ServiceResponse<Role>> Create(Role newRole,List<Claim> claims);
 
         Task<ServiceResponse<Role>> Delete(Role role);
 
-        Task<ServiceResponse<Role>> Update(Role updateRole);
+        Task<ServiceResponse<Role>> Update(Role updateRole,List<Claim> newClaims,List<Claim> removeClaims);
 
         Task<bool> IsExisted(string roleName);
 

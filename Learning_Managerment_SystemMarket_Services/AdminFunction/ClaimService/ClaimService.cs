@@ -37,16 +37,15 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService
             }
             catch (Exception ex)
             {
-
                 return new ServiceResponse<Claim> { Success = false, Message = ex.Message };
             }
         }
 
-        public async Task<ServiceResponse<Claim>> Delete(int idRole)
+        public async Task<ServiceResponse<Claim>> Delete(int id)
         {
             try
             {
-                var claimFromDB = await FindAll(x => x.RoleId == idRole);
+                var claimFromDB = await FindAll(x => x.Id == id);
                 if (claimFromDB != null)
                 {
                     foreach (var item in claimFromDB)
@@ -66,7 +65,6 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService
             }
             catch (Exception ex)
             {
-
                 return new ServiceResponse<Claim> { Success = false, Message = ex.Message };
             }
         }
@@ -79,13 +77,7 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService
 
         public async Task<bool> IsExisted(Expression<Func<Claim, bool>> expression = null)
         {
-            //var isExist = await _unitOfWork.Categories.FindByCondition(expression);
-            //if (isExist == null)
-            //{
-            //    return false;
-            //}
-            //return true;
-            return await _unitOfWork.Claims.FindByCondition(expression) == null ? false : true;
+            return await _unitOfWork.Claims.FindByCondition(expression) == null;
         }
 
         public async Task<bool> SaveChange()
@@ -114,10 +106,68 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService
             {
                 return new ServiceResponse<Claim> { Success = false, Message = ex.Message };
             }
-
         }
 
-        public async Task<ICollection<Claim>> GetAllClaimInUser(int idRole) 
+        public async Task<ICollection<Claim>> GetAllClaimInUser(int idRole)
             => await FindAll(x => x.RoleId == idRole);
+
+        public async Task<ServiceResponse<Claim>> DeleteArrange(IList<Claim> claims)
+        {
+            try
+            {
+                foreach (var item in claims)
+                {
+                    if (item != null)
+                    {
+                        var claimFromDB = await FindAll(x => x.Id == item.Id);
+                        if (claimFromDB != null)
+                        {
+                            _unitOfWork.Claims.Delete(item);
+                        }
+                        else
+                        {
+                            return new ServiceResponse<Claim> { Success = false, Message = "Not Found claim" };
+                        }
+                    }
+                }
+                if (!await SaveChange())
+                {
+                    return new ServiceResponse<Claim> { Success = false, Message = "Error when delete claim" };
+                }
+                return new ServiceResponse<Claim> { Success = true, Message = "Delete claim Success" };
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResponse<Claim> { Success = false, Message = ex.Message };
+            }
+        }
+
+        public async Task<ServiceResponse<Claim>> Delete(Claim claim)
+        {
+            try
+            {
+                var claimFromDB = await FindAll(x => x.Id == claim.Id);
+                if (claimFromDB != null)
+                {
+                    foreach (var item in claimFromDB)
+                    {
+                        _unitOfWork.Claims.Delete(item);
+                        if (!await SaveChange())
+                        {
+                            return new ServiceResponse<Claim> { Success = false, Message = "Error when delete claim" };
+                        }
+                    }
+                    return new ServiceResponse<Claim> { Success = true, Message = "Delete claim Success" };
+                }
+                else
+                {
+                    return new ServiceResponse<Claim> { Success = false, Message = "Not Found claim" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResponse<Claim> { Success = false, Message = ex.Message };
+            }
+        }
     }
 }
