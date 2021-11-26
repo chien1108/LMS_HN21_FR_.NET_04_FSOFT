@@ -1,5 +1,6 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Data;
 using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepo;
+using Learning_Managerment_SystemMarket_Core.Repositories.CartRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseContentRepo;
@@ -50,6 +51,7 @@ namespace Learning_Managerment_SystemMarket_Core.Contracts
         IStudentRepository Students { get; }
         ISubCategoryRepository SubCategories { get; }
         IClaimRepository Claims { get; }
+        ICartRepository Carts { get; }
 
         LMSDbContext Context { get; }
         Task<bool> Save();
