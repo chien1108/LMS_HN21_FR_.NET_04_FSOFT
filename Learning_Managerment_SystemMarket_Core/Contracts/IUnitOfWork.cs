@@ -51,6 +51,7 @@ namespace Learning_Managerment_SystemMarket_Core.Contracts
         ISubCategoryRepository SubCategories { get; }
         IClaimRepository Claims { get; }
 
+        LMSDbContext Context { get; }
         Task<bool> Save();
     }
 }

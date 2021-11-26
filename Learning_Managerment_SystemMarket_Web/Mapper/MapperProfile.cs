@@ -6,6 +6,13 @@ using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleViewModel
 using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.SubCategoryViewModels;
 using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.UserViewModels;
 using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.CategoryViewModel;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.LanguageViewModel;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.SubCategoryViewModel;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.DashboardViewModels;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.LectureViewModel;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewModel;
 
 namespace Learning_Managerment_SystemMarket_Web.Mapper
 {
@@ -22,6 +29,17 @@ namespace Learning_Managerment_SystemMarket_Web.Mapper
             CreateMap<Course, StudentHomePageVM>().ReverseMap();
             CreateMap<Course, CourseDetailVM>().ReverseMap();
             CreateMap<Category, CategoryDetailVM>().ReverseMap();
+            CreateMap<Course, CourseVm>()
+                .ForMember(x => x.CategoryName, c => c.MapFrom(source => source.Category.CategoryName)).ReverseMap();
+            CreateMap<SpecialDiscount, DisCountCourseVm>()
+                .ForMember(x => x.CourseName, c => c.MapFrom(source => source.Course.Title)).ReverseMap();
+            CreateMap<Course, CreateCourseVm>().ReverseMap();
+            CreateMap<Lecture, CreateLectureVm>().ReverseMap();
+            CreateMap<CourseContent, CreateCourseContentVm>().ReverseMap();
+
+            CreateMap<Category, CategoryVm>().ReverseMap();
+            CreateMap<SubCategory, SubCategoryVm>().ReverseMap();
+            CreateMap<Language, LanguageVm>().ReverseMap();
         }
     }
 }

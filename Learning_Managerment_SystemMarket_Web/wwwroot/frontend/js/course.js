@@ -48,7 +48,6 @@ function onLectureFileChange() {
 function addLectureToHtml() {
     var tr = "";
     LectureData.forEach((element, index) => {
-
         tr += ` <tr>
         <td class="text-center">${index+1}</td>
         <td class="cell-ta">${element[0]['value']}</td>

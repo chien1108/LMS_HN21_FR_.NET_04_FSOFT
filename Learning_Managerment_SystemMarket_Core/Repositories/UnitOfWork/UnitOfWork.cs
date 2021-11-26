@@ -100,6 +100,8 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork
         public ISubCategoryRepository SubCategories => _subCategoryRepository ??= new SubCategoryRepository(_context);
 
         public IClaimRepository Claims => _claimRepository ??= new ClaimRepository(_context);
+        public LMSDbContext Context => _context;
+
         public void Dispose()
         {
             Dispose(true);

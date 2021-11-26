@@ -12,6 +12,12 @@
     <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-rc.yml" />
     <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish.yml" />
     <None Include="wwwroot\frontend\vendor\unicons-2.0.1\.github\workflows\update-icons.yml" />
+    <None Include="wwwroot\instructor\public\frontend\vendor\unicons-2.0.1\.github\workflows\autotag.yml" />
+    <None Include="wwwroot\instructor\public\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-pro.yml" />
+    <None Include="wwwroot\instructor\public\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-rc-pro.yml" />
+    <None Include="wwwroot\instructor\public\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish-rc.yml" />
+    <None Include="wwwroot\instructor\public\frontend\vendor\unicons-2.0.1\.github\workflows\npm-publish.yml" />
+    <None Include="wwwroot\instructor\public\frontend\vendor\unicons-2.0.1\.github\workflows\update-icons.yml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +43,10 @@
     <Folder Include="Areas\AdminFunction\Models\" />
     <Folder Include="Areas\StudentFunction\Data\" />
     <Folder Include="Areas\StudentFunction\Models\" />
+    <Folder Include="wwwroot\instructor\public\upload\document\" />
+    <Folder Include="wwwroot\instructor\public\upload\image\" />
+    <Folder Include="wwwroot\instructor\public\upload\lectures\" />
+    <Folder Include="wwwroot\instructor\public\upload\video\" />
   </ItemGroup>
 
 </Project>

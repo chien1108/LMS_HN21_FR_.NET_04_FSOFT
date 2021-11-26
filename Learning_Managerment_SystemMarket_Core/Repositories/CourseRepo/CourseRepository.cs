@@ -1,6 +1,11 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Data;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 using Learning_Managerment_SystemMarket_Core.Repositories.GenericRepo;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
@@ -104,5 +109,15 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
         }
 
       
+
+        public async Task<List<Course>> GetAllDraftCourses()
+        {
+            return await _context.Courses.Include(x => x.CourseContent).Where(x => x.Status == StatusCourse.Draft).ToListAsync();
+        }
+
+        public async Task<List<Course>> GetAllUpcomingCourses()
+        {
+            return await _context.Courses.Include(x => x.CourseContent).Where(x => x.Status == StatusCourse.WaitForApproced).ToListAsync();
+        }
     }
 }

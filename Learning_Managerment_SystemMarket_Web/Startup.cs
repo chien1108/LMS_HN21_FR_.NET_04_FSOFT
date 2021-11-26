@@ -31,6 +31,10 @@ using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
 using Learning_Managerment_SystemMarket_Web.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -101,6 +105,11 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IStudentExploreService, StudentExploreService>();
             services.AddScoped<ISavedCourseService, SavedCourseService>();
 
+            services.AddTransient<ICourseServices, CourseServices>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ILanguageService, LanguageService>();
+            services.AddTransient<ISubCategoryService, SubCategoryService>();
+
             //Config for Dependence Service
 
             services.AddAutoMapper(typeof(MapperProfile));
@@ -142,6 +151,9 @@ namespace Learning_Managerment_SystemMarket_Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{area:?}/{controller=Home}/{action=Index}/{id?}");
+                    name: "instuctor",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                  );
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
