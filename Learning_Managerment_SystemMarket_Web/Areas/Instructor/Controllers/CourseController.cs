@@ -47,8 +47,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
 
         // POST: CourseController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateCourseVm model)
+        public ActionResult Create([Bind("Title,SubTitile,Description,IsFree,CategoryId,SubcategoryId,LanguageId")] CreateCourseTest model)
         {
             try
             {
@@ -56,7 +55,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
             }
             catch
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
         }
 
@@ -77,6 +76,13 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public ActionResult CreateCourse(CreateCourseVm model)
+        {
+            var result = model;
+            return Json(result);
         }
 
         [HttpGet]
