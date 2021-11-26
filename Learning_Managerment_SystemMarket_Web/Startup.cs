@@ -106,9 +106,9 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<ISavedCourseService, SavedCourseService>();
 
             services.AddTransient<ICourseServices, CourseServices>();
-            services.AddTransient<Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService.ICategoryService, Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService.CategoryService>();
-            services.AddTransient<Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService.ILanguageService, Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService.LanguageService>();
-            services.AddTransient<Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService.ISubCategoryService, Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService.SubCategoryService>();
+            services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();
+            services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
+            services.AddTransient<IInstructorSubCategoryService, InstructorSubCategoryService>();
 
             //Config for Dependence Service
 

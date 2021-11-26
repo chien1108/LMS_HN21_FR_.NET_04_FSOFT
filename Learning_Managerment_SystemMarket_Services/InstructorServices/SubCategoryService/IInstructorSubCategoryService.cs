@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService
 {
-    public interface ISubCategoryService
+    public interface IInstructorSubCategoryService
     {
         Task<List<SubCategoryVm>> GetSubCategoryByCategoryId(int id);
     }

@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService
 {
-    public class SubCategoryService : ISubCategoryService
+    public class InstructorSubCategoryService : IInstructorSubCategoryService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public SubCategoryService(IUnitOfWork unitOfWork, IMapper mapper)
+        public InstructorSubCategoryService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

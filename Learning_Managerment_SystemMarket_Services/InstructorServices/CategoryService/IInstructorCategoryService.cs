@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService
 {
-    public interface ICategoryService
+    public interface IInstructorCategoryService
     {
         Task<List<CategoryVm>> GetAllCategory();
     }

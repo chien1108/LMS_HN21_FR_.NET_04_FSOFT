@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService
 {
-    public interface ILanguageService
+    public interface IInstructorLanguageService
     {
         Task<List<LanguageVm>> GetAllLanguage();
     }

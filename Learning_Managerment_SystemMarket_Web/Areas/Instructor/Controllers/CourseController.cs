@@ -2,7 +2,6 @@
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
-﻿using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
@@ -23,10 +22,10 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
         static List<CreateCourseContentVm> createCourseContentVms = new List<CreateCourseContentVm>();
         static List<CreateLectureVm> createLectureVms = new List<CreateLectureVm>();
 
-        private readonly ISubCategoryService _subCategoryService;
+        private readonly IInstructorSubCategoryService _subCategoryService;
         private readonly ICourseServices _courseServices;
 
-        public CourseController(ISubCategoryService subCategoryService, ICourseServices courseServices)
+        public CourseController(IInstructorSubCategoryService subCategoryService, ICourseServices courseServices)
         {
             _subCategoryService = subCategoryService;
             _courseServices = courseServices;

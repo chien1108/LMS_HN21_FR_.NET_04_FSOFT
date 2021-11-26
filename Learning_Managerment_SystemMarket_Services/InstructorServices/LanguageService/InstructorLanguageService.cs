@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService
 {
-    public class LanguageService : ILanguageService
+    public class InstructorLanguageService : IInstructorLanguageService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public LanguageService(IUnitOfWork unitOfWork, IMapper mapper)
+        public InstructorLanguageService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
