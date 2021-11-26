@@ -1,5 +1,5 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Models;
-using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.LectureViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.ResponseResult;

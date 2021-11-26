@@ -95,9 +95,9 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IPaytabsInvoiceRepository, PaytabsInvoiceRepository>();
             services.AddScoped<IClaimRepository, ClaimRepository>();
             //Add service
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<ISubCategoryService, SubCategoryService>();
-            services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices.ICategoryService, Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices.CategoryService>();
+            services.AddScoped<Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService.ISubCategoryService, Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService.SubCategoryService>();
+            services.AddScoped<Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService.ILanguageService, Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService.LanguageService>();
             services.AddScoped<IClaimService, ClaimService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoleService, RoleService>();
@@ -106,9 +106,9 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<ISavedCourseService, SavedCourseService>();
 
             services.AddTransient<ICourseServices, CourseServices>();
-            services.AddTransient<ICategoryService, CategoryService>();
-            services.AddTransient<ILanguageService, LanguageService>();
-            services.AddTransient<ISubCategoryService, SubCategoryService>();
+            services.AddTransient<Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService.ICategoryService, Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService.CategoryService>();
+            services.AddTransient<Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService.ILanguageService, Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService.LanguageService>();
+            services.AddTransient<Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService.ISubCategoryService, Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService.SubCategoryService>();
 
             //Config for Dependence Service
 
@@ -149,14 +149,11 @@ namespace Learning_Managerment_SystemMarket_Web
                      pattern: "{area:exists}/{controller}/{action}/{id?}");
 
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{area:?}/{controller=Home}/{action=Index}/{id?}");
                     name: "instuctor",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                   );
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
                     pattern: "{area=StudentFunction}/{controller=Student}/{action=Index}/{id?}");
             });
         }

@@ -1,9 +1,6 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.InstructorViewModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
 {
@@ -31,7 +28,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
         public int CategoryId { get; set; }
         public int SubcategoryId { get; set; }
         public int LanguageId { get; set; }
-        public Instructor Instructor { get; set; }
+        public InstructorVm Instructor { get; set; }
         public Language Language { get; set; }
         public SubCategory SubCategory { get; set; }
     }

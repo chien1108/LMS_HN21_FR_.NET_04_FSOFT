@@ -1,5 +1,6 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Models.Base;
 using Learning_Managerment_SystemMarket_Core.Modules.Enums;
+using System.Collections.Generic;
 
 namespace Learning_Managerment_SystemMarket_Core.Models.Entities
 {
