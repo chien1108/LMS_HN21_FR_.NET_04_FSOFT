@@ -2,6 +2,7 @@
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
+﻿using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
@@ -33,7 +34,12 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
         // GET: CourseController
         public ActionResult Index()
         {
-            return View();
+            var courses = _courseServices.GetAllCourses();
+            var model = new DisCountCourseVm
+            {
+                Courses = courses.Result
+            };
+            return View(model);
         }
 
         // GET: CourseController/Details/5
@@ -90,11 +96,25 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
             return Json(model.Title);
         }
 
-        /// <summary>
-        /// Thêm Course Content vào list SonNL4
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateDiscount(DisCountCourseVm model)
+        {
+            if(!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Model is invalid");
+                return RedirectToAction(nameof(Index));
+            }
+
+            var result = _courseServices.CreateDiscount(model);
+
+            if (result.Result.Success == true)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpGet]
         public ActionResult CreateLecture(CreateLectureVm model)
         {
@@ -132,24 +152,100 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
         }
 
         // GET: CourseController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: CourseController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult DeleteCourse(int id)
         {
-            try
+            var result = _courseServices.Delete(id);
+            if(result.Result.Success == true)
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult ChangeStatusToDraft(int id)
+        {
+            var course = _courseServices.ChangeStatusToDraft(id);
+            if(course.Result.Success == false)
             {
-                return View();
+                return RedirectToAction(nameof(Index));
             }
+            return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult ChangeStatusToPending(int id)
+        {
+            var course = _courseServices.ChangeStatusToPending(id);
+            if (course.Result.Success == false)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            
+        }
+
+        public ActionResult ChangeStatus(int id)
+        {
+            var discountCourse = _courseServices.ChangeStatus(id);
+            if(discountCourse.Result.Success == false)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteDiscount(int id)
+        {
+            var result = _courseServices.DeleteDiscount(id);
+            if (result.Result.Success == true)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public ActionResult EditDiscount(int id)
+        {
+            var discount = _courseServices.GetDiscountById(id);
+
+            return View(discount.Result);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditDiscount(DisCountCourseVm entity)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Model is invalid");
+                return RedirectToAction(nameof(EditDiscount), new { id = entity.Id });
+            }
+
+            var result = _courseServices.UpdateDiscount(entity);
+
+            if(result.Result.Success == false)
+            {
+                ModelState.AddModelError("", result.Result.Message);
+                return RedirectToAction(nameof(EditDiscount), new { id = entity.Id });
+            }
+
+            return RedirectToAction(nameof(EditDiscount));
         }
     }
 }

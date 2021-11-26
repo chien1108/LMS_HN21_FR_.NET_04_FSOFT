@@ -143,4 +143,25 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
 
         public IEnumerable<CreateCourseContentVm> CourseContent { get; set; }
     }
+
+    public class ViewCourseVm
+    {
+        public IEnumerable<CourseVm> Courses { get; set; }
+        public IEnumerable<CourseVm> DraftCourses { get; set; }
+        public IEnumerable<CourseVm> UpcomingCourses { get; set; }
+        public IEnumerable<DisCountCourseVm> DisCountCourses { get; set; }
+    }
+
+    public class DisCountCourseVm
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string CourseName { get; set; }
+        public decimal Percentage { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public Status Status { get; set; }
+        public IEnumerable<CourseVm> Courses { get; set; }
+        public int CourseId { get; set; }
+    }
 }

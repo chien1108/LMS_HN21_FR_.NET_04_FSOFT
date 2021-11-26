@@ -22,8 +22,8 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
-using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
 using Learning_Managerment_SystemMarket_Web.Mapper;
@@ -57,7 +57,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddDbContext<LMSDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            }, ServiceLifetime.Transient);
+            });
 
             //Config for Dependence Repository
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -85,10 +85,9 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IPaytabsInvoiceRepository, PaytabsInvoiceRepository>();
 
             services.AddTransient<ICourseServices, CourseServices>();
-            //Instructor service
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<ILanguageService, LanguageService>();
-            services.AddScoped<ISubCategoryService, SubCategoryService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ILanguageService, LanguageService>();
+            services.AddTransient<ISubCategoryService, SubCategoryService>();
 
             //Config for Dependence Service
 

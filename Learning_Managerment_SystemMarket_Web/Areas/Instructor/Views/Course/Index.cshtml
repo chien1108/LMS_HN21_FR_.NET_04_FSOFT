@@ -1,305 +1,364 @@
-﻿@{
+﻿@model Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel.DisCountCourseVm
+
+@{
     Layout = "~/Areas/Instructor/Views/Shared/_InstructorLayout.cshtml";
 }
 
 @using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
+@using Learning_Managerment_SystemMarket_Core.Modules.Enums
 @inject ICourseServices coursesService
 
-@{ 
-    var courses = coursesService.GetAllCourses();
-    var draftCourses = coursesService.GetAllDraftCourses();
+@{
+    var courses = await coursesService.GetViewCourses();
 }
 
 
-    <div class="sa4d25">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="st_title"><i class="uil uil-book-alt"></i>Courses</h2>
-                </div>
-                <div class="col-md-12">
-                    <div class="card_dash1">
-                        <div class="card_dash_left1">
-                            <i class="uil uil-book-alt"></i>
-                            <h1>Jump Into Course Creation</h1>
-                        </div>
-                        <div class="card_dash_right1">
-                            <button class="create_btn_dash" onclick="window.location.href = 'public/instructor/courses/create';">
-                                Create
-                                Your
-                                Course
-                            </button>
-                        </div>
+<div class="sa4d25">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="st_title"><i class="uil uil-book-alt"></i>Courses</h2>
+            </div>
+            <div class="col-md-12">
+                <div class="card_dash1">
+                    <div class="card_dash_left1">
+                        <i class="uil uil-book-alt"></i>
+                        <h1>Jump Into Course Creation</h1>
+                    </div>
+                    <div class="card_dash_right1">
+                        <button class="create_btn_dash" onclick="window.location.href = 'public/instructor/courses/create';">
+                            Create
+                            Your
+                            Course
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="my_courses_tabs">
-                        <ul class="nav nav-pills my_crse_nav" id="pills-tab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="pills-my-courses-tab" data-toggle="pill" href="#pills-my-courses" role="tab" aria-controls="pills-my-courses" aria-selected="true">
-                                    <i class="uil uil-book-alt"></i>My Courses
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-my-purchases-tab" data-toggle="pill" href="#pills-my-purchases" role="tab" aria-controls="pills-my-purchases" aria-selected="false">
-                                    <i class="uil uil-download-alt"></i>Drafts
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-upcoming-courses-tab" data-toggle="pill" href="#pills-upcoming-courses" role="tab" aria-controls="pills-upcoming-courses" aria-selected="false"><i class="uil uil-upload-alt"></i>Upcoming Courses</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-discount-tab" data-toggle="pill" href="#pills-discount" role="tab" aria-controls="pills-discount" aria-selected="false">
-                                    <i class="uil uil-tag-alt"></i>Discounts
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-promotions-tab" data-toggle="pill" href="#pills-promotions" role="tab" aria-controls="pills-promotions" aria-selected="false">
-                                    <i class="uil uil-megaphone"></i>Promotions
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-my-courses" role="tabpanel">
-                                <div class="table-responsive mt-30">
-                                    <table class="table ucp-table">
-                                        <thead class="thead-s">
-
-                                            <tr>
-                                                <th class="text-center" scope="col">#</th>
-                                                <th>Title</th>
-                                                <th class="text-center" scope="col">Updated Date</th>
-                                                <th class="text-center" scope="col">Sales</th>
-                                                <th class="text-center" scope="col">Parts</th>
-                                                <th class="text-center" scope="col">Category</th>
-                                                <th class="text-center" scope="col">Status</th>
-                                                <th class="text-center" scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach(var item in courses.Result)
-                                            {
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="my_courses_tabs">
+                    <ul class="nav nav-pills my_crse_nav" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-my-courses-tab" data-toggle="pill" href="#pills-my-courses" role="tab" aria-controls="pills-my-courses" aria-selected="true">
+                                <i class="uil uil-book-alt"></i>My Courses
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-my-purchases-tab" data-toggle="pill" href="#pills-my-purchases" role="tab" aria-controls="pills-my-purchases" aria-selected="false">
+                                <i class="uil uil-download-alt"></i>Drafts
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-upcoming-courses-tab" data-toggle="pill" href="#pills-upcoming-courses" role="tab" aria-controls="pills-upcoming-courses" aria-selected="false"><i class="uil uil-upload-alt"></i>Upcoming Courses</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-discount-tab" data-toggle="pill" href="#pills-discount" role="tab" aria-controls="pills-discount" aria-selected="false">
+                                <i class="uil uil-tag-alt"></i>Discounts
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-promotions-tab" data-toggle="pill" href="#pills-promotions" role="tab" aria-controls="pills-promotions" aria-selected="false">
+                                <i class="uil uil-megaphone"></i>Promotions
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-my-courses" role="tabpanel">
+                            <div class="table-responsive mt-30">
+                                <table class="table ucp-table">
+                                    <thead class="thead-s">
+                                        <tr>
+                                            <th class="text-center" scope="col">#</th>
+                                            <th>Title</th>
+                                            <th class="text-center" scope="col">Updated Date</th>
+                                            <th class="text-center" scope="col">Sales</th>
+                                            <th class="text-center" scope="col">Parts</th>
+                                            <th class="text-center" scope="col">Category</th>
+                                            <th class="text-center" scope="col">Status</th>
+                                            <th class="text-center" scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in courses.Courses)
+                                        {
                                             <tr>
                                                 <td class="text-center">@item.Id</td>
                                                 <td>@item.Title</td>
-                                                <td class="text-center">@item.ModifiedDate</td>
+                                                <td class="text-center">@item.ModifiedDate.ToString("dd MMMM yyyy | HH:mm")</td>
                                                 <td class="text-center">@item.Sales</td>
                                                 <td class="text-center">@item.Parts</td>
                                                 <td class="text-center"><span class="text-primary">@item.CategoryName</span></td>
                                                 <td class="text-center ">
-                                                    <b class="course_active text-success">
-                                                        @if (item.Status == Learning_Managerment_SystemMarket_Core.Modules.Enums.StatusCourse.Active)
-                                                        {
-                                                            <text>Active</text>
-                                                        }
-                                                        else if (item.Status == Learning_Managerment_SystemMarket_Core.Modules.Enums.StatusCourse.Draft)
-                                                        {
-                                                            <text>Draft</text>
-                                                        }
-                                                        else if (item.Status == Learning_Managerment_SystemMarket_Core.Modules.Enums.StatusCourse.WaitForApproced)
-                                                        {
-                                                            <text>Pending</text>
-                                                        }
-                                                    </b>
+                                                    @if (item.Status == StatusCourse.Active)
+                                                    {
+                                                        <b class="course_active text-success">Active</b>
+                                                    }
+                                                    else if (item.Status == StatusCourse.Draft)
+                                                    {
+                                                        <b class="course_active text-warning">Draft</b>
+                                                    }
+                                                    else if (item.Status == StatusCourse.WaitForApproced)
+                                                    {
+                                                        <b class="course_active text-danger">Pending</b>
+                                                    }
                                                 </td>
                                                 <td class="text-center d-flex justify-content-center">
                                                     <a href="public/instructor/courses/8/edit" title="Edit" class="gray-s">
                                                         <i class="uil uil-edit-alt"></i>
                                                     </a>
-
-                                                    <a href="public/instructor/courses/8/update-status/0" title="Back To Draft" class="gray-s">
-                                                        <i class="uil uil-corner-down-left"></i>
-                                                    </a>
+                                                    @if (item.Status == StatusCourse.Active)
+                                                    {
+                                                        <a asp-action="ChangeStatusToDraft" asp-route-id="@item.Id" title="Back To Draft" class="gray-s">
+                                                            <i class="uil uil-corner-down-left"></i>
+                                                        </a>
+                                                        <form asp-action="DeleteCourse" asp-route-id="@item.Id" method="post">
+                                                            <button style="border:none; background-color:white !important" type="submit" onclick="confirm('Are you sure you want to delete this?')"
+                                                                    title="Delete" class="gray-s">
+                                                                <i class="uil uil-trash-alt"></i>
+                                                            </button>
+                                                        </form>
+                                                    }
+                                                    else
+                                                    {
+                                                        <form asp-action="DeleteCourse" asp-route-id="@item.Id" method="post">
+                                                            <button style="border:none; background-color:white !important" type="submit" onclick="confirm('Are you sure you want to delete this?')"
+                                                                    title="Delete" class="gray-s">
+                                                                <i class="uil uil-trash-alt"></i>
+                                                            </button>
+                                                        </form>
+                                                    }
                                                 </td>
                                             </tr>
-                                            }                                           
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="tab-pane fade" id="pills-my-purchases" role="tabpanel">
-                                <div class="table-responsive mt-30">
-                                    <table class="table ucp-table">
-                                        <thead class="thead-s">
+                        </div>
+                        <div class="tab-pane fade" id="pills-my-purchases" role="tabpanel">
+                            <div class="table-responsive mt-30">
+                                <table class="table ucp-table">
+                                    <thead class="thead-s">
+                                        <tr>
+                                            <th class="text-center" scope="col">#</th>
+                                            <th class="cell-ta" scope="col">Title</th>
+                                            <th class="text-center" scope="col">Thumbnail</th>
+                                            <th class="text-center" scope="col">Category</th>
+                                            <th class="text-center" scope="col">Parts</th>
+                                            <th class="text-center" scope="col">Last Update</th>
+                                            <th class="text-center" scope="col">Price</th>
+                                            <th class="text-center" scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in courses.DraftCourses)
+                                        {
                                             <tr>
-                                                <th class="text-center" scope="col">#</th>
-                                                <th class="cell-ta" scope="col">Title</th>
-                                                <th class="text-center" scope="col">Thumbnail</th>
-                                                <th class="cell-ta" scope="col">Category</th>
-                                                <th class="text-center" scope="col">Parts</th>
-                                                <th class="text-center" scope="col">Last Update</th>
-                                                <th class="text-center" scope="col">Price</th>
-                                                <th class="text-center" scope="col">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach(var item in draftCourses.Result)
-                                            {
                                                 <td class="text-center">@item.Id</td>
-                                                <td class="text-center">@item.Title</td>
+                                                <td>@item.Title</td>
                                                 <td class="text-center"><a href="#">View</a></td>
                                                 <td class="text-center"><span class="text-primary">@item.CategoryName</span></td>
                                                 <td class="text-center">@item.Parts</td>
-                                                <td class="text-center">@item.ModifiedDate</td>
+                                                <td class="text-center">@item.ModifiedDate.ToString("dd MMMM yyyy | HH:mm")</td>
                                                 <td class="text-center">@item.Price</td>
                                                 <td class="text-center d-flex justify-content-center">
                                                     <a href="public/instructor/courses/10/edit" title="Edit" class="gray-s">
                                                         <i class="uil uil-edit-alt"></i>
                                                     </a>
-                                                    <a href="public/instructor/courses/10/update-status/2" title="Give For Review" class="gray-s">
+                                                    <a asp-action="ChangeStatusToPending" asp-route-id="@item.Id" title="Give For Review" class="gray-s">
                                                         <i class="uil uil-arrow-from-right"></i>
                                                     </a>
+                                                    <form asp-action="DeleteCourse" asp-route-id="@item.Id" method="post">
+                                                        <button style="border:none !important; background-color:white !important" type="submit" onclick="confirm('Are you sure you want to delete this?')"
+                                                                title="Delete" class="gray-s">
+                                                            <i class="uil uil-trash-alt"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
-                                            }                                                                                     
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-upcoming-courses" role="tabpanel">
-                                <div class="table-responsive mt-30">
-                                    <table class="table ucp-table">
-                                        <thead class="thead-s">
-                                            <tr>
-                                                <th class="text-center" scope="col">Item No.</th>
-                                                <th class="cell-ta">Title</th>
-                                                <th class="text-center" scope="col">Thumbnail</th>
-                                                <th class="text-center">Category</th>
-                                                <th class="text-center">Price</th>
-                                                <th class="text-center">Last Update</th>
-                                                <th class="text-center" scope="col">Status</th>
-                                                <th class="text-center" scope="col">Actions</th>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="tab-pane fade" id="pills-discount" role="tabpanel">
-                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingOne">
-                                            <div class="panel-title adcrse1250">
-                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                    New Discount
-                                                </a>
-                                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-upcoming-courses" role="tabpanel">
+                            <div class="table-responsive mt-30">
+                                <table class="table ucp-table">
+                                    <thead class="thead-s">
+                                        <tr>
+                                            <th class="text-center" scope="col">Item No.</th>
+                                            <th class="cell-ta">Title</th>
+                                            <th class="text-center" scope="col">Thumbnail</th>
+                                            <th class="text-center">Category</th>
+                                            <th class="text-center">Price</th>
+                                            <th class="text-center">Last Update</th>
+                                            <th class="text-center" scope="col">Status</th>
+                                            <th class="text-center" scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in courses.UpcomingCourses)
+                                        {
+                                            <tr>
+                                                <td class="text-center">@item.Id</td>
+                                                <td>@item.Title</td>
+                                                <td class="text-center"><a href="#">View</a></td>
+                                                <td class="text-center"><span class="text-primary">@item.CategoryName</span></td>
+                                                <td class="text-center">@item.Price</td>
+                                                <td class="text-center">@item.ModifiedDate.ToString("dd MMMM yyyy | HH:mm")</td>
+                                                <td class="text-center ">
+                                                    <b class="course_active text-danger">Pending</b>
+                                                </td>
+                                                <td class="text-center d-flex justify-content-center">
+                                                    <a href="public/instructor/courses/10/edit" title="Edit" class="gray-s">
+                                                        <i class="uil uil-edit-alt"></i>
+                                                    </a>
+                                                    <a asp-action="ChangeStatusToDraft" asp-route-id="@item.Id" title="Back To Draft" class="gray-s">
+                                                        <i class="uil uil-corner-down-left"></i>
+                                                    </a>
+                                                    <form asp-action="DeleteCourse" asp-route-id="@item.Id" method="post">
+                                                        <button style="border:none !important; background-color:white !important" type="submit" onclick="confirm('Are you sure you want to delete this?')"
+                                                                title="Delete" class="gray-s">
+                                                            <i class="uil uil-trash-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-discount" role="tabpanel">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <div class="panel-title adcrse1250">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                New Discount
+                                            </a>
                                         </div>
-                                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                                            <div class="panel-body adcrse_body">
-                                                <div class="row">
-                                                    <div class="col-lg-8">
-                                                        <div class="discount_form">
-                                                            <form action="public/instructor/special-discount" method="post">
-                                                                <input type="hidden" name="_token" value="1I6KrpUtxSRxT4RmsC4NNBOUdmGgIOilQzXH4su3">
-                                                                <div class="row">
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        <div class="mt-20 lbel25">
-                                                                            <label>Course*</label>
-                                                                        </div>
-                                                                        <select class="ui hj145 dropdown cntry152 prompt srch_explore" required name="course_id">
-                                                                            <option value="">Select Course</option>
-                                                                            <option value="8">
-                                                                                CSS : The Complete Guide 2021 (Include SASS &amp; GRID) -
-                                                                            </option>
-
-                                                                            <option value="11">
-                                                                                uzf uzfuzf uzf uzf uzf - 45.00
-                                                                            </option>
-
-                                                                            <option value="133"
-                                                                                    disabled>
-                                                                                Class 1 Syllabys -
-                                                                            </option>
-
-                                                                            <option value="152"
-                                                                                    disabled>
-                                                                                geeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee -
-                                                                            </option>
-
-                                                                            <option value="405"
-                                                                                    disabled>
-                                                                                Course Overview -
-                                                                            </option>
-
-
-                                                                        </select>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body adcrse_body">
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                    <div class="discount_form">
+                                                        <form asp-action="CreateDiscount" method="post">
+                                                            <input type="hidden" name="_token" value="1I6KrpUtxSRxT4RmsC4NNBOUdmGgIOilQzXH4su3">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    <div class="mt-20 lbel25">
+                                                                        <label>Course*</label>
                                                                     </div>
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        <div class="ui search focus mt-20 lbel25">
-                                                                            <label>Discount Amount</label>
-                                                                            <div class="ui left icon input swdh19">
-                                                                                <input class="prompt srch_explore" type="number" name="percentage" value="" required="" min="1" max="99" placeholder="Percent (eg. 20 for 20%)" required>
-                                                                            </div>
+                                                                    @Html.DropDownListFor(x => x.CourseId, new SelectList(courses.Courses, "Id", "Title"), "Select Course", new { @class = "ui hj145 dropdown cntry152 prompt srch_explore" })
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    <div class="ui search focus mt-20 lbel25">
+                                                                        <label>Discount Amount</label>
+                                                                        <div class="ui left icon input swdh19">
+                                                                            <input class="prompt srch_explore" type="number" asp-for="Percentage" min="1" max="99" placeholder="Percent (eg. 20 for 20%)" required>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-lg-12 col-md-12">
-                                                                        <div class="ui search focus mt-20 lbel25">
-                                                                            <label>Title*</label>
-                                                                            <div class="ui left icon input swdh19">
-                                                                                <input class="prompt srch_explore" type="text" name="title" value="" placeholder="Why you give this discount??" required max="50" min="3" pattern="\S+" title="This field is required">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        <div class="ui search focus mt-20 lbel25">
-                                                                            <label>Start Date</label>
-                                                                            <div class="ui left icon input swdh19">
-                                                                                <input name="start_time" class="prompt srch_explore datepicker-here" type="date" placeholder="dd/mm/yyyy" required min="2021-11-19" onchange="$('#enddate').attr({
-                                                                    'min' : this.value,
-                                                                    });">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        <div class="ui search focus mt-20 lbel25">
-                                                                            <label>End Date</label>
-                                                                            <div class="ui left icon input swdh19">
-                                                                                <input name="end_time" class="prompt srch_explore datepicker-here" type="date" id="enddate" placeholder="dd/mm/yyyy" required>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        <button class="discount_btn" type="submit">
-                                                                            Save
-                                                                            Changes
-                                                                        </button>
                                                                     </div>
                                                                 </div>
-                                                            </form>
-                                                        </div>
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    <div class="ui search focus mt-20 lbel25">
+                                                                        <label>Title*</label>
+                                                                        <div class="ui left icon input swdh19">
+                                                                            <input class="prompt srch_explore" type="text" asp-for="Title" placeholder="Why you give this discount??" required max="50" min="3" >
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    <div class="ui search focus mt-20 lbel25">
+                                                                        <label>Start Date</label>
+                                                                        <div class="ui left icon input swdh19">
+                                                                            <input class="prompt srch_explore datepicker-here" type="date" asp-for="StartDate" placeholder="dd/mm/yyyy" required min="@DateTime.Now"  onchange="$('#enddate').attr({ 'min': this.value, });">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    <div class="ui search focus mt-20 lbel25">
+                                                                        <label>End Date</label>
+                                                                        <div class="ui left icon input swdh19">
+                                                                            <input class="prompt srch_explore datepicker-here" type="date" asp-for="EndDate" id="enddate" placeholder="dd/mm/yyyy" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    <button class="discount_btn" type="submit">
+                                                                        Save
+                                                                        Changes
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="table-responsive mt-30">
-                                    <table class="table ucp-table">
-                                        <thead class="thead-s">
-                                            <tr>
-                                                <th class="text-center" scope="col">#</th>
-                                                <th class="cell-ta">Title</th>
-                                                <th class="cell-ta">Course</th>
-                                                <th class="text-center" scope="col">Date</th>
-                                                <th class="text-center" scope="col">Discount</th>
-                                                <th class="text-center" scope="col">Status</th>
-                                                <th class="text-center" scope="col">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
-                            <div class="tab-pane fade" id="pills-promotions" role="tabpanel" aria-labelledby="pills-promotions-tab">
-                                <div class="promotion_tab mb-10">
-                                    <img src="images/dashboard/promotion.svg" alt="">
-                                    <h4>We Are come in future with this feature.</h4>
-
-                                </div>
+                            <div class="table-responsive mt-30">
+                                <table class="table ucp-table">
+                                    <thead class="thead-s">
+                                        <tr>
+                                            <th class="text-center" scope="col">#</th>
+                                            <th class="cell-ta">Title</th>
+                                            <th class="cell-ta">Course</th>
+                                            <th class="text-center" scope="col">Date</th>
+                                            <th class="text-center" scope="col">Discount</th>
+                                            <th class="text-center" scope="col">Status</th>
+                                            <th class="text-center" scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach(var item in courses.DisCountCourses)
+                                        {
+                                            <tr>
+                                                <td class="text-center">@item.Id</td>
+                                                <td>@item.Title</td>
+                                                <td>@item.CourseName</td>
+                                                <td class="text-center">@item.StartDate.ToString("dd/MM") - @item.EndDate.ToString("dd/MM/yyyy")</td>
+                                                <td class="text-center">@item.Percentage %</td>
+                                                <td class="text-center">
+                                                    @if (item.Status == Status.IsActive)
+                                                    {
+                                                        <b class="course_active text-success">Active</b>
+                                                    }
+                                                    else
+                                                    {
+                                                        <b class="course_active text-danger">Not Active</b>
+                                                    }
+                                                </td>
+                                                <td class="text-center d-flex justify-content-center">
+                                                    <a asp-action="EditDiscount" asp-route-id="@item.Id" title="Edit" class="gray-s">
+                                                        <i class="uil uil-edit-alt"></i>
+                                                    </a>
+                                                    <a asp-action="ChangeStatus" asp-route-id="@item.Id" title="Change Status" class="gray-s">
+                                                        <i class="uil uil-exchange"></i>
+                                                    </a>
+                                                    @if (item.Status == Status.IsDeleted)
+                                                    {
+                                                        <form asp-action="DeleteDiscount" asp-route-id="@item.Id" method="post">
+                                                            <button style="border:none !important; background-color:white !important" type="submit" onclick="confirm('Are you sure you want to delete this?')"
+                                                                    title="Delete" class="gray-s">
+                                                                <i class="uil uil-trash-alt"></i>
+                                                            </button>
+                                                        </form>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-promotions" role="tabpanel" aria-labelledby="pills-promotions-tab">
+                            <div class="promotion_tab mb-10">
+                                <img src="images/dashboard/promotion.svg" alt="">
+                                <h4>We Are come in future with this feature.</h4>
                             </div>
                         </div>
                     </div>
@@ -307,4 +366,5 @@
             </div>
         </div>
     </div>
+</div>
 

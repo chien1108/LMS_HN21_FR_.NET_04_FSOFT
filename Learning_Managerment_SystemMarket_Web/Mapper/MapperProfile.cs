@@ -15,7 +15,9 @@ namespace Learning_Managerment_SystemMarket_Web.Mapper
         public MapperProfile()
         {
             CreateMap<Course, CourseVm>()
-                .ForMember(x => x.CategoryName, c => c.MapFrom(source => source.Category.CategoryName));
+                .ForMember(x => x.CategoryName, c => c.MapFrom(source => source.Category.CategoryName)).ReverseMap();
+            CreateMap<SpecialDiscount, DisCountCourseVm>()
+                .ForMember(x => x.CourseName, c => c.MapFrom(source => source.Course.Title)).ReverseMap();
             CreateMap<Course, CreateCourseVm>().ReverseMap();
             CreateMap<Lecture, CreateLectureVm>().ReverseMap();
             CreateMap<CourseContent, CreateCourseContentVm>().ReverseMap();
