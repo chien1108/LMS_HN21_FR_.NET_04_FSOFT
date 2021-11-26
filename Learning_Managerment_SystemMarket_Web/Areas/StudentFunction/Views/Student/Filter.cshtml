@@ -1,0 +1,656 @@
+﻿@using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
+@using Learning_Managerment_SystemMarket_Core.Models.Entities;
+@using Learning_Managerment_SystemMarket_Core.Contracts;
+@inject IStudentHomePageService studentHomePage;
+@inject IUnitOfWork unitOfWork;
+
+@{
+    ViewData["Title"] = "Filter";
+    ICollection<Course> courseFeature = await studentHomePage.GetFeatureCourse(5);
+}
+
+<div class="">
+    <div class="row justify-content-between">
+        <div class="col-lg-3 col-md-4">
+            <form method="GET" id="srform">
+                <input type="hidden" name="sort" value="1" id="sort">
+                <div class="section3125 hstry142">
+                    <div class="result_stitles">
+                        <div class="rs6t_title">Filters</div>
+                        <div class="filter_selector">
+                            <div class="ui inline dropdown flt145" tabindex="0">
+                                <div class="text">Sort</div>
+                                <i class="dropdown icon"></i>
+                                <div class="menu transition hidden" tabindex="-1">
+                                    <div class="item" onclick="sortChange(1)">Newest</div>
+                                    <div class="item" onclick="sortChange(2)">Lowest Price</div>
+                                    <div class="item" onclick="sortChange(3)">Highest Price</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tb_145">
+                        <div class="panel-group accordion" id="accordionfilter">
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingOne">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapseOne" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Topic
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="1">
+                                                            <label>Photography</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="2">
+                                                            <label>Marketing</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="3">
+                                                            <label>Development</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="4">
+                                                            <label>Business</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="5">
+                                                            <label>Design</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="6">
+                                                            <label>Music</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="7">
+                                                            <label>IT &amp; Software</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="8">
+                                                            <label>Finance &amp; Accounting</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="9">
+                                                            <label>Office Productivity</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="10">
+                                                            <label>Personal Development</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="11">
+                                                            <label>Lifestyle</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="12">
+                                                            <label>Health &amp; Fitness</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="13">
+                                                            <label>Teaching &amp; Academics</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="14">
+                                                            <label>Human Development</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="15">
+                                                            <label>fgfgfg</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="16">
+                                                            <label>Jose</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="17">
+                                                            <label>Literature</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" tabindex="0" class="hidden" name="category" value="18">
+                                                            <label>Motivational</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingThree">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapseThree" href="#" aria-expanded="false" aria-controls="collapseThree">
+                                            Language
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse" aria-labelledby="headingThree" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="1">
+                                                            <label>Hindi</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="3">
+                                                            <label>English</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="5">
+                                                            <label>Spanish</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="6">
+                                                            <label>Português</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="7">
+                                                            <label>العربية</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="9">
+                                                            <label>Türkçe</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="10">
+                                                            <label>French</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="13">
+                                                            <label>vn</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="14">
+                                                            <label>reeryrt</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="15">
+                                                            <label>Čeština</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="16">
+                                                            <label>Indonesia</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="17">
+                                                            <label>Russian</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="18">
+                                                            <label>Bangla</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="20">
+                                                            <label>Khmer</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="21">
+                                                            <label>Français</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="22">
+                                                            <label>Urdu</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="23">
+                                                            <label>omid198714</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="24">
+                                                            <label>Bangle</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="25">
+                                                            <label>Thailand</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="26">
+                                                            <label>汉语</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="27">
+                                                            <label>Korean</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="28">
+                                                            <label>UZBEK</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="29">
+                                                            <label>persian</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="language" tabindex="0" class="hidden" value="30">
+                                                            <label>Romana</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingfour">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapsefour" href="#" aria-expanded="false" aria-controls="collapsefour">
+                                            Price
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapsefour" class="panel-collapse collapse" aria-labelledby="headingfour" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="price" value="1" tabindex="0" class="hidden">
+                                                            <label>Paid</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="price" value="0" tabindex="0" class="hidden">
+                                                            <label>Free</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingsix">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapsesix" href="#" aria-expanded="false" aria-controls="collapsesix">
+                                            Rating
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapsesix" class="panel-collapse collapse" aria-labelledby="headingsix" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="rating" value="5" tabindex="0" class="hidden">
+                                                            <label class="rating_filter">
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                5.0 &amp; up
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="rating" value="4" tabindex="0" class="hidden">
+                                                            <label class="rating_filter">
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                4.0 &amp; up
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="rating" value="3" tabindex="0" class="hidden">
+                                                            <label class="rating_filter">
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                3.0 &amp; up
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="rating" value="2" tabindex="0" class="hidden">
+                                                            <label class="rating_filter">
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                2.0 &amp; up
+
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingseven">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapseseven" href="#" aria-expanded="false" aria-controls="collapseseven">
+                                            Video Duration
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapseseven" class="panel-collapse collapse" aria-labelledby="headingseven" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="duration" value="0-120" tabindex="0" class="hidden">
+                                                            <label>0-2 Hours</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="duration" value="180-360" tabindex="0" class="hidden">
+                                                            <label>3-6 Hours</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="duration" value="420-1080" tabindex="0" class="hidden">
+                                                            <label>7-18 Hours</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="duration" value="1140-9999" tabindex="0" class="hidden">
+                                                            <label>19+ Hours</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-9 col-md-8">
+            <div class="_14d25 mb-20">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="mhs_title">
+                            Filters Results <span class="float-right cu" onclick="document.getElementById('srform').submit()" role="button">Search</span>
+                        </h4>
+
+                        @foreach (var item in courseFeature)
+                        {
+                            <div class="owl-item active" style="width: 283px; margin-right: 20px;">
+                                <div class="item">
+                                    <div class="fcrse_1 mb-20">
+                                        <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
+                                            <img src="~/frontend/images/courses/@item.CoverImage" alt="">
+                                            <div class="course-overlay">
+                                                <div class="crse_reviews">
+                                                    <i class="uil uil-star"></i>3.5
+                                                </div>
+                                                <span class="play_btn1"><i class="uil uil-play"></i></span>
+                                            </div>
+                                        </a>
+                                        <div class="fcrse_content">
+                                            <div class="eps_dots more_dropdown">
+                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                <div class="dropdown-content">
+                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                        <span><i class="uil uil-share-alt"></i>Share</span>
+                                                    </a>
+                                                    <a href="#">
+                                                        <span>
+                                                            <i class="uil uil-heart"></i>
+                                                            Save
+                                                        </span>
+                                                    </a>
+                                                    <a href="https://coursearly.com/cursus/public/report/2/add">
+                                                        <span><i class="uil uil-windsock"></i>Report</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="vdtodt">
+                                                <span class="vdt14">@item.Views</span>
+                                                <span class="vdt14">@item.CreatedDate</span>
+                                            </div>
+                                            <a href="#" class="crse14s">@item.Title</a>
+                                            <a href="#" class="crse-cate">
+                                                @item.SubCategory.SubCategoryName
+                                            </a>
+                                            <div class="auth1lnkprce">
+                                                <p class="cr1fot">
+                                                    By <a href="#">@item.Instructor.InstructorName</a>
+                                                </p>
+                                                <div class="prce142">$@item.Price</div>
+                                                <button onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/2//add';" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <div class="main-loader mt-50">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

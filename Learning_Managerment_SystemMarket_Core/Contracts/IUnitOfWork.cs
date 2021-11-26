@@ -1,4 +1,5 @@
-﻿using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepo;
+﻿using Learning_Managerment_SystemMarket_Core.Data;
+using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseContentRepo;

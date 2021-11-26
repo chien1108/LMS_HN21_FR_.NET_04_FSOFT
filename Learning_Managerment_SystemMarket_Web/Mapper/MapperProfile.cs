@@ -5,6 +5,7 @@ using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.LanguageViewM
 using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleViewModels;
 using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.SubCategoryViewModels;
 using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.UserViewModels;
+using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
 
 namespace Learning_Managerment_SystemMarket_Web.Mapper
 {
@@ -18,6 +19,9 @@ namespace Learning_Managerment_SystemMarket_Web.Mapper
             CreateMap<Language, LanguageVM>().ReverseMap();
             CreateMap<Role,RoleVM>().ReverseMap();
 
+            CreateMap<Course, StudentHomePageVM>().ReverseMap();
+            CreateMap<Course, CourseDetailVM>().ReverseMap();
+            CreateMap<Category, CategoryDetailVM>().ReverseMap();
         }
     }
 }

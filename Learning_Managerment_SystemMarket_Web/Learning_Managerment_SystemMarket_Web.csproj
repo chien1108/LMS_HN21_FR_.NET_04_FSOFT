@@ -35,6 +35,8 @@
   <ItemGroup>
     <Folder Include="Areas\AdminFunction\Data\" />
     <Folder Include="Areas\AdminFunction\Models\" />
+    <Folder Include="Areas\StudentFunction\Data\" />
+    <Folder Include="Areas\StudentFunction\Models\" />
   </ItemGroup>
 
 </Project>

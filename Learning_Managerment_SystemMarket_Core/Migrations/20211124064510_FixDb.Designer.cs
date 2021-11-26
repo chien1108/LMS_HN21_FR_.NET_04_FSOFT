@@ -4,14 +4,16 @@ using Learning_Managerment_SystemMarket_Core.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Learning_Managerment_SystemMarket_Core.Migrations
 {
     [DbContext(typeof(LMSDbContext))]
-    partial class LMSDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211124064510_FixDb")]
+    partial class FixDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,6 +310,9 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HeadLine")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InstructorName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LinkedIn")
@@ -787,14 +792,14 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<string>("StudentName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -872,16 +877,10 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("IdUser")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -970,10 +969,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
@@ -982,8 +977,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("RoleClaims");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRoleClaim<int>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
@@ -1062,20 +1055,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("UserTokens");
-                });
-
-            modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Claim", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>");
-
-                    b.Property<int?>("RoleId1")
-                        .HasColumnType("int");
-
-                    b.HasIndex("RoleId1");
-
-                    b.ToTable("RoleClaims");
-
-                    b.HasDiscriminator().HasValue("Claim");
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Cart", b =>
@@ -1396,13 +1375,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Claim", b =>
-                {
-                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Role", null)
-                        .WithMany("Claims")
-                        .HasForeignKey("RoleId1");
-                });
-
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Category", b =>
                 {
                     b.Navigation("SubCategories");
@@ -1426,11 +1398,6 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Navigation("Notifications");
 
                     b.Navigation("SubScriptions");
-                });
-
-            modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Role", b =>
-                {
-                    b.Navigation("Claims");
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Student", b =>

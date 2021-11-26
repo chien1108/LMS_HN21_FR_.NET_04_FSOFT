@@ -28,10 +28,12 @@ using Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
 using Learning_Managerment_SystemMarket_Web.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -70,14 +72,14 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IInstructorRepository, InstructorRepository>();
             services.AddScoped<ISpecialDiscountRepository, SpecialDiscountRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
-            services.AddScoped<ICategoryRepository,CategoryRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<ICourseContentRepository, CourseContentRepository>();
             services.AddScoped<ICourseRateRepository, CourseRateRepository>();
             services.AddScoped<IFAQRepository, FAQRepository>();
             services.AddScoped<IFeedBackRepository, FeedBackRepository>();
-            services.AddScoped<IInstructorDiscusstionRepository,InstructorDiscusstionRepository>();
+            services.AddScoped<IInstructorDiscusstionRepository, InstructorDiscusstionRepository>();
             services.AddScoped<IInstructorVerifyRepository, InstructorVerifyRepository>();
             services.AddScoped<ILanguageRepository, LanguageRepository>();
             services.AddScoped<ILectureRepository, LectureRepository>();
@@ -95,6 +97,10 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IClaimService, ClaimService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IStudentHomePageService, StudentHomePageService>();
+            services.AddScoped<IStudentExploreService, StudentExploreService>();
+            services.AddScoped<ISavedCourseService, SavedCourseService>();
+
             //Config for Dependence Service
 
             services.AddAutoMapper(typeof(MapperProfile));
@@ -106,7 +112,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
-        
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -130,11 +136,16 @@ namespace Learning_Managerment_SystemMarket_Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                     name: "areaRoute",
+                     pattern: "{area:exists}/{controller}/{action}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{area:?}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area=StudentFunction}/{controller=Student}/{action=Index}/{id?}");
             });
         }
     }

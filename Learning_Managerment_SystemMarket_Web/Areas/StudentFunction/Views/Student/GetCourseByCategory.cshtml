@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Learning_Managerment_SystemMarket_ViewModels.StudentViewModels.CourseDetailVM>
+
+@{
+    ViewData["Title"] = "GetCourseByCategory";
+}
+<div class="col-xl-12 col-lg-8">
+    <div class="section3125">
+        <div class="explore_search">
+            <div class="ui search focus">
+                <form action="https://coursearly.com/cursus/public/categories/design/5" method="post">
+                    <input type="hidden" name="_token" value="xx6u44kO9tUAsMdAJlYbU8mAewMIZ94B5ZEJ80va">
+                    <div class="ui left icon input swdh11">
+                        <input class="prompt srch_explore" type="text" placeholder="Search Courses..." name="q" value="">
+                        <i class="uil uil-search-alt icon icon2"></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@if (Model.Count() == 0)
+{
+    <div class="col-md-12">
+        <div class="_14d25">
+            <div class="row mt-30">
+                <div class="col-md-12 text-center">
+                    <div class="no-data-div">
+                        <img src="https://coursearly.com/cursus/public/nodata.svg" alt="No Data" srcset="">
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <div class="main-loader mt-50">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    @foreach (var course in Model)
+    {
+        <div class="col-md-12">
+            <div class="_14d25">
+                <div class="row mt-30">
+                    <div class="col-xl-3 col-lg-4 col-md-6">
+                        <div class="item">
+                            <div class="fcrse_1 mb-20">
+                                <a href="https://coursearly.com/cursus/public/courses/wordpress-for-beginner-:-create-a-website-step-by-step/7" class="fcrse_img">
+                                    <img src="https://coursearly.com/cursus/public/upload/image/60d6cca34e000.jpg" alt="">
+                                    <div class="course-overlay">
+                                        <div class="badge_seller">Bestseller</div>
+                                        <div class="crse_reviews">
+                                            <i class="uil uil-star"></i>5.0
+                                        </div>
+
+                                        <span class="play_btn1"><i class="uil uil-play"></i></span>
+
+                                        <div class="crse_timer">
+                                            0 hours
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="fcrse_content">
+                                    <div class="eps_dots more_dropdown">
+                                        <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                        <div class="dropdown-content">
+                                            <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/wordpress-for-beginner-:-create-a-website-step-by-step/7/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                <span><i class="uil uil-share-alt"></i>Share</span>
+                                            </a>
+                                            <a href="https://coursearly.com/cursus/public/save/7/add">
+                                                <span>
+                                                    <i class="uil uil-heart"></i>
+                                                    Save
+                                                </span>
+                                            </a>
+
+                                            <a href="https://coursearly.com/cursus/public/report/7/add">
+                                                <span><i class="uil uil-windsock"></i>Report</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="vdtodt">
+                                        <span class="vdt14">@course.Views views</span>
+                                        @{ 
+                                            var month = (@DateTime.Now - @course.CreatedDate);
+                                        }
+                                        <span class="vdt14">@month.TotalDays days ago</span>
+                                    </div>
+                                    <a href="https://coursearly.com/cursus/public/courses/wordpress-for-beginner-:-create-a-website-step-by-step/7" class="crse14s">@course.Title</a>
+                                    <a href="#" class="crse-cate">
+                                        Design |
+                                        WordPress
+                                    </a>
+                                    <div class="auth1lnkprce">
+                                        <p class="cr1fot">
+                                            By <a href="https://coursearly.com/cursus/public/instructors/amritpal/12">@course.Instructor.InstructorName</a>
+                                        </p>
+                                        <div class="prce142">$@course.Price</div>
+                                        <button onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/7//add';" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <div class="main-loader mt-50">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+}

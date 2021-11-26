@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Learning_Managerment_SystemMarket_Core.Models.Entities.SavedCourse>
+@{
+    ViewData["Title"] = "SavedCourses";
+    var studentId = Model.Select(x=>x.StudentId).FirstOrDefault();
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 ">
+            <div class="section3125 hstry142">
+                <div class="grp_titles pt-0">
+                    <div class="ht_title">Saved Courses</div>
+                    <a asp-action="RemoveAll" asp-route-studentid="@studentId" class="ht_clr">Remove All</a>
+                </div>
+                <div class="tb_145">
+                    <div class="wtch125">
+                        <span class="vdt14">@Model.Count() Courses</span>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="_14d25 mb-20">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="mhs_title">Saved Courses</h4>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered text-center ">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>SubTitile</th>
+                                        <th>Description</th>
+                                        <th>Remove</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.Course.Title</td>
+                                                <td>@item.Course.SubTitile</td>
+                                                <td>@item.Course.Description</td>
+                                                <td><a asp-action="Delete" asp-route-studentid="@item.StudentId" asp-route-courseid="@item.CourseId" class="btn btn-danger"><i class="uil uil-trash-alt"></i>Remove Saved Courses</a></td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
