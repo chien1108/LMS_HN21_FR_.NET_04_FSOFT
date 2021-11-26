@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Learning_Managerment_SystemMarket_Core.Migrations
 {
     [DbContext(typeof(LMSDbContext))]
-    [Migration("20211122023840_Initial")]
-    partial class Initial
+    [Migration("20211124171306_inittable")]
+    partial class inittable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,8 +100,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CoverImage")
-                        .HasColumnType("int");
+                    b.Property<string>("CoverImage")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -110,19 +110,27 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("DiscountPrice")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<int>("Dislike")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("InstructorId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsBestseller")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<bool>("IsFeatured")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<bool>("IsFree")
                         .HasColumnType("bit");
@@ -131,19 +139,25 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Likes")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(0m);
 
                     b.Property<string>("PromotionVideo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Share")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -158,9 +172,13 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Views")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex("InstructorId");
 
@@ -1078,6 +1096,12 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Course", b =>
                 {
+                    b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor", "Instructor")
                         .WithMany("Courses")
                         .HasForeignKey("InstructorId")
@@ -1085,16 +1109,18 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .IsRequired();
 
                     b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Language", "Language")
-                        .WithMany()
+                        .WithMany("Courses")
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.SubCategory", "SubCategory")
-                        .WithMany()
+                        .WithMany("Courses")
                         .HasForeignKey("SubcategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Instructor");
 
@@ -1207,7 +1233,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Order", b =>
                 {
                     b.HasOne("Learning_Managerment_SystemMarket_Core.Models.Entities.Course", "Course")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1387,6 +1413,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Navigation("CourseContent");
 
                     b.Navigation("CourseRates");
+
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor", b =>
@@ -1400,6 +1428,11 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Navigation("SubScriptions");
                 });
 
+            modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Language", b =>
+                {
+                    b.Navigation("Courses");
+                });
+
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Student", b =>
                 {
                     b.Navigation("Carts");
@@ -1409,6 +1442,11 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("SubCriptions");
+                });
+
+            modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.SubCategory", b =>
+                {
+                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }

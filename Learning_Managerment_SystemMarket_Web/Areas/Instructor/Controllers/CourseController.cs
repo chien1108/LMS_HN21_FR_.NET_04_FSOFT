@@ -1,6 +1,12 @@
-﻿using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
+﻿using AutoMapper;
+using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using Learning_Managerment_SystemMarket_Core.Modules.Enums;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.LectureViewModel;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.ResponseResult;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,11 +19,16 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
     [Area("Instructor")]
     public class CourseController : Controller
     {
-        private readonly ISubCategoryService _subCategoryService;
+        static List<CreateCourseContentVm> createCourseContentVms = new List<CreateCourseContentVm>();
+        static List<CreateLectureVm> createLectureVms = new List<CreateLectureVm>();
 
-        public CourseController(ISubCategoryService subCategoryService)
+        private readonly ISubCategoryService _subCategoryService;
+        private readonly ICourseServices _courseServices;
+
+        public CourseController(ISubCategoryService subCategoryService, ICourseServices courseServices)
         {
             _subCategoryService = subCategoryService;
+            _courseServices = courseServices;
         }
         // GET: CourseController
         public ActionResult Index()
@@ -37,25 +48,59 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
             return View();
         }
 
-        // POST: CourseController/Create
-        [HttpPost]
-        public ActionResult Create([Bind("Title,SubTitile,Description,IsFree,CategoryId,SubcategoryId,LanguageId")] CreateCourseTest model)
+        /// <summary>
+        /// Tạo Course mới SonNL4
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<ActionResult> CreateCourse(CreateCourseVm model)
         {
-            try
+            var responseResult = new ResponseResult {
+                Code = false,
+                Message = "Empty value"
+            };
+            if (createCourseContentVms.Count() < 1)
             {
-                return RedirectToAction(nameof(Index));
+                return Json(responseResult);
             }
-            catch
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var result = model;
+                responseResult = await _courseServices.CreateCourse(model, createCourseContentVms, createLectureVms);
             }
+            
+            return Json(responseResult);
         }
 
+        /// <summary>
+        /// Thêm Course Content vào list SonNL4
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpGet]
-        public ActionResult CreateCourse(CreateCourseVm model)
+        public ActionResult CreateCourseContent(CreateCourseContentVm model)
         {
+            if (ModelState.IsValid)
+            {
+
+                createCourseContentVms.Add(model);
+            }
+            
+            return Json(model.Title);
+        }
+
+        /// <summary>
+        /// Thêm Course Content vào list SonNL4
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CreateLecture(CreateLectureVm model)
+        {
+            createLectureVms.Add(model);
             var result = model;
-            return Json(result);
+            return Json(result.Title);
         }
 
         [HttpGet]

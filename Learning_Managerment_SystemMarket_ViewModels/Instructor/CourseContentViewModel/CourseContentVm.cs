@@ -2,6 +2,7 @@
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.LectureViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -22,14 +23,14 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentV
 
     public class CreateCourseContentVm
     {
-        [Required]
+        //[Required]
         public int Position { get; set; } = 1;
 
-        [Required]
+        [DisplayName("Course Content Title")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public string Title { get; set; }
 
-        [Required]
-        public int CourseId { get; set; }
+        public int IdFake { get; set; }
 
         List<CreateLectureVm> Lecture { get; set; }
     }

@@ -5,6 +5,7 @@ using Learning_Managerment_SystemMarket_ViewModels.Instructor.LanguageViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.SubCategoryViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -88,20 +89,24 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
     }
     public class CreateCourseVm
     {
-        [Required]
+        [DisplayName("Category")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public string Title { get; set; }
 
-        [Required]
+        [DisplayName("SubTitile")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public string SubTitile { get; set; }
 
-        [Required]
+        [DisplayName("Description")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public string Description { get; set; }
 
         public decimal Price { get; set; }
 
         public decimal DiscountPrice { get; set; }
 
-        [Required]
+        [DisplayName("Is Free")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public bool IsFree { get; set; }
 
         public bool IsFeatured { get; set; }
@@ -126,14 +131,16 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
         //[Required]
         public int InstructorId { get; set; }
 
-        [Required]
+        [DisplayName("Category")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public int CategoryId { get; set; }
 
-        [Required]
+        [DisplayName("Sub Category")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public int SubcategoryId { get; set; }
 
         public int LanguageId { get; set; }
 
-        public List<CreateCourseContentVm> CourseContent { get; set; }
+        public IEnumerable<CreateCourseContentVm> CourseContent { get; set; }
     }
 }

@@ -19,8 +19,6 @@ namespace Learning_Managerment_SystemMarket_Core.Data
         {
         }
 
-       
-
         //DbSet
         public virtual DbSet<AdminSetting> AdminSettings { get; set; }
 
@@ -70,10 +68,48 @@ namespace Learning_Managerment_SystemMarket_Core.Data
             {
                 entity.HasKey(k => new { k.Id });
             });
+
+
             modelBuilder.Entity<Course>(entity =>
             {
                 entity.HasKey(k => new { k.Id });
+
+                entity.HasOne(x => x.SubCategory)
+                .WithMany(x => x.Courses)
+                .HasForeignKey(x => x.SubcategoryId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+                entity.Property(c => c.Price)
+                        .HasDefaultValue(0);
+
+                entity.Property(c => c.DiscountPrice)
+                        .HasDefaultValue(0);
+
+                entity.Property(c => c.IsFeatured)
+                        .HasDefaultValue(false);
+
+                entity.Property(c => c.IsBestseller)
+                        .HasDefaultValue(false);
+
+                entity.Property(c => c.CoverImage)
+                        .IsRequired(false);
+
+                entity.Property(c => c.PromotionVideo)
+                        .IsRequired(false);
+
+                entity.Property(c => c.Likes)
+                        .HasDefaultValue(0);
+
+                entity.Property(c => c.Dislike)
+                        .HasDefaultValue(0);
+
+                entity.Property(c => c.Share)
+                        .HasDefaultValue(0);
+
+                entity.Property(c => c.Views)
+                        .HasDefaultValue(0);
             });
+
             modelBuilder.Entity<CourseContent>(entity =>
             {
             });
@@ -160,7 +196,7 @@ namespace Learning_Managerment_SystemMarket_Core.Data
             });
 
 
-            
+
             base.OnModelCreating(modelBuilder);
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Learning_Managerment_SystemMarket_Core.Migrations
 {
-    public partial class Initial : Migration
+    public partial class inittable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -484,18 +484,18 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubTitile = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DiscountPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 0m),
+                    DiscountPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false, defaultValue: 0m),
                     IsFree = table.Column<bool>(type: "bit", nullable: false),
-                    IsFeatured = table.Column<bool>(type: "bit", nullable: false),
-                    IsBestseller = table.Column<bool>(type: "bit", nullable: false),
-                    CoverImage = table.Column<int>(type: "int", nullable: false),
+                    IsFeatured = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    IsBestseller = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    CoverImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PromotionVideo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    Likes = table.Column<int>(type: "int", nullable: false),
-                    Dislike = table.Column<int>(type: "int", nullable: false),
-                    Share = table.Column<int>(type: "int", nullable: false),
-                    Views = table.Column<int>(type: "int", nullable: false),
+                    Likes = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    Dislike = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    Share = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    Views = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     InstructorId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     SubcategoryId = table.Column<int>(type: "int", nullable: false),
@@ -506,6 +506,12 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Courses_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Courses_Instructors_InstructorId",
                         column: x => x.InstructorId,
@@ -522,8 +528,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         name: "FK_Courses_SubCategories_SubcategoryId",
                         column: x => x.SubcategoryId,
                         principalTable: "SubCategories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -807,6 +812,11 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "IX_CourseRates_StudentId",
                 table: "CourseRates",
                 column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Courses_CategoryId",
+                table: "Courses",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_InstructorId",

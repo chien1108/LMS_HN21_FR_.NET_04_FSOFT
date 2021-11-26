@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -13,23 +14,28 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.LectureViewMod
 
     public class CreateLectureVm
     {
-        public int CourseContentId { get; set; }
-        
-        [Required]
+        [DisplayName("Lecture Title")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public string Title { get; set; }
 
-        [Required]
+        [DisplayName("Lecture Description")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public string Description { get; set; }
 
         public string File { get; set; }
 
-        [Required]
+        [DisplayName("Volume")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public int Volume { get; set; }
 
-        [Required]
+        [DisplayName("Duration")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public int Duration { get; set; }
 
-        [Required]
+        [DisplayName("Positon")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public int Positon { get; set; }
+
+        public int IdFake { get; set; }
     }
 }
