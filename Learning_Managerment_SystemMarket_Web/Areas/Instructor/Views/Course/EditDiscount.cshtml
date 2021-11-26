@@ -1,0 +1,66 @@
+﻿@model Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel.DisCountCourseVm
+
+<div class="sa4d25">
+    <div class="container-fluid">
+        <div class="row">
+            <h1>Edit @Model.CourseName Discount</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="discount_form">
+                    <form asp-action="EditDiscount" method="post">
+                        <input type="hidden" name="_token" value="1I6KrpUtxSRxT4RmsC4NNBOUdmGgIOilQzXH4su3">
+                        <div class="row">
+                            <input type="hidden" class="prompt srch_explore" asp-for="Id" />
+                            <input type="hidden" class="prompt srch_explore" asp-for="Status"/>
+                            <input type="hidden" class="prompt srch_explore" asp-for="CourseId"/>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="ui search focus mt-20 lbel25">
+                                    <label>Discount Amount</label>
+                                    <div class="ui left icon input swdh19">
+                                        <input class="prompt srch_explore" type="number" asp-for="Percentage" min="1" max="99" placeholder="Percent (eg. 20 for 20%)" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="ui search focus mt-20 lbel25">
+                                    <label>Title*</label>
+                                    <div class="ui left icon input swdh19">
+                                        <input class="prompt srch_explore" type="text" asp-for="Title" placeholder="Why you give this discount??" required max="50" min="3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="ui search focus mt-20 lbel25">
+                                    <label>Start Date</label>
+                                    <div class="ui left icon input swdh19">
+                                        <input class="prompt srch_explore datepicker-here" type="date" asp-for="StartDate" placeholder="dd/mm/yyyy" required min="@DateTime.Now" onchange="$('#enddate').attr({ 'min': this.value, });">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="ui search focus mt-20 lbel25">
+                                    <label>End Date</label>
+                                    <div class="ui left icon input swdh19">
+                                        <input class="prompt srch_explore datepicker-here" type="date" asp-for="EndDate" id="enddate" placeholder="dd/mm/yyyy" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="row">
+                                    <button class="col-lg-3 col-md-3 discount_btn mr-1" type="submit">
+                                        Save
+                                        Changes
+                                    </button>
+                                    <a asp-action="Index" class="btn col-lg-3 col-md-3 discount_btn">
+                                        Back
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

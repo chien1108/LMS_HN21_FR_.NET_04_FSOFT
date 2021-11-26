@@ -73,6 +73,11 @@ namespace Learning_Managerment_SystemMarket_Core.Data
             modelBuilder.Entity<Course>(entity =>
             {
                 entity.HasKey(k => new { k.Id });
+
+                entity.HasOne(x => x.SubCategory)
+                .WithMany(x => x.Courses)
+                .HasForeignKey(x => x.SubcategoryId)
+                .OnDelete(DeleteBehavior.NoAction);
             });
             modelBuilder.Entity<CourseContent>(entity =>
             {
