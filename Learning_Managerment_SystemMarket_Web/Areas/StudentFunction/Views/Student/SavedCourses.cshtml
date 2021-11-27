@@ -10,7 +10,7 @@
             <div class="section3125 hstry142">
                 <div class="grp_titles pt-0">
                     <div class="ht_title">Saved Courses</div>
-                    <a asp-action="RemoveAll" asp-route-studentid="@studentId" class="ht_clr">Remove All</a>
+                    <a asp-action="RemoveAll" asp-route-studentid="@studentId" onclick="return confirm('Are you want to delete all record ?')" class="ht_clr">Remove All</a>
                 </div>
                 <div class="tb_145">
                     <div class="wtch125">
@@ -44,7 +44,7 @@
                                                 <td>@item.Course.Title</td>
                                                 <td>@item.Course.SubTitile</td>
                                                 <td>@item.Course.Description</td>
-                                                <td><a asp-action="Delete" asp-route-studentid="@item.StudentId" asp-route-courseid="@item.CourseId" class="btn btn-danger"><i class="uil uil-trash-alt"></i>Remove Saved Courses</a></td>
+                                                <td><a asp-action="Delete" asp-route-studentid="@item.StudentId" asp-route-courseid="@item.CourseId" class="btn btn-danger" onclick="return confirm('Are you want to delete this record ?')"><i class="uil uil-trash-alt"></i>Remove Saved Courses</a></td>
                                             </tr>
                                         }
                                     }

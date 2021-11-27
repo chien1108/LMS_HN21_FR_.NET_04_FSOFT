@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Learning_Managerment_SystemMarket_Core.Models;
+using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.Subcription
 {
     public interface ISubcriptionService
     {
+        Task<ServiceResponse<SubScription>> CreateSubcription(SubScription subScription);
+       
     }
 }

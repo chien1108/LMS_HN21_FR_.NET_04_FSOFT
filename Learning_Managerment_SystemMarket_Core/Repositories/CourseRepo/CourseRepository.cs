@@ -113,5 +113,10 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
         {
             return await _context.Courses.Include(x => x.CourseContent).Where(x => x.Status == StatusCourse.WaitForApproced).ToListAsync();
         }
+
+        public async Task CreateSavedCourse(SavedCourse savedCourse)
+        {
+            await _context.AddAsync(savedCourse);
+        }
     }
 }

@@ -17,6 +17,11 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo
             _context = context;
         }
 
+        public async Task CreateSubcription(SubScription subScription)
+        {
+            await _context.AddAsync(subScription);
+        }
+
         public async Task<ICollection<SubScription>> GetAllSubInstructorByStudentId(int studentId)
         {
             var subInstructor = await _context.SubScriptions

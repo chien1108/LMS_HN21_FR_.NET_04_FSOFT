@@ -1,4 +1,5 @@
-﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
+﻿using Learning_Managerment_SystemMarket_Core.Models;
+using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourse
     /// </summary>
     public interface ISavedCourseService
     {
+        Task<ServiceResponse<SavedCourse>> CreateSavedCourse(SavedCourse savedCourse);
         void Delete(SavedCourse savedCourse);
         void DeleteSaveCourses(int studentId);
         Task<bool> SaveChanges();

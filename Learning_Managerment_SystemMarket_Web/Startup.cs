@@ -48,6 +48,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
 
 namespace Learning_Managerment_SystemMarket_Web
 {
@@ -104,6 +105,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IStudentHomePageService, StudentHomePageService>();
             services.AddScoped<IStudentExploreService, StudentExploreService>();
             services.AddScoped<ISavedCourseService, SavedCourseService>();
+            services.AddScoped<ISubcriptionService, SubcriptionService>();
 
             services.AddTransient<ICourseServices, CourseServices>();
             services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();

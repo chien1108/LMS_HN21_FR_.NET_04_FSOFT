@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controllers
 {
@@ -22,14 +23,15 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         private readonly IStudentExploreService _studentExploreService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISavedCourseService _savedCourseService;
-
+        private readonly ISubcriptionService _subcriptionService;
 
         public StudentController(
             IStudentHomePageService studentHomePageService
             , ISavedCourseService savedCourseService
             , IUnitOfWork unitOfWork
             , IMapper mapper
-            , IStudentExploreService studentExploreService)
+            , IStudentExploreService studentExploreService,
+            ISubcriptionService subcriptionService)
 
         {
             _studentHomePageService = studentHomePageService;
@@ -39,7 +41,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             _unitOfWork = unitOfWork;
 
             _savedCourseService = savedCourseService;
-
+            _subcriptionService = subcriptionService;
         }
 
         public IActionResult Index()
@@ -101,10 +103,90 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             }
             return View(courses);
         }
-
-        public IActionResult Filter()
+        public async Task<IActionResult> SavedToCourse(SavedCoursesVM model)
         {
-            return View();
+            try
+            {
+                // TODO: Add insert logic here
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var savedCourse = _mapper.Map<SavedCourse>(model);
+                savedCourse.StudentId = 1;
+                savedCourse.CreatedDate = DateTime.Now;
+
+                var isSuccess = await _savedCourseService.CreateSavedCourse(savedCourse);
+                if (isSuccess.Success == false)
+                {
+                    ModelState.AddModelError("", isSuccess.Message);
+                    return RedirectToAction(nameof(Index));
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View(model);
+            }
+        }
+
+        public async Task<IActionResult> Subcribe(SubScriptionVM model)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var subScription = _mapper.Map<SubScription>(model);
+                subScription.StudentId = 1;
+                subScription.CreatedDate = DateTime.Now;
+
+                var isSuccess = await _subcriptionService.CreateSubcription(subScription);
+                if (isSuccess.Success == false)
+                {
+                    ModelState.AddModelError("", isSuccess.Message);
+                    return RedirectToAction(nameof(Index));
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View(model);
+            }
+        }
+
+        public async Task<IActionResult> Filter(int? page)
+        {
+            int pageSize = 12;
+            var courses = await _studentHomePageService.GetFeatureCourse(pageSize);
+            if (page <= 0 || page == null)
+            {
+                page = 1;
+            }
+           
+            int start = (int)(page - 1) * pageSize;
+
+
+            int totalPage = courses.Count;
+            float totalNumsize = (totalPage / (float)pageSize);
+            int numSize = (int)Math.Ceiling(totalNumsize);
+
+            var ExplorePagingModel = new ExplorePagingModel
+            {
+                CurrentPage = page,
+                NumSize = numSize,
+
+            };
+            ViewBag.ExplorePagingModel = ExplorePagingModel;
+
+            StudentExploreVM studentExploreVM = new StudentExploreVM
+            {
+                Courses = courses.Skip(start).Take(pageSize).ToList(),
+               
+            };
+            return View(studentExploreVM);
         }
 
         /// <summary>
