@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controllers
 {
+    [Area("StudentFunction")]
     public class StudentController : Controller
     {
         private readonly IStudentHomePageService _studentHomePageService;
