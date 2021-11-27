@@ -1,4 +1,5 @@
-﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using Learning_Managerment_SystemMarket_Core.Models;
+using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.Subcription
     public interface ISubcriptionService
     {
         Task<ICollection<SubScription>> GetAllSubInstructorByStudentId(int studentId);
+        Task<ServiceResponse<SubScription>> CreateSubcription(SubScription subScription);
+       
     }
 }

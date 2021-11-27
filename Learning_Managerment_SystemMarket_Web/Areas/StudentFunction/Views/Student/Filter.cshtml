@@ -1,13 +1,7 @@
-﻿@using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
-@using Learning_Managerment_SystemMarket_ViewModels.Instructor.InstructorViewModel
-@using Learning_Managerment_SystemMarket_Core.Models.Entities;
-@using Learning_Managerment_SystemMarket_Core.Contracts;
-@inject IStudentHomePageService studentHomePage;
-@inject IUnitOfWork unitOfWork;
-
+﻿
+@model Learning_Managerment_SystemMarket_ViewModels.StudentViewModels.StudentExploreVM
 @{
     ViewData["Title"] = "Filter";
-    ICollection<Course> courseFeature = await studentHomePage.GetFeatureCourse(5);
 }
 
 <div class="">
@@ -206,8 +200,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -480,7 +472,6 @@
                                                                 <i class="uil uil-star"></i>
                                                                 <i class="uil uil-star"></i>
                                                                 5.0 &amp; up
-
                                                             </label>
                                                         </div>
                                                     </div>
@@ -493,7 +484,6 @@
                                                                 <i class="uil uil-star"></i>
                                                                 <i class="uil uil-star"></i>
                                                                 4.0 &amp; up
-
                                                             </label>
                                                         </div>
                                                     </div>
@@ -505,7 +495,6 @@
                                                                 <i class="uil uil-star"></i>
                                                                 <i class="uil uil-star"></i>
                                                                 3.0 &amp; up
-
                                                             </label>
                                                         </div>
                                                     </div>
@@ -516,7 +505,6 @@
                                                                 <i class="uil uil-star"></i>
                                                                 <i class="uil uil-star"></i>
                                                                 2.0 &amp; up
-
                                                             </label>
                                                         </div>
                                                     </div>
@@ -575,7 +563,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -583,59 +570,62 @@
         </div>
         <div class="col-lg-9 col-md-8">
             <div class="_14d25 mb-20">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4 class="mhs_title">
-                            Filters Results <span class="float-right cu" onclick="document.getElementById('srform').submit()" role="button">Search</span>
-                        </h4>
-
-                        @foreach (var item in courseFeature)
+                @if (Model.Courses.Count != 0)
+                {
+                    <div class="row mt-30">
+                        <div class="col-12"><h4 class="item_title">Courses</h4></div>
+                        @foreach (var item in Model.Courses)
                         {
-                            <div class="owl-item active" style="width: 283px; margin-right: 20px;">
+                            <div class="col-xl-3 col-lg-4 col-md-6">
                                 <div class="item">
                                     <div class="fcrse_1 mb-20">
                                         <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
                                             <img src="~/frontend/images/courses/@item.CoverImage" alt="">
                                             <div class="course-overlay">
-                                                <div class="crse_reviews">
-                                                    <i class="uil uil-star"></i>3.5
-                                                </div>
+
                                                 <span class="play_btn1"><i class="uil uil-play"></i></span>
+
+                                                <div class="crse_timer">
+                                                    0 hours
+                                                </div>
                                             </div>
                                         </a>
                                         <div class="fcrse_content">
                                             <div class="eps_dots more_dropdown">
-                                                <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                                <a href="https://coursearly.com/cursus/public/explore#"><i class="uil uil-ellipsis-v"></i></a>
                                                 <div class="dropdown-content">
-                                                    <a target="popup" onclick="window.open('https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">
+                                                    <a target="popup" onclick="window.open(&#39;https://coursearly.com/cursus/public/courses/class-1-syllabys/133/share&#39;,&#39;popup&#39;,&#39;width=600,height=600,scrollbars=no,resizable=no&#39;); return false;">
                                                         <span><i class="uil uil-share-alt"></i>Share</span>
                                                     </a>
-                                                    <a href="#">
+                                                    <a href="https://coursearly.com/cursus/public/save/133/add">
                                                         <span>
                                                             <i class="uil uil-heart"></i>
                                                             Save
                                                         </span>
                                                     </a>
-                                                    <a href="https://coursearly.com/cursus/public/report/2/add">
+
+                                                    <a href="https://coursearly.com/cursus/public/report/133/add">
                                                         <span><i class="uil uil-windsock"></i>Report</span>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="vdtodt">
-                                                <span class="vdt14">@item.Views</span>
-                                                <span class="vdt14">@item.CreatedDate</span>
+                                                <span class="vdt14">@item.Views views</span>
+                                                @{
+                                                    var month = (@DateTime.Now - item.CreatedDate);
+                                                }
+                                                <span class="vdt14">@month.TotalDays days ago</span>
                                             </div>
-                                            <a href="#" class="crse14s">@item.Title</a>
-                                            <a href="#" class="crse-cate">
+                                            <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="crse14s">@item.Title</a>
+                                            <a href="https://coursearly.com/cursus/public/explore#" class="crse-cate">
                                                 @item.SubCategory.SubCategoryName
                                             </a>
                                             <div class="auth1lnkprce">
                                                 <p class="cr1fot">
-                                                    By <a href="#">@*@item.Instructor*@</a>
+                                                    By <a href="https://coursearly.com/cursus/public/instructors/jemmy/13">@*@item.Instructor.InstructorName*@</a>
                                                 </p>
                                                 <div class="prce142">$@item.Price</div>
-                                                <button onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/2//add';" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
-
+                                                <button onclick="window.location.href = &#39;https://coursearly.com/cursus/public/cart/133//add&#39;;" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
                                             </div>
                                         </div>
                                     </div>
@@ -643,15 +633,31 @@
                             </div>
                         }
 
-                    </div>
-                    <div class="col-md-12 text-center">
-                        <div class="main-loader mt-50">
-
+                        <div class="col-md-10 d-flex justify-content-lg-end ">
+                            <partial name="/Areas/StudentFunction/Views/Student/_ExplorePaging.cshtml" model="ViewBag.ExplorePagingModel" />
                         </div>
                     </div>
-                </div>
+
+                }
+                else
+                {
+
+                    <div class="row mt-30">
+                        <div class="col-12"><h4 class="item_title">Courses</h4></div>
+                        <div class="col-md-12 text-center">
+                            <div class="no-data-div">
+                                <img src="https://coursearly.com/cursus/public/nodata.svg" alt="No Data" srcset="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center">
+                            <div class="main-loader mt-50">
+                            </div>
+                        </div>
+                    </div>
+
+                }
             </div>
         </div>
     </div>
 </div>
-

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Learning_Managerment_SystemMarket_Core.Contracts;
+using Learning_Managerment_SystemMarket_Core.Models;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
 using System;
@@ -21,6 +22,26 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourse
         {
             _unitOfWork = unitOfWork;
             _map = map;
+        }
+
+        public async Task<ServiceResponse<SavedCourse>> CreateSavedCourse(SavedCourse savedCourse)
+        {
+            try
+            {
+                await _unitOfWork.Courses.CreateSavedCourse(savedCourse);
+                if (await SaveChanges())
+                {
+                    return new ServiceResponse<SavedCourse> { Success = true, Message = "Add feedback Success" };
+                }
+                else
+                {
+                    return new ServiceResponse<SavedCourse> { Success = false, Message = "Error when create new savedCourse" };
+                }
+            }
+            catch (Exception)
+            {
+                return new ServiceResponse<SavedCourse> { Success = false, Message = "Create fail" };
+            }
         }
 
         public void Delete(SavedCourse savedCourse)

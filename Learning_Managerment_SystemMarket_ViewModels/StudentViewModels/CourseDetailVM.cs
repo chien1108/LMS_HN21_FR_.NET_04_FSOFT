@@ -6,6 +6,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
 {
     public class CourseDetailVM
     {
+        public int Id { get; set; }
         public string Title { get; set; }
         public string SubTitile { get; set; }
         public string Description { get; set; }
