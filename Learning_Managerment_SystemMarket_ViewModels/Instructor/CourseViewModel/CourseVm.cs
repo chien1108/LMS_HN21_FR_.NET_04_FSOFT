@@ -42,7 +42,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
 
         public bool IsBestseller { get; set; }
 
-        public int CoverImage { get; set; }// default img.png
+        public string CoverImage { get; set; }// default img.png
 
         public string PromotionVideo { get; set; } // null
 

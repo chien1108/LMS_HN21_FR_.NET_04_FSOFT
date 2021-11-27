@@ -7,5 +7,6 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo
 {
     public interface IStudentRepository : IGenericRepository<Student>
     {
+        Task<ICollection<SubScription>> GetAllSubInstructorByStudentId(int studentId);
     }
 }

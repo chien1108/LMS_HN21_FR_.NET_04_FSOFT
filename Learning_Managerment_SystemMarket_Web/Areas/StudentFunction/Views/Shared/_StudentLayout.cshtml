@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
+@using Learning_Managerment_SystemMarket_Core.Models.Entities;
+@using Learning_Managerment_SystemMarket_Core.Contracts;
+
+@inject IUnitOfWork unitOfWork;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -159,7 +164,7 @@
                 <div class="ui simple dropdown item" tabindex="0">
                     <a href="#" class="option_links p-0" title="categories"><i class="uil uil-apps"></i></a>
                     <div class="menu dropdown_category5" tabindex="-1">
-                         <partial name="/Areas/StudentFunction/Views/Student/_Categories.cshtml">
+                        <partial name="/Areas/StudentFunction/Views/Student/_Categories.cshtml">
                     </div>
                 </div>
             </div>
@@ -167,7 +172,7 @@
         <div class="search120">
             <div class="ui search">
                 <form asp-action="Explore" asp-controller="Student">
-                    <input type="hidden" name="_token" value="nJlOQKC6HopjqJkfwa0wgscgW71F30K9vUOA3rSU">                
+                    <input type="hidden" name="_token" value="nJlOQKC6HopjqJkfwa0wgscgW71F30K9vUOA3rSU">
                     <div class="ui left icon input swdh10">
                         <input class="prompt srch10" type="text" placeholder="Search for Tuts Videos, Tutors, Tests and more.." name="searchString">
                         <i class="uil uil-search-alt icon icon1"></i>
@@ -346,7 +351,7 @@
                             <span class="menu--label">Home</span>
                         </a>
                     </li>
-                    
+
                     <li class="menu--item">
                         <a asp-action="Explore" asp-controller="Student" class="menu--link " title="Explore">
                             <i class="uil uil-search menu--icon"></i>
@@ -370,7 +375,7 @@
                     </li>
 
                     <li class="menu--item">
-                        <a asp-area="StudentFunction" asp-controller="Student" asp-action="Filter"  class="menu--link "  title="Filter">
+                        <a asp-area="StudentFunction" asp-controller="Student" asp-action="Filter" class="menu--link " title="Filter">
                             <i class="uil uil-abacus menu--icon"></i>
                             <span class="menu--label">Filter</span>
                         </a>
@@ -398,42 +403,13 @@
             <div class="left_section">
                 <h6 class="left_title">SUBSCRIPTIONS</h6>
                 <ul>
-
+                    <!--subcribe-->
                     <li class="menu--item">
                         <a href="#" class="menu--link user_img">
                             <img src="https://coursearly.com/cursus/public/default.png" alt="">
                             Jon Deo
                         </a>
                     </li>
-                    <li class="menu--item">
-                        <a href="#" class="menu--link user_img">
-                            <img src="https://coursearly.com/cursus/public/upload/image/60d32f92c4e69.jfif" alt="">
-                            instructor
-                        </a>
-                    </li>
-                    <li class="menu--item">
-                        <a href="#" class="menu--link user_img">
-                            <img src="https://coursearly.com/cursus/public/default.png" alt="">
-                            Raziya Blish
-                        </a>
-                    </li>
-                    <li class="menu--item">
-                        <a href="#" class="menu--link user_img">
-                            <img src="https://coursearly.com/cursus/public/upload/image/60d6b4a486f0d.jpg" alt="">
-                            Jassica William
-                        </a>
-
-                        <div class="alrt_dot"></div>
-                    </li>
-                    <li class="menu--item">
-                        <a href="#" class="menu--link user_img">
-                            <img src="https://coursearly.com/cursus/public/upload/image/60d6b737531a5.jpg" alt="">
-                            Joginder Singh
-                        </a>
-
-                        <div class="alrt_dot"></div>
-                    </li>
-
                     <li class="menu--item">
 
                         <a href="#" class="menu--link " title="See All">

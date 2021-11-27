@@ -13,6 +13,7 @@ using Learning_Managerment_SystemMarket_ViewModels.Instructor.SubCategoryViewMod
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.DashboardViewModels;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.LectureViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewModel;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.InstructorViewModel;
 
 namespace Learning_Managerment_SystemMarket_Web.Mapper
 {
@@ -36,10 +37,11 @@ namespace Learning_Managerment_SystemMarket_Web.Mapper
             CreateMap<Course, CreateCourseVm>().ReverseMap();
             CreateMap<Lecture, CreateLectureVm>().ReverseMap();
             CreateMap<CourseContent, CreateCourseContentVm>().ReverseMap();
-
             CreateMap<Category, CategoryVm>().ReverseMap();
             CreateMap<SubCategory, SubCategoryVm>().ReverseMap();
             CreateMap<Language, LanguageVm>().ReverseMap();
+            CreateMap<Instructor, InstructorVm>().ReverseMap();
+            CreateMap<Course, CourseDetailVM>().ReverseMap();
         }
     }
 }

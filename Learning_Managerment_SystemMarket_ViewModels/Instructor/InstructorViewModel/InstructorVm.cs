@@ -13,6 +13,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.InstructorView
         public string InstructorName { get; set; }
 
         public string HeadLine { get; set; } = null;
+        public string Image { get; set; } = null;
 
         public string Website { get; set; } = null;
 

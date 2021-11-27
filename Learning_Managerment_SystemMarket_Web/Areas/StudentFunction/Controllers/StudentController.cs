@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controllers
 {
@@ -50,12 +51,12 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
 
         public async Task<IActionResult> CourseDetails(int id)
         {
-            var isExists = await _unitOfWork.Courses.FindByCondition(q => q.Id == id);
+            var isExists = await _unitOfWork.Courses.FindByCondition(q => q.Id == id, new List<string>() { "Instructor" });
             if (isExists == null)
             {
                 return NotFound();
             }
-            var model = _mapper.Map<CourseDetailVM>(isExists);
+            var model = _mapper.Map<CourseVm>(isExists);
             return View(model);
         }
 

@@ -1,4 +1,4 @@
-﻿@model Learning_Managerment_SystemMarket_ViewModels.StudentViewModels.CourseDetailVM;
+﻿@model Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel.CourseVm;
 
 @{
     ViewData["Title"] = "CourseDetails";
@@ -52,9 +52,6 @@
                                 </div>
 
                             </div>
-                            <div class="_215b05">
-                                Last updated 11/2021
-                            </div>
                             <ul class="_215b31">
                                 <li>
                                     <button class="btn_adcart" onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/1//add';">
@@ -84,10 +81,10 @@
                     <div class="user_dt_left">
                         <div class="live_user_dt">
                             <div class="user_img5">
-                                <a href="#"><img src="https://coursearly.com/cursus/public/upload/image/60d6bc7513dd0.jpg" alt=""></a>
+                                <a href="#"><img src="~/frontend/images/about/@Model.Instructor.Image" alt=""></a>
                             </div>
                             <div class="user_cntnt">
-                                <a href="#" class="_df7852">Jaysen Batchelor</a>
+                                <a href="#" class="_df7852">@Model.Instructor.InstructorName</a>
                                 <button class="subscribe-btn" onclick="window.location.href = 'https://coursearly.com/cursus/public/subscription/16/add';">Subscribe</button>
                             </div>
                         </div>
