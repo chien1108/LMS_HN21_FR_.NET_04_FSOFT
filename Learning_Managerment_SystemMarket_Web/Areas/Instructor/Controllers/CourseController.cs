@@ -61,11 +61,12 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
         [HttpGet]
         public async Task<ActionResult> CreateCourse(CreateCourseVm model)
         {
-            var responseResult = new ResponseResult {
+            var responseResult = new ResponseResult
+            {
                 Code = false,
-                Message = "Empty value"
+                Message = "Please add at least one Course Content"
             };
-            if (createCourseContentVms.Count() < 1)
+            if (createCourseContentVms.Count() < 1 || createLectureVms.Count() < 1)
             {
                 return Json(responseResult);
             }
@@ -74,7 +75,15 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
                 var result = model;
                 responseResult = await _courseServices.CreateCourse(model, createCourseContentVms, createLectureVms);
             }
-            
+            else
+            {
+                var message = string.Join(" | ", ModelState.Values
+                        .SelectMany(v => v.Errors)
+                        .Select(e => e.ErrorMessage));
+
+                responseResult.Message = message;
+            }
+
             return Json(responseResult);
         }
 
@@ -86,20 +95,31 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
         [HttpGet]
         public ActionResult CreateCourseContent(CreateCourseContentVm model)
         {
+            var responseResult = new ResponseResult
+            {
+                Code = false,
+                Message = "Please add at least one Course Content"
+            };
             if (ModelState.IsValid)
             {
-
                 createCourseContentVms.Add(model);
             }
-            
-            return Json(model.Title);
+            else
+            {
+                var message = string.Join(" | ", ModelState.Values
+                        .SelectMany(v => v.Errors)
+                        .Select(e => e.ErrorMessage));
+                responseResult.Message = message;
+            }
+
+            return Json(responseResult);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateDiscount(DisCountCourseVm model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("", "Model is invalid");
                 return RedirectToAction(nameof(Index));
@@ -117,9 +137,23 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
         [HttpGet]
         public ActionResult CreateLecture(CreateLectureVm model)
         {
-            createLectureVms.Add(model);
-            var result = model;
-            return Json(result.Title);
+            var responseResult = new ResponseResult
+            {
+                Code = false,
+                Message = "Please add at least one Lecture"
+            };
+            if (ModelState.IsValid)
+            {
+                createLectureVms.Add(model);
+            }
+            else
+            {
+                var message = string.Join(" | ", ModelState.Values
+                        .SelectMany(v => v.Errors)
+                        .Select(e => e.ErrorMessage));
+                responseResult.Message = message;
+            }
+            return Json(responseResult);
         }
 
         [HttpGet]
@@ -162,7 +196,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
         public ActionResult DeleteCourse(int id)
         {
             var result = _courseServices.Delete(id);
-            if(result.Result.Success == true)
+            if (result.Result.Success == true)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -172,7 +206,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
         public ActionResult ChangeStatusToDraft(int id)
         {
             var course = _courseServices.ChangeStatusToDraft(id);
-            if(course.Result.Success == false)
+            if (course.Result.Success == false)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -190,13 +224,13 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            
+
         }
 
         public ActionResult ChangeStatus(int id)
         {
             var discountCourse = _courseServices.ChangeStatus(id);
-            if(discountCourse.Result.Success == false)
+            if (discountCourse.Result.Success == false)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -238,7 +272,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
 
             var result = _courseServices.UpdateDiscount(entity);
 
-            if(result.Result.Success == false)
+            if (result.Result.Success == false)
             {
                 ModelState.AddModelError("", result.Result.Message);
                 return RedirectToAction(nameof(EditDiscount), new { id = entity.Id });

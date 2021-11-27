@@ -62,7 +62,7 @@
                                                     <div class="ui search focus mt-30 lbel25">
                                                         <label>Course Title <span class="text-danger">*</span></label>
                                                         <div class="ui flex-column icon input swdh19">
-                                                            <input class="prompt srch_explore" type="text" placeholder="Insert your course title." name="title" id="Title" data-purpose="edit-course-title" required/>
+                                                            <input class="prompt srch_explore" type="text" placeholder="Insert your course title." name="title" id="Title" data-purpose="edit-course-title" required />
                                                             <p class="text-danger"></p>
                                                         </div>
 
@@ -72,7 +72,7 @@
                                                     <div class="ui search focus mt-30 lbel25">
                                                         <label>Course Subtitle <span class="text-danger">*</span></label>
                                                         <div class="ui flex-column icon input swdh19">
-                                                            <input class="prompt srch_explore" type="text" placeholder="Insert your course Subtitle." name="subtitle" data-purpose="edit-course-title" id="SubTitile" value="" required/>
+                                                            <input class="prompt srch_explore" type="text" placeholder="Insert your course Subtitle." name="subtitle" data-purpose="edit-course-title" id="SubTitile" value="" required />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -484,35 +484,6 @@
             $('#saveChanges').click(function () {
                 var isFree = $('#IsFree').val() == '1' ? true : false;
 
-                //kiểm tra dữ liệu
-                var inputCheck = $('input[required]');
-                $.each(inputCheck, function (index, item) {
-                    $(item).attr('require');
-                    //Kiếm tra dữ liệu nhập, nếu trống cảnh báo
-                    var value = $(this).val();
-                    if (!value) {
-                        $(this).addClass('border-red');
-                        $(this).attr('title', 'Trường này không được phép để trống');
-                    }
-                    else {
-                        $(this).removeClass('border-red');
-                    }
-                });
-
-                var selectCheck = $('select[required]');
-                $.each(selectCheck, function (index, item) {
-                    $(item).attr('require');
-                    //Kiếm tra dữ liệu nhập, nếu trống cảnh báo
-                    var value = $(this).val();
-                    if (!value) {
-                        $(this).addClass('border-red');
-                        $(this).attr('title', 'Trường này không được phép để trống');
-                    }
-                    else {
-                        $(this).removeClass('border-red');
-                    }
-                });
-
                 var model = {
                     Title: $('#Title').val(),
                     SubTitile: $('#SubTitile').val(),
@@ -561,7 +532,7 @@
 
                 });
 
-                if (LectureData.length > 0 && CourseContent.length > 0) {
+                if (CourseContent.length > 0) {
                     //post Course
                     $.ajax({
                         url: 'https://localhost:44371/Instructor/Course/CreateCourse',
@@ -574,7 +545,7 @@
                                 toastr.success("Create Course Success")
                             }
                             else {
-                                toastr.warning("Empty value")
+                                toastr.warning(data.message)
                             }
                         },
                         failure: function (errMsg) {
@@ -681,28 +652,24 @@
             var tr = "";
             LectureData.forEach((element, index) => {
                 tr += ` <tr>
-                        <td class="text-center">${index + 1}</td>
-                        <td class="cell-ta">${element.Title}</td>
-                        <td class="text-center">${element.Volume}</td>
-                        <td class="text-center">${element.Duration}</td>
-                        <td class="text-center">${element.Positon}</td>
-                        <td class="text-center">  <a href="#">${element.File}</a>   </td>
-                        <td class="text-center">
-                            <a href="#" title="Delete" class="gray-s" onclick="deleteLecture(${index})"><i class="uil uil-trash-alt"></i></a>
-                        </td>
-                        </tr>`
+                    <td class="text-center">${index + 1}</td>
+                    <td class="cell-ta">${element.Title}</td>
+                    <td class="text-center">${element.Volume}</td>
+                    <td class="text-center">${element.Duration}</td>
+                    <td class="text-center">${element.Positon}</td>
+                    <td class="text-center">  <a href="#">${element.File}</a>   </td>
+                    <td class="text-center">
+                        <a href="#" title="Delete" class="gray-s" onclick="deleteLecture(${index})"><i class="uil uil-trash-alt"></i></a>
+                    </td>
+                </tr>`;
             });
             $("#tbodylecture").html(tr);
         }
 
         //validate address file
         function onLectureFileChange() {
-            extension = $('#lectureFileInput').val().replace(/^.*\./, '');
-            if (extension == "php") {
-            } else {
-                file = $('#lectureFileInput')[0].files[0]
-                $(this).next('label').text(file);
-            }
+            file = $('#lectureFileInput')[0].files[0]
+            $(this).next('label').text(file);
         }
 
         //remove lecture in array
@@ -711,23 +678,9 @@
             AddLectureToHtml()
         }
 
+        //Theem Course Content vào array
         function FinalCourseContent() {
-            var title = $("#ContentTitle").val()
-
-            //kiểm tra dữ liệu
-            var inputCheck = $('input[required]');
-            $.each(inputCheck, function (index, item) {
-                $(item).attr('require');
-                //Kiếm tra dữ liệu nhập, nếu trống cảnh báo
-                var value = $(this).val();
-                if (!value) {
-                    $(this).addClass('border-red');
-                    $(this).attr('title', 'Trường này không được phép để trống');
-                }
-                else {
-                    $(this).removeClass('border-red');
-                }
-            });
+            var title = $("#ContentTitle").val();
 
             if (!title) {
                 toastr.warning("Please enter a Course Content Title")
@@ -747,6 +700,7 @@
                 CourseContent.push(course);
                 AddCourseToHtml();
                 console.log(CourseContent);
+                Refreshtbodylecture();
             }
         }
 
@@ -770,16 +724,16 @@
                 });
 
                 tr += ` <tr>
-                        <td class="text-center">${index + 1}</td>
-                        <td class="cell-ta">${element.Title}</td>
-                        <td class="text-center">${lecture}</td>
-                        <td class="text-center">${volumn}</td>
-                        <td class="text-center">${duration}</td>
-                        <td class="text-center">  <a href="#">${date}</a>   </td>
-                        <td class="text-center">
-                            <a href="#" title="Delete" class="gray-s" onclick="DeleteCourse(${index})"><i class="uil uil-trash-alt"></i></a>
-                        </td>
-                        </tr>`;
+                                    <td class="text-center">${index + 1}</td>
+                                    <td class="cell-ta">${element.Title}</td>
+                                    <td class="text-center">${lecture}</td>
+                                    <td class="text-center">${volumn}</td>
+                                    <td class="text-center">${duration}</td>
+                                    <td class="text-center">  <a href="#">${date}</a>   </td>
+                                    <td class="text-center">
+                                        <a href="#" title="Delete" class="gray-s" onclick="DeleteCourse(${index})"><i class="uil uil-trash-alt"></i></a>
+                                    </td>
+                                    </tr>`;
             });
             $("#tbodycourse").html(tr);
         }
