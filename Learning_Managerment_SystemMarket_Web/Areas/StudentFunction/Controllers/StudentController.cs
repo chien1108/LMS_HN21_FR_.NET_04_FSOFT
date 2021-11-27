@@ -68,6 +68,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         public IActionResult Explore(string searchString, int? page)
         {
             var courses = Task.Run(() => _studentExploreService.SearchCourse(searchString)).Result;
+            var collection = _mapper.Map<ICollection<Course>, ICollection<CardCourseVM>>(courses);
+
             if (page <= 0 || page == null)
             {
                 page = 1;
@@ -90,7 +92,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
 
             StudentExploreVM studentExploreVM = new StudentExploreVM
             {
-                Courses = courses.Skip(start).Take(pageSize).ToList(),
+                Courses = collection.Skip(start).Take(pageSize).ToList(),
                 SearchString = searchString
             };
             return View(studentExploreVM);
@@ -163,6 +165,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         {
             int pageSize = 12;
             var courses = await _studentHomePageService.GetFeatureCourse(pageSize);
+            var collection = _mapper.Map<ICollection<Course>, ICollection<CardCourseVM>>(courses);
+
             if (page <= 0 || page == null)
             {
                 page = 1;
@@ -185,7 +189,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
 
             StudentExploreVM studentExploreVM = new StudentExploreVM
             {
-                Courses = courses.Skip(start).Take(pageSize).ToList(),
+                Courses = collection.Skip(start).Take(pageSize).ToList(),
                
             };
             return View(studentExploreVM);

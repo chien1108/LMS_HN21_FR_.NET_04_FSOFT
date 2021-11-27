@@ -65,10 +65,8 @@
                                     </div>
                                     <div class="vdtodt">
                                         <span class="vdt14">@item.Views views</span>
-                                        @{
-                                            var month = (@DateTime.Now - item.CreatedDate);
-                                        }
-                                        <span class="vdt14">@month.TotalDays days ago</span>
+                                        
+                                        <span class="vdt14">@item.RelativeCreateDate</span>
                                     </div>
                                     <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="crse14s">@item.Title</a>
                                     <a href="https://coursearly.com/cursus/public/explore#" class="crse-cate">
@@ -76,7 +74,7 @@
                                     </a>
                                     <div class="auth1lnkprce">
                                         <p class="cr1fot">
-                                            By <a href="https://coursearly.com/cursus/public/instructors/jemmy/13">@*@item.Instructor.InstructorName*@</a>
+                                            By <a href="https://coursearly.com/cursus/public/instructors/jemmy/13">@item.Instructor.InstructorName</a>
                                         </p>
                                         <div class="prce142">$@item.Price</div>
                                         <button onclick="window.location.href = &#39;https://coursearly.com/cursus/public/cart/133//add&#39;;" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
