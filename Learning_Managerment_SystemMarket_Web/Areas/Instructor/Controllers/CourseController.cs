@@ -80,7 +80,6 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
                 var message = string.Join(" | ", ModelState.Values
                         .SelectMany(v => v.Errors)
                         .Select(e => e.ErrorMessage));
-
                 responseResult.Message = message;
             }
 

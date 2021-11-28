@@ -1,6 +1,7 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Contracts;
 using Learning_Managerment_SystemMarket_Core.Data;
 using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepo;
+using Learning_Managerment_SystemMarket_Core.Repositories.CartRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseContentRepo;
@@ -101,6 +102,8 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork
 
         public IClaimRepository Claims => _claimRepository ??= new ClaimRepository(_context);
         public LMSDbContext Context => _context;
+
+        public ICartRepository Carts => throw new NotImplementedException();
 
         public void Dispose()
         {
