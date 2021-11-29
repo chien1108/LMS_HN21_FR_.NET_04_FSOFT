@@ -23,9 +23,6 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
-using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices;
-using Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService;
-using Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
@@ -96,9 +93,6 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IPaytabsInvoiceRepository, PaytabsInvoiceRepository>();
             services.AddScoped<IClaimRepository, ClaimRepository>();
             //Add service
-            services.AddScoped<Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices.ICategoryService, Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices.CategoryService>();
-            services.AddScoped<Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService.ISubCategoryService, Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService.SubCategoryService>();
-            services.AddScoped<Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService.ILanguageService, Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService.LanguageService>();
             services.AddScoped<IClaimService, ClaimService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoleService, RoleService>();

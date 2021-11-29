@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
+namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Controllers
 {
-    [Area("Instructor")]
-    public class HomeController : Controller
+    public class EarningController : Controller
     {
         public IActionResult Index()
         {
