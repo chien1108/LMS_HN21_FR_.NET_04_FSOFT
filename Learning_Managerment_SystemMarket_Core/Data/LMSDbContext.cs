@@ -168,7 +168,7 @@ namespace Learning_Managerment_SystemMarket_Core.Data
             });
             modelBuilder.Entity<SpecialDiscount>(entity =>
             {
-                entity.HasKey(k => new { k.CourseId, k.Id, k.InstructorId });
+                entity.HasKey(k => new { k.Id });
                 entity.Property(p => p.Percentage).HasPrecision(8, 5);
             });
             modelBuilder.Entity<Student>(entity =>

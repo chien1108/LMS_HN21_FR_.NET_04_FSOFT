@@ -278,7 +278,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
                 return RedirectToAction(nameof(EditDiscount), new { id = entity.Id });
             }
 
-            return RedirectToAction(nameof(EditDiscount));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

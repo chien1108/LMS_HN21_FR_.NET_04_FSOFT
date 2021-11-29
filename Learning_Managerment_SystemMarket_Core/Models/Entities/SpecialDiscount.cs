@@ -9,7 +9,7 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public int InstructorId { get; set; }
         public int CourseId { get; set; }
         public string Title { get; set; }
-        public decimal Percentage { get; set; }
+        public int Percentage { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public Status Status { get; set; }
