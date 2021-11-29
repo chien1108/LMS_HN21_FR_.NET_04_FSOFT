@@ -128,7 +128,6 @@ $(document).ready(function () {
         else {
             toastr.warning("Please add at least one Course Content");
         }
-
     });
 
     //config toastr
