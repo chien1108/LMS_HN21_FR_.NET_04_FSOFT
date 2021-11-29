@@ -156,7 +156,8 @@ namespace Learning_Managerment_SystemMarket_Web
                   );
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{area=StudentFunction}/{controller=Student}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

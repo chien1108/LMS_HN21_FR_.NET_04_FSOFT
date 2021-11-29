@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "SavedCourses";
     var studentId = Model.Select(x=>x.StudentId).FirstOrDefault();
+    Layout = "/Views/Shared/_StudentLayout.cshtml";
 }
 
 <div class="container-fluid">

@@ -7,6 +7,7 @@
     ViewData["Title"] = "Index";
     ICollection<Course> courseFeature = await studentHomePage.GetFeatureCourse(5);
     ICollection<Course> courseNew = await studentHomePage.GetNewestCourse(5);
+    Layout = "/Views/Shared/_StudentLayout.cshtml";
 }
 <div class="row">
     <div class="col-xl-9 col-lg-8">
