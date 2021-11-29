@@ -163,5 +163,6 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
         public Status Status { get; set; }
         public IEnumerable<CourseVm> Courses { get; set; }
         public int CourseId { get; set; }
+        public int InstructorId { get; set; }
     }
 }

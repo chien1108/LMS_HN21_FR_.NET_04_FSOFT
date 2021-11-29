@@ -147,13 +147,11 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
         public async Task<ServiceResponse<DisCountCourseVm>> CreateDiscount(DisCountCourseVm entity)
         {
             try
-            {
+            {              
                 var course = await _unitOfWork.Courses.FindByCondition(x => x.Id == entity.CourseId);
-
+                entity.InstructorId = course.InstructorId;
+                entity.Status = Status.IsDeleted;
                 var map = _mapper.Map<SpecialDiscount>(entity);
-                map.Status = Status.IsDeleted;
-                map.InstructorId = 1;
-                map.Id = 10;
                 map.Course = course;
 
                 await _unitOfWork.SpecialDiscounts.Create(map);
@@ -296,13 +294,10 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
         {
             try
             {
-                var discount = await _unitOfWork.SpecialDiscounts.FindByCondition(x => x.Id == entity.Id);
                 var course = await _unitOfWork.Courses.FindByCondition(x => x.Id == entity.CourseId);
                 var map = _mapper.Map<SpecialDiscount>(entity);
-                map.Course = course;
-                map.InstructorId = discount.InstructorId;
-                map.CreatedDate = discount.CreatedDate;
                 map.ModifiedDate = DateTime.Now;
+                map.Course = course;
                 _unitOfWork.SpecialDiscounts.Update(map);
                 var isSuccess = await _unitOfWork.Save();
                 if (isSuccess == true)

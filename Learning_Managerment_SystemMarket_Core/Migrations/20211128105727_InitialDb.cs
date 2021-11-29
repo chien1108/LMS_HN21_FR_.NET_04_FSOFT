@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Learning_Managerment_SystemMarket_Core.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -728,11 +728,12 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "SpecialDiscounts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     InstructorId = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Percentage = table.Column<decimal>(type: "decimal(8,5)", precision: 8, scale: 5, nullable: false),
+                    Percentage = table.Column<int>(type: "int", precision: 8, scale: 5, nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
@@ -741,7 +742,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SpecialDiscounts", x => new { x.CourseId, x.Id, x.InstructorId });
+                    table.PrimaryKey("PK_SpecialDiscounts", x => x.Id);
                     table.ForeignKey(
                         name: "FK_SpecialDiscounts_Courses_CourseId",
                         column: x => x.CourseId,
@@ -913,6 +914,11 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                 name: "IX_SavedCourses_StudentId",
                 table: "SavedCourses",
                 column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SpecialDiscounts_CourseId",
+                table: "SpecialDiscounts",
+                column: "CourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubCategories_CategoryId",

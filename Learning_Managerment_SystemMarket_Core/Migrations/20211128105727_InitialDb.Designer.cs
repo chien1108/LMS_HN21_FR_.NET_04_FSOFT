@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Learning_Managerment_SystemMarket_Core.Migrations
 {
     [DbContext(typeof(LMSDbContext))]
-    [Migration("20211126083305_Initial")]
-    partial class Initial
+    [Migration("20211128105727_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -770,13 +770,12 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.SpecialDiscount", b =>
                 {
-                    b.Property<int>("CourseId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("InstructorId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -785,12 +784,15 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("InstructorId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("Percentage")
+                    b.Property<int>("Percentage")
                         .HasPrecision(8, 5)
-                        .HasColumnType("decimal(8,5)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -801,7 +803,9 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CourseId", "Id", "InstructorId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("SpecialDiscounts");
                 });
