@@ -101,6 +101,8 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
         [Required(ErrorMessage = "{0} không được để trống")]
         public string Description { get; set; }
 
+        [DisplayName("Price")]
+        [Required(ErrorMessage = "{0} không được để trống")]
         public decimal Price { get; set; }
 
         public decimal DiscountPrice { get; set; }
@@ -135,8 +137,6 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
         [Required(ErrorMessage = "{0} không được để trống")]
         public int CategoryId { get; set; }
 
-        [DisplayName("Sub Category")]
-        [Required(ErrorMessage = "{0} không được để trống")]
         public int SubcategoryId { get; set; }
 
         public int LanguageId { get; set; }
