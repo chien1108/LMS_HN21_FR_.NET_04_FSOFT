@@ -3,6 +3,7 @@ using Learning_Managerment_SystemMarket_Core.Data;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CategoryRepo;
+using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseContentRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseRateRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo;
@@ -23,32 +24,27 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
-using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices;
-using Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService;
-using Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.StudentService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
-using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
-using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
-using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
 using Learning_Managerment_SystemMarket_Web.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
-using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
-using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
 
 namespace Learning_Managerment_SystemMarket_Web
 {
@@ -106,7 +102,8 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IStudentExploreService, StudentExploreService>();
             services.AddScoped<ISavedCourseService, SavedCourseService>();
             services.AddScoped<ISubcriptionService, SubcriptionService>();
-
+            services.AddScoped<IInstructorService, InstructorService>();
+            services.AddScoped<IStudentService,StudentService>();
             services.AddTransient<ICourseServices, CourseServices>();
             services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();
             services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
@@ -116,9 +113,12 @@ namespace Learning_Managerment_SystemMarket_Web
 
             services.AddAutoMapper(typeof(MapperProfile));
 
-            services.AddIdentityCore<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<Role>()
-                .AddEntityFrameworkStores<LMSDbContext>();
+            services.AddIdentity<User, Role>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+            })
+            .AddEntityFrameworkStores<LMSDbContext>()
+                .AddDefaultUI();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
