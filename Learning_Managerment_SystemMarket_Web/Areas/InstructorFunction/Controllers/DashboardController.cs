@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Collections.Generic;
 using System;
-using Learning_Managerment_SystemMarket_Web.Areas.Instructor.Models;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.DashboardViewModels;
+using Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Models;
 
-namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
+namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Controllers
 {
     [Area("Instructor")]
     [Route("/Instructor/Dashboard/[Action]")]

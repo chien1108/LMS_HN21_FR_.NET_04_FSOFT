@@ -5,7 +5,7 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
     public class User : IdentityUser<int>
     {
         //ID => role
-        //public string FirstName { get; set; }
+        public string FullName { get; set; }
 
         //public string LastName { get; set; }
         //public string Image { get; set; }
