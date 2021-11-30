@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, shrink-to-fit=9">
+
+    <title>Sign-in with Cursus</title>
+    <link rel="canonical" href="https://coursearly.com/cursus/public/login">
+    <meta name="robots" content="all">
+    <meta property="og:image" content="https://coursearly.com/cursus/public/frontend/images/logo.svg">
+    <meta property="og:url" content="https://coursearly.com/cursus/public/login">
+    <title>Cursus</title>
+
+
+
+    <link rel="icon" type="image/png" href="/frontend/images/fav.png">
+
+
+    <link href="/frontend/vendor/unicons-2.0.1/css/unicons.css" rel="stylesheet">
+    <link href="/frontend/css/vertical-responsive-menu.min.css" rel="stylesheet">
+    <link href="/frontend/css/style.css" rel="stylesheet">
+    <link href="/frontend/css/responsive.css" rel="stylesheet">
+    <link href="/frontend/css/night-mode.css" rel="stylesheet">
+    <link href="/frontend/css/instructor-dashboard.css" rel="stylesheet">
+    <link href="/frontend/css/instructor-responsive.css" rel="stylesheet">
+    <link href="/frontend/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/frontend/vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
+    <link href="/frontend/vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+    <link href="/frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/frontend/vendor/semantic/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/frontend/vendor/snackbar/snackbar.min.css">
+
+    <style>
+        .sign_in_up_bg:before {
+            background: url("/frontend/images/sign.svg") no-repeat center !important;
+        }
+    </style>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalPageSDKES6.js?v=151510" async=""></script>
+</head>
+<body>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="/frontend/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js">
+    </script>
+    <script src="/frontend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/nicescroll.min.js"></script>
+    <script src="/js/moment.min.js"></script>
+
+    <script src="/plugins/table/datatable/datatables.js"></script>
+    <script src="/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
+    <script src="/plugins/table/datatable/button-ext/jszip.min.js"></script>
+    <script src="/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
+    <script src="/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+    <script src="/js/stisla.js"></script>
+    <script src="/plugins/select2/select2.min.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/chart.js"></script>
+
+    <script src="/js/summernote.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
