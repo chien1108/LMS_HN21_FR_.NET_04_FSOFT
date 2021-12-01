@@ -3,6 +3,7 @@ using Learning_Managerment_SystemMarket_Core.Data;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Core.Repositories.AdminSettingRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CategoryRepo;
+using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseContentRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseRateRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo;
@@ -23,18 +24,26 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.StudentService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
-using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
-using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
-using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
 using Learning_Managerment_SystemMarket_Web.Mapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -101,20 +110,39 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IStudentExploreService, StudentExploreService>();
             services.AddScoped<ISavedCourseService, SavedCourseService>();
             services.AddScoped<ISubcriptionService, SubcriptionService>();
-
+            services.AddScoped<IInstructorService, InstructorService>();
+            services.AddScoped<IStudentService,StudentService>();
             services.AddTransient<ICourseServices, CourseServices>();
             services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();
             services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
             services.AddTransient<IInstructorSubCategoryService, InstructorSubCategoryService>();
             services.AddTransient<IInstructorOrderService, InstructorOrderService>();
 
+            services.AddScoped<ICategoryService,CategoryService>();
+            services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<ISubCategoryService, SubCategoryService>();
             //Config for Dependence Service
 
             services.AddAutoMapper(typeof(MapperProfile));
 
-            services.AddIdentityCore<User>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<Role>()
-                .AddEntityFrameworkStores<LMSDbContext>();
+            services.AddIdentity<User, Role>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+            })
+            .AddEntityFrameworkStores<LMSDbContext>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI();
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                //options.Cookie.Expiration
+
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+                options.SlidingExpiration = true;
+                options.ReturnUrlParameter = "returnUrl";
+                //options.ReturnUrlParameter=""
+            });
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -137,7 +165,7 @@ namespace Learning_Managerment_SystemMarket_Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -152,7 +180,7 @@ namespace Learning_Managerment_SystemMarket_Web
                   );
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area=StudentFunction}/{controller=Student}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

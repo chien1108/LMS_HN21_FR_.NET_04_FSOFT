@@ -1,4 +1,6 @@
-﻿using Learning_Managerment_SystemMarket_Web.Models;
+﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using Learning_Managerment_SystemMarket_Web.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,13 +14,15 @@ namespace Learning_Managerment_SystemMarket_Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<User> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,UserManager<User> userManager)
         {
             _logger = logger;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }

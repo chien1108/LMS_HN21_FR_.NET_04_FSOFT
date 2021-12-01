@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Learning_Managerment_SystemMarket_Core.Models.Entities
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @if (user.WhoIs == 0)
+        {
+            <li class="nav-item">
+                <a href="https://coursearly.com/cursus/public/instructor/courses/create" class="upload_btn" title="Create New   Course">Ernolled</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a href="https://coursearly.com/cursus/public/instructor/courses/create" class="upload_btn" title="Create New   Course">Create New   Course</a>
+            </li>
+        }
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="upload_btn" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>
