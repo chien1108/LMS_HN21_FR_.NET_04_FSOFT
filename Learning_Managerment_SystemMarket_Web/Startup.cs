@@ -49,6 +49,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService;
 
 namespace Learning_Managerment_SystemMarket_Web
 {
@@ -109,6 +116,8 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();
             services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
             services.AddTransient<IInstructorSubCategoryService, InstructorSubCategoryService>();
+            services.AddTransient<IInstructorOrderService, InstructorOrderService>();
+
             services.AddScoped<ICategoryService,CategoryService>();
             services.AddScoped<ILanguageService, LanguageService>();
             services.AddScoped<ISubCategoryService, SubCategoryService>();

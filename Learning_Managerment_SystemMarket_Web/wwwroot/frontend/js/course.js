@@ -72,7 +72,7 @@ $(document).ready(function () {
         //post Course Content
         CourseContent.forEach((model, index) => {
             $.ajax({
-                url: 'https://localhost:44371/Instructor/Course/CreateCourseContent',
+                url: 'https://localhost:44371/InstructorFunction/Course/CreateCourseContent',
                 type: 'GET',
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
@@ -87,7 +87,7 @@ $(document).ready(function () {
             //post Lecture
             model.Lecture.forEach((model, index) => {
                 $.ajax({
-                    url: 'https://localhost:44371/Instructor/Course/CreateLecture',
+                    url: 'https://localhost:44371/InstructorFunction/Course/CreateLecture',
                     type: 'GET',
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
@@ -106,7 +106,7 @@ $(document).ready(function () {
         if (CourseContent.length > 0) {
             //post Course
             $.ajax({
-                url: 'https://localhost:44371/Instructor/Course/CreateCourse',
+                url: 'https://localhost:44371/InstructorFunction/Course/CreateCourse',
                 type: 'GET',
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
@@ -207,7 +207,7 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 alert(xhr.responseText);
             }
-        })
+        });
     });
 });
 

@@ -70,23 +70,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
 
         public ICollection<CourseContentVm> CourseContent { get; set; }
     }
-    public class CreateCourseTest
-    {
-        public string Title { get; set; }
-
-        public string SubTitile { get; set; }
-
-        public string Description { get; set; }
-
-        public bool IsFree { get; set; }
-
-        public int CategoryId { get; set; }
-
-        public int SubcategoryId { get; set; }
-
-        public int LanguageId { get; set; }
-
-    }
+ 
     public class CreateCourseVm
     {
         [DisplayName("Category")]

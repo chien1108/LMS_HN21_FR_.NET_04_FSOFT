@@ -6,7 +6,7 @@
 @inject IInstructorLanguageService languageService
 
 @{
-    Layout = "~/Areas/Instructor/Views/Shared/_InstructorLayout.cshtml";
+    Layout = "~/Areas/InstructorFunction/Views/Shared/_InstructorLayout.cshtml";
     var listCategory = await categoryService.GetAllCategory();
     var listLanguage = await languageService.GetAllLanguage();
 }
