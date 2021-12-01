@@ -1,8 +1,11 @@
 ﻿@using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
 @using Learning_Managerment_SystemMarket_Core.Models.Entities;
 @using Learning_Managerment_SystemMarket_Core.Contracts;
+@using Microsoft.AspNetCore.Identity
 
 @inject IUnitOfWork unitOfWork;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -156,8 +159,8 @@
             <span class="collapse_menu--label"></span>
         </button>
         <div class="main_logo" id="logo">
-            <a asp-action="Index" asp-controller="Student"><img src="https://coursearly.com/cursus/public/frontend/images/logo.svg" alt=""></a>
-            <a asp-action="Index" asp-controller="Student"><img class="logo-inverse" src="https://coursearly.com/cursus/public/frontend/images/ct_logo.svg" alt=""></a>
+            <a asp-action="Index" asp-controller="Student"><img src="/frontend/images/logo.svg" alt=""></a>
+            <a asp-action="Index" asp-controller="Student"><img class="logo-inverse" src="/frontend/images/ct_logo.svg" alt=""></a>
         </div>
         <div class="top-category">
             <div class="ui compact menu cate-dpdwn">
@@ -305,38 +308,7 @@
                     </div>
                 </li>
                 <li class="ui dropdown" tabindex="0">
-                    <a href="#" class="opts_account" title="Account">
-                        <img src="https://coursearly.com/cursus/public/frontend/images/hd_dp.jpg" alt="">
-                    </a>
-                    <div class="menu dropdown_account" tabindex="-1">
-                        <div class="channel_my">
-                            <div class="profile_link">
-                                <img src="https://coursearly.com/cursus/public/frontend/images/hd_dp.jpg" alt="">
-                                <div class="pd_content">
-                                    <div class="rhte85">
-                                        <h6>student student</h6>
-                                        <div class="mef78" title="Verify">
-                                            <i class="uil uil-check-circle"></i>
-                                        </div>
-                                    </div>
-                                    <span>student@student.com</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="night_mode_switch__btn">
-                            <a href="#" id="night-mode" class="btn-night-mode">
-                                <i class="uil uil-moon"></i> Night mode
-                                <span class="btn-night-mode-switch">
-                                    <span class="uk-switch-button"></span>
-                                </span>
-                            </a>
-                        </div>
-                        <a href="https://coursearly.com/cursus/public/subscription" class="item channel_item">Subscription</a>
-                        <a href="https://coursearly.com/cursus/public/profile" class="item channel_item">Setting</a>
-                        <a href="https://coursearly.com/cursus/public/help" class="item channel_item">Help</a>
-                        <a href="https://coursearly.com/cursus/public/feedback" class="item channel_item">Send Feedback</a>
-                        <a href="https://coursearly.com/cursus/public/logout" class="item channel_item">Sign Out</a>
-                    </div>
+                    <partial name="~/Views/Shared/PartialViews/_InformationGuest.cshtml">
                 </li>
             </ul>
         </div>
@@ -521,8 +493,8 @@
     <script src="/frontend/js/custom.js"></script>
     <script src="/frontend/js/night-mode.js"></script>
     <script src="/frontend/vendor/snackbar/snackbar.min.js"></script>
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>
+    @*<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>*@
+    @*<script>
         var OneSignal = OneSignal || [];
 
         OneSignal.push(function () {
@@ -546,7 +518,7 @@
 
             });
         });
-    </script>
+    </script>*@
 
     @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

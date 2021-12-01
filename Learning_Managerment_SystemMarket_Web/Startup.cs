@@ -24,10 +24,13 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SpecialDiscountRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.StudentService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
@@ -45,6 +48,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace Learning_Managerment_SystemMarket_Web
 {
@@ -105,17 +109,31 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();
             services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
             services.AddTransient<IInstructorSubCategoryService, InstructorSubCategoryService>();
-
+            services.AddScoped<ICategoryService,CategoryService>();
+            services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<ISubCategoryService, SubCategoryService>();
             //Config for Dependence Service
 
             services.AddAutoMapper(typeof(MapperProfile));
 
             services.AddIdentity<User, Role>(options =>
             {
-                options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedAccount = true;
             })
             .AddEntityFrameworkStores<LMSDbContext>()
+                .AddDefaultTokenProviders()
                 .AddDefaultUI();
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                //options.Cookie.Expiration
+
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+                options.SlidingExpiration = true;
+                options.ReturnUrlParameter = "returnUrl";
+                //options.ReturnUrlParameter=""
+            });
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -138,7 +156,7 @@ namespace Learning_Managerment_SystemMarket_Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -153,7 +171,7 @@ namespace Learning_Managerment_SystemMarket_Web
                   );
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area=StudentFunction}/{controller=Student}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

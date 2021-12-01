@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
 {
@@ -19,12 +20,14 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly UserManager<User> _userManager;
+        private readonly IUserService _userService;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
         public LoginModel(SignInManager<User> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -76,14 +79,13 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            var data = Input.Email;
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
-                {
+                {   
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
