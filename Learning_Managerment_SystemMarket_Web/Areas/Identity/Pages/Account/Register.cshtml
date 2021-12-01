@@ -18,36 +18,36 @@
             <p>Sign Up and Start Learning!</p>
             <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="ui search focus">
+                <div class="form-group search focus">
                     <div class="ui left icon input swdh11 swdh19">
                         <input asp-for="Input.FullName" class="prompt srch_explore" type="text" placeholder="Full Name">
-                        <i class="fa fa-user"></i>
+                        @*<i class="fa fa-user"></i>*@
                         <span asp-validation-for="Input.FullName" class="text-danger"></span>
                     </div>
                 </div>
 
-                <div class="ui search focus mt-15">
+                <div class="form-group ui search focus mt-15">
                     <div class="ui left icon input swdh11 swdh19">
                         <input asp-for="Input.Email" class="prompt srch_explore" type="email" placeholder="Email">
-                        <i class="fa fa-user"></i>
+                        @*<i class="fa fa-user"></i>*@
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="ui search focus mt-15">
+                <div class="form-group ui search focus mt-15">
                     <div class="ui left icon input swdh11 swdh19">
                         <input asp-for="Input.Password" class="prompt srch_explore" type="password"  placeholder="Password">
-                        <i class="fa fa-key"></i>
+                        @*<i class="fa fa-key"></i>*@
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="ui search focus mt-15">
+                <div class="form-group ui search focus mt-15">
                     <div class="ui left icon input swdh11 swdh19">
                         <input asp-for="Input.ConfirmPassword" class="prompt srch_explore" type="password"  placeholder="Re - Password">
-                        <i class="fa fa-key"></i>
+                        @*<i class="fa fa-key"></i>*@
                         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="ui form mt-30 checkbox_sign">
+                <div class="form-group ui form mt-30 checkbox_sign">
                     <div class="inline field">
                         <div class="ui checkbox mncheck">
                             <input asp-for="Input.IsCheck" type="checkbox" tabindex="0">
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="ui form mt-30 checkbox_sign">
+                <div class="form-group ui form mt-30 checkbox_sign">
                     <div class="inline field">
                         <div class="ui checkbox mncheck">
                             <input asp-for="Input.IsInstructor" type="checkbox" tabindex="0">

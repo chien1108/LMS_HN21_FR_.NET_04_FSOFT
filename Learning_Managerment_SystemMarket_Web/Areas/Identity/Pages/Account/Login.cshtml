@@ -17,19 +17,19 @@
             <h2>Welcome Back</h2>
             <p>Sign In to Your Account!</p>
             <button class="social_lnk_btn mt-15 color_btn_go"><i class="uil uil-google"></i>Continue with Google</button>
-            <form id="account" method="post">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="ui search focus mt-15">
+                <div class="form-group ui search focus mt-15">
                     <div class="ui left icon input swdh95">
-                        <i class="fa fa-envelope-o"></i>
-                        <input asp-for="Input.Email" class="prompt srch_explore " type="email" name="email" required="" maxlength="64" placeholder="Email Address">
+                        @*<i class="fa fa-envelope-o"></i>*@
+                        <input asp-for="Input.Email" class="prompt srch_explore " type="email"placeholder="Email Address">
                         <span asp-validation-for="Input.Email" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="ui search focus mt-15">
+                <div class="form-group ui search focus mt-15">
                     <div class="ui left icon input swdh95">
-                        <i class="fa fa-key"></i>
-                        <input asp-for="Input.Password" class="prompt srch_explore" type="password" name="password" required="" maxlength="50" placeholder="Password">
+                        @*<i class="fa fa-key"></i>*@
+                        <input asp-for="Input.Password" class="prompt srch_explore" type="password"placeholder="Password">
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
                 </div>

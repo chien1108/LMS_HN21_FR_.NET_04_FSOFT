@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.StudentService;
+using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
 {
@@ -92,37 +93,53 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
                 User user;
                 if (Input.IsInstructor)
                 {
-                     user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 0,FullName = Input.FullName, EmailConfirmed = true };
+                    var instructor = new Instructor { InstructorName = Input.FullName, Status = StatusIns.Deactive };
+                    var response = await _instructorService.Create(instructor);
+                    if (!response.Success)
+                    {
+                        ModelState.AddModelError("",$"{response.Message}");
+                        return Page();
+                    }
+                    var getFromDB = _instructorService.Find(x => x.InstructorName.ToLower().Trim() == Input.FullName.ToLower().Trim());
+                    user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 1, FullName = Input.FullName, EmailConfirmed = true, IdUser = getFromDB.Id };
                 }
                 else
                 {
-                     user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 1, FullName = Input.FullName,EmailConfirmed=true };
+                    var student = new Student { StudentName = Input.FullName, Status = StatusStudent.Active };
+                    var response = await _studentService.Create(student);
+                    if (!response.Success)
+                    {
+                        ModelState.AddModelError("", $"{response.Message}");
+                        return Page();
+                    }
+                    var getFromDB = _studentService.Find(x => x.StudentName.ToLower().Trim() == Input.FullName.ToLower().Trim());
+                    user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 0, FullName = Input.FullName, EmailConfirmed = true, IdUser = getFromDB.Id };
                 }
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    //var callbackUrl = Url.Page(
+                    //    "/Account/ConfirmEmail",
+                    //    pageHandler: null,
+                    //    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
+                    //    protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
+                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    //{
+                    //    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    //}
+                    //else
+                    //{
+                    //    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //    return LocalRedirect(returnUrl);
+                    //}
                 }
                 foreach (var error in result.Errors)
                 {

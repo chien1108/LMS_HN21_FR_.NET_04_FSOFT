@@ -76,7 +76,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        
+            var data = Input.Email;
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
