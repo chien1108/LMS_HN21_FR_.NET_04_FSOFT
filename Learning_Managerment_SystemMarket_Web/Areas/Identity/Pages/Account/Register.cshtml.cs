@@ -100,7 +100,6 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
                         ModelState.AddModelError("",$"{response.Message}");
                         return Page();
                     }
-                    var getFromDB = _instructorService.Find(x => x.InstructorName.ToLower().Trim() == Input.FullName.ToLower().Trim());
                     user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 1, FullName = Input.FullName, EmailConfirmed = true, IdUser = instructor.Id };
                 }
                 else
@@ -112,13 +111,13 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
                         ModelState.AddModelError("", $"{response.Message}");
                         return Page();
                     }
-                    var getFromDB = _studentService.Find(x => x.StudentName.ToLower().Trim() == Input.FullName.ToLower().Trim());
                     user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 0, FullName = Input.FullName, EmailConfirmed = true, IdUser = student.Id };
                 }
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+                    return LocalRedirect(returnUrl);
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     //var callbackUrl = Url.Page(
@@ -130,15 +129,15 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
                     //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                     //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
+                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    //{
+                    //    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    //}
+                    //else
+                    //{
+                    //    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //    return LocalRedirect(returnUrl);
+                    //}
                 }
                 foreach (var error in result.Errors)
                 {
