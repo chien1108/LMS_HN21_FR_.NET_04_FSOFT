@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.StudentService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
 {
+    [Area("AdminFunction")]
     public class StudentController : Controller
     {
         private readonly ILogger<StudentController> _logger;
@@ -31,32 +33,40 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
         {
             return View();
         }
+
+
         // GET: StudentController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: StudentController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> ChangeBlock(int id)
         {
-            return View();
+            var student = await _studentService.Find(x => x.Id == id);
+            if (student == null)
+            {
+                return RedirectToAction(nameof(ManagerStudent));
+            }
+
+            if (student.Status == StatusStudent.Active)
+            {
+                student.Status = StatusStudent.Deactive;
+            }
+            else
+            {
+                student.Status = StatusStudent.Active;
+            }
+
+            var respone = await _studentService.Update(student);
+            if (!respone.Success)
+            {
+                ModelState.AddModelError("", respone.Message);
+                return RedirectToAction(nameof(ManagerStudent));
+            }
+            return RedirectToAction(nameof(ManagerStudent));
         }
 
-        // POST: StudentController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: StudentController/Edit/5
         public ActionResult Edit(int id)
@@ -68,27 +78,6 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: StudentController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: StudentController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
