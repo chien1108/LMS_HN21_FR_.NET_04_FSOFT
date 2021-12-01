@@ -1,0 +1,87 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using Learning_Managerment_SystemMarket_Core.Models.Entities;
+@using Learning_Managerment_SystemMarket_Core.Contracts;
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.StudentService;
+
+@inject IUnitOfWork unitOfWork;
+@inject IStudentService studentService;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@{
+    Layout = "/Views/Shared/_StudentLayout.cshtml";
+    int userId = ViewBag.IdUser;
+    Student student = await studentService.Find(x => x.Id == userId);
+}
+
+
+<div class="_216b01">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-10">
+                <div class="section3125 rpt145">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="dp_dt150">
+                                <div class="img148">
+                                    <img src="https://coursearly.com/cursus/public/default.png" alt="">
+                                </div>
+                                <div class="prfledt1">
+                                    <h2>@student.StudentName</h2>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+
+                            <div class="rgt-145">
+                                <ul class="tutor_social_links">
+                                    <li>
+                                        <a href="#" class="fb"><i class="fab fa-facebook-f"></i></a>
+                                    </li>
+                                    <li><a href="#" class="tw"><i class="fab fa-twitter"></i></a></li>
+                                    <li>
+                                        <a href="#" class="ln"><i class="fab fa-linkedin-in"></i></a>
+                                    </li>
+                                    <li><a href="#" class="yu"><i class="fab fa-youtube"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="_215b17">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="course_tab_content">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade active show" id="nav-about" role="tabpanel">
+                            <div class="_htg451">
+                                <div class="_htg452">
+                                    <h3>Education</h3>
+                                    <p>FPT University</p>
+                                    <h3>Adress</h3>
+                                    <p>Ba Dinh - Ha Noi</p>
+                                    <h3>Hobies</h3>
+                                    <p>I like listen to music</p>
+                                    <h3>About Me</h3>
+                                    <p>
+                                        I am an enthusiastic software engineer. I recently completed MBA from XYZ university after receiving my BCA degree from a bc university. I also did GNIIT to enhance my programming skills.
+                                        Apart from that, I attended training sessions on business communication and software architecture. I am glad that I invested my time in additional training and courses. I believe I have more tools in my box.
+                                        I’m a people person. I really enjoy meeting and working with different sets of people and am known for being a great listener and clear communicator. While working on live projects, I realized I am a team player.
+                                        I’ve always preferred to work in groups and find that my collaborative nature is one of my strongest attributes. I am a constant learner and I invest significant time in developing my skills.
+                                        I am truly passionate about software engineering and highly excited about the possibility of working with you.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

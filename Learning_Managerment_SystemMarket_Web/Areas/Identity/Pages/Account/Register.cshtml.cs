@@ -101,7 +101,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
                         return Page();
                     }
                     var getFromDB = _instructorService.Find(x => x.InstructorName.ToLower().Trim() == Input.FullName.ToLower().Trim());
-                    user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 1, FullName = Input.FullName, EmailConfirmed = true, IdUser = getFromDB.Id };
+                    user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 1, FullName = Input.FullName, EmailConfirmed = true, IdUser = instructor.Id };
                 }
                 else
                 {
@@ -113,7 +113,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
                         return Page();
                     }
                     var getFromDB = _studentService.Find(x => x.StudentName.ToLower().Trim() == Input.FullName.ToLower().Trim());
-                    user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 0, FullName = Input.FullName, EmailConfirmed = true, IdUser = getFromDB.Id };
+                    user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 0, FullName = Input.FullName, EmailConfirmed = true, IdUser = student.Id };
                 }
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

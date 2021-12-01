@@ -1,12 +1,17 @@
 ﻿@using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
 @using Learning_Managerment_SystemMarket_Core.Models.Entities;
 @using Learning_Managerment_SystemMarket_Core.Contracts;
+@using Microsoft.AspNetCore.Identity
+
 @inject IStudentHomePageService studentHomePage;
 @inject IUnitOfWork unitOfWork;
+@inject SignInManager<User> SignInManager;
+@inject UserManager<User> UserManager;
 @{
     ViewData["Title"] = "Index";
     ICollection<Course> courseFeature = await studentHomePage.GetFeatureCourse(5);
     ICollection<Course> courseNew = await studentHomePage.GetNewestCourse(5);
+    var user = await UserManager.GetUserAsync(User);
     Layout = "/Views/Shared/_StudentLayout.cshtml";
 }
 <div class="row">
@@ -208,7 +213,14 @@
                 </div>
                 <div class="tutor_content_dt">
                     <div class="tutor150">
-                        <a href="https://coursearly.com/cursus/public/instructors/test/25" class="tutor_name">Test</a>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <a asp-area="StudentFunction" asp-action="StudentDetails" asp-controller="Student" asp-route-id="@user.IdUser" class="tutor_name">@user.FullName</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="tutor_name">Guest</a>
+                        }
                     </div>
                     <div class="tutor_cate"></div>
                     <ul class="tutor_social_links">
@@ -218,10 +230,17 @@
                         <li><a href="http://www.youtube.com/" class="yu"><i class="fab fa-youtube"></i></a></li>
                     </ul>
                     <div class="tut1250">
-                        <span class="vdt15">0 Students</span>
-                        <span class="vdt15">0 Courses</span>
+                        <span class="vdt15">Students</span>
                     </div>
-                    <a href="https://coursearly.com/cursus/public/instructors/test/25" class="prfle12link">Go To Profile</a>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a href="https://coursearly.com/cursus/public/instructors/test/25" class="prfle12link">Go To Profile</a>
+                    }
+                    else
+                    {
+                        <a href="#" class="tutor_name">Welcome</a>
+                    }
+                    
                 </div>
             </div>
             <div class="get1452">
@@ -231,8 +250,7 @@
                     skills to teach what you love.
                 </p>
                 <button class="Get_btn" onclick="window.location.href = 'https://coursearly.com/cursus/public/instructor/register';">
-                    Start
-                    Teaching
+                    Comming Soon
                 </button>
             </div>
             <div class="fcrse_3">
