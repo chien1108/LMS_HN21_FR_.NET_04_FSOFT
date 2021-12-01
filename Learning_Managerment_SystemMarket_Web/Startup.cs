@@ -46,6 +46,7 @@ using System.Threading.Tasks;
 using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService;
 
 namespace Learning_Managerment_SystemMarket_Web
 {
@@ -105,6 +106,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();
             services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
             services.AddTransient<IInstructorSubCategoryService, InstructorSubCategoryService>();
+            services.AddTransient<IInstructorOrderService, InstructorOrderService>();
 
             //Config for Dependence Service
 

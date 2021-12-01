@@ -13,7 +13,7 @@ using Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Models;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Controllers
 {
-    [Area("Instructor")]
+    [Area("InstructorFunction")]
     [Route("/Instructor/Dashboard/[Action]")]
     public class DashboardController : Controller
     {

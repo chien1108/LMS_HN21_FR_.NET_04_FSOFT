@@ -14,6 +14,7 @@ using Learning_Managerment_SystemMarket_ViewModels.Instructor.DashboardViewModel
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.LectureViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.InstructorViewModel;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.OrderViewModel;
 
 namespace Learning_Managerment_SystemMarket_Web.Mapper
 {
@@ -45,6 +46,7 @@ namespace Learning_Managerment_SystemMarket_Web.Mapper
             CreateMap<Instructor, InstructorVm>().ReverseMap();
             CreateMap<Course, CourseDetailVM>().ReverseMap();
             CreateMap<Course, CardCourseVM>().ReverseMap();
+            CreateMap<Order, OrderVm>().ReverseMap();
         }
     }
 }

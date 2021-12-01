@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Controllers
 {
-    [Area("Instructor")]
+    [Area("InstructorFunction")]
     public class CourseController : Controller
     {
         static List<CreateCourseContentVm> createCourseContentVms = new List<CreateCourseContentVm>();

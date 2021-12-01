@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Controllers
 {
-    [Area("Instructor")]
+    [Area("InstructorFunction")]
     public class HomeController : Controller
     {
         public IActionResult Index()
