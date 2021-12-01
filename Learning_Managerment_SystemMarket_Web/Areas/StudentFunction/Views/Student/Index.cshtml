@@ -1,12 +1,17 @@
 ﻿@using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
 @using Learning_Managerment_SystemMarket_Core.Models.Entities;
 @using Learning_Managerment_SystemMarket_Core.Contracts;
+@using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
+@using AutoMapper;
 @inject IStudentHomePageService studentHomePage;
 @inject IUnitOfWork unitOfWork;
+@inject IMapper _mapper;
 @{
     ViewData["Title"] = "Index";
     ICollection<Course> courseFeature = await studentHomePage.GetFeatureCourse(5);
+    var cardCourseFeature = _mapper.Map<ICollection<Course>, ICollection<CardCourseVM>>(courseFeature);
     ICollection<Course> courseNew = await studentHomePage.GetNewestCourse(5);
+    var cardCourseNew = _mapper.Map<ICollection<Course>, ICollection<CardCourseVM>>(courseNew);
     Layout = "/Views/Shared/_StudentLayout.cshtml";
 }
 <div class="row">
@@ -18,7 +23,7 @@
                 <div class="owl-carousel featured_courses owl-theme owl-loaded owl-drag">
                     <div class="owl-stage-outer">
                         <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1212px;">
-                            @foreach (var item in courseFeature)
+                            @foreach (var item in cardCourseFeature)
                             {
                                 <div class="owl-item active" style="width: 283px; margin-right: 20px;">
                                     <div class="item">
@@ -52,7 +57,7 @@
                                                 </div>
                                                 <div class="vdtodt">
                                                     <span class="vdt14">@item.Views</span>
-                                                    <span class="vdt14">@(DateTime.Now.Month-Convert.ToInt32(item.CreatedDate.Month)) month ago</span>
+                                                    <span class="vdt14">@item.RelativeCreateDate</span>
                                                 </div>
                                                 <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="crse14s">@item.Title</a>
                                                 <a href="#" class="crse-cate">
@@ -88,7 +93,7 @@
                 <div class="owl-carousel featured_courses owl-theme owl-loaded owl-drag">
                     <div class="owl-stage-outer">
                         <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1212px;">
-                            @foreach (var item in courseNew)
+                            @foreach (var item in cardCourseNew)
                             {
                                 <div class="owl-item active" style="width: 283px; margin-right: 20px;">
                                     <div class="item">
@@ -122,7 +127,7 @@
                                                 </div>
                                                 <div class="vdtodt">
                                                     <span class="vdt14">@item.Views</span>
-                                                    <span class="vdt14">@(DateTime.Now.Month-Convert.ToInt32(item.CreatedDate.Month)) month ago</span>
+                                                    <span class="vdt14">@item.RelativeCreateDate</span>
                                                 </div>
                                                 <a href="https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2" class="crse14s">@item.Title</a>
                                                 <a href="#" class="crse-cate">
