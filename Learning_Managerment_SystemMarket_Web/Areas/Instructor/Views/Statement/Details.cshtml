@@ -1,0 +1,164 @@
+﻿@model Learning_Managerment_SystemMarket_ViewModels.Instructor.InstructorViewModel.OrderVM
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, shrink-to-fit=9">
+        <meta name="robots" content="all">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+        <title>Cursus</title>
+        <meta name="theme-color" content="#ed2a26">
+
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="application-name" content="Cursus">
+        <link rel="icon" sizes="512x512" href="~/instructor/public/frontend/images/fav.png">
+
+        <link rel="icon" type="image/png" href="~/instructor/public/frontend/images/fav.png">
+        <link rel="icon" sizes="192x192" href="~/instructor/public/frontend/images/fav.png">
+
+        <link href='~/instructor/public/frontend/vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
+        <link href="~/instructor/public/frontend/css/vertical-responsive-menu.min.css" rel="stylesheet">
+        <link href="~/instructor/public/frontend/css/style.css" rel="stylesheet">
+        <link href="~/instructor/public/frontend/css/responsive.css" rel="stylesheet">
+        <link href="~/instructor/public/frontend/css/night-mode.css" rel="stylesheet">
+        <link href="~/instructor/public/frontend/css/instructor-dashboard.css" rel="stylesheet">
+        <link href="~/instructor/public/frontend/css/instructor-responsive.css" rel="stylesheet">
+        <link href="~/instructor/public/frontend/css/font-awesome.min.css" rel="stylesheet">
+        <link href="~/instructor/public/frontend/vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
+        <link href="~/instructor/public/frontend/vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+        <link href="~/instructor/public/frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="~/instructor/public/frontend/vendor/semantic/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="~/instructor/public/frontend/vendor/snackbar/snackbar.min.css">
+        <link href="~/instructor/public/frontend/css/toastr.min.css" rel="stylesheet" />
+
+        <link href="~/instructor/public/frontend/css/instructor-dashboard.css" rel="stylesheet">
+        <link href="~/instructor/public/frontend/css/instructor-responsive.css" rel="stylesheet">
+
+        <link href="~/instructor/public/frontend/css/jquery-steps.css" rel="stylesheet">
+
+    </head>
+    <body>
+        <header class="invoice_header clearfix">
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-md-8">
+                        <div class="invoice_header_main">
+                            <div class="invoice_header_item">
+                                <div class="invoice_logo">
+                                    <a href="#"><img src="https://coursearly.com/cursus/public/frontend/images/ct_logo.svg" alt=""></a>
+                                </div>
+                                <p>Invoice</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="wrapper _bg4586 _new89 p-0">
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-md-8">
+                        <div class="invoice_body">
+                            <div class="invoice_date_info">
+                                <ul>
+                                    <li>
+                                        <div class="vdt-list">
+                                            <span>Date :</span>@Model.CreatedDate.ToString("dd MMM yyyy")
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="vdt-list"><span>Order ID : </span>ord-@Model.Id</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="invoice_dts">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2 class="invoice_title">Invoice</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invoice_table">
+                                <div class="table-responsive-md">
+                                    <table class="table table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Item</th>
+                                                <th scope="col">Price</th>
+
+                                                <th scope="col">Total Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div class="user_dt_trans">
+                                                        <p>@Model.CourseName</p>
+                                                    </div>
+                                                </th>
+                                                <td>
+                                                    <div class="user_dt_trans">
+                                                        <p>$@Model.Price</p>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="user_dt_trans">
+                                                        <p>$@Model.Price</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="1"></td>
+                                                <td colspan="3">
+                                                    <div class="user_dt_trans jsk1145">
+                                                        <div class="totalinv2">
+                                                            Invoice Total : USD
+                                                            $@Model.Price
+                                                        </div>
+                                                        <p>Paid via Free</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="invoice_footer">
+                                <div class="leftfooter">
+                                    <p>Thanks for buying.</p>
+                                </div>
+                                <div class="righttfooter">
+                                    <a class="print_btn" href="javascript:window.print();">Print</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*<script src="~/instructor/public/frontend/js/vertical-responsive-menu.min.js"></script>*@
+
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+        <script src="~/instructor/public/frontend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/instructor/public/frontend/vendor/OwlCarousel/owl.carousel.js"></script>
+        <script src="~/instructor/public/frontend/vendor/semantic/semantic.min.js"></script>
+        <script src="~/instructor/public/frontend/js/custom.js"></script>
+        <script src="~/instructor/public/frontend/js/night-mode.js"></script>
+        <script src="~/instructor/public/frontend/vendor/snackbar/snackbar.min.js"></script>
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+    </body>
+</html>
+

@@ -10,16 +10,16 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
 {
     public interface ICourseServices
     {
-        Task<IList<CourseVm>> GetAllDraftCourses();
+        Task<IList<CourseVm>> GetAllDraftCourses(int id);
 
-        Task<IList<CourseVm>> GetAllCourses();
+        Task<IList<CourseVm>> GetAllCourses(int id);
 
-        Task<IList<CourseVm>> GetAllUpcomingCourses();
+        Task<IList<CourseVm>> GetAllUpcomingCourses(int id);
 
         Task<ResponseResult> CreateCourse(CreateCourseVm model, List<CreateCourseContentVm> createCourseContentVms, List<CreateLectureVm> createLectureVms);
-        Task<IList<DisCountCourseVm>> GetAllDiscountCourses();
+        Task<IList<DisCountCourseVm>> GetAllDiscountCourses(int id);
 
-        Task<ViewCourseVm> GetViewCourses();
+        Task<ViewCourseVm> GetViewCourses(int id);
 
         Task<ServiceResponse<CourseVm>> ChangeStatusToDraft(int id);
         Task<ServiceResponse<CourseVm>> ChangeStatusToPending(int id);
@@ -28,8 +28,10 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
         Task<ServiceResponse<DisCountCourseVm>> DeleteDiscount(int id);
         Task<ServiceResponse<DisCountCourseVm>> CreateDiscount(DisCountCourseVm entity);
         Task<ServiceResponse<DisCountCourseVm>> UpdateDiscount(DisCountCourseVm entity);
+        Task<ServiceResponse<DisCountCourseVm>> ClearDiscountExpire();
 
         Task<DisCountCourseVm> GetDiscountById(int id);
+        Task<CourseVm> GetCourseById(int id);
 
     }
 }

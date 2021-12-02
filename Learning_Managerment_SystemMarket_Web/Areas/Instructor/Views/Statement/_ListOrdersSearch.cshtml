@@ -1,0 +1,39 @@
+﻿@model List<Learning_Managerment_SystemMarket_ViewModels.Instructor.InstructorViewModel.OrderVM>
+
+<div class="col-lg-12 col-md-12">
+    <ul class="more_options_tt">
+        <li><button class="more_items_14 active">@Model.FirstOrDefault().CreatedDate.ToString("MMM yyyy")</button></li>
+    </ul>
+</div>
+
+<div class="col-lg-12 col-md-12">
+    <div class="table-responsive mt-30">
+        <table class="table ucp-table earning__table">
+            <thead class="thead-s">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Fees</th>
+                    <th scope="col">Invoice</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CreatedDate.ToString("dd MMMM yyyy")</td>
+                        <td>ord-@item.Id</td>
+                        <td>Sale</td>
+                        <td>@item.CourseName</td>
+                        <td>@item.Price</td>
+                        <td>-$0</td>
+                        <td><a asp-action="Details" asp-route-id="@item.Id">View</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
