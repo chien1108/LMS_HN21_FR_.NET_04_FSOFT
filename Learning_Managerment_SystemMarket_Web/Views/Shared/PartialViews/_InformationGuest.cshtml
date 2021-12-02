@@ -41,10 +41,7 @@
             <a href="https://coursearly.com/cursus/public/profile" class="item channel_item">Setting</a>
             <a href="https://coursearly.com/cursus/public/help" class="item channel_item">Help</a>
             <a href="https://coursearly.com/cursus/public/feedback" class="item channel_item">Send Feedback</a>
-            <a asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="item channel_item" method="post">
-                @{
-                    await SignInManager.SignOutAsync();
-                }
+            <a asp-area="StudentFunction" asp-action="Logout" asp-controller="Student" class="item channel_item">
                 Sign Out
             </a>
         </div>
@@ -78,10 +75,7 @@
             <a href="https://coursearly.com/cursus/public/instructor/profile" class="item channel_item">Setting</a>
             <a href="https://coursearly.com/cursus/public/instructor/help" class="item channel_item">Help</a>
             <a href="https://coursearly.com/cursus/public/instructor/feedback" class="item channel_item">Send Feedback</a>
-            <a asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="item channel_item" method="post">
-                @{
-                    await SignInManager.SignOutAsync();
-                }
+            <a asp-area="StudentFunction" asp-action="Logout" asp-controller="Student" class="item channel_item">
                 Sign Out
             </a>
         </div>

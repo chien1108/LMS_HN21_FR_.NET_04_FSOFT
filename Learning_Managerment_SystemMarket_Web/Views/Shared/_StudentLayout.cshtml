@@ -3,7 +3,7 @@
 @using Learning_Managerment_SystemMarket_Core.Contracts;
 @using Microsoft.AspNetCore.Identity
 
-@inject IUnitOfWork unitOfWork;
+@inject IUnitOfWork unitOfWork
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 <!DOCTYPE html>
@@ -12,19 +12,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Learning_Managerment_SystemMarket_Web</title>
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-        <link href="/frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/frontend/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/datatables.css">
-        <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_html5.css">
-        <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
-        <link href="~/js/summernote.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="~/plugins/select2/select2.min.css">
 
-        <link rel="stylesheet" href="~/css/style.css">
-        <link rel="stylesheet" href="~/css/components.css">*@
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link href="/frontend/css/vertical-responsive-menu.min.css" rel="stylesheet" />
     <link href="/frontend/css/style.css" rel="stylesheet" />
     <link href="/frontend/css/responsive.css" rel="stylesheet" />
@@ -37,13 +25,11 @@
     <link href="/frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/frontend/vendor/semantic/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="~/frontend/vendor/snackbar/snackbar.min.css">
-    <script src="https://cdn.onesignal.com/sdks/OneSignalPageSDKES6.js?v=151509" async=""></script>
 
+    <link href='~/frontend/vendor/unicons-2.0.1/css/animation.css' rel='stylesheet'>
 
-    @*<link href='~/frontend/vendor/unicons-2.0.1/css/animation.css' rel='stylesheet'>
-
-        <link href='~/frontend/vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
-        <link href="~/frontend/css/vertical-responsive-menu.min.css" rel="stylesheet" />
+    <link href='~/frontend/vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
+    @*<link href="~/frontend/css/vertical-responsive-menu.min.css" rel="stylesheet" />
         <link href="~/frontend/css/style.css" rel="stylesheet">
         <link href="~/frontend/css/responsive.css" rel="stylesheet">
         <link href="~/frontend/css/night-mode.css" rel="stylesheet">
@@ -143,11 +129,6 @@
                 pointer-events: none;
             }
     </style>
-
-    <!--<link rel="stylesheet" href="~/css/style5.css">-->
-    <!-- Font Awesome JS -->
-    <!--<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>-->
 </head>
 <body>
     <header class="header clearfix">
@@ -175,7 +156,7 @@
         <div class="search120">
             <div class="ui search">
                 <form asp-action="Explore" asp-controller="Student">
-                    <input type="hidden" name="_token" value="nJlOQKC6HopjqJkfwa0wgscgW71F30K9vUOA3rSU">
+                   <input type="hidden" name="_token" value="nJlOQKC6HopjqJkfwa0wgscgW71F30K9vUOA3rSU">
                     <div class="ui left icon input swdh10">
                         <input class="prompt srch10" type="text" placeholder="Search for Tuts Videos, Tutors, Tests and more.." name="searchString">
                         <i class="uil uil-search-alt icon icon1"></i>
@@ -495,30 +476,30 @@
     <script src="/frontend/vendor/snackbar/snackbar.min.js"></script>
     @*<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>*@
     @*<script>
-        var OneSignal = OneSignal || [];
+            var OneSignal = OneSignal || [];
 
-        OneSignal.push(function () {
-            OneSignal.init({
-                appId: "1ab5fe2e-5b2a-4698-a5b6-7fc074dc7053",
+            OneSignal.push(function () {
+                OneSignal.init({
+                    appId: "1ab5fe2e-5b2a-4698-a5b6-7fc074dc7053",
 
-            });
-
-        });
-        OneSignal.push(function () {
-            OneSignal.getUserId(function (userId) {
-                console.log('userId', userId);
-
-                var token = "aaJrbZ8Ic8MwnOt9BpjXXuGHYVqqAYydkbzsHYRu";
-
-                $.post("/savedevicetoken", {
-
-                    '_token': token,
-                    'device_token': userId,
                 });
 
             });
-        });
-    </script>*@
+            OneSignal.push(function () {
+                OneSignal.getUserId(function (userId) {
+                    console.log('userId', userId);
+
+                    var token = "aaJrbZ8Ic8MwnOt9BpjXXuGHYVqqAYydkbzsHYRu";
+
+                    $.post("/savedevicetoken", {
+
+                        '_token': token,
+                        'device_token': userId,
+                    });
+
+                });
+            });
+        </script>*@
 
     @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

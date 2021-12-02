@@ -18,10 +18,7 @@
         <i class="fas fa-cog"></i> Settings
     </a>
     <div class="dropdown-divider"></div>
-    <a asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="item channel_item" method="post">
-        @{
-            await SignInManager.SignOutAsync();
-        }
+    <a asp-area="StudentFunction" asp-action="Logout" asp-controller="Student" class="item channel_item">
         Sign Out
     </a>
 </div>
