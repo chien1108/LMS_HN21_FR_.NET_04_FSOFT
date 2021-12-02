@@ -9,7 +9,7 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
     {
         public string InstructorName { get; set; }
         public string HeadLine { get; set; } = null;
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         public string Website { get; set; } = null;
         public string Facebook { get; set; } = null;
         public string LinkedIn { get; set; } = null;
