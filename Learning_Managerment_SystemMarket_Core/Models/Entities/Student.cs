@@ -9,7 +9,7 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public string StudentName { get; set; }
         public StatusStudent Status { get; set; }
 
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         public ICollection<Cart> Carts { get; set; }
         public ICollection<Notification> Notifications { get; set; }
 
