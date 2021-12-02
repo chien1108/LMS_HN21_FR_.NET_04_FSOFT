@@ -1,14 +1,16 @@
 ﻿@model Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel.CourseVm;
 @using Learning_Managerment_SystemMarket_Core.Models.Entities;
 @using Microsoft.AspNetCore.Identity
-
+@using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-
+@inject ISubcriptionService _subcriptionService;
 @{
     ViewData["Title"] = "CourseDetails";
     Layout = "/Views/Shared/_StudentLayout.cshtml";
     var user = await UserManager.GetUserAsync(User);
+    
+
 }
 
 <div class="_215b01">
@@ -104,7 +106,31 @@
                             </div>
                             <div class="user_cntnt">
                                 <a href="#" class="_df7852">@Model.Instructor.InstructorName</a>
-                                <button class="subscribe-btn" onclick="window.location.href = 'https://coursearly.com/cursus/public/subscription/16/add';">Subscribe</button>
+
+                                @if (user != null)
+                                {
+                                    var subcriptionExist = await _subcriptionService.IsSubcribeExist(user.IdUser ,Model.InstructorId);
+                                    if (!subcriptionExist)
+                                    {
+                                        <a class="btn btn-danger" asp-route-InstructorId="@Model.InstructorId"
+                                           asp-route-StudentId="@user.IdUser" asp-route-CourseId="@Model.Id"
+                                           asp-area="StudentFunction" asp-action="Subcribe" asp-controller="Student" >Subscribe</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-danger" asp-route-InstructorId="@Model.InstructorId"
+                                           asp-route-StudentId="@user.IdUser" asp-route-CourseId="@Model.Id"
+                                           asp-area="StudentFunction" asp-action="UnSubcribe" asp-controller="Student">UnSubscribe</a>
+                                    }
+
+
+                                }
+                                else
+                                {
+                                    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-danger">
+                                        Subscribe
+                                    </a>
+                                }
                             </div>
                         </div>
                     </div>
