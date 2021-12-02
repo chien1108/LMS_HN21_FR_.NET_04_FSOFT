@@ -93,7 +93,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
                 User user;
                 if (Input.IsInstructor)
                 {
-                    var instructor = new Instructor { InstructorName = Input.FullName, Status = StatusIns.Deactive };
+                    var instructor = new Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor { InstructorName = Input.FullName, Status = StatusIns.Deactive };
                     var response = await _instructorService.Create(instructor);
                     if (!response.Success)
                     {
