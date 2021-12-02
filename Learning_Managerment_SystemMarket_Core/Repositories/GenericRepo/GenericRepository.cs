@@ -63,7 +63,6 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.GenericRepo
                     query = query.Include(table);
                 }
             }
-
             if (orderBy != null)
             {
                 query = orderBy(query);

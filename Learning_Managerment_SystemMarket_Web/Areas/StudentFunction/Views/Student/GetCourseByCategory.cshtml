@@ -6,6 +6,7 @@
 @inject IUnitOfWork unitOfWork
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@inject Learning_Managerment_SystemMarket_Services.StudentServices.OrderService.IOrderService orderService;
 @{
     ViewData["Title"] = "GetCourseByCategory";
     Layout = "/Views/Shared/_StudentLayout.cshtml";
@@ -108,12 +109,25 @@ else
                                         <div class="prce142">$@course.Price</div>
                                         @if (user != null)
                                         {
-                                            <a class="shrt-cart-btn" title="cart" asp-area="StudentFunction"
-                                               asp-controller="Cart" asp-action="AddCourseToCart"
-                                               asp-route-courseId="@course.Id" asp-route-studentId="@user.IdUser"
-                                               onclick="return confirm('Are you sure want to add this course to cart?')">
-                                                <i class="uil uil-shopping-cart-alt"></i>
-                                            </a>
+                                            var existingEnroll = await orderService.Find(
+                                              expression: c => c.CourseId == course.Id
+                                              && c.StudentId == user.IdUser);
+                                            if (existingEnroll == null)
+                                            {
+                                                <a class="shrt-cart-btn" title="cart" asp-area="StudentFunction"
+                                                   asp-controller="Cart" asp-action="AddCourseToCart"
+                                                   asp-route-courseId="@course.Id" asp-route-studentId="@user.IdUser"
+                                                   onclick="return confirm('Are you sure want to add this course to cart?')">
+                                                    <i class="uil uil-shopping-cart-alt"></i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a class="shrt-cart-btn" title="cart" id="login" href="#"
+                                                   onclick="return confirm('You have enrolled this course')">
+                                                    <i class="uil uil-shopping-cart-alt"></i>
+                                                </a>
+                                            }
                                         }
                                         else
                                         {

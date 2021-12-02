@@ -4,7 +4,7 @@
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-
+@inject Learning_Managerment_SystemMarket_Services.StudentServices.OrderService.IOrderService orderService;
 @{
     ViewData["Title"] = "CourseDetails";
     Layout = "/Views/Shared/_StudentLayout.cshtml";
@@ -62,13 +62,26 @@
                                 <li>
                                     @if (user != null)
                                     {
-                                        <a asp-area="StudentFunction" asp-controller="Cart"
-                                           asp-action="AddCourseToCart" asp-route-courseId="@Model.Id"
-                                           asp-route-studentId="@user.IdUser" class="btn btn-danger"
-                                           onclick="return confirm('Are you sure want to add this course to cart?')">
-                                            Add
-                                            to Cart
-                                        </a>
+                                        var existingEnroll = await orderService.Find(
+                                               expression: c => c.CourseId == Model.Id
+                                               && c.StudentId == user.IdUser);
+                                        if (existingEnroll == null)
+                                        {
+                                            <a asp-area="StudentFunction" asp-controller="Cart"
+                                               asp-action="AddCourseToCart" asp-route-courseId="@Model.Id"
+                                               asp-route-studentId="@user.IdUser" class="btn btn-danger"
+                                               onclick="return confirm('Are you sure want to add this course to cart?')">
+                                                Add
+                                                to Cart
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a id="login" href="#" class="btn btn-danger"
+                                               onclick="return confirm('You have enrolled this course')">
+                                                You have enrolled
+                                            </a>
+                                        }
                                     }
                                     else
                                     {

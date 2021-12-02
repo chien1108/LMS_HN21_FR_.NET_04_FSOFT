@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Learning_Managerment_SystemMarket_Core.Models.Entities.Order>
+
+@{
+    ViewData["Title"] = "EnrolledCourse";
+    Layout = "/Views/Shared/_StudentLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-4 ">
+            <div class="section3125 hstry142">
+                <div class="grp_titles pt-0">
+                    <div class="ht_title">Buy Courses</div>
+
+                </div>
+                <div class="tb_145">
+                    <div class="wtch125">
+                        <span class="vdt14">@Model.Count() Buy Courses</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="_14d25 mb-20">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="mhs_title">Buy Courses</h4>
+                        @foreach (var item in Model)
+                        {
+                            <div class="fcrse_1 mb-30">
+                                <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.CourseId" class="hf_img">
+                                    <img src="@item.Course.CoverImage" alt="@item.Course.Title">
+                                    <div class="course-overlay">
+                                        <div class="crse_reviews">
+                                            <i class="uil uil-star"></i>2.5
+                                        </div>
+
+                                        <span class="play_btn1"><i class="uil uil-play"></i></span>
+                                        <div class="crse_timer">
+                                            0 hours
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="hs_content">
+                                    <div class="eps_dots eps_dots10 more_dropdown">
+                                        <a href="#"><i class="uil uil-ellipsis-v"></i></a>
+                                        <div class="dropdown-content">
+                                            <a href="https://coursearly.com/cursus/public/order-invoice/25" target="_blank"><span><i class="uil uil-print"></i>Invoice</span></a>
+                                        </div>
+                                    </div>
+                                    <div class="vdtodt">
+                                        <span class="vdt14">
+                                            @item.Course.Views
+                                            views
+                                        </span>
+                                        <span class="vdt14">@(DateTime.Now - item.CreatedDate) months ago</span>
+                                    </div>
+                                    <a asp-area="StudentFunction" asp-controller="Student"
+                                       asp-action="CourseDetails" asp-route-id="@item.CourseId" 
+                                       class="crse14s title900">
+                                    @item.Course.Title
+                                    </a>
+                                    <a asp-area="StudentFunction" asp-action="GetCourseByCategory" 
+                                       asp-controller="Student" asp-route-id="@item.Course.CategoryId" class="crse-cate">
+                                        @item.Course.Category.CategoryName
+                                    </a>
+                                    <div class="auth1lnkprce">
+                                        <p class="cr1fot">
+                                            By <a href="#">@item.Course.Instructor.InstructorName</a>
+                                        </p>
+                                        <div class="prce142">
+                                            $@item.Course.Price
+                                        </div>
+                                    </div>
+                                    <div class="auth1lnkprce">
+                                        <p class="cr1fot">
+                                            buy at @item.CreatedDate
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
