@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Learning_Managerment_SystemMarket_Core.Migrations
 {
-    public partial class Initial : Migration
+    public partial class AddDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -493,7 +493,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     IsFree = table.Column<bool>(type: "bit", nullable: false),
                     IsFeatured = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     IsBestseller = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CoverImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CoverImage = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     PromotionVideo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Likes = table.Column<int>(type: "int", nullable: false, defaultValue: 0),

@@ -278,7 +278,10 @@
                     <div class="tutor150">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <a asp-area="StudentFunction" asp-action="StudentDetails" asp-controller="Student" asp-route-id="@user.IdUser" class="tutor_name">@user.FullName</a>
+                            @if (user != null)
+                            {
+                                <a asp-area="StudentFunction" asp-action="StudentDetails" asp-controller="Student" asp-route-id="@user.IdUser" class="tutor_name">@user.FullName</a>
+                            }
                         }
                         else
                         {
