@@ -2,17 +2,22 @@
 @using Learning_Managerment_SystemMarket_Core.Modules.Enums
 @using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
 @using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService
+@using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService
 @inject IStudentService _service
 @inject IUserService _userService
 @inject IStudentOrderService _studentOrderService
+@inject ISubcriptionService _subcriptionService
 @{
     int id = ViewBag.IdStudent;
     var student = await _service.Find(x => x.Id == id);
     var user = await _userService.Find(x => x.IdUser == student.Id);
 
     var listEnrollCoure = await _studentOrderService.FindAll(x => x.StudentId == student.Id
-                                                             ,null,  new List<string>() {"Student"});
+                                                             , null, new List<string>() { "Student" });
+
+    var listSubScription = await _subcriptionService.GetAllSubInstructorByStudentId(student.Id);
 }
+
 <div class="card profile-widget">
     <div class="profile-widget-header">
         <img alt="image" src="https://coursearly.com/cursus/public/upload/image/60d31155a3e8d.png" class="rounded-circle profile-widget-picture">
@@ -26,7 +31,7 @@
             <div class="profile-widget-item">
                 <div class="profile-widget-item-label">Subscriptions</div>
                 <div class="profile-widget-item-value">
-                    @student.SubCriptions
+                    @listSubScription.Count()
                 </div>
             </div>
 
