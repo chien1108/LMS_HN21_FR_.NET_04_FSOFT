@@ -123,6 +123,9 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<ICategoryService,CategoryService>();
             services.AddScoped<ILanguageService, LanguageService>();
             services.AddScoped<ISubCategoryService, SubCategoryService>();
+
+            services.AddScoped<IStudentOrderService, StudentOrderService>();
+
             //Config for Dependence Service
 
             services.AddAutoMapper(typeof(MapperProfile));
