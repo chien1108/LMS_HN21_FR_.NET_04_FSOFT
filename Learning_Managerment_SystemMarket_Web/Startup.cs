@@ -56,6 +56,7 @@ using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.CartService;
 
 namespace Learning_Managerment_SystemMarket_Web
 {
@@ -117,6 +118,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
             services.AddTransient<IInstructorSubCategoryService, InstructorSubCategoryService>();
             services.AddTransient<IInstructorOrderService, InstructorOrderService>();
+            services.AddTransient<ICartService, CartService>();
 
             services.AddScoped<ICategoryService,CategoryService>();
             services.AddScoped<ILanguageService, LanguageService>();

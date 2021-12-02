@@ -47,6 +47,7 @@ namespace Learning_Managerment_SystemMarket_Web.Mapper
             CreateMap<Course, CourseDetailVM>().ReverseMap();
             CreateMap<Course, CardCourseVM>().ReverseMap();
             CreateMap<Order, OrderVm>().ReverseMap();
+            CreateMap<CartItemVM, Cart>().ReverseMap();
         }
     }
 }

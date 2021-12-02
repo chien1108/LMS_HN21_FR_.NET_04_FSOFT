@@ -77,8 +77,22 @@
                                                         By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">@item.Instructor.InstructorName</a>
                                                     </p>
                                                     <div class="prce142">$@item.Price</div>
-                                                    <button onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/2//add';" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
-
+                                                    @if (user != null)
+                                                    {
+                                                        <a class="shrt-cart-btn" title="cart" asp-area="StudentFunction"
+                                                           asp-controller="Cart" asp-action="AddCourseToCart"
+                                                           asp-route-courseId="@item.Id" asp-route-studentId="@user.IdUser"
+                                                           onclick="return confirm('Are you sure want to add this course to cart?')">
+                                                            <i class="uil uil-shopping-cart-alt"></i>
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="shrt-cart-btn" title="cart" id="login" asp-area="Identity" asp-page="/Account/Login"
+                                                                onclick="return confirm('You must login to add this course to cart')">
+                                                            <i class="uil uil-shopping-cart-alt"></i>
+                                                        </a>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +121,7 @@
                                 <div class="owl-item active" style="width: 283px; margin-right: 20px;">
                                     <div class="item">
                                         <div class="fcrse_1 mb-20">
-                                            <a asp-area="SudentFunction" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
+                                            <a asp-area="SudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
                                                 <img src="~/frontend/images/courses/@item.CoverImage" alt="">
                                                 <div class="course-overlay">
                                                     <div class="crse_reviews">
@@ -147,8 +161,22 @@
                                                         By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">@item.Instructor.InstructorName</a>
                                                     </p>
                                                     <div class="prce142">$@item.Price</div>
-                                                    <button onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/2//add';" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
-
+                                                    @if (user != null)
+                                                    {
+                                                        <a class="shrt-cart-btn" title="cart" asp-area="StudentFunction"
+                                                           asp-controller="Cart" asp-action="AddCourseToCart"
+                                                           asp-route-courseId="@item.Id" asp-route-studentId="@user.IdUser"
+                                                           onclick="return confirm('Are you sure want to add this course to cart?')">
+                                                            <i class="uil uil-shopping-cart-alt"></i>
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="shrt-cart-btn" title="cart" id="login" asp-area="Identity" asp-page="/Account/Login"
+                                                           onclick="return confirm('You must login to add this course to cart')">
+                                                            <i class="uil uil-shopping-cart-alt"></i>
+                                                        </a>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
