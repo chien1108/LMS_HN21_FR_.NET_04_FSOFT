@@ -3,27 +3,19 @@
 @using Learning_Managerment_SystemMarket_Core.Contracts;
 @using Microsoft.AspNetCore.Identity
 
-@inject IUnitOfWork unitOfWork;
+@inject IUnitOfWork unitOfWork
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@{ 
+    var user = await UserManager.GetUserAsync(User);
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Learning_Managerment_SystemMarket_Web</title>
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-        <link href="/frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/frontend/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/datatables.css">
-        <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/custom_dt_html5.css">
-        <link rel="stylesheet" type="text/css" href="~/plugins/table/datatable/dt-global_style.css">
-        <link href="~/js/summernote.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="~/plugins/select2/select2.min.css">
 
-        <link rel="stylesheet" href="~/css/style.css">
-        <link rel="stylesheet" href="~/css/components.css">*@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     <link href="/frontend/css/vertical-responsive-menu.min.css" rel="stylesheet" />
     <link href="/frontend/css/style.css" rel="stylesheet" />
@@ -37,117 +29,9 @@
     <link href="/frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/frontend/vendor/semantic/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="~/frontend/vendor/snackbar/snackbar.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
     <script src="https://cdn.onesignal.com/sdks/OneSignalPageSDKES6.js?v=151509" async=""></script>
-
-
-    @*<link href='~/frontend/vendor/unicons-2.0.1/css/animation.css' rel='stylesheet'>
-
-        <link href='~/frontend/vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
-        <link href="~/frontend/css/vertical-responsive-menu.min.css" rel="stylesheet" />
-        <link href="~/frontend/css/style.css" rel="stylesheet">
-        <link href="~/frontend/css/responsive.css" rel="stylesheet">
-        <link href="~/frontend/css/night-mode.css" rel="stylesheet">
-        <link href="~/frontend/css/instructor-dashboard.css" rel="stylesheet">
-        <link href="~/frontend/css/instructor-responsive.css" rel="stylesheet">
-        <link href="~/frontend/css/font-awesome.min.css" rel="stylesheet">
-        <link href="~/frontend/vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
-        <link href="~/frontend/vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
-        <link href="~/frontend/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="~/frontend/vendor/semantic/semantic.min.css">*@
-
-    <style>
-        .glot-sub-active {
-            color: #1296ba !important;
-        }
-
-        .glot-sub-hovered {
-            color: #1296ba !important;
-        }
-
-        .glot-sub-clzz {
-            cursor: pointer;
-            line-height: 1.2;
-            font-size: 28px;
-            color: #FFCC00;
-            background: rgba(17, 17, 17, 0.7);
-        }
-
-            .glot-sub-clzz:hover {
-                color: #1296ba !important;
-            }
-
-        .ej-trans-sub {
-            position: absolute;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999999;
-            cursor: move;
-        }
-
-            .ej-trans-sub > span {
-                color: #3CF9ED;
-                font-size: 18px;
-                text-align: center;
-                padding: 0 16px;
-                line-height: 1.5;
-                background: rgba(32, 26, 25, 0.8);
-                /*// text-shadow: 0px 1px 4px black;*/
-                padding: 0 8px;
-                line-height: 1.2;
-                font-size: 16px;
-                color: #0CB1C7;
-                background: rgba(67, 65, 65, 0.7);
-            }
-
-        .ej-main-sub {
-            position: absolute;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999999;
-            cursor: move;
-            padding: 0 8px;
-        }
-
-            .ej-main-sub > span {
-                color: white;
-                font-size: 20px;
-                line-height: 1.5;
-                text-align: center;
-                background: rgba(32, 26, 25, 0.8);
-                /*// text-shadow: 0px 1px 4px black;*/
-                padding: 2px 8px;
-                line-height: 1.2;
-                font-size: 28px;
-                color: #FFCC00;
-                background: rgba(17, 17, 17, 0.7);
-            }
-
-            .ej-main-sub .glot-sub-clzz {
-                background: transparent !important
-            }
-
-        .tran-subtitle > .view-icon-edit-sub {
-            cursor: pointer;
-            padding-left: 10px;
-            top: 2px;
-            position: relative;
-        }
-
-            .tran-subtitle > .view-icon-edit-sub > svg {
-                width: 16px;
-                height: 16px;
-                pointer-events: none;
-            }
-    </style>
-
-    <!--<link rel="stylesheet" href="~/css/style5.css">-->
-    <!-- Font Awesome JS -->
-    <!--<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>-->
+    <link href="~/css/studentStyle.css" rel="stylesheet" />
 </head>
 <body>
     <header class="header clearfix">
@@ -189,7 +73,20 @@
                     <partial name="~/Views/Shared/_LoginPartial.cshtml">
                 </li>
                 <li>
-                    <a href="https://coursearly.com/cursus/public/cart" class="option_links" title="cart"><i class="uil uil-shopping-cart-alt"></i><span class="noti_count">0</span></a>
+                    @if (user != null)
+                    {
+                        <a asp-area="StudentFunction" asp-controller="Cart" asp-action="GetCartByStudentId" asp-route-id="@user.IdUser" class="option_links" title="cart">
+                            <i class="uil uil-shopping-cart-alt"></i>
+                            <span class="noti_count">0</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-area="StudentFunction" asp-controller="Cart" asp-action="GetCartByStudentId" asp-route-id="" class="option_links" title="cart">
+                            <i class="uil uil-shopping-cart-alt"></i>
+                            <span class="noti_count">0</span>
+                        </a>
+                    }
                 </li>
                 <li class="ui dropdown" tabindex="0">
                     <a href="#" class="option_links" title="Messages"><i class="uil uil-envelope-alt"></i><span class="noti_count">5</span></a>
@@ -493,68 +390,7 @@
     <script src="/frontend/js/custom.js"></script>
     <script src="/frontend/js/night-mode.js"></script>
     <script src="/frontend/vendor/snackbar/snackbar.min.js"></script>
-    @*<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>*@
-    @*<script>
-        var OneSignal = OneSignal || [];
-
-        OneSignal.push(function () {
-            OneSignal.init({
-                appId: "1ab5fe2e-5b2a-4698-a5b6-7fc074dc7053",
-
-            });
-
-        });
-        OneSignal.push(function () {
-            OneSignal.getUserId(function (userId) {
-                console.log('userId', userId);
-
-                var token = "aaJrbZ8Ic8MwnOt9BpjXXuGHYVqqAYydkbzsHYRu";
-
-                $.post("/savedevicetoken", {
-
-                    '_token': token,
-                    'device_token': userId,
-                });
-
-            });
-        });
-    </script>*@
-
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/js/popper.min.js"></script>
-        <script src="~/js/nicescroll.min.js"></script>
-        <script src="~/js/moment.min.js"></script>
-
-        <script src="~/plugins/table/datatable/datatables.js"></script>
-        <script src="~/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
-        <script src="~/plugins/table/datatable/button-ext/jszip.min.js"></script>
-        <script src="~/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
-        <script src="~/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
-        <script src="~/js/stisla.js"></script>
-        <script src="~/plugins/select2/select2.min.js"></script>
-        <script src="~/js/scripts.js"></script>
-        <script src="~/js/custom.js"></script>
-        <script src="~/js/chart.js"></script>
-
-        <script src="~/js/summernote.min.js"></script>*@
-
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
-    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
-    <!-- Popper.JS -->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>-->
-    <!-- Bootstrap JS -->
-    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $(this).toggleClass('active');
-            });
-        });
-    </script>-->
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

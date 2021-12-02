@@ -1,0 +1,97 @@
+﻿@model Learning_Managerment_SystemMarket_ViewModels.StudentViewModels.CartVM
+@using Learning_Managerment_SystemMarket_Core.Models.Entities;
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = "GetCartByStudentId";
+    Layout = "/Views/Shared/_StudentLayout.cshtml";
+    var user = await UserManager.GetUserAsync(User);
+}
+
+@if (Model.Carts == null)
+{
+    <div class="col-md-12">
+        <div class="_14d25">
+            <div class="row mt-30">
+                <div class="col-md-12 text-center">
+                    <div class="no-data-div">
+                        <img src="https://coursearly.com/cursus/public/nodata.svg" alt="No Data" srcset="">
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <div class="main-loader mt-50">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <h2 class="mx-auto mt-4 text-center text-success">Shopping Cart</h2>
+    <table id="tblData" class="table">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Price
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Carts)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Title)
+                    </td>
+                    <td>
+                        <img style="width:65px; height: 50px;" src="@item.Course.CoverImage" alt="">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Price)
+                    </td>
+                    <td>
+                        <a asp-action="DeleteCourseFromCart" asp-route-courseId="@item.CourseId"
+                           asp-route-studentId="@item.StudentId" class="btn btn-danger"
+                           onclick="return confirm('Are you sure want to delete this course from cart?')">
+                            <i class="uil uil-trash-alt"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>
+                    Total: @Model.Total $
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    @if (Model.Carts.Count() > 0)
+    {
+        <a asp-area="StudentFunction" asp-controller="Cart" asp-action="Payment"
+           asp-route-studentId="@user.IdUser" class="btn btn-warning"
+           onclick="return alert('Success')">
+            Buy
+        </a>
+    }
+}
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#tblData').DataTable();
+        });
+    </script>
+}

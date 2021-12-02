@@ -93,14 +93,13 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
                 User user;
                 if (Input.IsInstructor)
                 {
-                    var instructor = new Instructor { InstructorName = Input.FullName, Status = StatusIns.Deactive };
+                    var instructor = new Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor { InstructorName = Input.FullName, Status = StatusIns.Deactive };
                     var response = await _instructorService.Create(instructor);
                     if (!response.Success)
                     {
                         ModelState.AddModelError("",$"{response.Message}");
                         return Page();
                     }
-                    var getFromDB = _instructorService.Find(x => x.InstructorName.ToLower().Trim() == Input.FullName.ToLower().Trim());
                     user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 1, FullName = Input.FullName, EmailConfirmed = true, IdUser = instructor.Id };
                 }
                 else
@@ -112,33 +111,14 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
                         ModelState.AddModelError("", $"{response.Message}");
                         return Page();
                     }
-                    var getFromDB = _studentService.Find(x => x.StudentName.ToLower().Trim() == Input.FullName.ToLower().Trim());
                     user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 0, FullName = Input.FullName, EmailConfirmed = true, IdUser = student.Id };
                 }
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    //var callbackUrl = Url.Page(
-                    //    "/Account/ConfirmEmail",
-                    //    pageHandler: null,
-                    //    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                    //    protocol: Request.Scheme);
-
-                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
+                    returnUrl = "/Identity/Account/Login";
+                    return LocalRedirect(returnUrl);
                 }
                 foreach (var error in result.Errors)
                 {

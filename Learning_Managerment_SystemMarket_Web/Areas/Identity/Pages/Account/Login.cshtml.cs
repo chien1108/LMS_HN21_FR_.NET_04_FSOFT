@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Learning_Managerment_SystemMarket_Core.Models.Entities;
+﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
 {
@@ -24,7 +21,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<User> signInManager, 
+        public LoginModel(SignInManager<User> signInManager,
             ILogger<LoginModel> logger,
             UserManager<User> userManager,
             IUserService userService)
@@ -49,6 +46,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
@@ -85,7 +83,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
-                {   
+                {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }

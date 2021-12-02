@@ -27,6 +27,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         private readonly ISavedCourseService _savedCourseService;
         private readonly ISubcriptionService _subcriptionService;
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
         public StudentController(
             IStudentHomePageService studentHomePageService
@@ -35,7 +36,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             , IMapper mapper
             , IStudentExploreService studentExploreService,
             ISubcriptionService subcriptionService,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            SignInManager<User> signInManager)
 
         {
             _studentHomePageService = studentHomePageService;
@@ -45,6 +47,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             _savedCourseService = savedCourseService;
             _subcriptionService = subcriptionService;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         /// <summary>
@@ -54,10 +57,16 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-            if (user != null && user.WhoIs == 2)
+            if (user != null )
             {
-                
-                return RedirectToAction("ManagerCategory", "Category", new { area = "AdminFunction" });
+                if (user.WhoIs == 2)
+                {
+                    return RedirectToAction("ManagerCategory", "Category", new { area = "AdminFunction" });
+                }
+                else if (user.WhoIs == 1)
+                {
+                    return RedirectToAction("Index","Dashboard", new { area = "InstructorFunction" });
+                }
             }
             return View();
         }
@@ -78,6 +87,11 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             return View(model);
         }
 
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Index), "Student");
+        }
         public async Task<IActionResult> StudentDetails(int id)
         {
             var user = await _unitOfWork.Students.FindByCondition( q => q.Id == id);
@@ -142,7 +156,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
                 savedCourse.CreatedDate = DateTime.Now;
 
                 var isSuccess = await _savedCourseService.CreateSavedCourse(savedCourse);
-                if (isSuccess.Success == false)
+                if (!isSuccess.Success)
                 {
                     ModelState.AddModelError("", isSuccess.Message);
                     return RedirectToAction(nameof(Index));
@@ -165,16 +179,42 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
                     return View(model);
                 }
                 var subScription = _mapper.Map<SubScription>(model);
-                subScription.StudentId = 1;
+                
                 subScription.CreatedDate = DateTime.Now;
 
                 var isSuccess = await _subcriptionService.CreateSubcription(subScription);
-                if (isSuccess.Success == false)
+                if (!isSuccess.Success)
                 {
                     ModelState.AddModelError("", isSuccess.Message);
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("CourseDetails", new { id = model.CourseId});
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("CourseDetails", new { id = model.CourseId });
+            }
+            catch
+            {
+                return View(model);
+            }
+        } 
+        public async Task<IActionResult> UnSubcribe(SubScriptionVM model)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var subScription = _mapper.Map<SubScription>(model);
+                
+                
+
+                var isSuccess = await _subcriptionService.DeleteSubcription(subScription);
+                if (!isSuccess.Success)
+                {
+                    ModelState.AddModelError("", isSuccess.Message);
+                    return RedirectToAction("CourseDetails", new { id = model.CourseId });
+                }
+                return RedirectToAction("CourseDetails", new { id = model.CourseId });
             }
             catch
             {

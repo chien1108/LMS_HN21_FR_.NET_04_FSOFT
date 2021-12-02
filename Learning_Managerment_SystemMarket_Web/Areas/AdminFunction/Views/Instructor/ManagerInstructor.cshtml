@@ -1,18 +1,20 @@
-﻿@using Learning_Managerment_SystemMarket_Services.AdminFunction.StudentService
-@using Learning_Managerment_SystemMarket_Core.Modules.Enums;
+﻿@using Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorService
 @using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
-@inject IStudentService _service
+@using Learning_Managerment_SystemMarket_Core.Modules.Enums
+@inject IInstructorService _service
 @inject IUserService _userService
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var listStudent = await _service.FindAll();
+    var listInstructor = await _service.FindAll();
+
 }
+
 <section class="section">
     <div class="section-header">
-        <h1>Students</h1>
+        <h1>Instructors</h1>
         <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a asp-controller="Home" asp-action="Index">Home</a></div>
-            <div class="breadcrumb-item"><a href="#">Students</a></div>
+            <div class="breadcrumb-item"><a href="#">Instructors</a></div>
         </div>
     </div>
     <div class="section-body">
@@ -20,7 +22,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header d-felx justify-content-between">
-                        <h4>Students List</h4>
+                        <h4>Instructors List</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -30,59 +32,67 @@
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
                                              #
-                                        : activate to sort column descending" style="width: 86.8906px;">
+                                        : activate to sort column descending" style="width: 14.2969px;">
                                                 #
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
                                             Name
-                                        : activate to sort column ascending" style="width: 301.875px;">
+                                        : activate to sort column ascending" style="width: 183.203px;">
                                                 Name
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
                                             Email
-                                        : activate to sort column ascending" style="width: 479.938px;">
+                                        : activate to sort column ascending" style="width: 224.438px;">
                                                 Email
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
                                             Status
-                                        : activate to sort column ascending" style="width: 199.109px;">
+                                        : activate to sort column ascending" style="width: 89.8594px;">
                                                 Status
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
                                             Action
-                                        : activate to sort column ascending" style="width: 220.188px;">
+                                        : activate to sort column ascending" style="width: 222.203px;">
                                                 Action
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @for (int i = 1; i <= listStudent.Count; i++)
+                                        @for (int i = 1; i <= listInstructor.Count; i++)
                                         {
                                             <tr role="row">
-                                                <td class="sorting_1">@i</td>
+                                                <td class="sorting_1"><span>@i</span></td>
                                                 <td>
-                                                    <a asp-area="AdminFunction" asp-controller="Student" asp-action="StudentInfo" asp-route-id="@listStudent.ElementAt(i-1).Id">
-                                                        @listStudent.ElementAt(i - 1).StudentName
-                                                    </a>
+                                                    @listInstructor.ElementAt(i - 1).InstructorName
+                                                    <span class="badge badge-dark m-1">Popular</span>
                                                 </td>
-                                                @{
-                                                    var userStudent = await _userService.Find(u => u.IdUser == listStudent.ElementAt(i - 1).Id);
+                                                @{ 
+                                                    var userInstructor = await _userService.Find(u => u.IdUser == listInstructor.ElementAt(i - 1).Id);
                                                 }
-                                                <td>@userStudent.Email</td>
+                                                <td>@userInstructor.Email</td>
+
                                                 <td>
-                                                    @if (listStudent.ElementAt(i - 1).Status == StatusStudent.Active)
+                                                    @if (listInstructor.ElementAt(i - 1).Status == StatusIns.Active)
                                                     {
                                                         <span class="badge badge-success m-1">Active</span>
                                                     }
                                                     else
                                                     {
-                                                        <span class="badge badge-danger m-1">Block</span>
+                                                        <span class="badge badge-danger m-1">De-Active</span>
                                                     }
                                                 </td>
                                                 <td class="d-flex">
-                                                    <form asp-area="AdminFunction" asp-controller="Student" asp-action="ChangeBlock" asp-route-id="@listStudent.ElementAt(i-1).Id">
-                                                        <button type="button" class="btn btn-sm btn-outline-danger btn-icon m-1" onclick="confirm('Are you sure you want to do this?') ? this.parentElement.submit() : ''">
-                                                            @if (listStudent.ElementAt(i - 1).Status == StatusStudent.Active)
+                                                    <form action="" method="post">
+                                                        <button type="button" class="btn btn-sm btn-outline-dark btn-icon m-1" onclick="confirm('Are you sure you want to do this?') ? this.parentElement.submit() : ''">
+                                                            <span class="ul-btn__icon">
+                                                                Popular
+                                                            </span>
+                                                        </button>
+                                                    </form>
+                                                    <form asp-area="AdminFunction" asp-controller="Instructor" asp-action="ChangeBlock" asp-route-id="@listInstructor.ElementAt(i-1).Id">
+                                                        <button type="button" class="btn btn-sm btn-outline-danger btn-icon m-1"
+                                                               onclick="confirm('Are you sure you want to do this?') ? this.parentElement.submit() : ''">
+                                                            @if (listInstructor.ElementAt(i - 1).Status == StatusIns.Active)
                                                             {
                                                                 <span class="ul-btn__icon">
                                                                     Block
@@ -96,6 +106,9 @@
                                                             }
                                                         </button>
                                                     </form>
+                                                    <a class="btn btn-sm btn-outline-info btn-icon m-1" href="https://coursearly.com/cursus/public/admin/instructors/3">
+                                                        <span class="ul-btn__icon"><i class="far fa-eye"></i></span>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         }
@@ -106,6 +119,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>

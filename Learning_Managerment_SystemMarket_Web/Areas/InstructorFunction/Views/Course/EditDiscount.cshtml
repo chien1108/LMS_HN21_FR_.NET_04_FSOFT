@@ -9,12 +9,13 @@
             <div class="col-lg-8">
                 <div class="discount_form">
                     <form asp-action="EditDiscount" method="post">
-                        <input type="hidden" name="_token" value="1I6KrpUtxSRxT4RmsC4NNBOUdmGgIOilQzXH4su3">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="row">
                             <input type="hidden" class="prompt srch_explore" asp-for="Id" />
-                            <input type="hidden" class="prompt srch_explore" asp-for="Status"/>
-                            <input type="hidden" class="prompt srch_explore" asp-for="CourseId"/>
-                            <input type="hidden" class="prompt srch_explore" asp-for="InstructorId"/>
+                            <input type="hidden" class="prompt srch_explore" asp-for="Status" />
+                            <input type="hidden" class="prompt srch_explore" asp-for="CourseId" />
+                            <input type="hidden" class="prompt srch_explore" asp-for="InstructorId" />
+                            <input type="hidden" class="prompt srch_explore" asp-for="CreatedDate" />
                             <div class="col-lg-12 col-md-12">
                                 <div class="ui search focus mt-20 lbel25">
                                     <label>Discount Amount</label>

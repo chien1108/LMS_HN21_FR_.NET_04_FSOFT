@@ -1,8 +1,15 @@
 ﻿@model IEnumerable<Learning_Managerment_SystemMarket_ViewModels.StudentViewModels.CourseDetailVM>
+@using Learning_Managerment_SystemMarket_Core.Models.Entities;
+@using Learning_Managerment_SystemMarket_Core.Contracts;
+@using Microsoft.AspNetCore.Identity
 
+@inject IUnitOfWork unitOfWork
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @{
     ViewData["Title"] = "GetCourseByCategory";
     Layout = "/Views/Shared/_StudentLayout.cshtml";
+    var user = await UserManager.GetUserAsync(User);
 }
 <div class="col-xl-12 col-lg-8">
     <div class="section3125">
@@ -40,16 +47,16 @@
 }
 else
 {
-    @foreach (var course in Model)
-    {
-        <div class="col-md-12">
-            <div class="_14d25">
-                <div class="row mt-30">
+    <div class="col-md-12">
+        <div class="_14d25">
+            <div class="row mt-30">
+                @foreach (var course in Model)
+                {
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="item">
                             <div class="fcrse_1 mb-20">
-                                <a href="https://coursearly.com/cursus/public/courses/wordpress-for-beginner-:-create-a-website-step-by-step/7" class="fcrse_img">
-                                    <img src="https://coursearly.com/cursus/public/upload/image/60d6cca34e000.jpg" alt="">
+                                <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@course.Id" class="fcrse_img">
+                                    <img src="@course.CoverImage" alt="">
                                     <div class="course-overlay">
                                         <div class="badge_seller">Bestseller</div>
                                         <div class="crse_reviews">
@@ -84,7 +91,7 @@ else
                                     </div>
                                     <div class="vdtodt">
                                         <span class="vdt14">@course.Views views</span>
-                                        @{ 
+                                        @{
                                             var month = (@DateTime.Now - @course.CreatedDate);
                                         }
                                         <span class="vdt14">@month.TotalDays days ago</span>
@@ -99,20 +106,33 @@ else
                                             By <a href="https://coursearly.com/cursus/public/instructors/amritpal/12">@course.Instructor.InstructorName</a>
                                         </p>
                                         <div class="prce142">$@course.Price</div>
-                                        <button onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/7//add';" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
+                                        @if (user != null)
+                                        {
+                                            <a class="shrt-cart-btn" title="cart" asp-area="StudentFunction"
+                                               asp-controller="Cart" asp-action="AddCourseToCart"
+                                               asp-route-courseId="@course.Id" asp-route-studentId="@user.IdUser"
+                                               onclick="return confirm('Are you sure want to add this course to cart?')">
+                                                <i class="uil uil-shopping-cart-alt"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a class="shrt-cart-btn" title="cart" id="login" asp-area="Identity" asp-page="/Account/Login"
+                                               onclick="return confirm('You must login to add this course to cart')">
+                                                <i class="uil uil-shopping-cart-alt"></i>
+                                            </a>
+                                        }
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-12 text-center">
-                        <div class="main-loader mt-50">
-                        </div>
+                }
+                <div class="col-md-12 text-center">
+                    <div class="main-loader mt-50">
                     </div>
                 </div>
             </div>
         </div>
-
-    }
+    </div>
 }

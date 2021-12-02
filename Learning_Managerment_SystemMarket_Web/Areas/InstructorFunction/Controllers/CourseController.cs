@@ -5,6 +5,7 @@ using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.LectureViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.ResponseResult;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -23,17 +24,20 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
         private readonly IInstructorSubCategoryService _subCategoryService;
         private readonly ICourseServices _courseServices;
         private static byte[] _picture;
+        private readonly UserManager<User> _userManager;
 
-        public CourseController(IInstructorSubCategoryService subCategoryService, ICourseServices courseServices)
+        public CourseController(IInstructorSubCategoryService subCategoryService, ICourseServices courseServices, UserManager<User> userManager)
         {
             _subCategoryService = subCategoryService;
             _courseServices = courseServices;
+            _userManager = userManager;
         }
 
         // GET: CourseController
         public ActionResult Index()
         {
-            var courses = _courseServices.GetAllCourses();
+            var instructor = _userManager.GetUserAsync(User).Result;
+            var courses = _courseServices.GetAllCourses(instructor.IdUser);
             var model = new DisCountCourseVm
             {
                 Courses = courses.Result
@@ -157,10 +161,15 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             var result = _courseServices.CreateDiscount(model);
 
             if (result.Result.Success == true)
-            {
+            {                
+                TempData["Message"] = result.Result.Message;
                 return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
+            else
+            {
+                TempData["Message"] = result.Result.Message;
+                return RedirectToAction(nameof(Index));
+            }            
         }
 
         [HttpGet]
@@ -227,9 +236,14 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             var result = _courseServices.Delete(id);
             if (result.Result.Success == true)
             {
+                TempData["Message"] = result.Result.Message;
                 return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
+            else
+            {
+                TempData["Message"] = result.Result.Message;
+                return RedirectToAction(nameof(Index));
+            }            
         }
 
         public ActionResult ChangeStatusToDraft(int id)
@@ -237,9 +251,14 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             var course = _courseServices.ChangeStatusToDraft(id);
             if (course.Result.Success == false)
             {
+                TempData["Message"] = course.Result.Message;
                 return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
+            else
+            {
+                TempData["Message"] = course.Result.Message;
+                return RedirectToAction(nameof(Index));
+            }            
         }
 
         public ActionResult ChangeStatusToPending(int id)
@@ -247,23 +266,27 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             var course = _courseServices.ChangeStatusToPending(id);
             if (course.Result.Success == false)
             {
+                TempData["Message"] = course.Result.Message;
                 return RedirectToAction(nameof(Index));
             }
             else
             {
+                TempData["Message"] = course.Result.Message;
                 return RedirectToAction(nameof(Index));
             }
         }
 
         public ActionResult ChangeStatus(int id)
-        {
+        {            
             var discountCourse = _courseServices.ChangeStatus(id);
             if (discountCourse.Result.Success == false)
-            {
+            {                
+                TempData["Message"] = discountCourse.Result.Message;
                 return RedirectToAction(nameof(Index));
             }
             else
-            {
+            {  
+                TempData["Message"] = discountCourse.Result.Message;
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -275,9 +298,14 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             var result = _courseServices.DeleteDiscount(id);
             if (result.Result.Success == true)
             {
+                TempData["Message"] = result.Result.Message;
                 return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
+            else
+            {
+                TempData["Message"] = result.Result.Message;
+                return RedirectToAction(nameof(Index));
+            }            
         }
 
         [HttpGet]
@@ -305,8 +333,11 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
                 ModelState.AddModelError("", result.Result.Message);
                 return RedirectToAction(nameof(EditDiscount), new { id = entity.Id });
             }
-
-            return RedirectToAction(nameof(Index));
+            else
+            {
+                TempData["Message"] = result.Result.Message;
+                return RedirectToAction(nameof(Index));
+            }           
         }
     }
 }
