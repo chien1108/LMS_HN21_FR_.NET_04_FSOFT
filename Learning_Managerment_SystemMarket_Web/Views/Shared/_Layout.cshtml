@@ -92,24 +92,7 @@
                 </div>
             </li>
             <li class="dropdown">
-                <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                    <img alt="image" src="https://coursearly.com/cursus/public/upload/image/60dee1e59cf8d.png" class="rounded-circle mr-1">
-                    <div class="d-sm-none d-lg-inline-block">Hi, Admin</div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <div class="dropdown-title">Logged in </div>
-                    <a href="https://coursearly.com/cursus/public/admin/profile" class="dropdown-item has-icon">
-                        <i class="far fa-user"></i> Profile
-                    </a>
-
-                    <a href="https://coursearly.com/cursus/public/admin/setting/general" class="dropdown-item has-icon">
-                        <i class="fas fa-cog"></i> Settings
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="https://coursearly.com/cursus/public/admin/logout" class="dropdown-item has-icon text-danger">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </a>
-                </div>
+                <partial name="~/Views/Shared/PartialViews/_InformationAdmin.cshtml">
             </li>
         </ul>
     </nav>
@@ -167,7 +150,7 @@
                 <li class="menu-header">Students</li>
 
                 <li class="">
-                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/students">
+                    <a class="nav-link" asp-area="AdminFunction" asp-controller="Student" asp-action="ManagerStudent">
                         <i class="fas fa-user"></i>
                         <span>Student</span>
                     </a>
@@ -175,7 +158,7 @@
                 <li class="menu-header">Instructor</li>
 
                 <li class="">
-                    <a class="nav-link" href="https://coursearly.com/cursus/public/admin/instructors">
+                    <a class="nav-link" asp-area="AdminFunction" asp-controller="Instructor" asp-action="ManagerInstructor">
                         <i class="fas fa-chalkboard-teacher"></i>
                         <span>Instructor</span>
                     </a>

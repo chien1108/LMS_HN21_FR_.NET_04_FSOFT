@@ -4,16 +4,16 @@ using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
-using Microsoft.AspNetCore.Mvc;
 using Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
-using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
-
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controllers
 {
@@ -26,6 +26,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISavedCourseService _savedCourseService;
         private readonly ISubcriptionService _subcriptionService;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
         public StudentController(
             IStudentHomePageService studentHomePageService
@@ -33,25 +35,47 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             , IUnitOfWork unitOfWork
             , IMapper mapper
             , IStudentExploreService studentExploreService,
-            ISubcriptionService subcriptionService)
+            ISubcriptionService subcriptionService,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager)
 
         {
             _studentHomePageService = studentHomePageService;
             _mapper = mapper;
             _studentExploreService = studentExploreService;
-
             _unitOfWork = unitOfWork;
-
             _savedCourseService = savedCourseService;
             _subcriptionService = subcriptionService;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        public IActionResult Index()
+        /// <summary>
+        /// Index Page - SonHH8
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> Index()
         {
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null )
+            {
+                if (user.WhoIs == 2)
+                {
+                    return RedirectToAction("ManagerCategory", "Category", new { area = "AdminFunction" });
+                }
+                else if (user.WhoIs == 1)
+                {
+                    return RedirectToAction("Index","Dashboard", new { area = "InstructorFunction" });
+                }
+            }
             return View();
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">Course Details by SonHH8</param>
+        /// <returns></returns>
         public async Task<IActionResult> CourseDetails(int id)
         {
             var isExists = await _unitOfWork.Courses.FindByCondition(q => q.Id == id, new List<string>() { "Instructor" });
@@ -63,7 +87,17 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             return View(model);
         }
 
-
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Index), "Student");
+        }
+        public async Task<IActionResult> StudentDetails(int id)
+        {
+            var user = await _unitOfWork.Students.FindByCondition( q => q.Id == id);
+            ViewBag.IdUser = id;
+            return View();
+        }
 
         public IActionResult Explore(string searchString, int? page)
         {
@@ -76,7 +110,6 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             }
             int pageSize = 12;
             int start = (int)(page - 1) * pageSize;
-
 
             int totalPage = courses.Count;
             float totalNumsize = (totalPage / (float)pageSize);
@@ -97,6 +130,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             };
             return View(studentExploreVM);
         }
+
         public async Task<IActionResult> SavedCourses()
 
         {
@@ -107,6 +141,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             }
             return View(courses);
         }
+
         public async Task<IActionResult> SavedToCourse(SavedCoursesVM model)
         {
             try
@@ -121,7 +156,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
                 savedCourse.CreatedDate = DateTime.Now;
 
                 var isSuccess = await _savedCourseService.CreateSavedCourse(savedCourse);
-                if (isSuccess.Success == false)
+                if (!isSuccess.Success)
                 {
                     ModelState.AddModelError("", isSuccess.Message);
                     return RedirectToAction(nameof(Index));
@@ -148,7 +183,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
                 subScription.CreatedDate = DateTime.Now;
 
                 var isSuccess = await _subcriptionService.CreateSubcription(subScription);
-                if (isSuccess.Success == false)
+                if (!isSuccess.Success)
                 {
                     ModelState.AddModelError("", isSuccess.Message);
                     return RedirectToAction(nameof(Index));
@@ -171,9 +206,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             {
                 page = 1;
             }
-           
-            int start = (int)(page - 1) * pageSize;
 
+            int start = (int)(page - 1) * pageSize;
 
             int totalPage = courses.Count;
             float totalNumsize = (totalPage / (float)pageSize);
@@ -183,14 +217,12 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             {
                 CurrentPage = page,
                 NumSize = numSize,
-
             };
             ViewBag.ExplorePagingModel = ExplorePagingModel;
 
             StudentExploreVM studentExploreVM = new StudentExploreVM
             {
                 Courses = collection.Skip(start).Take(pageSize).ToList(),
-               
             };
             return View(studentExploreVM);
         }
@@ -206,6 +238,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             var model = _mapper.Map<ICollection<CourseDetailVM>>(courses);
             return View(model);
         }
+
         /// <summary>
         /// TamLV10 RemoveAll savedcorse by studentId
         /// </summary>
@@ -221,11 +254,10 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             }
             catch (Exception)
             {
-
                 return NotFound();
             }
-            
         }
+
         /// <summary>
         /// Delete SavedCourse
         /// </summary>

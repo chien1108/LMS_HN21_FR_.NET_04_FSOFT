@@ -1,0 +1,115 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Learning_Managerment_SystemMarket_Core.Models.Entities
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    if (user.WhoIs == 0)
+    {
+        <a href="#" class="opts_account" title="Account">
+            <img src="/frontend/images/hd_dp.jpg" alt="">
+        </a>
+        <div class="menu dropdown_account left transition hidden" tabindex="-1" style="display: block !important;">
+            <div class="channel_my">
+                <div class="profile_link">
+                    <img src="/frontend/images/hd_dp.jpg" alt="">
+                    <div class="pd_content">
+                        <div class="rhte85">
+                            <h6>@user.FullName</h6>
+                            <div class="mef78" title="Verify">
+                                <i class="uil uil-check-circle"></i>
+                            </div>
+                        </div>
+                        <span>@user.Email</span>
+                    </div>
+                </div>
+            </div>
+            <div class="night_mode_switch__btn">
+                <a href="#" id="night-mode" class="btn-night-mode">
+                    <i class="uil uil-moon"></i> Night mode
+                    <span class="btn-night-mode-switch">
+                        <span class="uk-switch-button"></span>
+                    </span>
+                </a>
+            </div>
+            <a href="https://coursearly.com/cursus/public/subscription" class="item channel_item">Subscription</a>
+            <a href="https://coursearly.com/cursus/public/profile" class="item channel_item">Setting</a>
+            <a href="https://coursearly.com/cursus/public/help" class="item channel_item">Help</a>
+            <a href="https://coursearly.com/cursus/public/feedback" class="item channel_item">Send Feedback</a>
+            <a asp-area="StudentFunction" asp-action="Logout" asp-controller="Student" class="item channel_item">
+                Sign Out
+            </a>
+        </div>
+    }
+    else
+    {
+        <a href="#" class="opts_account" title="Account">
+            <img src="/frontend/images/hd_dp.jpg" alt="">
+        </a>
+        <div class="menu dropdown_account left transition hidden" tabindex="-1" style="display: block !important;">
+            <div class="channel_my">
+                <div class="profile_link">
+                    <img src="/frontend/images/hd_dp.jpg" alt="">
+                    <div class="pd_content">
+                        <div class="rhte85">
+                            <h6>@user.FullName</h6>
+                        </div>
+                        <span>@user.Email</span>
+                    </div>
+                </div>
+            </div>
+            <div class="night_mode_switch__btn">
+                <a href="#" id="night-mode" class="btn-night-mode">
+                    <i class="uil uil-moon"></i> Night mode
+                    <span class="btn-night-mode-switch">
+                        <span class="uk-switch-button"></span>
+                    </span>
+                </a>
+            </div>
+            <a href="https://coursearly.com/cursus/public/instructor/home" class="item channel_item">Dashboard</a>
+            <a href="https://coursearly.com/cursus/public/instructor/profile" class="item channel_item">Setting</a>
+            <a href="https://coursearly.com/cursus/public/instructor/help" class="item channel_item">Help</a>
+            <a href="https://coursearly.com/cursus/public/instructor/feedback" class="item channel_item">Send Feedback</a>
+            <a asp-area="StudentFunction" asp-action="Logout" asp-controller="Student" class="item channel_item">
+                Sign Out
+            </a>
+        </div>
+    }
+}
+else
+{
+    <a href="#" class="opts_account" title="Account">
+        <img src="/frontend/images/hd_dp.jpg" alt="">
+    </a>
+    <div class="menu dropdown_account left transition hidden" tabindex="-1" style="display: block !important;">
+        <div class="channel_my">
+            <div class="profile_link">
+                <img src="/frontend/images/hd_dp.jpg" alt="">
+                <div class="pd_content">
+                    <div class="rhte85">
+                        <h6>Guest</h6>
+                        <div class="mef78" title="Verify">
+                            <i class="uil uil-check-circle"></i>
+                        </div>
+                    </div>
+                    <span>Please Login to your account</span>
+                </div>
+            </div>
+        </div>
+        <div class="night_mode_switch__btn">
+            <a href="#" id="night-mode" class="btn-night-mode">
+                <i class="uil uil-moon"></i> Night mode
+                <span class="btn-night-mode-switch">
+                    <span class="uk-switch-button"></span>
+                </span>
+            </a>
+        </div>
+        <a class="item channel_item" id="login" asp-area="Identity" asp-page="/Account/Login">Sign in</a>
+        <a class="item channel_item" id="login" asp-area="Identity" asp-page="/Account/Register">Sign Up</a>
+    </div>
+}

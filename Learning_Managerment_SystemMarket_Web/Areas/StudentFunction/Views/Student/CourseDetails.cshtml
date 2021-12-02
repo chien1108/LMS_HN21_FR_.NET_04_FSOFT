@@ -1,8 +1,14 @@
 ﻿@model Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel.CourseVm;
+@using Learning_Managerment_SystemMarket_Core.Models.Entities;
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 @{
     ViewData["Title"] = "CourseDetails";
     Layout = "/Views/Shared/_StudentLayout.cshtml";
+    var user = await UserManager.GetUserAsync(User);
 }
 
 <div class="_215b01">
@@ -23,7 +29,7 @@
                                 </a>
                             </div>
                             <div class="_215b10">
-                                <a asp-action="SavedToCourse" asp-route-courseId="@Model.Id"  class="_215b11">
+                                <a asp-action="SavedToCourse" asp-route-courseId="@Model.Id" class="_215b11">
                                     <span><i class="uil uil-heart"></i></span>Save
                                 </a>
                                 <a href="https://coursearly.com/cursus/public/report/1/add" class="_215b12">
@@ -54,10 +60,23 @@
                             </div>
                             <ul class="_215b31">
                                 <li>
-                                    <button class="btn_adcart" onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/1//add';">
-                                        Add
-                                        to Cart
-                                    </button>
+                                    @if (user != null)
+                                    {
+                                        <a asp-area="StudentFunction" asp-controller="Cart"
+                                           asp-action="AddCourseToCart" asp-route-courseId="@Model.Id"
+                                           asp-route-studentId="@user.IdUser" class="btn btn-danger"
+                                           onclick="return confirm('Are you sure want to add this course to cart?')">
+                                            Add
+                                            to Cart
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-danger"
+                                           onclick="return confirm('You must login to add this course to cart')">
+                                            Add to Cart
+                                        </a>
+                                    }
                                 </li>
                                 <li>
                                     <button class="btn_buy" onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/1/buy/add';">Buy Now</button>

@@ -5,6 +5,6 @@
 @foreach (var category in categories)
 {
     <li style="list-style-type:none" class="sub_menu--item">
-        <a asp-action="GetCourseByCategory" asp-controller="Student" asp-route-id="@category.Id" class="sub_menu--link item channel_item">@category.CategoryName</a>
+        <a asp-area="StudentFunction" asp-action="GetCourseByCategory" asp-controller="Student" asp-route-id="@category.Id" class="sub_menu--link item channel_item">@category.CategoryName</a>
     </li>
 }

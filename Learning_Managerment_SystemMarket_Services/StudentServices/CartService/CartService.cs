@@ -2,6 +2,7 @@
 using Learning_Managerment_SystemMarket_Core.Contracts;
 using Learning_Managerment_SystemMarket_Core.Models;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,8 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.CartService
             try
             {
                 await _unitOfWork.Carts.Create(cart);
-                if (await SaveChange())
+                var success = await SaveChange();
+                if (success)
                 {
                     return new ServiceResponse<Cart> { Success = true, Message = "Add Cart Success" };
                 }
@@ -41,15 +43,18 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.CartService
             }
         }
 
-        public async Task<ServiceResponse<Cart>> Delete(Cart cart)
+        public async Task<ServiceResponse<Cart>> Delete(CartItemVM cartVM)
         {
             try
             {
-                var cartItem = await Find(x => x.StudentId == cart.StudentId && x.CourseId == cart.CourseId);
-                if (cartItem != null)
+                if (cartVM != null)
                 {
+                    var cart = await _unitOfWork.Carts.FindByCondition(
+                        expression: c => c.StudentId == cartVM.StudentId &&
+                        c.CourseId == cartVM.CourseId);
                     _unitOfWork.Carts.Delete(cart);
-                    if (!await SaveChange())
+                    var success = await SaveChange();
+                    if (!success)
                     {
                         return new ServiceResponse<Cart> { Success = false, Message = "Error when delete Cart" };
                     }
@@ -67,12 +72,45 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.CartService
             }
         }
 
-        public async Task<Cart> Find(Expression<Func<Cart, bool>> expression = null, List<string> includes = null)
-            => await _unitOfWork.Carts.FindByCondition(expression, includes);
+        public async Task<CartItemVM> Find(Expression<Func<Cart, bool>> expression = null,
+            List<string> includes = null)
+        {
+            var cart = await _unitOfWork.Carts.FindByCondition(expression, includes);
+            return _map.Map<CartItemVM>(cart);
+        }
 
-        public async Task<ICollection<Cart>> FindAll(Expression<Func<Cart, bool>> expression = null, Func<IQueryable<Cart>, IOrderedQueryable<Cart>> orderBy = null, List<string> includes = null)
-            => await _unitOfWork.Carts.GetAll(expression, orderBy, includes);
+        public async Task<ICollection<CartItemVM>> FindAll(Expression<Func<Cart, bool>> expression = null,
+            Func<IQueryable<Cart>, IOrderedQueryable<Cart>> orderBy = null, 
+            List<string> includes = null)
+        {
+            var carts = await _unitOfWork.Carts.GetAll(expression, orderBy, includes);
+            return _map.Map<ICollection<CartItemVM>>(carts);
+        }
 
+        public async Task<ServiceResponse<Cart>> Payment(int studentId)
+        {
+            try
+            {
+                var carts = await _unitOfWork.Carts.GetAll(expression: c => c.StudentId == studentId);
+                var count = carts.Count;
+                foreach (var item in carts)
+                {
+                    _unitOfWork.Carts.Delete(item);
+                    var sucess = await SaveChange();
+                    if (sucess)
+                        count--;
+                    else
+                        return new ServiceResponse<Cart> { Success = false, Message = "Payment Cart Error" };
+                }
+                return count<1 ? new ServiceResponse<Cart> { Success = true, Message = "Payment Cart Success" }
+                : new ServiceResponse<Cart> { Success = false, Message = "Payment Cart Error" };
+
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResponse<Cart> { Success = false, Message = ex.Message };
+            }
+        }
         public async Task<bool> SaveChange()
         {
             return await _unitOfWork.Save();
