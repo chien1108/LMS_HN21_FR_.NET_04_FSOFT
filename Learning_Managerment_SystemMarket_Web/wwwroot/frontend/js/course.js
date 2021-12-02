@@ -50,10 +50,68 @@ $(document).ready(function () {
         addLectureToHtml();
     })
 
+    //Show image
+    $('#cover_image').change(function () {
+        var input = document.getElementById("cover_image");
+        var fReader = new FileReader();
+        fReader.readAsDataURL(input.files[0]);
+        fReader.onloadend = function (event) {
+            var img = document.getElementById("image_tag");
+            img.src = event.target.result;
+        }
+    });
+
+    $('#cover_image').change(function () {
+        var formData = new FormData();
+        var totalFiles = document.getElementById("cover_image").files.length;
+
+        for (var i = 0; i < totalFiles; i++) {
+            var file = document.getElementById("cover_image").files[i];
+            formData.append("cover_image", file);
+        };
+
+        $.ajax({
+            type: "POST",
+            url: 'https://localhost:44371/InstructorFunction/Course/UploadImage',
+            data: formData,
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                if (!data) {
+                    console.log('Faild');
+                    return false;
+                }
+            },
+            failure: function (errMsg) {
+                toastr.warning(errMsg)
+                return false;
+            }
+        });
+    });
+
     //Create Course
     $('#saveChanges').click(function () {
+        //kiểm tra dữ liệu
+        var inputCheck = $('#tab_step1 input[required]');
+        $.each(inputCheck, function (index, item) {
+            $(item).attr('require');
+            //Kiếm tra dữ liệu nhập, nếu trống cảnh báo
+            var value = $(this).val();
+            if (!value) {
+                $(this).addClass('border-red');
+                $(this).attr('title', 'Trường này không được phép để trống');
+                $(this).next('label').text('Trường này không được phép để trống');
+            }
+            else {
+                $(this).removeClass('border-red');
+                $(this).next('label').empty;
+            }
+        });
+
         var isFree = $('#IsFree').val() == '1' ? true : false;
-        var price = isFree ? 0 : $('#price').val()
+        var price = isFree ? 0 : $('#price').val();
 
         var model = {
             Title: $('#Title').val(),
@@ -79,7 +137,7 @@ $(document).ready(function () {
                 data: model,
                 success: function (data) { },
                 failure: function (errMsg) {
-                    alert(errMsg);
+                    toastr.warning(errMsg)
                     return false;
                 }
             });
@@ -94,7 +152,7 @@ $(document).ready(function () {
                     data: model,
                     success: function (data) { },
                     failure: function (errMsg) {
-                        alert(errMsg);
+                        toastr.warning(errMsg)
                         return false;
                     }
                 });
@@ -158,9 +216,11 @@ $(document).ready(function () {
         if (!value) {
             $(this).addClass('border-red');
             $(this).attr('title', 'Trường này không được phép để trống');
+            $(this).next('label').text('Trường này không được phép để trống');
         }
         else {
             $(this).removeClass('border-red');
+            $(this).next('label').empty();
         }
     });
 
@@ -221,16 +281,16 @@ function addLectureToHtml() {
     var tr = "";
     LectureData.forEach((element, index) => {
         tr += ` <tr>
-                    <td class="text-center">${index + 1}</td>
-                    <td class="cell-ta">${element.Title}</td>
-                    <td class="text-center">${element.Volume}</td>
-                    <td class="text-center">${element.Duration}</td>
-                    <td class="text-center">${element.Positon}</td>
-                    <td class="text-center">  <a href="#">${element.File}</a>   </td>
-                    <td class="text-center">
-                        <a href="#" title="Delete" class="gray-s" onclick="DeleteLecture(${index})"><i class="uil uil-trash-alt"></i></a>
-                    </td>
-                </tr>`;
+                <td class="text-center">${index + 1}</td>
+                <td class="cell-ta">${element.Title}</td>
+                <td class="text-center">${element.Volume}</td>
+                <td class="text-center">${element.Duration}</td>
+                <td class="text-center">${element.Positon}</td>
+                <td class="text-center">  <a href="#">${element.File}</a>   </td>
+                <td class="text-center">
+                    <a href="#" title="Delete" class="gray-s" onclick="DeleteLecture(${index})"><i class="uil uil-trash-alt"></i></a>
+                </td>
+            </tr>`;
     });
     $("#tbodylecture").html(tr);
 }

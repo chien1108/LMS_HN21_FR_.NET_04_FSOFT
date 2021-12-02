@@ -35,6 +35,7 @@ using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
@@ -49,13 +50,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
-using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
-using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
-using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService;
 
 namespace Learning_Managerment_SystemMarket_Web
 {
@@ -111,14 +105,14 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<ISavedCourseService, SavedCourseService>();
             services.AddScoped<ISubcriptionService, SubcriptionService>();
             services.AddScoped<IInstructorService, InstructorService>();
-            services.AddScoped<IStudentService,StudentService>();
+            services.AddScoped<IStudentService, StudentService>();
             services.AddTransient<ICourseServices, CourseServices>();
             services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();
             services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
             services.AddTransient<IInstructorSubCategoryService, InstructorSubCategoryService>();
             services.AddTransient<IInstructorOrderService, InstructorOrderService>();
 
-            services.AddScoped<ICategoryService,CategoryService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ILanguageService, LanguageService>();
             services.AddScoped<ISubCategoryService, SubCategoryService>();
             //Config for Dependence Service

@@ -49,6 +49,7 @@
     <Folder Include="Areas\AdminFunction\Models\" />
     <Folder Include="Areas\StudentFunction\Data\" />
     <Folder Include="Areas\StudentFunction\Models\" />
+    <Folder Include="wwwroot\assets\images\" />
     <Folder Include="wwwroot\instructor\public\upload\document\" />
     <Folder Include="wwwroot\instructor\public\upload\image\" />
     <Folder Include="wwwroot\instructor\public\upload\lectures\" />
