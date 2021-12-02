@@ -1,0 +1,73 @@
+﻿@using Learning_Managerment_SystemMarket_Services.AdminFunction.StudentService
+@using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService
+@using Learning_Managerment_SystemMarket_Core.Modules.Enums
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
+
+@inject IStudentService _studentService
+@inject IStudentOrderService _studentOrderService
+@inject IUserService _userService
+@{
+    int id = ViewBag.IdStudent;
+
+    var listCourse = await _studentOrderService.FindAll(x => x.StudentId == id, null, new List<string>() { "Course"});
+
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Course</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                <table id="datatable" class="table table-striped no-footer dataTable" role="grid" aria-describedby="datatable_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
+                                             #
+                                        : activate to sort column descending" style="width: 9.28125px;">
+                                #
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
+                                            Title
+                                        : activate to sort column ascending" style="width: 223.016px;">
+                                Title
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
+                                            instructor Name
+                                        : activate to sort column ascending" style="width: 118.109px;">
+                                instructor Name
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
+                                            Price
+                                        : activate to sort column ascending" style="width: 36.0469px;">
+                                Price
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
+                                            Buy at
+                                        : activate to sort column ascending" style="width: 45.9688px;">
+                                Buy at
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i=0; i < listCourse.Count(); i++)
+                        {
+                        <tr role="row">
+                            <td class="sorting_1">@(i+1)</td>
+                            <td>
+                                @listCourse.ElementAt(i).Course.Title
+                            </td>
+                            @{
+                                var userInstructor = await _userService.Find(u => u.IdUser == listCourse.ElementAt(i).Course.InstructorId);
+                            }
+                            <td>@userInstructor.FullName</td>
+                            <td>@listCourse.ElementAt(i).Course.Price</td>
+                            <td>@listCourse.ElementAt(i).CreatedDate.ToString("dd MMM yyyy")</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
