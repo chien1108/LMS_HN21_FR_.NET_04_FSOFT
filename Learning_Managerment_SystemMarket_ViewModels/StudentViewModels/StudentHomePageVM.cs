@@ -12,7 +12,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
         public bool IsFree { get; set; }
         public bool IsFeatured { get; set; }
         public bool IsBestseller { get; set; }
-        public int CoverImage { get; set; }// default img.png
+        public byte[] CoverImage { get; set; }// default img.png
         public StatusCourse Status { get; set; } // 0 Draft, 1 Active , 2 WaitFor Approced, 3 Block, 4 Deactive
         public int Likes { get; set; }
         public int Dislike { get; set; }

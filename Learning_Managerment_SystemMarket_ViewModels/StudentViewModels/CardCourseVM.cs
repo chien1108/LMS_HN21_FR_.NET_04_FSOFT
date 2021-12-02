@@ -13,7 +13,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
         public int Id { get; set; }
         public string Title { get; set; }
         public decimal Price { get; set; }
-        public string CoverImage { get; set; }// default img.png
+        public byte[] CoverImage { get; set; }// default img.png
         public int Views { get; set; }
         public DateTime CreatedDate { get; set; }
         public Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor Instructor { get; set; }

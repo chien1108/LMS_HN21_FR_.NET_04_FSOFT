@@ -36,8 +36,9 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
 
 
         // GET: StudentController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult StudentInfo(int id)
         {
+            ViewBag.IdStudent = id;
             return View();
         }
 
@@ -51,7 +52,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
 
             if (student.Status == StatusStudent.Active)
             {
-                student.Status = StatusStudent.Deactive;
+                student.Status = StatusStudent.Block;
             }
             else
             {
@@ -65,28 +66,6 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
                 return RedirectToAction(nameof(ManagerStudent));
             }
             return RedirectToAction(nameof(ManagerStudent));
-        }
-
-
-        // GET: StudentController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: StudentController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

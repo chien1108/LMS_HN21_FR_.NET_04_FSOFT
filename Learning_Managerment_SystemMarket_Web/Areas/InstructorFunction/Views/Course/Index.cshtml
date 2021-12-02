@@ -6,10 +6,13 @@
 
 @using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
 @using Learning_Managerment_SystemMarket_Core.Modules.Enums
+@using Microsoft.AspNetCore.Identity
+@using Learning_Managerment_SystemMarket_Core.Models.Entities
 @inject ICourseServices coursesService
-
+@inject UserManager<User> userManager
 @{
-    var courses = await coursesService.GetViewCourses();
+    var instructor = await userManager.GetUserAsync(User);
+    var courses = await coursesService.GetViewCourses(instructor.IdUser);
 }
 
 
@@ -160,7 +163,16 @@
                                                 <td class="text-center"><span class="text-primary">@item.CategoryName</span></td>
                                                 <td class="text-center">@item.Parts</td>
                                                 <td class="text-center">@item.ModifiedDate.ToString("dd MMMM yyyy | HH:mm")</td>
-                                                <td class="text-center">@item.Price</td>
+                                                <td class="text-center">
+                                                    @if (item.DiscountPrice == 0)
+                                                    {
+                                                        <text>@item.Price</text>
+                                                    }
+                                                    else
+                                                    {
+                                                        <text>@item.DiscountPrice</text>
+                                                    }
+                                                </td>
                                                 <td class="text-center d-flex justify-content-center">
                                                     <a href="public/instructor/courses/10/edit" title="Edit" class="gray-s">
                                                         <i class="uil uil-edit-alt"></i>
@@ -245,13 +257,12 @@
                                                 <div class="col-lg-8">
                                                     <div class="discount_form">
                                                         <form asp-action="CreateDiscount" method="post">
-                                                            <input type="hidden" name="_token" value="1I6KrpUtxSRxT4RmsC4NNBOUdmGgIOilQzXH4su3">
                                                             <div class="row">
                                                                 <div class="col-lg-6 col-md-6">
                                                                     <div class="mt-20 lbel25">
                                                                         <label>Course*</label>
                                                                     </div>
-                                                                    @Html.DropDownListFor(x => x.CourseId, new SelectList(courses.Courses, "Id", "Title"), "Select Course", new { @class = "ui hj145 dropdown cntry152 prompt srch_explore" })
+                                                                    @Html.DropDownListFor(x => x.CourseId, new SelectList(courses.Courses, "Id", "Title"), "Select Course", new { @class = "ui hj145 dropdown cntry152 prompt srch_explore", @required = "required" })
                                                                 </div>
                                                                 <div class="col-lg-6 col-md-6">
                                                                     <div class="ui search focus mt-20 lbel25">
@@ -265,7 +276,7 @@
                                                                     <div class="ui search focus mt-20 lbel25">
                                                                         <label>Title*</label>
                                                                         <div class="ui left icon input swdh19">
-                                                                            <input class="prompt srch_explore" type="text" asp-for="Title" placeholder="Why you give this discount??" required max="50" min="3" >
+                                                                            <input class="prompt srch_explore" type="text" asp-for="Title" placeholder="Why you give this discount??" required max="50" min="3">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -273,7 +284,7 @@
                                                                     <div class="ui search focus mt-20 lbel25">
                                                                         <label>Start Date</label>
                                                                         <div class="ui left icon input swdh19">
-                                                                            <input class="prompt srch_explore datepicker-here" type="date" asp-for="StartDate" placeholder="dd/mm/yyyy" required min="@DateTime.Now"  onchange="$('#enddate').attr({ 'min': this.value, });">
+                                                                            <input class="prompt srch_explore datepicker-here" type="date" asp-for="StartDate" placeholder="dd/mm/yyyy" required min="@DateTime.Now" onchange="$('#enddate').attr({ 'min': this.value, });">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -314,7 +325,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach(var item in courses.DisCountCourses)
+                                        @foreach (var item in courses.DisCountCourses)
                                         {
                                             <tr>
                                                 <td class="text-center">@item.Id</td>
@@ -354,13 +365,14 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <a class="btn btn-primary" asp-action="ClearDiscountExpire">Clear Discount</a>
                         </div>
                         <div class="tab-pane fade" id="pills-promotions" role="tabpanel" aria-labelledby="pills-promotions-tab">
                             <div class="promotion_tab mb-10">
                                 <img src="images/dashboard/promotion.svg" alt="">
                                 <h4>We Are come in future with this feature.</h4>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -368,3 +380,11 @@
     </div>
 </div>
 
+@if (TempData["Message"] != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@TempData["Message"]");
+            };
+    </script>
+}

@@ -12,6 +12,8 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.Subcription
     {
         Task<ICollection<SubScription>> GetAllSubInstructorByStudentId(int studentId);
         Task<ServiceResponse<SubScription>> CreateSubcription(SubScription subScription);
-       
+        
+        Task<ServiceResponse<SubScription>> DeleteSubcription(SubScription subScription);
+        Task<bool> IsSubcribeExist(int studentId, int instuctorId);
     }
 }

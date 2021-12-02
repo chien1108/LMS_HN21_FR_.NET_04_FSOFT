@@ -38,7 +38,7 @@
                                     <div class="item">
                                         <div class="fcrse_1 mb-20">
                                             <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
-                                                <img src="~/frontend/images/courses/@item.CoverImage" alt="">
+                                                <img src="@item.CoverImage.ToString()" alt="">
                                                 <div class="course-overlay">
                                                     <div class="crse_reviews">
                                                         <i class="uil uil-star"></i>3.5
@@ -135,7 +135,7 @@
                                     <div class="item">
                                         <div class="fcrse_1 mb-20">
                                             <a asp-area="SudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
-                                                <img src="~/frontend/images/courses/@item.CoverImage" alt="">
+                                                <img src="@item.CoverImage.ToString()" alt="">
                                                 <div class="course-overlay">
                                                     <div class="crse_reviews">
                                                         <i class="uil uil-star"></i>3.5

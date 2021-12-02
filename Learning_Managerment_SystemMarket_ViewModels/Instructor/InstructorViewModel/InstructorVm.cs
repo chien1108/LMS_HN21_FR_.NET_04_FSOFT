@@ -37,4 +37,21 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.InstructorView
 
         public ICollection<CourseVm> Courses { get; set; }
     }
+
+    public class EarningView
+    {
+        public decimal Balance { get; set; }
+        public decimal Earning { get; set; }
+        public decimal Fee { get; set; }
+    }
+
+    public class OrderVM
+    {
+        public int Id { get; set; }
+        public int StudentId { get; set; }
+        public int CourseId { get; set; }
+        public decimal Price { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string CourseName { get; set; }
+    }
 }
