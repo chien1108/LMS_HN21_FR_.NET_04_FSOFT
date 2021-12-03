@@ -33,5 +33,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
         Task<DisCountCourseVm> GetDiscountById(int id);
         Task<CourseVm> GetCourseById(int id);
 
+        Task<IList<CourseVm>> GetAllCourseWaitApprove();
+
     }
 }
