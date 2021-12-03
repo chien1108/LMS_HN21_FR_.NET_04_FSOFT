@@ -1,6 +1,5 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Models.Base;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
-using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,7 +10,7 @@ namespace Learning_Managerment_SystemMarket_Core.Data
 {
     public class LMSDbContext : IdentityDbContext<User, Role, int>
     {
-        
+
         public LMSDbContext()
         {
         }
@@ -154,7 +153,8 @@ namespace Learning_Managerment_SystemMarket_Core.Data
             modelBuilder.Entity<PaytabsInvoice>(entity =>
             {
             });
-            modelBuilder.Entity<Claim>(entity => {
+            modelBuilder.Entity<Claim>(entity =>
+            {
             });
             modelBuilder.Entity<ReportAbuse>(entity =>
             {
@@ -200,6 +200,8 @@ namespace Learning_Managerment_SystemMarket_Core.Data
                     entityType.SetTableName(tableName.Substring(6));
                 }
             }
+
+            modelBuilder.Seed();
         }
 
         // some method override

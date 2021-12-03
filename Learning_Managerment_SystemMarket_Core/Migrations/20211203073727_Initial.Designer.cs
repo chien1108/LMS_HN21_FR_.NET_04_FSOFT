@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Learning_Managerment_SystemMarket_Core.Migrations
 {
     [DbContext(typeof(LMSDbContext))]
-    [Migration("20211202135833_AddDb")]
-    partial class AddDb
+    [Migration("20211203073727_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,263 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AdminSettings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4340),
+                            KeyNameID = "c_p",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4350),
+                            Value = "Copyright Policy<br>"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4358),
+                            KeyNameID = "p_p",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4360),
+                            Value = "Privacy Policy<br>"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4365),
+                            KeyNameID = "terms",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4368),
+                            Value = "terms"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4371),
+                            KeyNameID = "logo",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4376),
+                            Value = "/frontend/images/logo.svg"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4382),
+                            KeyNameID = "favicon",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4384),
+                            Value = "/frontend/images/fav.png"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4389),
+                            KeyNameID = "admin_commission",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4392),
+                            Value = "3"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4396),
+                            KeyNameID = "currency_code",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4398),
+                            Value = "USD"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4518),
+                            KeyNameID = "currency_symbole",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4520),
+                            Value = "$"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4528),
+                            KeyNameID = "notification",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4530),
+                            Value = "0"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4534),
+                            KeyNameID = "default_theme",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4537),
+                            Value = "night-mode"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4540),
+                            KeyNameID = "instructor_verification",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4542),
+                            Value = "0"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4546),
+                            KeyNameID = "user_verification",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4548),
+                            Value = "0"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4552),
+                            KeyNameID = "facebook",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4555),
+                            Value = "facebook"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4558),
+                            KeyNameID = "twitter",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4560),
+                            Value = "twitter"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4564),
+                            KeyNameID = "linkedin",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4566),
+                            Value = "linkedin"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4570),
+                            KeyNameID = "Instagram",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4572),
+                            Value = "Instagram"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4576),
+                            KeyNameID = "youtube",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4579),
+                            Value = "youtube"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4582),
+                            KeyNameID = "pinterest",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4584),
+                            Value = "pinterest"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4588),
+                            KeyNameID = "verification_subscriber",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4591),
+                            Value = "500"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4594),
+                            KeyNameID = "verification_sell",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4597),
+                            Value = "100"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4600),
+                            KeyNameID = "paypal",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4602),
+                            Value = "0"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4608),
+                            KeyNameID = "palypal_client_id",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4610),
+                            Value = ""
+                        },
+                        new
+                        {
+                            Id = 23,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4613),
+                            KeyNameID = "stripe",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4616),
+                            Value = "0"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4620),
+                            KeyNameID = "stripe_pk",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4622),
+                            Value = "0"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4626),
+                            KeyNameID = "razorpay",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4628),
+                            Value = "0"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4631),
+                            KeyNameID = "seo_title",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4634),
+                            Value = "Online Courses - Anytime, Anywhere Cursus"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4637),
+                            KeyNameID = "seo_description",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4639),
+                            Value = "is the world&#39;s largest destination for online courses. Discover an online course and start learning a new skill today."
+                        },
+                        new
+                        {
+                            Id = 28,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4642),
+                            KeyNameID = "seo_meta",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4645),
+                            Value = "online,courses,learning,teaching"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4648),
+                            KeyNameID = "seo_twitter_title",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4650),
+                            Value = "Online Courses - Anytime, Anywhere"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4654),
+                            KeyNameID = "seo_canonical",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4656),
+                            Value = "https://coursearly.com/cursus/public/"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4659),
+                            KeyNameID = "dark_logo",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4662)
+                        },
+                        new
+                        {
+                            Id = 32,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4665),
+                            KeyNameID = "footer_logo",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4667),
+                            Value = "footerlpgo.png"
+                        });
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Cart", b =>
@@ -88,6 +345,112 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryName = "Photography",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(4989),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5016),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryName = "Marketing",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5023),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5025),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryName = "Development",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5029),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5032),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryName = "Business",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5035),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5038),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryName = "Design",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5041),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5044),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryName = "Music",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5047),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5049),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryName = "IT & Software",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5053),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5055),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryName = "Finance & Accounting",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5059),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5061),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryName = "Office Productivity",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5065),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5067),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryName = "Personal Development",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5071),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5073),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryName = "Lifestyle",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5077),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5079),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CategoryName = "Health & Fitness",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5083),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5085),
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CategoryName = "Teaching & Academics",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5088),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5091),
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Course", b =>
@@ -270,6 +633,26 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FAQs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Answer = "Manage your account settings.",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(7573),
+                            FAQFor = 0,
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(7586),
+                            Question = "Account/Profile"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Answer = "Manage your account settings.",
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(7593),
+                            FAQFor = 1,
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(7596),
+                            Question = "Account/Profile"
+                        });
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.FeedBack", b =>
@@ -330,8 +713,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<string>("HeadLine")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("InstructorName")
                         .HasColumnType("nvarchar(max)");
@@ -443,6 +826,32 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 90, DateTimeKind.Local).AddTicks(1137),
+                            LanguageName = "English",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 91, DateTimeKind.Local).AddTicks(9997),
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 92, DateTimeKind.Local).AddTicks(953),
+                            LanguageName = "Vietnamese",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 92, DateTimeKind.Local).AddTicks(964),
+                            Status = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 92, DateTimeKind.Local).AddTicks(968),
+                            LanguageName = "Korean",
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 92, DateTimeKind.Local).AddTicks(970),
+                            Status = 0
+                        });
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Lecture", b =>
@@ -578,6 +987,107 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("NotificationTemplates");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2233),
+                            EmailTitle = "Cource Approved",
+                            ForWhat = "Cource Approved",
+                            ForWho = 2,
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2245),
+                            NotificationTitle = "Cource Approved",
+                            Subject = "Cource Approved"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2255),
+                            EmailTitle = "Course Sell",
+                            ForWhat = "Course Sell",
+                            ForWho = 2,
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2257),
+                            NotificationTitle = "Course Sell",
+                            Subject = "Course Sell"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2262),
+                            EmailTitle = "Payout Update",
+                            ForWhat = "Payout Update",
+                            ForWho = 2,
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2264),
+                            NotificationTitle = "Payout Update",
+                            Subject = "Payout Update"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2269),
+                            EmailTitle = "Review Added",
+                            ForWhat = "Review Added",
+                            ForWho = 2,
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2272),
+                            NotificationTitle = "Review Added",
+                            Subject = "Review Added"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2277),
+                            EmailTitle = "Thanks For Review",
+                            ForWhat = "Thanks For Review",
+                            ForWho = 1,
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2280),
+                            NotificationTitle = "Thanks For Review",
+                            Subject = "Thanks For Review"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2283),
+                            EmailTitle = "Report Feedback",
+                            ForWhat = "Report Feedback",
+                            ForWho = 1,
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2286),
+                            NotificationTitle = "Report Feedback",
+                            Subject = "Report Feedback"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2290),
+                            EmailTitle = "Cource Block",
+                            ForWhat = "Cource Block",
+                            ForWho = 2,
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2292),
+                            NotificationTitle = "Cource Block",
+                            Subject = "Cource Block"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2297),
+                            EmailTitle = "Live Now (Subscribe Institute)",
+                            ForWhat = "Live Now (Subscribe Institute)",
+                            ForWho = 1,
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2300),
+                            NotificationTitle = "Live Now (Subscribe Institute)",
+                            Subject = "Live Now (Subscribe Institute)"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2304),
+                            EmailTitle = "New Course (Subscribe Institute)",
+                            ForWhat = "New Course (Subscribe Institute)",
+                            ForWho = 1,
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2306),
+                            NotificationTitle = "New Course (Subscribe Institute)",
+                            Subject = "New Course (Subscribe Institute)"
+                        });
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Order", b =>
@@ -745,6 +1255,16 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "047c4f31-97a3-4dcc-9ab9-2b6f6d4bd6fc",
+                            GuardName = "Web",
+                            Name = "Admin S",
+                            NormalizedName = "Admin S"
+                        });
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.SavedCourse", b =>
@@ -820,8 +1340,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -864,6 +1384,71 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("SubCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8397),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8410),
+                            Status = 1,
+                            SubCategoryName = "CSS"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8418),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8420),
+                            Status = 1,
+                            SubCategoryName = "JS"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 2,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8424),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8427),
+                            Status = 1,
+                            SubCategoryName = "Digital Marketing"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 5,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8431),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8433),
+                            Status = 1,
+                            SubCategoryName = "UI Design"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8437),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8439),
+                            Status = 1,
+                            SubCategoryName = "Full Stack Development"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 4,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8447),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8449),
+                            Status = 1,
+                            SubCategoryName = "B2B Business"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 3,
+                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8453),
+                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8455),
+                            Status = 1,
+                            SubCategoryName = "Python"
+                        });
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.SubScription", b =>
@@ -1104,6 +1689,344 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                     b.ToTable("RoleClaims");
 
                     b.HasDiscriminator().HasValue("Claim");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "Role_Create",
+                            ClaimValue = "Role_Create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClaimType = "Role_Edit",
+                            ClaimValue = "Role_Edit",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ClaimType = "Role_Access",
+                            ClaimValue = "Role_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ClaimType = "Role_Access",
+                            ClaimValue = "Role_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ClaimType = "Role_Delete",
+                            ClaimValue = "Role_Delete",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ClaimType = "User_Create",
+                            ClaimValue = "User_Create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ClaimType = "User_Edit",
+                            ClaimValue = "User_Edit",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ClaimType = "User_Access",
+                            ClaimValue = "User_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ClaimType = "User_Show",
+                            ClaimValue = "User_Show",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ClaimType = "User_Delete",
+                            ClaimValue = "User_Delete",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ClaimType = "Language_Create",
+                            ClaimValue = "Language_Create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ClaimType = "Language_Edit",
+                            ClaimValue = "Language_Edit",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ClaimType = "Language_Access",
+                            ClaimValue = "Language_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ClaimType = "Language_Show",
+                            ClaimValue = "Language_Show",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ClaimType = "Language_Delete",
+                            ClaimValue = "Language_Delete",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ClaimType = "Category_Create",
+                            ClaimValue = "Category_Create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ClaimType = "Category_Edit",
+                            ClaimValue = "Category_Edit",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 18,
+                            ClaimType = "Category_Access",
+                            ClaimValue = "Category_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ClaimType = "Category_Show",
+                            ClaimValue = "Category_Show",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 20,
+                            ClaimType = "Category_Delete",
+                            ClaimValue = "Category_Delete",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 21,
+                            ClaimType = "SubCategory_Create",
+                            ClaimValue = "SubCategory_Create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 22,
+                            ClaimType = "SubCategory_Edit",
+                            ClaimValue = "SubCategory_Edit",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 23,
+                            ClaimType = "SubCategory_Access",
+                            ClaimValue = "SubCategory_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 24,
+                            ClaimType = "SubCategory_Show",
+                            ClaimValue = "SubCategory_Show",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 25,
+                            ClaimType = "SubCategory_Delete",
+                            ClaimValue = "SubCategory_Delete",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 26,
+                            ClaimType = "Instructor_Edit",
+                            ClaimValue = "Instructor_Edit",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 27,
+                            ClaimType = "Instructor_Access",
+                            ClaimValue = "Instructor_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 28,
+                            ClaimType = "Instructor_Show",
+                            ClaimValue = "Instructor_Show",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 29,
+                            ClaimType = "Course_Access",
+                            ClaimValue = "Course_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 30,
+                            ClaimType = "Course_Show",
+                            ClaimValue = "Course_Show",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 31,
+                            ClaimType = "Verification_Access",
+                            ClaimValue = "Verification_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 32,
+                            ClaimType = "FAQ_Create",
+                            ClaimValue = "FAQ_Create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 33,
+                            ClaimType = "FAQ_Show",
+                            ClaimValue = "FAQ_Show",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 34,
+                            ClaimType = "FAQ_Edit",
+                            ClaimValue = "FAQ_Edit",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 35,
+                            ClaimType = "FAQ_Access",
+                            ClaimValue = "FAQ_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 36,
+                            ClaimType = "FAQ_Delete",
+                            ClaimValue = "FAQ_Delete",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 37,
+                            ClaimType = "Student_Edit",
+                            ClaimValue = "Student_Edit",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 38,
+                            ClaimType = "Student_Access",
+                            ClaimValue = "Student_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 39,
+                            ClaimType = "Student_Show",
+                            ClaimValue = "Student_Show",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 40,
+                            ClaimType = "PayOut_Access",
+                            ClaimValue = "PayOut_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 41,
+                            ClaimType = "Setting_Access",
+                            ClaimValue = "Setting_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 42,
+                            ClaimType = "Report_Access",
+                            ClaimValue = "Report_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 43,
+                            ClaimType = "Notification_Access",
+                            ClaimValue = "Notification_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 44,
+                            ClaimType = "FeedBack_Access",
+                            ClaimValue = "FeedBack_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 45,
+                            ClaimType = "Lang_Access",
+                            ClaimValue = "Lang_Access",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 46,
+                            ClaimType = "Lang_Create",
+                            ClaimValue = "Lang_Create",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 47,
+                            ClaimType = "Lang_Delete",
+                            ClaimValue = "Lang_Delete",
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 48,
+                            ClaimType = "Lang_Edit",
+                            ClaimValue = "Lang_Edit",
+                            RoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("Learning_Managerment_SystemMarket_Core.Models.Entities.Cart", b =>

@@ -2,11 +2,11 @@
 @using Learning_Managerment_SystemMarket_Core.Models.Entities;
 @using Learning_Managerment_SystemMarket_Core.Contracts;
 @using Microsoft.AspNetCore.Identity
-
+@inject ISubcriptionService _subcriptionService
 @inject IUnitOfWork unitOfWork
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-@{ 
+@{
     var user = await UserManager.GetUserAsync(User);
 }
 <!DOCTYPE html>
@@ -260,7 +260,7 @@
                         else
                         {
                             <a id="login" asp-area="Identity" asp-page="/Account/Login"
-                                class="menu--link " title="Enrolled"
+                               class="menu--link " title="Enrolled"
                                onclick="return confirm('You must login to show enrolled course')">
                                 <i class="uil uil-bag menu--icon"></i>
                                 <span class="menu--label">Enrolled</span>
@@ -281,32 +281,40 @@
                     </li>
                 </ul>
             </div>
-            <div class="left_section">
-                <h6 class="left_title">SUBSCRIPTIONS</h6>
-                <ul>
-                    <!--subcribe-->
-                    <li class="menu--item">
-                        <a href="#" class="menu--link user_img">
-                            <img src="https://coursearly.com/cursus/public/default.png" alt="">
-                            Jon Deo
-                        </a>
-                    </li>
-                    <li class="menu--item">
+            @if (user != null)
+            {
+                var subcriptionExist = await _subcriptionService.GetAllSubInstructorByStudentId(user.IdUser);
 
-                        <a href="#" class="menu--link " title="See All">
-                            <i class="uil uil-eye menu--icon"></i>
-                            <span class="menu--label">See All</span>
-                        </a>
-                    </li>
-                    <li class="menu--item">
-                        <a href="#" class="menu--link " title="Browse Instructors">
+                <div class="left_section">
+                    <h6 class="left_title">SUBSCRIPTIONS</h6>
+                    <ul>
+                        <!--subcribe-->
+                        @foreach (var item in subcriptionExist)
+                        {
+                            <li class="menu--item">
+                                <a href="#" class="menu--link user_img">
+                                    <img src="@item.Instructor.Image" alt="">
+                                    @item.Instructor.InstructorName
+                                </a>
+                            </li>
+                        }
+                        <li class="menu--item">
 
-                            <i class="uil uil-plus-circle menu--icon"></i>
-                            <span class="menu--label">Browse Instructors</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                            <a href="#" class="menu--link " title="See All">
+                                <i class="uil uil-eye menu--icon"></i>
+                                <span class="menu--label">See All</span>
+                            </a>
+                        </li>
+                        <li class="menu--item">
+                            <a href="#" class="menu--link " title="Browse Instructors">
+
+                                <i class="uil uil-plus-circle menu--icon"></i>
+                                <span class="menu--label">Browse Instructors</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            }
             <div class="left_section pt-2">
                 <ul>
                     <li class="menu--item">

@@ -4,11 +4,8 @@
 @using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-<<<<<<< HEAD
 @inject Learning_Managerment_SystemMarket_Services.StudentServices.OrderService.IOrderService orderService;
-=======
 @inject ISubcriptionService _subcriptionService;
->>>>>>> 3ec4e701b3c84c36d7f7088b86df90e550074191
 @{
     ViewData["Title"] = "CourseDetails";
     Layout = "/Views/Shared/_StudentLayout.cshtml";
@@ -26,7 +23,12 @@
                         <div class="col-xl-4 col-lg-5 col-md-6">
                             <div class="preview_video">
                                 <a href="#" class="fcrse_img" data-toggle="modal" data-target="#videoModal">
-                                    <img src="~/frontend/images/courses/@Model.CoverImage" alt="">
+                                    @if (Model.CoverImage != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(Model.CoverImage);
+                                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                        <img src="@imgsrc" width="100%" />
+                                    }
                                     <div class="course-overlay">
                                         <div class="badge_seller">Bestseller</div>
                                         <span class="play_btn1"><i class="uil uil-play"></i></span>

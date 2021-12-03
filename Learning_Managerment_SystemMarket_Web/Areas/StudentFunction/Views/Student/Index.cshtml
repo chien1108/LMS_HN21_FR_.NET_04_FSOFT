@@ -81,7 +81,7 @@
                                                 </a>
                                                 <div class="auth1lnkprce">
                                                     <p class="cr1fot">
-                                                        By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">@item.Instructor.InstructorName</a>
+                                                        By <a asp-area="StudentFunction" asp-controller="Instructor" asp-action="InstructorDetails" asp-route-id="@item.Instructor.Id">@item.Instructor.InstructorName</a>
                                                     </p>
                                                     <div class="prce142">$@item.Price</div>
                                                     @if (user != null)
@@ -131,7 +131,7 @@
 
         <div class="section3125 mt-50">
             <h4 class="item_title">Newest Courses</h4>
-            <a href="https://coursearly.com/cursus/public/courses/featured" class="see150">See all</a>
+            <a asp-area="StudentFunction" asp-action="Explore" asp-controller="Student" class="see150">See all</a>
             <div class="la5lo1">
                 <div class="owl-carousel featured_courses owl-theme owl-loaded owl-drag">
                     <div class="owl-stage-outer">
@@ -141,7 +141,7 @@
                                 <div class="owl-item active" style="width: 283px; margin-right: 20px;">
                                     <div class="item">
                                         <div class="fcrse_1 mb-20">
-                                            <a asp-area="SudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
+                                            <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
                                                 @if (item.CoverImage != null)
                                                 {
                                                     var base64 = Convert.ToBase64String(item.CoverImage);
@@ -178,7 +178,7 @@
                                                     <span class="vdt14">@item.Views</span>
                                                     <span class="vdt14">@item.RelativeCreateDate</span>
                                                 </div>
-                                                <a href="https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2" class="crse14s">@item.Title</a>
+                                                <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="crse14s">@item.Title</a>
                                                 <a href="#" class="crse-cate">
                                                     @item.SubCategory.SubCategoryName
                                                 </a>
@@ -313,7 +313,7 @@
                     </div>
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <a href="https://coursearly.com/cursus/public/instructors/test/25" class="prfle12link">Go To Profile</a>
+                        <a asp-area="StudentFunction" asp-action="StudentDetails" asp-controller="Student" asp-route-id="@user.IdUser" class="prfle12link">Go To Profile</a>
                     }
                     else
                     {

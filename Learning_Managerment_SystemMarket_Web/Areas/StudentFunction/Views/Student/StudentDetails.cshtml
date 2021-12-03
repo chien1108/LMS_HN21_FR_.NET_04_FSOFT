@@ -23,7 +23,12 @@
                         <div class="col-lg-7">
                             <div class="dp_dt150">
                                 <div class="img148">
-                                    <img src="https://coursearly.com/cursus/public/default.png" alt="">
+                                    @if (student.Image != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(student.Image);
+                                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                        <img src="@imgsrc" width="100%" />
+                                    }
                                 </div>
                                 <div class="prfledt1">
                                     <h2>@student.StudentName</h2>
