@@ -15,5 +15,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.OrderServic
             Expression<Func<Order, bool>> expression = null,
             Func<IQueryable<Order>, IOrderedQueryable<Order>> orderBy = null,
             List<string> includes = null);
+
+        Task<int> GetAllStudentEnrollCourse(int id);
     }
 }

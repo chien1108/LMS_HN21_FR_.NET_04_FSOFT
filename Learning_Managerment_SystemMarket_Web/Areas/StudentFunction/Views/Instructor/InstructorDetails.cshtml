@@ -1,0 +1,100 @@
+﻿@using Learning_Managerment_SystemMarket_Services.StudentServices.OrderService;
+@using Learning_Managerment_SystemMarket_Services.StudentServices.InstructorService;
+@model Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor
+
+@inject IOrderService _orderService;
+@inject IStudentInstructorService _stdInstructorService;
+@{
+    ViewData["Title"] = "InstructorDetails";
+    Layout = "~/Views/Shared/_StudentLayout.cshtml";
+    var count = await _orderService.GetAllStudentEnrollCourse(Model.Id);
+    var countCourse = await _stdInstructorService.CountCourseByInstructorId(Model.Id);
+}
+<div class="_216b01">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-10">
+                <div class="section3125 rpt145">
+                    <div class="row">
+                        <div class="col-lg-7">
+
+                            <div class="dp_dt150">
+                                <div class="img148">
+                                    @if (Model.Image != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(Model.Image);
+                                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                        <img src="@imgsrc" width="100%" />
+                                    }
+                                </div>
+                                <div class="prfledt1">
+                                    <h2></h2>
+                                    <span>@Model.InstructorName</span>
+                                </div>
+                            </div>
+                            <ul class="_ttl120">
+                                <li>
+                                    <div class="_ttl121">
+                                        <div class="_ttl122">Enroll Students</div>
+                                        <div class="_ttl123">@count</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="_ttl121">
+                                        <div class="_ttl122">Courses</div>
+                                        <div class="_ttl123">@countCourse</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="_ttl121">
+                                        <div class="_ttl122">Subscribers</div>
+                                        <div class="_ttl123">@countCourse</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="_ttl121">
+                                        <div class="_ttl122">Reviews</div>
+                                        <div class="_ttl123">4</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-5">
+
+                            <div class="rgt-145">
+                                <ul class="tutor_social_links">
+                                    <li>
+                                        <a href="http://facebook.com/https://www.facebook.com/https://www.facebook.com/" class="fb"><i class="fab fa-facebook-f"></i></a>
+                                    </li>
+                                    <li><a href="http://twitter.com/https://twitter.com/" class="tw"><i class="fab fa-twitter"></i></a></li>
+                                    <li>
+                                        <a href="http://www.linkedin.com/https://www.linkedin.com/" class="ln"><i class="fab fa-linkedin-in"></i></a>
+                                    </li>
+                                    <li><a href="http://www.youtube.com/https://www.youtube.com/" class="yu"><i class="fab fa-youtube"></i></a></li>
+                                </ul>
+                            </div>
+                            <ul class="_bty149">
+                                <li>
+                                    <button class="subscribe-btn btn500" onclick="window.location.href = 'https://coursearly.com/cursus/public/subscription/16/add';">Subscribe</button>
+                                </li>
+                                <li><button class="msg125 btn500" onclick="window.location.href = 'https://coursearly.com/cursus/public/messages/16';">Message</button></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="course_tabs">
+        <nav>
+            <div class="nav nav-tabs tab_crse" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-selected="true">About</a>
+                <a class="nav-item nav-link" id="nav-courses-tab" data-toggle="tab" href="#nav-courses" role="tab" aria-selected="false">Courses</a>
+                <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-selected="false">Discussion</a>
+            </div>
+        </nav>
+    </div>
+</div>

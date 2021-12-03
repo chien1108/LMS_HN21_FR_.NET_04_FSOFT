@@ -39,6 +39,7 @@ using Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageServ
 using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.CartService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.InstructorService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.OrderService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
@@ -123,6 +124,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<ISubCategoryService, SubCategoryService>();
 
             services.AddScoped<IStudentOrderService, StudentOrderService>();
+            services.AddScoped<IStudentInstructorService, StudentInstructorService>();
 
             //Config for Dependence Service
 

@@ -81,7 +81,7 @@
                                                 </a>
                                                 <div class="auth1lnkprce">
                                                     <p class="cr1fot">
-                                                        By <a href="https://coursearly.com/cursus/public/instructors/jassica-william/7">@item.Instructor.InstructorName</a>
+                                                        By <a asp-area="StudentFunction" asp-controller="Instructor" asp-action="InstructorDetails" asp-route-id="@item.Instructor.Id">@item.Instructor.InstructorName</a>
                                                     </p>
                                                     <div class="prce142">$@item.Price</div>
                                                     @if (user != null)
@@ -313,7 +313,7 @@
                     </div>
                     @if (SignInManager.IsSignedIn(User))
                     {
-                        <a href="https://coursearly.com/cursus/public/instructors/test/25" class="prfle12link">Go To Profile</a>
+                        <a asp-area="StudentFunction" asp-action="StudentDetails" asp-controller="Student" asp-route-id="@user.IdUser" class="prfle12link">Go To Profile</a>
                     }
                     else
                     {
