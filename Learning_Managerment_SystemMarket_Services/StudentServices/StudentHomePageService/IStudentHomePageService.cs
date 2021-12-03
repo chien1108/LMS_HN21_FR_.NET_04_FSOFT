@@ -19,9 +19,9 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
 
         Task<bool> isExisted(Expression<Func<Course, bool>> expression = null);
 
-        Task<IList<CourseDetailVM>> FindAllCourse(Expression<Func<Course, bool>> expression = null, Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null, List<string> includes = null);
+        Task<IList<CardCourseVM>> FindAllCourse(Expression<Func<Course, bool>> expression = null, Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null, List<string> includes = null);
 
-        Task<CourseDetailVM> FindCourse(Expression<Func<Course, bool>> expression = null, List<string> includes = null);
+        Task<CardCourseVM> FindCourse(Expression<Func<Course, bool>> expression = null, List<string> includes = null);
 
         Task<IList<StudentHomePageVM>> GetAllCourseIsActive();
 

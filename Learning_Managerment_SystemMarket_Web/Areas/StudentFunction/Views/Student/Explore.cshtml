@@ -124,9 +124,13 @@
                         </div>
                     }
 
-                <div class="col-md-10 d-flex justify-content-lg-end ">
+            <div class="col-md-10 d-flex justify-content-lg-end ">
+                @if (Model.Courses.Count > ViewBag.PageSize)
+                {
                     <partial name="/Areas/StudentFunction/Views/Student/_ExplorePaging.cshtml" model="ViewBag.ExplorePagingModel" />
-                </div>
+
+                }
+            </div>
             </div>
 
         }
