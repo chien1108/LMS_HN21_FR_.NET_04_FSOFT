@@ -78,13 +78,13 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.CourseRepo
         }
         public async Task<ICollection<Course>> GetFeatureCourse(int size)
         {
-            var course = await _context.Courses.Include(q => q.Instructor).Include(q => q.SubCategory).OrderByDescending(x => x.Likes).Take(size).ToListAsync();
+            var course = await _context.Courses.Include(q => q.Instructor).Include(q => q.SubCategory).OrderByDescending(x => x.Likes).Where(x => x.Status == StatusCourse.Active).Take(size).ToListAsync();
             return course;
         }
 
         public async Task<ICollection<Course>> GetNewestCourse(int size)
         {
-            var course = await _context.Courses.Include(q => q.Instructor).Include(q => q.SubCategory).OrderByDescending(x => x.ModifiedDate).Take(size).ToListAsync();
+            var course = await _context.Courses.Include(q => q.Instructor).Include(q => q.SubCategory).OrderByDescending(x => x.ModifiedDate).Where(x=>x.Status == StatusCourse.Active).Take(size).ToListAsync();
             return course;
         }
 
