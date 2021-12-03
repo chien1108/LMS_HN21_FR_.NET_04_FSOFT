@@ -28,7 +28,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
         Task<ServiceResponse<DisCountCourseVm>> DeleteDiscount(int id);
         Task<ServiceResponse<DisCountCourseVm>> CreateDiscount(DisCountCourseVm entity);
         Task<ServiceResponse<DisCountCourseVm>> UpdateDiscount(DisCountCourseVm entity);
-        Task<ServiceResponse<DisCountCourseVm>> ClearDiscountExpire();
+        Task<ServiceResponse<DisCountCourseVm>> ClearDiscountExpire(int id);
 
         Task<DisCountCourseVm> GetDiscountById(int id);
         Task<CourseVm> GetCourseById(int id);

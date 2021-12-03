@@ -51,6 +51,11 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             return View();
         }
 
+        public ActionResult ClearDiscountExpire()
+        {
+            return View("Index");
+        }
+
         // GET: CourseController/Create
         public ActionResult Create()
         {
