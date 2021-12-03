@@ -28,6 +28,12 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.InstructorS
             return count;
         }
 
+        public async Task<IList<Course>> GetCourseByInstructorId(int id)
+        {
+            var list = await unitOfWork.Courses.GetAll(x => x.InstructorId == id, includes: new List<string> { "Category","SubCategory" });
+            return list;
+        }
+
         public async Task<Instructor> GetInstructorById(int id)
         {
             var instructor = await unitOfWork.Instructors.FindByCondition(x => x.Id == id);
