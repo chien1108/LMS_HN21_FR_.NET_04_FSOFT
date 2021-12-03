@@ -52,16 +52,16 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
 
 
 
-        public async Task<CourseDetailVM> FindCourse(Expression<Func<Course, bool>> expression = null, List<string> includes = null)
+        public async Task<CardCourseVM> FindCourse(Expression<Func<Course, bool>> expression = null, List<string> includes = null)
         {
             var course = await unitOfWork.Courses.FindByCondition(expression, includes);
-            return _map.Map<CourseDetailVM>(course);
+            return _map.Map<CardCourseVM>(course);
         }
 
-        public async Task<IList<CourseDetailVM>> FindAllCourse(Expression<Func<Course, bool>> expression = null, Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null, List<string> includes = null)
+        public async Task<IList<CardCourseVM>> FindAllCourse(Expression<Func<Course, bool>> expression = null, Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null, List<string> includes = null)
         {
             var course = await this.unitOfWork.Courses.GetAll(expression, orderBy, includes: new List<string> { "Instructor" });
-            return _map.Map<IList<CourseDetailVM>>(course);
+            return _map.Map<IList<CardCourseVM>>(course);
         }
 
         public async Task<IList<StudentHomePageVM>> GetAllCourseIsActive()

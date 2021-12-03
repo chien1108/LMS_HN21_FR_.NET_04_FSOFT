@@ -19,6 +19,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.Category
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
         public async Task<List<CategoryVm>> GetAllCategory()
         {
             var categories = await _unitOfWork.Categories.GetAll();
