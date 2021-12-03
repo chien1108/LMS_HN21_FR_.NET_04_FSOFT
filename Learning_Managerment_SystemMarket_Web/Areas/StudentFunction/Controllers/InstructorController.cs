@@ -60,5 +60,24 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             var instructor = await _studentInstructorService.GetInstructorById(id);
             return View(instructor);
         }
+        /// <summary>
+        /// Get instructions by student id VuTV10
+        /// </summary>
+        /// <param name="id">Student id</param>
+        /// <returns>List instruction</returns>
+        public async Task<IActionResult> GetSubcriptionByStudentId(int id)
+        {
+            var instructions = await _studentInstructorService.GetInstructorByStudentId(id);
+            return View(instructions);
+        }
+        /// <summary>
+        /// Get all instructor VuTV10
+        /// </summary>
+        /// <returns>List instructor</returns>
+        public async Task<IActionResult> BrowseInstructors()
+        {
+            var instructors = await _studentInstructorService.GetAllInstructor();
+            return View(instructors);
+        }
     }
 }

@@ -1,8 +1,12 @@
-﻿
+﻿@using Learning_Managerment_SystemMarket_Core.Models.Entities;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject Learning_Managerment_SystemMarket_Services.StudentServices.OrderService.IOrderService orderService;
 @{
     ViewData["Title"] = "Explore";
     Layout = "/Views/Shared/_StudentLayout.cshtml";
-
+    var user = await UserManager.GetUserAsync(User);
 }
 @model Learning_Managerment_SystemMarket_ViewModels.StudentViewModels.StudentExploreVM
 
@@ -33,7 +37,12 @@
                         <div class="item">
                             <div class="fcrse_1 mb-20">
                                 <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
-                                    <img src="~/frontend/images/courses/@item.CoverImage" alt="">
+                                    @if (item.CoverImage != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(item.CoverImage);
+                                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                        <img src="@imgsrc" width="100%" />
+                                    }
                                     <div class="course-overlay">
 
                                         <span class="play_btn1"><i class="uil uil-play"></i></span>
@@ -66,7 +75,7 @@
                                     </div>
                                     <div class="vdtodt">
                                         <span class="vdt14">@item.Views views</span>
-                                        
+
                                         <span class="vdt14">@item.RelativeCreateDate</span>
                                     </div>
                                     <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="crse14s">@item.Title</a>
@@ -75,17 +84,45 @@
                                     </a>
                                     <div class="auth1lnkprce">
                                         <p class="cr1fot">
-                                            By <a href="https://coursearly.com/cursus/public/instructors/jemmy/13">@item.Instructor.InstructorName</a>
-                                        </p>
-                                        <div class="prce142">$@item.Price</div>
-                                        <button onclick="window.location.href = &#39;https://coursearly.com/cursus/public/cart/133//add&#39;;" class="shrt-cart-btn" title="cart"><i class="uil uil-shopping-cart-alt"></i></button>
-
+                                            By <a asp-area="StudentFunction" asp-controller="Instructor" asp-action="InstructorDetails"
+                                                  asp-route-id="@item.Instructor.Id">@item.Instructor.InstructorName</a>
+                                            </p>
+                                            <div class="prce142">$@item.Price</div>
+                                            @if (user != null)
+                                            {
+                                                var existingEnroll = await orderService.Find(
+                                                  expression: c => c.CourseId == item.Id
+                                                  && c.StudentId == user.IdUser);
+                                                if (existingEnroll == null)
+                                                {
+                                                    <a class="shrt-cart-btn" title="cart" asp-area="StudentFunction"
+                                                       asp-controller="Cart" asp-action="AddCourseToCart"
+                                                       asp-route-courseId="@item.Id" asp-route-studentId="@user.IdUser"
+                                                       onclick="return confirm('Are you sure want to add this course to cart?')">
+                                                        <i class="uil uil-shopping-cart-alt"></i>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="shrt-cart-btn" title="cart" id="login" href="#"
+                                                       onclick="return confirm('You have enrolled this course')">
+                                                        <i class="uil uil-shopping-cart-alt"></i>
+                                                    </a>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <a class="shrt-cart-btn" title="cart" id="login" asp-area="Identity" asp-page="/Account/Login"
+                                                   onclick="return confirm('You must login to add this course to cart')">
+                                                    <i class="uil uil-shopping-cart-alt"></i>
+                                                </a>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                }
+                    }
 
                 <div class="col-md-10 d-flex justify-content-lg-end ">
                     <partial name="/Areas/StudentFunction/Views/Student/_ExplorePaging.cshtml" model="ViewBag.ExplorePagingModel" />

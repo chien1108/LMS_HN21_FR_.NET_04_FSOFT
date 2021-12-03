@@ -1,0 +1,79 @@
+﻿@model List<Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor>
+@using Learning_Managerment_SystemMarket_Services.StudentServices.InstructorService;
+
+@inject IStudentInstructorService _stdInstructorService;
+@{
+    ViewData["Title"] = "Instructors";
+    Layout = "/Views/Shared/_StudentLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-8">
+            <div class="section3125">
+                <div class="explore_search">
+                    <div class="ui search focus">
+                        <form action="https://coursearly.com/cursus/public/instructors" method="post">
+                            <input type="hidden" name="_token" value="RvgN44890enhP2HVWRycLHlpg1bY1wB2xAhJWbqD">                        <div class="ui left icon input swdh11">
+                                <input class="prompt srch_explore" type="text" placeholder="Search Tutors..." name="q" value="">
+                                <i class="uil uil-search-alt icon icon2"></i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="_14d25">
+                <div class="row mt-30">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="item">
+                                <div class="fcrse_1 mb-20">
+                                    <div class="tutor_img">
+                                        <a asp-area="StudentFunction" asp-controller="Instructor" asp-action="InstructorDetails"
+                                           asp-route-id="@item.Id">
+                                            <img src="@item.Image" alt="@item.InstructorName">
+                                        </a>
+                                    </div>
+                                    <div class="tutor_content_dt">
+                                        <div class="tutor150">
+                                            <a asp-area="StudentFunction" asp-controller="Instructor" asp-action="InstructorDetails"
+                                               asp-route-id="@item.Id" class="tutor_name">@item.InstructorName</a>
+                                            <div class="mef78" title="Verify">
+                                                <i class="uil uil-check-circle"></i>
+                                            </div>
+                                        </div>
+                                        <div class="tutor_cate">@item.Description</div>
+                                        <ul class="tutor_social_links">
+                                            <li><a href="@item.Facebook" class="fb"><i class="fab fa-facebook-f"></i></a></li>
+                                            <li><a href="http://twitter.com/" class="tw"><i class="fab fa-twitter"></i></a></li>
+                                            <li><a href="@item.LinkedIn" class="ln"><i class="fab fa-linkedin-in"></i></a></li>
+                                            <li><a href="@item.Youtube" class="yu"><i class="fab fa-youtube"></i></a></li>
+                                        </ul>
+                                        <div class="tut1250">
+                                            @{
+                                                var countCourse = await _stdInstructorService.CountCourseByInstructorId(item.Id);
+                                                var countStudent = await _stdInstructorService.CountStudentByInstructorId(item.Id);
+                                            }
+                                            <span class="vdt15">@countStudent Students</span>
+
+                                            <span class="vdt15">@countCourse Courses</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="col-md-12 text-center">
+                        <div class="main-loader mt-50">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
