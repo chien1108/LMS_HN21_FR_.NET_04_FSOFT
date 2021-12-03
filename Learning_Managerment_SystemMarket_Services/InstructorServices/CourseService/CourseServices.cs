@@ -10,6 +10,7 @@ using Learning_Managerment_SystemMarket_ViewModels.Instructor.ResponseResult;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
@@ -379,5 +380,41 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
 
             return map;
         }
+
+        public async Task<ServiceResponse<Course>> Update(CourseVm updateCourse)
+        {
+            try
+            {
+                var studentFromDb = await Find(x => x.Id == updateCourse.Id);
+                if (studentFromDb != null)
+                {
+                    var map = _mapper.Map<Course>(updateCourse);
+                    _unitOfWork.Courses.Update(map);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<Course> { Success = false, Message = "Something wrongs went update new Course" };
+                    }
+                    return new ServiceResponse<Course> { Success = true, Message = "Update Course Success" };
+                }
+                else
+                {
+                    return new ServiceResponse<Course> { Success = false, Message = "Not Found Course" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResponse<Course> { Success = true, Message = ex.Message };
+            }
+        }
+        public async Task<bool> SaveChange()
+            => await _unitOfWork.Save();
+        public async Task<Course> Find(Expression<Func<Course, bool>> expression = null,
+                                        List<string> includes = null)
+            => await _unitOfWork.Courses.FindByCondition(expression, includes);
+        public async Task<bool> IsExisted(Expression<Func<Course, bool>> expression = null)
+            => await _unitOfWork.Courses.IsExists(expression);
+
+        public async Task<IList<Course>> FindAll(Expression<Func<Course, bool>> expression = null, Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null, List<string> includes = null)
+        => await _unitOfWork.Courses.GetAll(expression, orderBy, includes);
     }
 }
