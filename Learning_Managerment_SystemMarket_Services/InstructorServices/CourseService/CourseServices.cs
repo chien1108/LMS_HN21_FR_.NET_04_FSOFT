@@ -30,13 +30,14 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             };
         }
 
-        public async Task<ResponseResult> CreateCourse(CreateCourseVm model, List<CreateCourseContentVm> createCourseContentVms, List<CreateLectureVm> createLectureVms)
+        public async Task<ResponseResult> CreateCourse(CreateCourseVm model, List<CreateCourseContentVm> createCourseContentVms, List<CreateLectureVm> createLectureVms, int instructorId)
         {
             try
             {
                 var course = _mapper.Map<Course>(model);
-                //Dùng tạm InstructorId có sẵn
-                course.InstructorId = 3;
+                //InstructorId 
+                course.InstructorId = instructorId;
+
                 await _unitOfWork.Courses.Create(course);
 
                 foreach (var courseContentItem in createCourseContentVms)

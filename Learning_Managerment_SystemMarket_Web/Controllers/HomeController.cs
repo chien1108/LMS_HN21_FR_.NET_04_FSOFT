@@ -22,7 +22,7 @@ namespace Learning_Managerment_SystemMarket_Web.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
