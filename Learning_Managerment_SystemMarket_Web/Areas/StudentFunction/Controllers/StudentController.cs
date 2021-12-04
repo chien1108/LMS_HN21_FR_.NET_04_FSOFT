@@ -184,7 +184,38 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
                 return View(model);
             }
         }
-      
+
+        public async Task<IActionResult> Filter(int? page)
+        {
+            int pageSize = 12;
+            var courses = await _studentHomePageService.GetFeatureCourse(pageSize);
+            var collection = _mapper.Map<ICollection<Course>, ICollection<CardCourseVM>>(courses);
+
+            if (page <= 0 || page == null)
+            {
+                page = 1;
+            }
+
+            int start = (int)(page - 1) * pageSize;
+
+            int totalPage = courses.Count;
+            float totalNumsize = (totalPage / (float)pageSize);
+            int numSize = (int)Math.Ceiling(totalNumsize);
+
+            var ExplorePagingModel = new ExplorePagingModel
+            {
+                CurrentPage = page,
+                NumSize = numSize,
+            };
+            ViewBag.ExplorePagingModel = ExplorePagingModel;
+
+            StudentExploreVM studentExploreVM = new StudentExploreVM
+            {
+                Courses = collection.Skip(start).Take(pageSize).ToList(),
+            };
+            return View(studentExploreVM);
+        }
+
 
         /// <summary>
         /// Get all course by category id VuTV10

@@ -80,15 +80,13 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
                 savedCourse.StudentId = (int)studentId;
                 savedCourse.CreatedDate = DateTime.Now;
 
-                var savedCourseExisting = await _savedCourseService.FindSavedCourse(model.StudentId, model.CourseId);
-
                 var isSuccess = await _savedCourseService.CreateSavedCourse(savedCourse);
                 if (!isSuccess.Success)
                 {
                     ModelState.AddModelError("", isSuccess.Message);
-                    return RedirectToAction("SavedCourses", "SaveCourse",studentId);
+                    return RedirectToAction(nameof(Index), "Student");
                 }
-                return RedirectToAction("SavedCourses", "SaveCourse",studentId);
+                return RedirectToAction(nameof(Index), "Student");
             }
             catch
             {
