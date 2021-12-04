@@ -131,44 +131,6 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             return View(studentExploreVM);
         }
 
-        public async Task<IActionResult> SavedCourses()
-
-        {
-            var courses = await _savedCourseService.GetSavedCoursesByStudentId(1);
-            if (courses == null)
-            {
-                return NotFound();
-            }
-            return View(courses);
-        }
-
-        public async Task<IActionResult> SavedToCourse(SavedCoursesVM model)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-                if (!ModelState.IsValid)
-                {
-                    return View(model);
-                }
-                var savedCourse = _mapper.Map<SavedCourse>(model);
-                savedCourse.StudentId = 1;
-                savedCourse.CreatedDate = DateTime.Now;
-
-                var isSuccess = await _savedCourseService.CreateSavedCourse(savedCourse);
-                if (!isSuccess.Success)
-                {
-                    ModelState.AddModelError("", isSuccess.Message);
-                    return RedirectToAction(nameof(Index));
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View(model);
-            }
-        }
-
         public async Task<IActionResult> Subcribe(SubScriptionVM model)
         {
             try
@@ -221,37 +183,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
                 return View(model);
             }
         }
-
-        public async Task<IActionResult> Filter(int? page)
-        {
-            int pageSize = 12;
-            var courses = await _studentHomePageService.GetFeatureCourse(pageSize);
-            var collection = _mapper.Map<ICollection<Course>, ICollection<CardCourseVM>>(courses);
-
-            if (page <= 0 || page == null)
-            {
-                page = 1;
-            }
-
-            int start = (int)(page - 1) * pageSize;
-
-            int totalPage = courses.Count;
-            float totalNumsize = (totalPage / (float)pageSize);
-            int numSize = (int)Math.Ceiling(totalNumsize);
-
-            var ExplorePagingModel = new ExplorePagingModel
-            {
-                CurrentPage = page,
-                NumSize = numSize,
-            };
-            ViewBag.ExplorePagingModel = ExplorePagingModel;
-
-            StudentExploreVM studentExploreVM = new StudentExploreVM
-            {
-                Courses = collection.Skip(start).Take(pageSize).ToList(),
-            };
-            return View(studentExploreVM);
-        }
+      
 
         /// <summary>
         /// Get all course by category id VuTV10
@@ -265,70 +197,5 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             return View(model);
         }
 
-        /// <summary>
-        /// TamLV10 RemoveAll savedcorse by studentId
-        /// </summary>
-        /// <param name="studentId"></param>
-        /// <returns></returns>
-        public async Task<IActionResult> RemoveAll(int studentId)
-        {
-            try
-            {
-                _savedCourseService.DeleteSaveCourses(studentId);
-                await _savedCourseService.SaveChanges();
-                return RedirectToAction(nameof(SavedCourses));
-            }
-            catch (Exception)
-            {
-                return NotFound();
-            }
-        }
-
-        /// <summary>
-        /// Delete SavedCourse
-        /// </summary>
-        /// <param name="studentId"></param>
-        /// <param name="courseId"></param>
-        /// <returns>SavedCoure</returns>
-        public async Task<IActionResult> Delete(int studentId, int courseId)
-        {
-            var savedCourse = await _savedCourseService.FindSavedCourse(studentId, courseId);
-            if (savedCourse == null)
-            {
-                return NotFound();
-            }
-            _savedCourseService.Delete(savedCourse);
-            await _savedCourseService.SaveChanges();
-            return RedirectToAction(nameof(SavedCourses));
-        }
-
-        /// <summary>
-        /// Delete SavedCourse
-        /// </summary>
-        /// <param name="studentId"></param>
-        /// <param name="courseId"></param>
-        /// <param name="savedCourse"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int studentId, int courseId, SavedCourse savedCourse)
-        {
-            try
-            {
-                savedCourse = await _savedCourseService.FindSavedCourse(studentId, courseId);
-                if (savedCourse == null)
-                {
-                    return NotFound();
-                }
-                _savedCourseService.Delete(savedCourse);
-                await _studentHomePageService.SaveChange();
-
-                return RedirectToAction(nameof(SavedCourses));
-            }
-            catch
-            {
-                return View(savedCourse);
-            }
-        }
     }
 }
