@@ -11,6 +11,9 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.Subcription
     public interface ISubcriptionService
     {
         Task<ICollection<SubScription>> GetAllSubInstructorByStudentId(int studentId);
+
+        Task<ICollection<SubScription>> GetSubByInstructorId(int instructorId);
+
         Task<ServiceResponse<SubScription>> CreateSubcription(SubScription subScription);
         
         Task<ServiceResponse<SubScription>> DeleteSubcription(SubScription subScription);

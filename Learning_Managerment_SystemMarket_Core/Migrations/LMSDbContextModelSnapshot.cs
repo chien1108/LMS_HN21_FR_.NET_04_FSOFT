@@ -46,256 +46,256 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4340),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9031),
                             KeyNameID = "c_p",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4350),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9057),
                             Value = "Copyright Policy<br>"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4358),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9067),
                             KeyNameID = "p_p",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4360),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9071),
                             Value = "Privacy Policy<br>"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4365),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9076),
                             KeyNameID = "terms",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4368),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9080),
                             Value = "terms"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4371),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9086),
                             KeyNameID = "logo",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4376),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9090),
                             Value = "/frontend/images/logo.svg"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4382),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9095),
                             KeyNameID = "favicon",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4384),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9098),
                             Value = "/frontend/images/fav.png"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4389),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9104),
                             KeyNameID = "admin_commission",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4392),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9107),
                             Value = "3"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4396),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9112),
                             KeyNameID = "currency_code",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4398),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9115),
                             Value = "USD"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4518),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9120),
                             KeyNameID = "currency_symbole",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4520),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9124),
                             Value = "$"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4528),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9129),
                             KeyNameID = "notification",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4530),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9133),
                             Value = "0"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4534),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9138),
                             KeyNameID = "default_theme",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4537),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9142),
                             Value = "night-mode"
                         },
                         new
                         {
                             Id = 11,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4540),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9147),
                             KeyNameID = "instructor_verification",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4542),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9150),
                             Value = "0"
                         },
                         new
                         {
                             Id = 12,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4546),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9155),
                             KeyNameID = "user_verification",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4548),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9158),
                             Value = "0"
                         },
                         new
                         {
                             Id = 13,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4552),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9163),
                             KeyNameID = "facebook",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4555),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9167),
                             Value = "facebook"
                         },
                         new
                         {
                             Id = 14,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4558),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9172),
                             KeyNameID = "twitter",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4560),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9176),
                             Value = "twitter"
                         },
                         new
                         {
                             Id = 15,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4564),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9182),
                             KeyNameID = "linkedin",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4566),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9186),
                             Value = "linkedin"
                         },
                         new
                         {
                             Id = 16,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4570),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9191),
                             KeyNameID = "Instagram",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4572),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9195),
                             Value = "Instagram"
                         },
                         new
                         {
                             Id = 17,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4576),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9200),
                             KeyNameID = "youtube",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4579),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9203),
                             Value = "youtube"
                         },
                         new
                         {
                             Id = 18,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4582),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9208),
                             KeyNameID = "pinterest",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4584),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9212),
                             Value = "pinterest"
                         },
                         new
                         {
                             Id = 19,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4588),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9216),
                             KeyNameID = "verification_subscriber",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4591),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9220),
                             Value = "500"
                         },
                         new
                         {
                             Id = 20,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4594),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9225),
                             KeyNameID = "verification_sell",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4597),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9228),
                             Value = "100"
                         },
                         new
                         {
                             Id = 21,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4600),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9233),
                             KeyNameID = "paypal",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4602),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9236),
                             Value = "0"
                         },
                         new
                         {
                             Id = 22,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4608),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9244),
                             KeyNameID = "palypal_client_id",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4610),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9247),
                             Value = ""
                         },
                         new
                         {
                             Id = 23,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4613),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9252),
                             KeyNameID = "stripe",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4616),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9256),
                             Value = "0"
                         },
                         new
                         {
                             Id = 24,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4620),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9261),
                             KeyNameID = "stripe_pk",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4622),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9265),
                             Value = "0"
                         },
                         new
                         {
                             Id = 25,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4626),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9270),
                             KeyNameID = "razorpay",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4628),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9274),
                             Value = "0"
                         },
                         new
                         {
                             Id = 26,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4631),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9279),
                             KeyNameID = "seo_title",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4634),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9282),
                             Value = "Online Courses - Anytime, Anywhere Cursus"
                         },
                         new
                         {
                             Id = 27,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4637),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9287),
                             KeyNameID = "seo_description",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4639),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9291),
                             Value = "is the world&#39;s largest destination for online courses. Discover an online course and start learning a new skill today."
                         },
                         new
                         {
                             Id = 28,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4642),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9295),
                             KeyNameID = "seo_meta",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4645),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9299),
                             Value = "online,courses,learning,teaching"
                         },
                         new
                         {
                             Id = 29,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4648),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9303),
                             KeyNameID = "seo_twitter_title",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4650),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9307),
                             Value = "Online Courses - Anytime, Anywhere"
                         },
                         new
                         {
                             Id = 30,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4654),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9313),
                             KeyNameID = "seo_canonical",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4656),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9317),
                             Value = "https://coursearly.com/cursus/public/"
                         },
                         new
                         {
                             Id = 31,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4659),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9322),
                             KeyNameID = "dark_logo",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4662)
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9325)
                         },
                         new
                         {
                             Id = 32,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4665),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9330),
                             KeyNameID = "footer_logo",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(4667),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(9334),
                             Value = "footerlpgo.png"
                         });
                 });
@@ -349,104 +349,104 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         {
                             Id = 1,
                             CategoryName = "Photography",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(4989),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5016),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6118),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6153),
                             Status = 1
                         },
                         new
                         {
                             Id = 2,
                             CategoryName = "Marketing",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5023),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5025),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6163),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6167),
                             Status = 1
                         },
                         new
                         {
                             Id = 3,
                             CategoryName = "Development",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5029),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5032),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6175),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6179),
                             Status = 1
                         },
                         new
                         {
                             Id = 4,
                             CategoryName = "Business",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5035),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5038),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6184),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6188),
                             Status = 1
                         },
                         new
                         {
                             Id = 5,
                             CategoryName = "Design",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5041),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5044),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6193),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6196),
                             Status = 1
                         },
                         new
                         {
                             Id = 6,
                             CategoryName = "Music",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5047),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5049),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6201),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6205),
                             Status = 1
                         },
                         new
                         {
                             Id = 7,
                             CategoryName = "IT & Software",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5053),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5055),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6210),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6214),
                             Status = 1
                         },
                         new
                         {
                             Id = 8,
                             CategoryName = "Finance & Accounting",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5059),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5061),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6219),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6223),
                             Status = 1
                         },
                         new
                         {
                             Id = 9,
                             CategoryName = "Office Productivity",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5065),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5067),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6228),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6232),
                             Status = 1
                         },
                         new
                         {
                             Id = 10,
                             CategoryName = "Personal Development",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5071),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5073),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6237),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6241),
                             Status = 1
                         },
                         new
                         {
                             Id = 11,
                             CategoryName = "Lifestyle",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5077),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5079),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6246),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6250),
                             Status = 1
                         },
                         new
                         {
                             Id = 12,
                             CategoryName = "Health & Fitness",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5083),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5085),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6254),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6258),
                             Status = 1
                         },
                         new
                         {
                             Id = 13,
                             CategoryName = "Teaching & Academics",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5088),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(5091),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6263),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 925, DateTimeKind.Local).AddTicks(6267),
                             Status = 1
                         });
                 });
@@ -637,18 +637,18 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         {
                             Id = 1,
                             Answer = "Manage your account settings.",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(7573),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 927, DateTimeKind.Local).AddTicks(3207),
                             FAQFor = 0,
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(7586),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 927, DateTimeKind.Local).AddTicks(3231),
                             Question = "Account/Profile"
                         },
                         new
                         {
                             Id = 2,
                             Answer = "Manage your account settings.",
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(7593),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 927, DateTimeKind.Local).AddTicks(3242),
                             FAQFor = 1,
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(7596),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 927, DateTimeKind.Local).AddTicks(3246),
                             Question = "Account/Profile"
                         });
                 });
@@ -829,25 +829,25 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 90, DateTimeKind.Local).AddTicks(1137),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 913, DateTimeKind.Local).AddTicks(6383),
                             LanguageName = "English",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 91, DateTimeKind.Local).AddTicks(9997),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 917, DateTimeKind.Local).AddTicks(2802),
                             Status = 0
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 92, DateTimeKind.Local).AddTicks(953),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 917, DateTimeKind.Local).AddTicks(3886),
                             LanguageName = "Vietnamese",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 92, DateTimeKind.Local).AddTicks(964),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 917, DateTimeKind.Local).AddTicks(3900),
                             Status = 0
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 92, DateTimeKind.Local).AddTicks(968),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 917, DateTimeKind.Local).AddTicks(3905),
                             LanguageName = "Korean",
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 92, DateTimeKind.Local).AddTicks(970),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 917, DateTimeKind.Local).AddTicks(3909),
                             Status = 0
                         });
                 });
@@ -990,99 +990,99 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2233),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5484),
                             EmailTitle = "Cource Approved",
                             ForWhat = "Cource Approved",
                             ForWho = 2,
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2245),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5513),
                             NotificationTitle = "Cource Approved",
                             Subject = "Cource Approved"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2255),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5523),
                             EmailTitle = "Course Sell",
                             ForWhat = "Course Sell",
                             ForWho = 2,
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2257),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5528),
                             NotificationTitle = "Course Sell",
                             Subject = "Course Sell"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2262),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5533),
                             EmailTitle = "Payout Update",
                             ForWhat = "Payout Update",
                             ForWho = 2,
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2264),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5537),
                             NotificationTitle = "Payout Update",
                             Subject = "Payout Update"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2269),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5542),
                             EmailTitle = "Review Added",
                             ForWhat = "Review Added",
                             ForWho = 2,
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2272),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5545),
                             NotificationTitle = "Review Added",
                             Subject = "Review Added"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2277),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5551),
                             EmailTitle = "Thanks For Review",
                             ForWhat = "Thanks For Review",
                             ForWho = 1,
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2280),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5554),
                             NotificationTitle = "Thanks For Review",
                             Subject = "Thanks For Review"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2283),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5560),
                             EmailTitle = "Report Feedback",
                             ForWhat = "Report Feedback",
                             ForWho = 1,
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2286),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5563),
                             NotificationTitle = "Report Feedback",
                             Subject = "Report Feedback"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2290),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5569),
                             EmailTitle = "Cource Block",
                             ForWhat = "Cource Block",
                             ForWho = 2,
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2292),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5573),
                             NotificationTitle = "Cource Block",
                             Subject = "Cource Block"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2297),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5578),
                             EmailTitle = "Live Now (Subscribe Institute)",
                             ForWhat = "Live Now (Subscribe Institute)",
                             ForWho = 1,
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2300),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5582),
                             NotificationTitle = "Live Now (Subscribe Institute)",
                             Subject = "Live Now (Subscribe Institute)"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2304),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5587),
                             EmailTitle = "New Course (Subscribe Institute)",
                             ForWhat = "New Course (Subscribe Institute)",
                             ForWho = 1,
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 95, DateTimeKind.Local).AddTicks(2306),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(5591),
                             NotificationTitle = "New Course (Subscribe Institute)",
                             Subject = "New Course (Subscribe Institute)"
                         });
@@ -1258,7 +1258,7 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "047c4f31-97a3-4dcc-9ab9-2b6f6d4bd6fc",
+                            ConcurrencyStamp = "d0adcb19-d027-4db6-8430-7eff9da9afc8",
                             GuardName = "Web",
                             Name = "Admin S",
                             NormalizedName = "Admin S"
@@ -1388,8 +1388,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8397),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8410),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(13),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(42),
                             Status = 1,
                             SubCategoryName = "CSS"
                         },
@@ -1397,8 +1397,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8418),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8420),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(51),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(55),
                             Status = 1,
                             SubCategoryName = "JS"
                         },
@@ -1406,8 +1406,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8424),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8427),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(61),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(65),
                             Status = 1,
                             SubCategoryName = "Digital Marketing"
                         },
@@ -1415,8 +1415,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         {
                             Id = 4,
                             CategoryId = 5,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8431),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8433),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(70),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(73),
                             Status = 1,
                             SubCategoryName = "UI Design"
                         },
@@ -1424,8 +1424,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         {
                             Id = 5,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8437),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8439),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(267),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(273),
                             Status = 1,
                             SubCategoryName = "Full Stack Development"
                         },
@@ -1433,8 +1433,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         {
                             Id = 6,
                             CategoryId = 4,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8447),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8449),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(278),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(282),
                             Status = 1,
                             SubCategoryName = "B2B Business"
                         },
@@ -1442,8 +1442,8 @@ namespace Learning_Managerment_SystemMarket_Core.Migrations
                         {
                             Id = 7,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8453),
-                            ModifiedDate = new DateTime(2021, 12, 3, 14, 37, 26, 94, DateTimeKind.Local).AddTicks(8455),
+                            CreatedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(287),
+                            ModifiedDate = new DateTime(2021, 12, 3, 16, 42, 1, 926, DateTimeKind.Local).AddTicks(291),
                             Status = 1,
                             SubCategoryName = "Python"
                         });
