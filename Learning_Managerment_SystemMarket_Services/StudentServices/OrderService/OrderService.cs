@@ -40,5 +40,17 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.OrderServic
             }
             return orders;
         }
+
+        public async Task<int> GetAllStudentEnrollCourse(int id)
+        {
+            var listFromDb = await _unitOfWork.Courses.GetAll(x => x.InstructorId == id);
+            int count = 0;
+            foreach (var item in listFromDb)
+            {
+                var enroll = await FindAll(x => x.CourseId == item.Id);
+                count += enroll.GroupBy(x => x.StudentId).Select(g => g.First()).Count();
+            }
+            return count;
+        }
     }
 }
