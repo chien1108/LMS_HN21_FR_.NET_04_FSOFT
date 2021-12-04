@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.StudentViewModel;
+using System;
 
 
 namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseRateViewModel
@@ -25,5 +26,9 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseRateView
         public StudentVm Student { get; set; }
 
         public CourseVm Course { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public string PrettyDate { get; set; }
     }
 }

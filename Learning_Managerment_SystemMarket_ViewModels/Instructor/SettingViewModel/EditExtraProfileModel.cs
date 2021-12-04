@@ -1,15 +1,19 @@
 using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace LMS.Web.Areas.IdentityMVC.Models.SettingViewModels
 {
-  public class EditExtraProfileModel
-  {
+    public class EditExtraProfileModel
+    {
+        public int InstructorId { get; set; }
+
+        [Required]
+        [Display(Name = "Current password")]
         public string InstructorName { get; set; }
+
         public string HeadLine { get; set; } = null;
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         public string Website { get; set; } = null;
         public string Facebook { get; set; } = null;
         public string LinkedIn { get; set; } = null;
@@ -22,6 +26,21 @@ namespace LMS.Web.Areas.IdentityMVC.Models.SettingViewModels
         public decimal Balance { get; set; }
 
         public string Email { get; set; }
- 
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Current password")]
+        public string OldPassword { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "New password")]
+        public string NewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm new password")]
+        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
     }
 }
