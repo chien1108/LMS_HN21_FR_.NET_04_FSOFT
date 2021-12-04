@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Learning_Managerment_SystemMarket_ViewModels.StudentViewModels.CourseDetailVM>
+﻿@model IEnumerable<Learning_Managerment_SystemMarket_ViewModels.StudentViewModels.CardCourseVM>
 @using Learning_Managerment_SystemMarket_Core.Models.Entities;
 @using Learning_Managerment_SystemMarket_Core.Contracts;
 @using Microsoft.AspNetCore.Identity
@@ -57,7 +57,12 @@ else
                         <div class="item">
                             <div class="fcrse_1 mb-20">
                                 <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@course.Id" class="fcrse_img">
-                                    <img src="@course.CoverImage" alt="">
+                                    @if (course.CoverImage != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(course.CoverImage);
+                                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                        <img src="@imgsrc" width="100%" />
+                                    }
                                     <div class="course-overlay">
                                         <div class="badge_seller">Bestseller</div>
                                         <div class="crse_reviews">
@@ -92,10 +97,8 @@ else
                                     </div>
                                     <div class="vdtodt">
                                         <span class="vdt14">@course.Views views</span>
-                                        @{
-                                            var month = (@DateTime.Now - @course.CreatedDate);
-                                        }
-                                        <span class="vdt14">@month.TotalDays days ago</span>
+                                        
+                                        <span class="vdt14">@course.RelativeCreateDate</span>
                                     </div>
                                     <a href="https://coursearly.com/cursus/public/courses/wordpress-for-beginner-:-create-a-website-step-by-step/7" class="crse14s">@course.Title</a>
                                     <a href="#" class="crse-cate">
@@ -104,7 +107,8 @@ else
                                     </a>
                                     <div class="auth1lnkprce">
                                         <p class="cr1fot">
-                                            By <a href="https://coursearly.com/cursus/public/instructors/amritpal/12">@course.Instructor.InstructorName</a>
+                                            By <a asp-area="StudentFunction" asp-controller="Instructor" asp-action="InstructorDetails"
+                                           asp-route-id="@course.Instructor.Id">@course.Instructor.InstructorName</a>
                                         </p>
                                         <div class="prce142">$@course.Price</div>
                                         @if (user != null)

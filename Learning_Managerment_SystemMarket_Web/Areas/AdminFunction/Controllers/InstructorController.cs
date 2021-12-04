@@ -36,6 +36,13 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
             return View();
         }
 
+        // GET: StudentController/Details/5
+        public ActionResult InstructorInfo(int id)
+        {
+            ViewBag.IdInstructor = id;
+            return View();
+        }
+
         // GET: InstructorController/Details/5
         public async Task<ActionResult> ChangeBlock(int id)
         {

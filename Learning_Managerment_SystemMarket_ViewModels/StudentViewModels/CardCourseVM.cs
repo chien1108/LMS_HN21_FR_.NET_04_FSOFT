@@ -19,5 +19,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
         public Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor Instructor { get; set; }
         public SubCategory SubCategory { get; set; }
         public string RelativeCreateDate => RelativeDate.ChangeDate(CreatedDate);
+        public Category Category { get; set; }
+
     }
 }

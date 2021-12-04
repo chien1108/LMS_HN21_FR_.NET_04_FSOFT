@@ -1,0 +1,119 @@
+﻿@using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService
+@using Learning_Managerment_SystemMarket_Core.Modules.Enums
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices
+
+
+@inject IInstructorOrderService _instructorOrderService
+@inject ICategoryService _categoryService
+@{
+    int id = ViewBag.IdInstructor;
+
+    var listCourse = await _instructorOrderService.FindAll(x => x.Course.InstructorId == id, null, new List<string>() { "Course" });
+
+}
+
+<div class="card">
+    <div class="card-header">
+        <h4>Course</h4>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="datatable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                <table id="datatable" class="table table-striped no-footer dataTable" role="grid" aria-describedby="datatable_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
+                                             #
+                                        : activate to sort column descending" style="width: 9.28125px;">
+                                #
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
+                                            Title
+                                        : activate to sort column ascending" style="width: 223.016px;">
+                                Title
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
+                                            instructor Name
+                                        : activate to sort column ascending" style="width: 118.109px;">
+                                Category
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
+                                            Price
+                                        : activate to sort column ascending" style="width: 36.0469px;">
+                                Price
+                            </th>
+                            <th class="text-center sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
+                                            Status
+                                        : activate to sort column ascending" style="width: 44.8594px;">
+                                Status
+                            </th>
+                            <th class="sorting_desc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
+                                            Last Update
+                                        : activate to sort column ascending" style="width: 86.5312px;" aria-sort="descending">
+                                Last Update
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
+                                            Action
+                                        : activate to sort column ascending" style="width: 251.156px;">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < listCourse.Count(); i++)
+                        {
+                            <tr role="row">
+                                <td class="sorting_1">@(i+1)</td>
+                                <td>
+                                    @listCourse.ElementAt(i).Course.Title
+                                </td>
+                                @{
+                                    var category = await _categoryService.Find(x => x.Id == listCourse.ElementAt(i).Course.CategoryId);
+                                    }
+                                <td>@category.CategoryName</td>
+                                <td>@listCourse.ElementAt(i).Course.Price</td>
+                                <td class="text-center text-primary">@listCourse.ElementAt(i).Status</td>
+                                <td>@listCourse.ElementAt(i).CreatedDate.ToString("dd MMM yyyy")</td>
+                                <td class="d-flex">
+                                    <a class="btn btn-sm btn-outline-info btn-icon m-1" >
+                                        View
+                                    </a>
+                                    <form action="">
+                                        <button type="button" class="btn btn-sm btn-outline-danger btn-icon m-1" onclick="confirm('Are you sure you want to do this?') ? this.parentElement.submit() : ''">
+                                            @if (@listCourse.ElementAt(i).Status == StatusOrder.Active)
+                                            {
+                                                <span class="ul-btn__icon">
+                                                    Block
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="ul-btn__icon">
+                                                    Un-Block
+                                                </span>
+                                            }
+                                        </button>
+                                    </form>
+
+                                    <form action="">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary btn-icon m-1" onclick="confirm('Are you sure you want to do this?') ? this.parentElement.submit() : ''">
+                                            <span class="ul-btn__icon">
+                                                Bestseller
+                                            </span>
+                                        </button>
+                                    </form>
+                                    <form action="">
+                                        <button type="button" class="btn btn-sm btn-outline-dark btn-icon m-1" onclick="confirm('Are you sure you want to do this?') ? this.parentElement.submit() : ''">
+                                            <span class="ul-btn__icon">
+                                                Remove Featured
+                                            </span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

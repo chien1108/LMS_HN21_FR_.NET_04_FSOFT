@@ -1,0 +1,86 @@
+﻿@using Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorService
+@using Learning_Managerment_SystemMarket_Core.Modules.Enums
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
+@using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService
+@using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService
+@inject IInstructorService _instructorService
+@inject IUserService _userService
+@inject IInstructorOrderService _instructorOrderService
+@inject ISubcriptionService _subcriptionService
+@{
+    int id = ViewBag.IdInstructor;
+    var instructor = await _instructorService.Find(x => x.Id == id);
+
+    var listEnrollCoure = await _instructorOrderService.FindAll(x => x.Course.InstructorId == instructor.Id);
+
+    var listSubScription = await _subcriptionService.GetSubByInstructorId(instructor.Id);
+}
+
+<div class="card profile-widget">
+    <div class="profile-widget-header">
+        <img alt="image" src="https://coursearly.com/cursus/public/upload/image/60d31155a3e8d.png" class="rounded-circle profile-widget-picture">
+        <div class="profile-widget-items">
+            <div class="profile-widget-item">
+                <div class="profile-widget-item-label">Enroll Course</div>
+                <div class="profile-widget-item-value">
+                    @listEnrollCoure.Count()
+                </div>
+            </div>
+            <div class="profile-widget-item">
+                <div class="profile-widget-item-label">Subsciber</div>
+                <div class="profile-widget-item-value">
+                    @listSubScription.Count()
+                </div>
+            </div>
+            <div class="profile-widget-item">
+                <div class="profile-widget-item-label">Earning</div>
+                <div class="profile-widget-item-value">
+                    52.38
+                </div>
+            </div>
+            <div class="profile-widget-item">
+                <div class="profile-widget-item-label">Commission</div>
+                <div class="profile-widget-item-value">1.62</div>
+            </div>
+        </div>
+    </div>
+    <div class="profile-widget-description">
+        <div class="profile-widget-name">
+            @instructor.InstructorName
+            <div class="text-muted d-inline font-weight-normal">
+                <div class="slash"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer text-center">
+        <div class="font-weight-bold mb-2">Find Jassica William On</div>
+        <a href="" class="btn btn-social-icon btn-info mr-1">
+            <i class="fas fa-globe-asia"></i>
+        </a>
+        <a href="http://facebook.com/https://www.facebook.com/https://www.facebook.com/" class="btn btn-social-icon btn-primary mr-1">
+            <i class="fab fa-facebook-f "></i>
+        </a>
+        <a href="http://twitter.com/https://twitter.com/" class="btn btn-social-icon btn-info mr-1">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="http://www.linkedin.com/https://www.linkedin.com/" class="btn btn-social-icon btn-dark mr-1">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="http://www.youtube.com/https://www.youtube.com/" class="btn btn-social-icon btn-danger">
+            <i class="fab fa-youtube"></i>
+        </a>
+    </div>
+    <div class="card-footer text-center">
+        <div class="font-weight-bold mb-2">Extra Detail</div>
+        <span class="badge badge-danger">Live Now</span>
+        @if (instructor.Status == StatusIns.Active)
+        {
+            <span class="badge badge-light">Active</span>
+        }
+        else
+        {
+            <span class="badge badge-warning">Block</span>
+        }
+    </div>
+</div>

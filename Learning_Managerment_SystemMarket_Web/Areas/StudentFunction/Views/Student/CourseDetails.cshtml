@@ -10,8 +10,6 @@
     ViewData["Title"] = "CourseDetails";
     Layout = "/Views/Shared/_StudentLayout.cshtml";
     var user = await UserManager.GetUserAsync(User);
-    
-
 }
 
 <div class="_215b01">
@@ -37,12 +35,27 @@
                                 </a>
                             </div>
                             <div class="_215b10">
-                                <a asp-action="SavedToCourse" asp-route-courseId="@Model.Id" class="_215b11">
-                                    <span><i class="uil uil-heart"></i></span>Save
-                                </a>
-                                <a href="https://coursearly.com/cursus/public/report/1/add" class="_215b12">
-                                    <span><i class="uil uil-windsock"></i></span>Report abuse
-                                </a>
+                                @if (user != null)
+                                {
+                                    <a asp-area="StudentFunction" asp-controller="SavedCourse" asp-action="SavedToCourse" asp-route-courseId="@Model.Id" class="_215b11">
+                                        <span><i class="uil uil-heart"></i></span>Save
+                                    </a>
+
+                                    <a href="#" class="_215b12">
+                                        <span><i class="uil uil-windsock"></i></span>Report abuse
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a id="login" asp-area="Identity" asp-page="/Account/Login"
+                                       class="menu--link " title="Enrolled"
+                                       onclick="return confirm('You must login to show save course ')">
+                                        <i class="uil uil-bag menu--icon"></i>
+                                        <span class="menu--label">Enrolled</span>
+                                    </a>
+                                }
+
+
                             </div>
                         </div>
                         <div class="col-xl-8 col-lg-7 col-md-6">
@@ -132,13 +145,13 @@
                                     if (!subcriptionExist)
                                     {
                                         <a class="btn btn-danger" asp-route-InstructorId="@Model.InstructorId"
-                                           asp-route-StudentId="@user.IdUser" asp-route-CourseId="@Model.Id"
+                                           asp-route-StudentId="@user.IdUser"  asp-route-ReturnUrl="~/StudentFunction/Student/CourseDetails/@Model.Id"
                                            asp-area="StudentFunction" asp-action="Subcribe" asp-controller="Student" >Subscribe</a>
                                     }
                                     else
                                     {
                                         <a class="btn btn-danger" asp-route-InstructorId="@Model.InstructorId"
-                                           asp-route-StudentId="@user.IdUser" asp-route-CourseId="@Model.Id"
+                                           asp-route-StudentId="@user.IdUser"  asp-route-ReturnUrl="~/StudentFunction/Student/CourseDetails/@Model.Id"
                                            asp-area="StudentFunction" asp-action="UnSubcribe" asp-controller="Student">UnSubscribe</a>
                                     }
 

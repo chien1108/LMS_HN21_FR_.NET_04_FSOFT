@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="section">
+    <div class="section-header">
+        <h1>Instructors</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a asp-controller="Home" asp-action="Index">Home</a></div>
+            <div class="breadcrumb-item"><a href="#">Instructors</a></div>
+        </div>
+    </div>
+
+    <div class="section-body">
+        <div class="row mt-sm-4">
+            <div class="col-12 col-md-12 col-lg-5">
+                <partial name="InstructorPartial.cshtml" />
+                <partial name="BalancePartial.cshtml" />
+            </div>
+            <div class="col-12 col-md-12 col-lg-7">
+                <partial name="CoursePartial.cshtml" />
+                <partial name="DiscussionPartial.cshtml" />
+            </div>
+        </div>
+    </div>
+</section>
