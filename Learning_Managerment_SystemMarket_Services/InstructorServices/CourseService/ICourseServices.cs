@@ -16,7 +16,8 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
 
         Task<IList<CourseVm>> GetAllUpcomingCourses(int id);
 
-        Task<ResponseResult> CreateCourse(CreateCourseVm model, List<CreateCourseContentVm> createCourseContentVms, List<CreateLectureVm> createLectureVms);
+        Task<ResponseResult> CreateCourse(CreateCourseVm model, List<CreateCourseContentVm> createCourseContentVms, List<CreateLectureVm> createLectureVms, int instructorId);
+
         Task<IList<DisCountCourseVm>> GetAllDiscountCourses(int id);
 
         Task<ViewCourseVm> GetViewCourses(int id);
