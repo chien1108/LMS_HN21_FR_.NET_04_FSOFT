@@ -44,10 +44,14 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.OrderServic
         public async Task<int> GetAllStudentEnrollCourse(int id)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             var listFromDb = await _unitOfWork.Courses.GetAll(x =>x.InstructorId == id);
 =======
             var listFromDb = await _unitOfWork.Courses.GetAll(x => x.InstructorId == id);
 >>>>>>> 053dae937b129d2a642b64c67ab6bc992975f967
+=======
+            var listFromDb = await _unitOfWork.Courses.GetAll(x => x.InstructorId == id);
+>>>>>>> 98beadc8cd1998ad9a347470423af675aa3bc5c0
             int count = 0;
             foreach (var item in listFromDb)
             {

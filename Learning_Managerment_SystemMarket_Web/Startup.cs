@@ -33,6 +33,7 @@ using Learning_Managerment_SystemMarket_Services.AdminFunction.StudentService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseRateService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstructorService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService;
@@ -114,6 +115,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();
             services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
             services.AddTransient<IInstructorSubCategoryService, InstructorSubCategoryService>();
+            services.AddTransient<IInstructorCourseRateService, InstructorCourseRateService>();
             services.AddTransient<IInsInstructorService, InsInstructorService>();
             services.AddTransient<IInstructorOrderService, InstructorOrderService>();
             services.AddTransient<ICartService, CartService>();
