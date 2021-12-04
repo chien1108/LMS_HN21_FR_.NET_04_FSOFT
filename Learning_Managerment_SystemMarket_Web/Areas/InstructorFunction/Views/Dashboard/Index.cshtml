@@ -15,7 +15,7 @@
                     <div class="card_dash_left">
                         <h5>Total Sales</h5>
                         <h2>@Model.TotalSales</h2>
-                        <span class="crdbg_1">Today $0</span>
+                        <span class="crdbg_1">Today @Model.TotalSalesToday</span>
                     </div>
                     <div class="card_dash_right">
                         <img src="public/frontend/images/dashboard/achievement.svg" alt="">
@@ -27,7 +27,7 @@
                     <div class="card_dash_left">
                         <h5>Total Enroll</h5>
                         <h2>@Model.TotalEnroll</h2>
-                        <span class="crdbg_2">Today 0</span>
+                        <span class="crdbg_2">Today @Model.TotalEnrollToday</span>
                     </div>
                     <div class="card_dash_right">
                         <img src="public/frontend/images/dashboard/graduation-cap.svg" alt="">
@@ -39,7 +39,7 @@
                     <div class="card_dash_left">
                         <h5>Total Courses</h5>
                         <h2>@Model.TotalCourses</h2>
-                        <span class="crdbg_3">Today 0</span>
+                        <span class="crdbg_3">Today @Model.TotalCoursesToday</span>
                     </div>
                     <div class="card_dash_right">
                         <img src="public/frontend/images/dashboard/online-course.svg" alt="">
@@ -51,7 +51,7 @@
                     <div class="card_dash_left">
                         <h5>Total Students</h5>
                         <h2>@Model.TotalStudents</h2>
-                        <span class="crdbg_4">Today 1</span>
+                        <span class="crdbg_4">Today @Model.TotalStudentsToday</span>
                     </div>
                     <div class="card_dash_right">
                         <img src="public/frontend/images/dashboard/knowledge.svg" alt="">
@@ -65,7 +65,7 @@
                         <h1>Jump Into Course Creation</h1>
                     </div>
                     <div class="card_dash_right1">
-                        <button class="create_btn_dash" onclick="window.location.href ='public/instructor/courses/create';">Create Your Course</button>
+                    <button class="create_btn_dash" ><a class= "text-white" asp-area = "InstructorFunction" asp-controller= "Course" asp-action = "Create">Create Your Course</a></button>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="crse-perf-right">
                                     @Model.TotalSales<span class="analyics_pr">
-                                    (0)
+                                    (@Model.TotalSalesToday)
                                 </span>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                             </div>
                             <div class="crse-perf-right">
                                 @Model.TotalEnroll<span class="analyics_pr">
-                                (0)
+                                (@Model.TotalEnrollToday)
                             </span>
                         </div>
                     </div>
@@ -154,7 +154,7 @@
                         <a class="new_links10">
                             @item.Title<div class="crse-perf-right">
                             <span class="analyics_pr">
-                                $0
+                                $ @item.Price
                             </span>
                         </div>
                     </a>
