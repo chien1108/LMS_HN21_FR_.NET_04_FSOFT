@@ -112,34 +112,49 @@
 
                             </div>
                         </div>
-                        
-                        <div class="review_all120 mb-30">
-                            <div class="review_item_course_title">
-                                <a href="#">CSS : The Complete Guide 2021 (Include SASS &amp; GRID)</a>
-                            </div>
-                            <div class="review_item">
-                                <div class="review_usr_dt">
-                                    <img src="public/upload/image/60d31155a3e8d.png" alt="">
-                                    <div class="rv1458">
-                                        <h4 class="tutor_name1">student student</h4>
-                                        <span class="time_145">3 months ago</span>
+                        @foreach (var courseRates in ViewBag.CourseRates)
+                        {
+                            <div class="review_all120 mb-30">
+                                <div class="review_item_course_title">
+                                    <a href="#">CSS : The Complete Guide 2021 (Include SASS &amp; GRID)</a>
+                                </div>
+                                @foreach (var item in courseRates)
+                                {
+                                    <div class="review_item">
+                                        <div class="review_usr_dt">
+                                            @if (item.Student.Image != null)
+                                            {
+                                                var base64 = Convert.ToBase64String(item.Student.Image);
+                                                var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                                <img src="@imgsrc" width="100%" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/frontend/images/hd_dp.jpg" />
+                                            }
+                                            <div class="rv1458">
+                                                <h4 class="tutor_name1">@item.Student.StudentName</h4>
+                                                <span class="time_145">3 months ago</span>
+                                            </div>
+                                        </div>
+                                        <div class="rating-box mt-20">
+                                            <span class="rating-star full-star">
+                                            </span>
+                                            <span class="rating-star full-star">
+                                            </span>
+                                            <span class="rating-star full-star">
+                                            </span>
+                                            <span class="rating-star empty-star">
+                                            </span>
+                                            <span class="rating-star empty-star">
+                                            </span>
+                                        </div>
+                                        <p class="rvds10">@item.Messge</p>
                                     </div>
-                                </div>
-                                <div class="rating-box mt-20">
-                                    <span class="rating-star full-star">
-                                    </span>
-                                    <span class="rating-star full-star">
-                                    </span>
-                                    <span class="rating-star full-star">
-                                    </span>
-                                    <span class="rating-star empty-star">
-                                    </span>
-                                    <span class="rating-star empty-star">
-                                    </span>
-                                </div>
-                                <p class="rvds10">ddssss232edffddfwdwefwfwef</p>
+                                }
                             </div>
-                        </div>
+                        }
+
                     </div>
                 </div>
             </div>
