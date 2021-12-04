@@ -11,6 +11,7 @@ using Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -122,7 +123,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
                 SearchString = searchString
             };
             ViewBag.ExplorePagingModel = ExplorePagingModel;
-
+            ViewBag.PageSize = pageSize;
             StudentExploreVM studentExploreVM = new StudentExploreVM
             {
                 Courses = collection.Skip(start).Take(pageSize).ToList(),
@@ -186,9 +187,9 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
                 if (!isSuccess.Success)
                 {
                     ModelState.AddModelError("", isSuccess.Message);
-                    return RedirectToAction("CourseDetails", new { id = model.CourseId});
+                    return Redirect(model.ReturnUrl);
                 }
-                return RedirectToAction("CourseDetails", new { id = model.CourseId });
+                return Redirect(model.ReturnUrl);
             }
             catch
             {
@@ -212,9 +213,9 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
                 if (!isSuccess.Success)
                 {
                     ModelState.AddModelError("", isSuccess.Message);
-                    return RedirectToAction("CourseDetails", new { id = model.CourseId });
+                    return Redirect(model.ReturnUrl);
                 }
-                return RedirectToAction("CourseDetails", new { id = model.CourseId });
+                return Redirect(model.ReturnUrl);
             }
             catch
             {
@@ -261,7 +262,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         public async Task<IActionResult> GetCourseByCategory(int id)
         {
             var courses = await _studentHomePageService.FindAllCourse(c => c.CategoryId == id);
-            var model = _mapper.Map<ICollection<CourseDetailVM>>(courses);
+            var model = _mapper.Map<ICollection<CardCourseVM>>(courses);
             return View(model);
         }
 

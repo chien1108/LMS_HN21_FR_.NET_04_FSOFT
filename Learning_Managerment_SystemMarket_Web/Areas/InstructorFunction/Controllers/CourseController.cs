@@ -5,6 +5,7 @@ using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewM
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.LectureViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.ResponseResult;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +53,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             return View();
         }
 
+        [Authorize]
         // GET: CourseController/Create
         public ActionResult Create()
         {
@@ -91,10 +93,12 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult> CreateCourse(CreateCourseVm model)
         {
-
+            var user = await _userManager.GetUserAsync(User);
+            var instructorId = user.IdUser;
             var responseResult = new ResponseResult
             {
                 Code = false,
@@ -108,7 +112,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             {
                 model.CoverImage = _picture;
                 var result = model;
-                responseResult = await _courseServices.CreateCourse(model, createCourseContentVms, createLectureVms);
+                responseResult = await _courseServices.CreateCourse(model, createCourseContentVms, createLectureVms, instructorId);
             }
             else
             {
