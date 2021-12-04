@@ -35,7 +35,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             {
                 var course = _mapper.Map<Course>(model);
                 //Dùng tạm InstructorId có sẵn
-                course.InstructorId = 3;
+                course.InstructorId = 2;
                 await _unitOfWork.Courses.Create(course);
 
                 foreach (var courseContentItem in createCourseContentVms)

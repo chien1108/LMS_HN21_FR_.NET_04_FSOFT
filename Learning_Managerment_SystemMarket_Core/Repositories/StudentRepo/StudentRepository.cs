@@ -36,6 +36,15 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo
             return subInstructor;
         }
 
+        public async Task<ICollection<SubScription>> GetSubByInstructorId(int instructorId)
+        {
+            var subInstructor = await _context.SubScriptions
+                                .Include(x => x.Instructor)
+                                .Where(x => x.Instructor.Id == instructorId)
+                                .ToListAsync();
+            return subInstructor;
+        }
+
         public async Task<bool> IsSubcribleExist(int studentId, int instuctorId)
         {
             var result = await _context.SubScriptions.FirstOrDefaultAsync(x=>x.StudentId == studentId && x.InstructorId == instuctorId);

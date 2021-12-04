@@ -76,6 +76,12 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.Subcription
                 return new ServiceResponse<SubScription> { Success = false, Message = "Create fail" };
             }
         }
+
+        public async Task<ICollection<SubScription>> GetSubByInstructorId(int instructorId)
+        {
+            var listSubInstructor = await _unitOfWork.Students.GetSubByInstructorId(instructorId);
+            return listSubInstructor;
+        }
     }
 }
 
