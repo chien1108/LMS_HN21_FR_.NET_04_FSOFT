@@ -120,7 +120,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
                         .SelectMany(v => v.Errors)
                         .Select(e => e.ErrorMessage));
                 responseResult.Message = message;
-            }
+            }  
 
             return Json(responseResult);
         }
