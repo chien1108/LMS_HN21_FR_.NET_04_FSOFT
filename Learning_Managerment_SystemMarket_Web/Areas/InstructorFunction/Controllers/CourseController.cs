@@ -53,7 +53,6 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             return View();
         }
 
-        [Authorize]
         // GET: CourseController/Create
         public ActionResult Create()
         {
@@ -93,17 +92,23 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [Authorize]
         [HttpGet]
         public async Task<ActionResult> CreateCourse(CreateCourseVm model)
         {
-            var user = await _userManager.GetUserAsync(User);
-            var instructorId = user.IdUser;
+            //var user = await _userManager.GetUserAsync(User);
+            //var instructorId = user.IdUser;
+            var instructorId = 3;
             var responseResult = new ResponseResult
             {
                 Code = false,
                 Message = "Please add at least one Course Content"
             };
+            bool checkIsExist = await _courseServices.IsExistsCourseTitle(model.Title);
+            if (checkIsExist)
+            {
+                responseResult.Message = "Course Title Is Exists";
+                return Json(responseResult);
+            }
             if (createCourseContentVms.Count() < 1 || createLectureVms.Count() < 1)
             {
                 return Json(responseResult);
