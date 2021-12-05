@@ -2,6 +2,7 @@
 using Learning_Managerment_SystemMarket_Core.Contracts;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Services.StudentServices.CartService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.OrderService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
@@ -26,6 +27,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         private readonly ISavedCourseService _savedCourseService;
         private readonly ISubcriptionService _subcriptionService;
         private readonly ICartService _cartService;
+        private readonly IOrderService _orderService;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
@@ -38,7 +40,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             ISubcriptionService subcriptionService,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            ICartService cartService)
+            ICartService cartService,
+            IOrderService orderService)
 
         {
             _studentHomePageService = studentHomePageService;
@@ -50,6 +53,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             _userManager = userManager;
             _signInManager = signInManager;
             _cartService = cartService;
+            _orderService = orderService;
         }
 
         /// <summary>
@@ -157,6 +161,16 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             {
                 return BadRequest();
             }
+        }
+        /// <summary>
+        /// Get enrolled courses by Student Id VuTV10
+        /// </summary>
+        /// <returns>List enrolled course</returns>
+        public async Task<IActionResult> EnrolledCourse()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var orders = await _orderService.FindAll(expression: o => o.StudentId == user.IdUser);
+            return View(orders);
         }
     }
 }

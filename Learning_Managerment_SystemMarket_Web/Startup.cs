@@ -34,8 +34,12 @@ using Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryServic
 using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CategoryService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstructorService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.CartService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.OrderService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
@@ -49,15 +53,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Learning_Managerment_SystemMarket_Core.Repositories.ClaimRepo;
-using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
-using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
-using Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstructorService;
-using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService;
-using Learning_Managerment_SystemMarket_Services.StudentServices.CartService;
 
 namespace Learning_Managerment_SystemMarket_Web
 {
@@ -113,7 +108,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<ISavedCourseService, SavedCourseService>();
             services.AddScoped<ISubcriptionService, SubcriptionService>();
             services.AddScoped<IInstructorService, InstructorService>();
-            services.AddScoped<IStudentService,StudentService>();
+            services.AddScoped<IStudentService, StudentService>();
             services.AddTransient<ICourseServices, CourseServices>();
             services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();
             services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
@@ -121,10 +116,14 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddTransient<IInsInstructorService, InsInstructorService>();
             services.AddTransient<IInstructorOrderService, InstructorOrderService>();
             services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IOrderService, OrderService>();
 
-            services.AddScoped<ICategoryService,CategoryService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ILanguageService, LanguageService>();
             services.AddScoped<ISubCategoryService, SubCategoryService>();
+
+            services.AddScoped<IStudentOrderService, StudentOrderService>();
+
             //Config for Dependence Service
 
             services.AddAutoMapper(typeof(MapperProfile));
@@ -153,7 +152,9 @@ namespace Learning_Managerment_SystemMarket_Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app,
+                                IWebHostEnvironment env,
+                                UserManager<User> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -171,7 +172,6 @@ namespace Learning_Managerment_SystemMarket_Web
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

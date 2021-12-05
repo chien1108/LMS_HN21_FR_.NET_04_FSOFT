@@ -7,7 +7,6 @@ using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewM
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.LectureViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.ResponseResult;
-using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +35,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             {
                 var course = _mapper.Map<Course>(model);
                 //Dùng tạm InstructorId có sẵn
-                course.InstructorId = 1;
+                course.InstructorId = 3;
                 await _unitOfWork.Courses.Create(course);
 
                 foreach (var courseContentItem in createCourseContentVms)
@@ -74,20 +73,20 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             {
                 var discountCourse = await _unitOfWork.SpecialDiscounts.FindByCondition(x => x.Id == id);
                 var course = await _unitOfWork.Courses.FindByCondition(x => x.Id == discountCourse.CourseId);
-                if(course.DiscountPrice != 0)
+                if (course.DiscountPrice != 0)
                 {
                     return new ServiceResponse<DisCountCourseVm> { Success = false, Message = "Already have discount" };
-                }    
+                }
                 if (discountCourse.Status == Status.IsActive)
                 {
                     discountCourse.Status = Status.IsDeleted;
                     course.DiscountPrice = 0;
-                }                  
+                }
                 else
                 {
                     discountCourse.Status = Status.IsActive;
                     course.DiscountPrice = course.Price - ((course.Price * discountCourse.Percentage) / 100);
-                }                
+                }
                 var isSuccess = await _unitOfWork.Save();
                 if (isSuccess == true)
                 {
@@ -102,7 +101,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             {
                 return new ServiceResponse<DisCountCourseVm> { Success = false, Message = ex.Message };
 
-            }            
+            }
         }
 
         public async Task<ServiceResponse<CourseVm>> ChangeStatusToDraft(int id)
@@ -112,7 +111,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
                 var course = await _unitOfWork.Courses.FindByCondition(x => x.Id == id);
                 course.Status = StatusCourse.Draft;
                 var isSuccess = await _unitOfWork.Save();
-                if(isSuccess == true)
+                if (isSuccess == true)
                 {
                     return new ServiceResponse<CourseVm> { Success = true, Message = "Change to Draft Success" };
                 }
@@ -125,8 +124,8 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             {
 
                 return new ServiceResponse<CourseVm> { Success = false, Message = ex.Message };
-            }              
-            
+            }
+
         }
 
         public async Task<ServiceResponse<CourseVm>> ChangeStatusToPending(int id)
@@ -155,7 +154,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
         public async Task<ServiceResponse<DisCountCourseVm>> CreateDiscount(DisCountCourseVm entity)
         {
             try
-            {              
+            {
                 var course = await _unitOfWork.Courses.FindByCondition(x => x.Id == entity.CourseId);
                 entity.InstructorId = course.InstructorId;
                 entity.Status = Status.IsDeleted;
@@ -177,7 +176,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             {
 
                 return new ServiceResponse<DisCountCourseVm> { Success = false, Message = ex.Message };
-            }            
+            }
         }
 
         public async Task<ServiceResponse<CourseVm>> Delete(int id)
@@ -225,7 +224,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             {
 
                 return new ServiceResponse<DisCountCourseVm> { Success = false, Message = ex.Message };
-            }           
+            }
         }
 
         public async Task<IList<CourseVm>> GetAllCourses(int id)
@@ -310,7 +309,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
                 if (course.DiscountPrice != 0)
                 {
                     return new ServiceResponse<DisCountCourseVm> { Success = false, Message = "Already have discount" };
-                }                
+                }
 
                 _unitOfWork.SpecialDiscounts.Update(map);
                 course.DiscountPrice = course.Price - (course.Price * entity.Percentage) / 100;
@@ -349,7 +348,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
                 if(item.EndDate < DateTime.Now)
                 {
                     _unitOfWork.SpecialDiscounts.Delete(item);
-                    if(item.Status == Status.IsActive)
+                    if (item.Status == Status.IsActive)
                     {
                         var course = await _unitOfWork.Courses.FindByCondition(x => x.Id == item.CourseId);
                         course.DiscountPrice = 0;
@@ -366,6 +365,19 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             {
                 return new ServiceResponse<DisCountCourseVm> { Success = false, Message = "Clear Discount Expire Fail" };
             }
+        }
+
+        public async Task<IList<CourseVm>> GetAllCourseWaitApprove()
+        {
+            var courses = await _unitOfWork.Courses.GetAll(expression: x => x.Status == StatusCourse.WaitForApproced);
+            var map = _mapper.Map<List<CourseVm>>(courses);
+            foreach (var item in map)
+            {
+                item.Parts = _unitOfWork.Context.CourseContents.Count(x => x.CourseId == item.Id);
+                item.Sales = _unitOfWork.Context.Orders.Count(x => x.CourseId == item.Id);
+            }
+
+            return map;
         }
     }
 }

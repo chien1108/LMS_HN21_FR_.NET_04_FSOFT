@@ -73,7 +73,7 @@
                             @foreach (var item in Model.ItemSales)
                             {
                                 <tr>
-                                    <td scope="col">@item.Day.Day, @item.Day.DayOfWeek</td>
+                                    <td scope="col">@item.Day.DayOfWeek, @item.Day.ToString("MM-dd-yyyy")</td>
                                     <td scope="col">@item.ItemSalesCount</td>
                                     <td scope="col">$@item.Earning</td>
                                 </tr>

@@ -12,7 +12,7 @@
 @inject IStudentHomePageService studentHomePage;
 @inject IUnitOfWork unitOfWork;
 @inject IMapper _mapper;
-
+@inject Learning_Managerment_SystemMarket_Services.StudentServices.OrderService.IOrderService orderService;
 @{
     ViewData["Title"] = "Index";
     ICollection<Course> courseFeature = await studentHomePage.GetFeatureCourse(5);
@@ -38,7 +38,14 @@
                                     <div class="item">
                                         <div class="fcrse_1 mb-20">
                                             <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
-                                                <img src="~/frontend/images/courses/@item.CoverImage" alt="">
+                                                @if (item.CoverImage != null)
+                                                {
+                                                    var base64 = Convert.ToBase64String(item.CoverImage);
+                                                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                                    <img src="@imgsrc" width="100%" />
+                                                }
+
+                                                @*<img src="@item.CoverImage.ToString()" alt="">*@
                                                 <div class="course-overlay">
                                                     <div class="crse_reviews">
                                                         <i class="uil uil-star"></i>3.5
@@ -79,17 +86,30 @@
                                                     <div class="prce142">$@item.Price</div>
                                                     @if (user != null)
                                                     {
-                                                        <a class="shrt-cart-btn" title="cart" asp-area="StudentFunction"
-                                                           asp-controller="Cart" asp-action="AddCourseToCart"
-                                                           asp-route-courseId="@item.Id" asp-route-studentId="@user.IdUser"
-                                                           onclick="return confirm('Are you sure want to add this course to cart?')">
-                                                            <i class="uil uil-shopping-cart-alt"></i>
-                                                        </a>
+                                                        var existingEnroll = await orderService.Find(
+                                                            expression: c => c.CourseId == item.Id
+                                                            && c.StudentId == user.IdUser);
+                                                        if (existingEnroll == null)
+                                                        {
+                                                            <a class="shrt-cart-btn" title="cart" asp-area="StudentFunction"
+                                                               asp-controller="Cart" asp-action="AddCourseToCart"
+                                                               asp-route-courseId="@item.Id" asp-route-studentId="@user.IdUser"
+                                                               onclick="return confirm('Are you sure want to add this course to cart?')">
+                                                                <i class="uil uil-shopping-cart-alt"></i>
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a class="shrt-cart-btn" title="cart" id="login" href="#"
+                                                               onclick="return confirm('You have enrolled this course')">
+                                                                <i class="uil uil-shopping-cart-alt"></i>
+                                                            </a>
+                                                        }
                                                     }
                                                     else
                                                     {
                                                         <a class="shrt-cart-btn" title="cart" id="login" asp-area="Identity" asp-page="/Account/Login"
-                                                                onclick="return confirm('You must login to add this course to cart')">
+                                                           onclick="return confirm('You must login to add this course to cart')">
                                                             <i class="uil uil-shopping-cart-alt"></i>
                                                         </a>
                                                     }
@@ -111,7 +131,7 @@
 
         <div class="section3125 mt-50">
             <h4 class="item_title">Newest Courses</h4>
-            <a href="https://coursearly.com/cursus/public/courses/featured" class="see150">See all</a>
+            <a asp-area="StudentFunction" asp-action="Explore" asp-controller="Student" class="see150">See all</a>
             <div class="la5lo1">
                 <div class="owl-carousel featured_courses owl-theme owl-loaded owl-drag">
                     <div class="owl-stage-outer">
@@ -121,8 +141,14 @@
                                 <div class="owl-item active" style="width: 283px; margin-right: 20px;">
                                     <div class="item">
                                         <div class="fcrse_1 mb-20">
-                                            <a asp-area="SudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
-                                                <img src="~/frontend/images/courses/@item.CoverImage" alt="">
+                                            <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
+                                                @if (item.CoverImage != null)
+                                                {
+                                                    var base64 = Convert.ToBase64String(item.CoverImage);
+                                                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                                    <img src="@imgsrc" width="100%" />
+                                                }
+                                                @*<img src="@item.CoverImage.ToString()" alt="">*@
                                                 <div class="course-overlay">
                                                     <div class="crse_reviews">
                                                         <i class="uil uil-star"></i>3.5
@@ -152,7 +178,7 @@
                                                     <span class="vdt14">@item.Views</span>
                                                     <span class="vdt14">@item.RelativeCreateDate</span>
                                                 </div>
-                                                <a href="https://coursearly.com/cursus/public/courses/the-complete-javascript-course-2021-:-build-real-project/2" class="crse14s">@item.Title</a>
+                                                <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="crse14s">@item.Title</a>
                                                 <a href="#" class="crse-cate">
                                                     @item.SubCategory.SubCategoryName
                                                 </a>
@@ -163,12 +189,25 @@
                                                     <div class="prce142">$@item.Price</div>
                                                     @if (user != null)
                                                     {
-                                                        <a class="shrt-cart-btn" title="cart" asp-area="StudentFunction"
-                                                           asp-controller="Cart" asp-action="AddCourseToCart"
-                                                           asp-route-courseId="@item.Id" asp-route-studentId="@user.IdUser"
-                                                           onclick="return confirm('Are you sure want to add this course to cart?')">
-                                                            <i class="uil uil-shopping-cart-alt"></i>
-                                                        </a>
+                                                        var existingEnroll = await orderService.Find(
+                                                            expression: c => c.CourseId == item.Id
+                                                            && c.StudentId == user.IdUser);
+                                                        if (existingEnroll == null)
+                                                        {
+                                                            <a class="shrt-cart-btn" title="cart" asp-area="StudentFunction"
+                                                               asp-controller="Cart" asp-action="AddCourseToCart"
+                                                               asp-route-courseId="@item.Id" asp-route-studentId="@user.IdUser"
+                                                               onclick="return confirm('Are you sure want to add this course to cart?')">
+                                                                <i class="uil uil-shopping-cart-alt"></i>
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a class="shrt-cart-btn" title="cart" id="login" href="#"
+                                                               onclick="return confirm('You have enrolled this course')">
+                                                                <i class="uil uil-shopping-cart-alt"></i>
+                                                            </a>
+                                                        }
                                                     }
                                                     else
                                                     {
@@ -252,7 +291,10 @@
                     <div class="tutor150">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <a asp-area="StudentFunction" asp-action="StudentDetails" asp-controller="Student" asp-route-id="@user.IdUser" class="tutor_name">@user.FullName</a>
+                            @if (user != null)
+                            {
+                                <a asp-area="StudentFunction" asp-action="StudentDetails" asp-controller="Student" asp-route-id="@user.IdUser" class="tutor_name">@user.FullName</a>
+                            }
                         }
                         else
                         {

@@ -11,7 +11,7 @@
     <div class="section-header">
         <h1>Students</h1>
         <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item active"><a href="#">Home</a></div>
+            <div class="breadcrumb-item active"><a asp-controller="Home" asp-action="Index">Home</a></div>
             <div class="breadcrumb-item"><a href="#">Students</a></div>
         </div>
     </div>
@@ -61,7 +61,7 @@
                                             <tr role="row">
                                                 <td class="sorting_1">@i</td>
                                                 <td>
-                                                    <a asp-area="AdminFunction" asp-controller="Student" asp-action="Details" asp-route-id="@listStudent.ElementAt(i-1).Id">
+                                                    <a asp-area="AdminFunction" asp-controller="Student" asp-action="StudentInfo" asp-route-id="@listStudent.ElementAt(i-1).Id">
                                                         @listStudent.ElementAt(i - 1).StudentName
                                                     </a>
                                                 </td>
@@ -76,7 +76,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <span class="badge badge-danger m-1">De-Active</span>
+                                                        <span class="badge badge-danger m-1">Block</span>
                                                     }
                                                 </td>
                                                 <td class="d-flex">

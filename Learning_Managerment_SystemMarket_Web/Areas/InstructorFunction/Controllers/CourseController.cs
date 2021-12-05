@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Learning_Managerment_SystemMarket_Core.Models.Entities;
-using Learning_Managerment_SystemMarket_Core.Modules.Enums;
+﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewModel;
@@ -12,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,11 +19,12 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
     [Area("InstructorFunction")]
     public class CourseController : Controller
     {
-        static List<CreateCourseContentVm> createCourseContentVms = new List<CreateCourseContentVm>();
-        static List<CreateLectureVm> createLectureVms = new List<CreateLectureVm>();
+        private static List<CreateCourseContentVm> createCourseContentVms = new List<CreateCourseContentVm>();
+        private static List<CreateLectureVm> createLectureVms = new List<CreateLectureVm>();
 
         private readonly IInstructorSubCategoryService _subCategoryService;
         private readonly ICourseServices _courseServices;
+        private static byte[] _picture;
         private readonly UserManager<User> _userManager;
 
         public CourseController(IInstructorSubCategoryService subCategoryService, ICourseServices courseServices, UserManager<User> userManager)
@@ -33,6 +33,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             _courseServices = courseServices;
             _userManager = userManager;
         }
+
         // GET: CourseController
         public ActionResult Index()
         {
@@ -53,13 +54,54 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
 
         public ActionResult ClearDiscountExpire()
         {
-            return View("Index");
+            var instructor = _userManager.GetUserAsync(User).Result;
+            var result = _courseServices.ClearDiscountExpire(instructor.IdUser);
+
+            if (result.Result.Success == true)
+            {
+                TempData["Message"] = result.Result.Message;
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                TempData["Message"] = result.Result.Message;
+                return RedirectToAction(nameof(Index));
+            }
+
         }
 
         // GET: CourseController/Create
         public ActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult UploadImage()
+        {
+            try
+            {
+                var files = HttpContext.Request.Form.Files;
+                if (files.Count > 0)
+                {
+                    byte[] p1 = null;
+                    using (var fs1 = files[0].OpenReadStream())
+                    {
+                        using (var ms1 = new MemoryStream())
+                        {
+                            fs1.CopyTo(ms1);
+                            p1 = ms1.ToArray();
+                        }
+                    }
+                    _picture = p1;
+                    return Json(true);
+                }
+                return Json(false);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -70,6 +112,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
         [HttpGet]
         public async Task<ActionResult> CreateCourse(CreateCourseVm model)
         {
+
             var responseResult = new ResponseResult
             {
                 Code = false,
@@ -81,6 +124,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             }
             if (ModelState.IsValid)
             {
+                model.CoverImage = _picture;
                 var result = model;
                 responseResult = await _courseServices.CreateCourse(model, createCourseContentVms, createLectureVms);
             }
@@ -249,7 +293,6 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
                 TempData["Message"] = course.Result.Message;
                 return RedirectToAction(nameof(Index));
             }
-
         }
 
         public ActionResult ChangeStatus(int id)

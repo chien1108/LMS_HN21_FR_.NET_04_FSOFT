@@ -15,7 +15,7 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
         public bool IsFree { get; set; }
         public bool IsFeatured { get; set; }
         public bool IsBestseller { get; set; }
-        public string CoverImage { get; set; }// default img.png
+        public byte[] CoverImage { get; set; }// default img.png
         public string PromotionVideo { get; set; } // null
         public StatusCourse Status { get; set; } // 0 Draft, 1 Active , 2 WaitFor Approced, 3 Block, 4 Deactive
         public int Likes { get; set; }

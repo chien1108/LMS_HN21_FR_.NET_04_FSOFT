@@ -179,16 +179,42 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
                     return View(model);
                 }
                 var subScription = _mapper.Map<SubScription>(model);
-                subScription.StudentId = 1;
+                
                 subScription.CreatedDate = DateTime.Now;
 
                 var isSuccess = await _subcriptionService.CreateSubcription(subScription);
                 if (!isSuccess.Success)
                 {
                     ModelState.AddModelError("", isSuccess.Message);
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("CourseDetails", new { id = model.CourseId});
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("CourseDetails", new { id = model.CourseId });
+            }
+            catch
+            {
+                return View(model);
+            }
+        } 
+        public async Task<IActionResult> UnSubcribe(SubScriptionVM model)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var subScription = _mapper.Map<SubScription>(model);
+                
+                
+
+                var isSuccess = await _subcriptionService.DeleteSubcription(subScription);
+                if (!isSuccess.Success)
+                {
+                    ModelState.AddModelError("", isSuccess.Message);
+                    return RedirectToAction("CourseDetails", new { id = model.CourseId });
+                }
+                return RedirectToAction("CourseDetails", new { id = model.CourseId });
             }
             catch
             {

@@ -42,7 +42,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
 
         public bool IsBestseller { get; set; }
 
-        public string CoverImage { get; set; }// default img.png
+        public byte[] CoverImage { get; set; }// default img.png
 
         public string PromotionVideo { get; set; } // null
 
@@ -74,25 +74,25 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
     public class CreateCourseVm
     {
         [DisplayName("Category")]
-        [Required(ErrorMessage = "{0} không được để trống")]
+        [Required(ErrorMessage = "{0} is Required")]
         public string Title { get; set; }
 
         [DisplayName("SubTitile")]
-        [Required(ErrorMessage = "{0} không được để trống")]
+        [Required(ErrorMessage = "{0} is Required")]
         public string SubTitile { get; set; }
 
         [DisplayName("Description")]
-        [Required(ErrorMessage = "{0} không được để trống")]
+        [Required(ErrorMessage = "{0} is Required")]
         public string Description { get; set; }
 
         [DisplayName("Price")]
-        [Required(ErrorMessage = "{0} không được để trống")]
+        [Range(0, int.MaxValue, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public decimal Price { get; set; }
 
         public decimal DiscountPrice { get; set; }
 
         [DisplayName("Is Free")]
-        [Required(ErrorMessage = "{0} không được để trống")]
+        [Required(ErrorMessage = "{0} is Required")]
         public bool IsFree { get; set; }
 
         public bool IsFeatured { get; set; }
@@ -100,7 +100,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
         public bool IsBestseller { get; set; }
 
         //[Required]
-        public int CoverImage { get; set; }// default img.png
+        public byte[] CoverImage { get; set; }// default img.png
 
         public string PromotionVideo { get; set; } // null
 
@@ -118,11 +118,15 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
         public int InstructorId { get; set; }
 
         [DisplayName("Category")]
-        [Required(ErrorMessage = "{0} không được để trống")]
+        [Range(1, int.MaxValue, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int CategoryId { get; set; }
 
+        [DisplayName("Sub Category")]
+        [Range(1, int.MaxValue, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int SubcategoryId { get; set; }
 
+        [DisplayName("Language")]
+        [Range(1, int.MaxValue, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int LanguageId { get; set; }
 
         public IEnumerable<CreateCourseContentVm> CourseContent { get; set; }

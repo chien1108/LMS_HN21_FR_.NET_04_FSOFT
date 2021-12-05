@@ -91,20 +91,34 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.CartService
         {
             try
             {
-                var carts = await _unitOfWork.Carts.GetAll(expression: c => c.StudentId == studentId);
+                var carts = await _unitOfWork.Carts.GetAll(
+                    expression: c => c.StudentId == studentId);
                 var count = carts.Count;
                 foreach (var item in carts)
                 {
+                    var course =await _unitOfWork.Courses.FindByCondition(c => c.Id == item.CourseId);
+                    var order = new Order
+                    {
+                        StudentId = studentId,
+                        CourseId = item.CourseId,
+                        CreatedDate = DateTime.Now,
+                        Price = course.Price
+                    };
+
+                    await _unitOfWork.Orders.Create(order);
+                    var successCreate = await SaveChange();
+                    if(!successCreate)
+                        return new ServiceResponse<Cart> { Success = false, Message = "Payment Cart Error" };
+
                     _unitOfWork.Carts.Delete(item);
-                    var sucess = await SaveChange();
-                    if (sucess)
+                    var sucessDelete = await SaveChange();
+                    if (sucessDelete)
                         count--;
                     else
                         return new ServiceResponse<Cart> { Success = false, Message = "Payment Cart Error" };
                 }
                 return count<1 ? new ServiceResponse<Cart> { Success = true, Message = "Payment Cart Success" }
                 : new ServiceResponse<Cart> { Success = false, Message = "Payment Cart Error" };
-
             }
             catch (Exception ex)
             {

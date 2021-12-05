@@ -69,5 +69,44 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstr
 
             return map;
         }
+
+        public List<string> SumOrderByInstructorIdOrderByDayOfMonth(int id, int month, int year)
+        {
+            var list = new List<string>();
+
+            for(int i = 1; i <= 31; i++)
+            {
+                var sum = _unitOfWork.Instructors.SumOrderByInstructorIdOrderByDayOfMonth(id, i, month, year);
+                list.Add(sum.ToString());
+            }
+
+            return list;
+        }
+
+        public List<string> SumOrderByInstructorIdOrderByMonth(int id)
+        {
+            var list = new List<string>();
+
+            for (int i = 1; i <= 12; i++)
+            {
+                var sum = _unitOfWork.Instructors.SumOrderByInstructorIdOrderByMonth(id, i);
+                list.Add(sum.ToString());
+            }
+
+            return list;
+        }
+
+        public List<string> SumStudentSubByInstructorIdOrderByMonth(int id)
+        {
+            var list = new List<string>();
+
+            for(int i = 1; i<=12; i++)
+            {
+                var sum = _unitOfWork.Instructors.SumStudentSubByInstructorIdOrderByMonth(id, i);
+                list.Add(sum.ToString());
+            }
+
+            return list;
+        }
     }
 }

@@ -9,5 +9,9 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.StudentRepo
     {
         Task<ICollection<SubScription>> GetAllSubInstructorByStudentId(int studentId);
         Task CreateSubcription(SubScription subScription);
+        
+        Task DeleteSubcription(SubScription subScription);
+        Task<bool> IsSubcribleExist(int studentId,int instuctorId);
+
     }
 }

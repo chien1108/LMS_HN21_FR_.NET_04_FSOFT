@@ -22,6 +22,10 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Get a Month-Year SoNL4
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> GetMonthYear()
         {
             User user = await _userManager.GetUserAsync(User);
@@ -34,6 +38,11 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             return Json(result);
         }
 
+        /// <summary>
+        /// Earning Index Page - SonNL4
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(string dateTime)
         {
             User user = await _userManager.GetUserAsync(User);
@@ -44,14 +53,12 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
 
                 orders = (List<OrderVm>)await _instructorOrderService
                     .FindAll(x => x.Course.InstructorId == 1 && x.CreatedDate.Month == Int32.Parse(date[0]) && x.CreatedDate.Year == Int32.Parse(date[1]), includes: new List<string>() { "Course" });
-
             }
             else
             {
                 //var orders = await _instructorOrderService.FindAll(x => x.Course.InstructorId == user.IdUser);
                 orders = (List<OrderVm>)await _instructorOrderService.FindAll(x => x.Course.InstructorId == 1, includes: new List<string>() { "Course" });
             }
-
 
             var salesEarnings = orders.Sum(x => x.Price);
             var adminCommission = orders.Sum(x => x.AdminCommission);
@@ -63,7 +70,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
                 .Select(c => new TopCourseVm { Title = c.Key.Title, Amount = c.Count(), Earning = c.Sum(x => x.Price) })
                 .OrderBy(n => n.Amount).Take(3);
 
-            //List Sale 
+            //List Sale
             var itemSalses = orders.GroupBy(x => new { x.CreatedDate }).Select(c => new ItemSalesVm
             {
                 Day = c.Key.CreatedDate,

@@ -30,22 +30,22 @@
                                         <tr role="row">
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
                                                  #
-                                            : activate to sort column descending" style="width: 82.625px;">
+                                            : activate to sort column descending">
                                                 #
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
                                                 Name
-                                            : activate to sort column ascending" style="width: 328.781px;">
+                                            : activate to sort column ascending">
                                                 Name
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
                                                 Status
-                                            : activate to sort column ascending" style="width: 191.375px;">
+                                            : activate to sort column ascending">
                                                 Status
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable" rowspan="1" colspan="1" aria-label="
                                                 Action
-                                            : activate to sort column ascending" style="width: 195.203px;">
+                                            : activate to sort column ascending">
                                                 Action
                                             </th>
                                         </tr>
@@ -53,28 +53,28 @@
                                     <tbody>
                                         @for (int i = 1; i <= listRole.Count; i++)
                                         {
-                                        <tr role="row">
-                                            <td class="sorting_1"><span>@listRole.ElementAt(i-1).Id</span></td>
-                                            <td>@listRole.ElementAt(i - 1).Name</td>
-                                            <td>
-                                                @{
-                                                    //var roles = await _service.(listUser.ElementAt(i - 1));
-                                                    var claims = await _claimService.FindAll(x => x.RoleId == @listRole.ElementAt(i - 1).Id);
-                                                    foreach (var claim in claims)
-                                                    {
+                                            <tr role="row">
+                                                <td class="sorting_1"><span>@listRole.ElementAt(i - 1).Id</span></td>
+                                                <td>@listRole.ElementAt(i - 1).Name</td>
+                                                <td>
+                                                    @{
+                                                        //var roles = await _service.(listUser.ElementAt(i - 1));
+                                                        var claims = await _claimService.FindAll(x => x.RoleId == @listRole.ElementAt(i - 1).Id);
+                                                        foreach (var claim in claims)
+                                                        {
                                                             <span class="badge badge-success m-1">@claim.ClaimValue</span>
+                                                        }
                                                     }
-                                                }
-                                            </td>
-                                            <td class="d-flex">
-                                                <a class="btn btn-sm btn-outline-info btn-icon m-1" asp-controller="Role" asp-action="Edit" asp-route-id="@listRole.ElementAt(i-1).Id">
-                                                    <span class="ul-btn__icon"><i class="fas fa-pencil-alt"></i></span>
-                                                </a>
-                                                <a class="btn btn-outline-danger btn-icon m-1" asp-controller="Role" asp-action="Delete" asp-route-id="@listRole.ElementAt(i-1).Id" onclick="return confirm('Are you sure you want delete this record?')">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                                <td class="d-flex">
+                                                    <a class="btn btn-sm btn-outline-dark btn-icon m-1" asp-controller="Role" asp-action="Edit" asp-route-id="@listRole.ElementAt(i-1).Id">
+                                                        <span class="ul-btn__icon"><i class="fas fa-pencil-alt"></i></span>
+                                                    </a>
+                                                    <a class="btn btn-outline-danger btn-icon m-1" asp-controller="Role" asp-action="Delete" asp-route-id="@listRole.ElementAt(i-1).Id" onclick="return confirm('Are you sure you want delete this record?')">
+                                                        <span class="ul-btn__icon"><i class="far fa-trash-alt"></i></span>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -86,11 +86,11 @@
             <div class="col-12 col-md-4 col-lg-4">
                 @if (ViewBag.IdRole > 0)
                 {
-                <partial name="Edit.cshtml" view-data="ViewData" />
+                    <partial name="Edit.cshtml" view-data="ViewData" />
                 }
                 else
                 {
-                <partial name="Create.cshtml" />
+                    <partial name="Create.cshtml" />
                 }
             </div>
         </div>

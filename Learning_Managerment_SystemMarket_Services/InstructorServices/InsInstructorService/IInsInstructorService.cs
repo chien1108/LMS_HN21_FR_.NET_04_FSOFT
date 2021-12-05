@@ -14,5 +14,11 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstr
         Task<List<OrderVM>> GetAllOrders(int id);
 
         Task<OrderVM> GetOrderById(int id);
+
+        List<string> SumStudentSubByInstructorIdOrderByMonth(int id);
+
+        List<string> SumOrderByInstructorIdOrderByMonth(int id);
+
+        List<string> SumOrderByInstructorIdOrderByDayOfMonth(int id, int month, int year);
     }
 }

@@ -1,14 +1,17 @@
 ﻿@model Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel.CourseVm;
 @using Learning_Managerment_SystemMarket_Core.Models.Entities;
 @using Microsoft.AspNetCore.Identity
-
+@using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-
+@inject Learning_Managerment_SystemMarket_Services.StudentServices.OrderService.IOrderService orderService;
+@inject ISubcriptionService _subcriptionService;
 @{
     ViewData["Title"] = "CourseDetails";
     Layout = "/Views/Shared/_StudentLayout.cshtml";
     var user = await UserManager.GetUserAsync(User);
+    
+
 }
 
 <div class="_215b01">
@@ -20,7 +23,12 @@
                         <div class="col-xl-4 col-lg-5 col-md-6">
                             <div class="preview_video">
                                 <a href="#" class="fcrse_img" data-toggle="modal" data-target="#videoModal">
-                                    <img src="~/frontend/images/courses/@Model.CoverImage" alt="">
+                                    @if (Model.CoverImage != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(Model.CoverImage);
+                                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                        <img src="@imgsrc" width="100%" />
+                                    }
                                     <div class="course-overlay">
                                         <div class="badge_seller">Bestseller</div>
                                         <span class="play_btn1"><i class="uil uil-play"></i></span>
@@ -62,13 +70,26 @@
                                 <li>
                                     @if (user != null)
                                     {
-                                        <a asp-area="StudentFunction" asp-controller="Cart"
-                                           asp-action="AddCourseToCart" asp-route-courseId="@Model.Id"
-                                           asp-route-studentId="@user.IdUser" class="btn btn-danger"
-                                           onclick="return confirm('Are you sure want to add this course to cart?')">
-                                            Add
-                                            to Cart
-                                        </a>
+                                        var existingEnroll = await orderService.Find(
+                                               expression: c => c.CourseId == Model.Id
+                                               && c.StudentId == user.IdUser);
+                                        if (existingEnroll == null)
+                                        {
+                                            <a asp-area="StudentFunction" asp-controller="Cart"
+                                               asp-action="AddCourseToCart" asp-route-courseId="@Model.Id"
+                                               asp-route-studentId="@user.IdUser" class="btn btn-danger"
+                                               onclick="return confirm('Are you sure want to add this course to cart?')">
+                                                Add
+                                                to Cart
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a id="login" href="#" class="btn btn-danger"
+                                               onclick="return confirm('You have enrolled this course')">
+                                                You have enrolled
+                                            </a>
+                                        }
                                     }
                                     else
                                     {
@@ -104,7 +125,31 @@
                             </div>
                             <div class="user_cntnt">
                                 <a href="#" class="_df7852">@Model.Instructor.InstructorName</a>
-                                <button class="subscribe-btn" onclick="window.location.href = 'https://coursearly.com/cursus/public/subscription/16/add';">Subscribe</button>
+
+                                @if (user != null)
+                                {
+                                    var subcriptionExist = await _subcriptionService.IsSubcribeExist(user.IdUser ,Model.InstructorId);
+                                    if (!subcriptionExist)
+                                    {
+                                        <a class="btn btn-danger" asp-route-InstructorId="@Model.InstructorId"
+                                           asp-route-StudentId="@user.IdUser" asp-route-CourseId="@Model.Id"
+                                           asp-area="StudentFunction" asp-action="Subcribe" asp-controller="Student" >Subscribe</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-danger" asp-route-InstructorId="@Model.InstructorId"
+                                           asp-route-StudentId="@user.IdUser" asp-route-CourseId="@Model.Id"
+                                           asp-area="StudentFunction" asp-action="UnSubcribe" asp-controller="Student">UnSubscribe</a>
+                                    }
+
+
+                                }
+                                else
+                                {
+                                    <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-danger">
+                                        Subscribe
+                                    </a>
+                                }
                             </div>
                         </div>
                     </div>

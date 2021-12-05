@@ -1,0 +1,61 @@
+﻿@using Learning_Managerment_SystemMarket_Services.AdminFunction.StudentService
+@using Learning_Managerment_SystemMarket_Core.Modules.Enums
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
+@using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService
+@using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService
+@inject IStudentService _service
+@inject IUserService _userService
+@inject IStudentOrderService _studentOrderService
+@inject ISubcriptionService _subcriptionService
+@{
+    int id = ViewBag.IdStudent;
+    var student = await _service.Find(x => x.Id == id);
+    var user = await _userService.Find(x => x.IdUser == student.Id);
+
+    var listEnrollCoure = await _studentOrderService.FindAll(x => x.StudentId == student.Id
+                                                             , null, new List<string>() { "Student" });
+
+    var listSubScription = await _subcriptionService.GetAllSubInstructorByStudentId(student.Id);
+}
+
+<div class="card profile-widget">
+    <div class="profile-widget-header">
+        <img alt="image" src="https://coursearly.com/cursus/public/upload/image/60d31155a3e8d.png" class="rounded-circle profile-widget-picture">
+        <div class="profile-widget-items">
+            <div class="profile-widget-item">
+                <div class="profile-widget-item-label">Enroll Course</div>
+                <div class="profile-widget-item-value">
+                    @listEnrollCoure.Count()
+                </div>
+            </div>
+            <div class="profile-widget-item">
+                <div class="profile-widget-item-label">Subscriptions</div>
+                <div class="profile-widget-item-value">
+                    @listSubScription.Count()
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="profile-widget-description">
+        <div class="profile-widget-name">
+            @student.StudentName
+            <div class="text-muted d-inline font-weight-normal">
+                <div class="slash"></div> @user.Email
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer text-center">
+        <div class="font-weight-bold mb-2">Extra Detail</div>
+
+        @if (student.Status == StatusStudent.Active)
+        {
+            <span class="badge badge-light">Active</span>
+        }
+        else
+        {
+            <span class="badge badge-warning">Block</span>
+        }
+    </div>
+</div>

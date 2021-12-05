@@ -12,13 +12,13 @@
         @if (user.WhoIs == 0)
         {
             <li class="nav-item">
-                <a href="https://coursearly.com/cursus/public/instructor/courses/create" class="upload_btn" title="Create New   Course">Ernolled</a>
+                <a asp-area="StudentFunction" asp-controller="Cart" asp-action="EnrolledCourse" class="upload_btn" title="Enrolled Course">Enrolled</a>
             </li>
         }
         else
         {
             <li class="nav-item">
-                <a href="https://coursearly.com/cursus/public/instructor/courses/create" class="upload_btn" title="Create New   Course">Create New   Course</a>
+                <a asp-area="InstructorFunction" asp-controller="Course" asp-action="CreateCourse" class="upload_btn" title="Create New   Course">Create New   Course</a>
             </li>
         }
     }
