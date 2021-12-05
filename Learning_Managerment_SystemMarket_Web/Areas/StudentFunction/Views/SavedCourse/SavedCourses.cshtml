@@ -1,16 +1,17 @@
-﻿
-@using Learning_Managerment_SystemMarket_Core.Models.Entities;
+﻿@using Learning_Managerment_SystemMarket_Core.Models.Entities;
 @using Microsoft.AspNetCore.Identity
 @using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService
-
+@using Learning_Managerment_SystemMarket_Services.StudentServices.OrderService
+@using System.Linq
 @inject ISavedCourseService _savedCourseService
 @inject SignInManager<User> _signInManager;
 @inject UserManager<User> _userManager;
+
 @{
     ViewData["Title"] = "SavedCourses";
     var user = await _userManager.GetUserAsync(User);
     Layout = "/Views/Shared/_StudentLayout.cshtml";
-    var courses = await _savedCourseService.GetSavedCoursesByStudentId(user.Id);
+    var courses = await _savedCourseService.GetSavedCoursesByStudentId(user.IdUser);
 }
 
 <div class="container-fluid">
@@ -25,6 +26,9 @@
                     <div class="wtch125">
                         <span class="vdt14">@courses.Count() Courses</span>
                     </div>
+                    <a asp-action="RemoveAll" asp-route-studentId="@user.IdUser" onclick="return confirm('Are you want to delete all record ?')" class="rmv-btn">
+                    <i class="uil uil-trash-alt"></i>Remove Saved Courses
+                    </a>
                 </div>
             </div>
         </div>
@@ -33,32 +37,71 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h4 class="mhs_title">Saved Courses</h4>
-
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered text-center ">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>SubTitile</th>
-                                        <th>Description</th>
-                                        <th>Remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{
-                                        foreach (var item in courses)
-                                        {
-                                            <tr>
-                                                <td>@item.Course.Title</td>
-                                                <td>@item.Course.SubTitile</td>
-                                                <td>@item.Course.Description</td>
-                                                <td><a asp-action="Delete" asp-route-studentId="@user.IdUser" asp-route-courseid="@item.CourseId" class="btn btn-danger" onclick="return confirm('Are you want to delete this record ?')"><i class="uil uil-trash-alt"></i>Remove Saved Courses</a></td>
-                                            </tr>
-                                        }
+                        @foreach (var item in courses)
+                        {
+                            <div class="fcrse_1 mb-30">
+                                <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.CourseId" class="hf_img">
+                                    @if (item.Course.CoverImage != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(item.Course.CoverImage);
+                                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                        <img src="@imgsrc" alt="@item.Course.Title">
                                     }
-                                </tbody>
-                            </table>
-                        </div>
+                                    <div class="course-overlay">
+                                        <div class="crse_reviews">
+                                            <i class="uil uil-star"></i>2.5
+                                        </div>
+
+                                        <span class="play_btn1"><i class="uil uil-play"></i></span>
+                                        <div class="crse_timer">
+                                            0 hours
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="hs_content">
+                                    <div class="eps_dots eps_dots10 more_dropdown">
+                                        <a>
+                                            <i class="uil uil-ellipsis-v"></i>
+                                        </a>
+                                        <div class="dropdown-content">
+                                            <a asp-action="Delete" asp-route-studentId="@user.IdUser" asp-route-courseid="@item.CourseId"
+                                               onclick="return confirm('Are you want to delete this record ?')">
+                                                <span><i class="uil uil-times"></i>Remove</span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="vdtodt">
+                                        <span class="vdt14">
+                                            @item.Course.Views
+                                            views
+                                        </span>
+                                        @{
+                                            var days = (DateTime.Now - item.CreatedDate).Days;
+                                        }
+                                        <span class="vdt14">@days days ago</span>
+                                    </div>
+                                    <a asp-area="StudentFunction" asp-controller="Student"
+                                       asp-action="CourseDetails" asp-route-id="@item.CourseId"
+                                       class="crse14s title900">
+                                        @item.Course.Title
+                                    </a>
+
+                                    <div class="auth1lnkprce">
+
+                                        <div class="prce142">
+                                            $@item.Course.Price
+                                        </div>
+                                    </div>
+                                    <div class="auth1lnkprce">
+                                        <p class="cr1fot">
+                                            buy at @item.CreatedDate
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
                     </div>
                 </div>
             </div>

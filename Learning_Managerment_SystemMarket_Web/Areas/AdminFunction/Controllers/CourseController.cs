@@ -1,83 +1,55 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
 {
+    [Area("AdminFunction")]
     public class CourseController : Controller
     {
+        private readonly ILogger<StudentController> _logger;
+        private readonly ICourseServices _courseService;
+        private readonly IMapper _mapper;
+        public CourseController(ILogger<StudentController> logger, ICourseServices courseService, IMapper mapper)
+        {
+            _logger = logger;
+            _courseService = courseService;
+            _mapper = mapper;
+        }
         // GET: CourseController
-        public ActionResult Index()
+        public ActionResult WaitToApprove()
         {
             return View();
         }
 
-        // GET: CourseController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult ListReject()
         {
             return View();
         }
 
-        // GET: CourseController/Create
-        public ActionResult Create()
+
+        public async Task<ActionResult> ChangeToActive(int id)
         {
-            return View();
+            var respone = await _courseService.ChangeToActive(id);
+            if (!respone)
+            {
+                ModelState.AddModelError("", "Error");
+                return RedirectToAction(nameof(WaitToApprove));
+            }
+            return RedirectToAction(nameof(WaitToApprove));
         }
 
-        // POST: CourseController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> ChangeToReject(int id)
         {
-            try
+            var respone = await _courseService.ChangeToReject(id);
+            if (!respone)
             {
-                return RedirectToAction(nameof(Index));
+                ModelState.AddModelError("", "Error");
+                return RedirectToAction(nameof(WaitToApprove));
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CourseController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: CourseController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CourseController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CourseController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(WaitToApprove));
         }
     }
 }

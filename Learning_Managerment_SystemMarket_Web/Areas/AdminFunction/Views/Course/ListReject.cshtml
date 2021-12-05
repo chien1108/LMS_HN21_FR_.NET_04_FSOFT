@@ -1,0 +1,90 @@
+﻿@using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
+@using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel
+
+@inject ICourseServices _service
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listCourseWaitApprove = await _service.GetAllCourseReject();
+}
+
+<section class="section">
+    <div class="section-header">
+        <h1>Courses</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Home</a></div>
+            <div class="breadcrumb-item"><a href="#">Courses</a></div>
+        </div>
+    </div>
+
+    <div class="section-body">
+        <x-alert-msg></x-alert-msg>
+        <div class="row">
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-felx justify-content-between">
+                        <h4>Courses List</h4>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="datatable" class="table table-striped  no-footer">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Title
+                                        </th>
+                                        <th>
+                                            Category
+                                        </th>
+                                        <th>
+                                            Price
+                                        </th>
+                                        <th class="text-center">
+                                            Status
+                                        </th>
+                                        <th>
+                                            Last Update
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 1; i <= listCourseWaitApprove.Count; i++)
+                                    {
+                                        <tr role="row">
+                                            <td>@i</td>
+                                            <td>@listCourseWaitApprove.ElementAt(i - 1).Title</td>
+                                            <td>@listCourseWaitApprove.ElementAt(i - 1).CategoryName</td>
+                                            <td>@listCourseWaitApprove.ElementAt(i - 1).Price</td>
+                                            <td>@listCourseWaitApprove.ElementAt(i - 1).Status</td>
+                                            <td>@listCourseWaitApprove.ElementAt(i - 1).ModifiedDate.ToString("dd-MMM-yyyy")</td>
+                                            <td class="d-flex">
+                                                <a class="btn btn-sm btn-outline-primary btn-icon m-1" asp-controller="Course" asp-action="ChangeToActive" asp-route-id="@listCourseWaitApprove.ElementAt(i-1).Id">
+                                                    <span class="ul-btn__icon text-primary">View</span>
+                                                </a>
+                                                <a class="btn btn-sm btn-outline-success btn-icon m-1" asp-controller="Course" asp-action="ChangeToActive" asp-route-id="@listCourseWaitApprove.ElementAt(i-1).Id" onclick="return confirm('Are you sure you want to do this?')">
+                                                    <span class="ul-btn__icon text-success">Approve</span>
+                                                </a>
+                                                <a class="btn btn-outline-danger btn-icon m-1" asp-controller="Course" asp-action="ChangeToReject" asp-route-id="@listCourseWaitApprove.ElementAt(i-1).Id" onclick="return confirm('Are you sure you want reject this course?')">
+                                                    <span class="ul-btn__icon text-danger">Reject</span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

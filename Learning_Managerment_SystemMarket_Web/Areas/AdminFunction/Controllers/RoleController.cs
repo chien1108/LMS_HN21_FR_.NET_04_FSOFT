@@ -4,7 +4,6 @@ using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService;
 using Learning_Managerment_SystemMarket_ViewModels.AdminFunctionVm.RoleViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -79,16 +78,16 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
                     return RedirectToAction(nameof(ManageRoleClaim));
                 }
                 var role = new Role() { Name = newRoleVM.Name };
-                var claims = new List<Claim>(); 
+                var claims = new List<Claim>();
                 foreach (var item in newRoleVM.ClaimsFake)
                 {
                     if (item != null)
                     {
-                        claims.Add(new Claim() {ClaimType = item.Trim(),ClaimValue = item.Trim() });
+                        claims.Add(new Claim() { ClaimType = item.Trim(), ClaimValue = item.Trim() });
                     }
                 }
 
-                var response = await _roleService.Create(role,claims);
+                var response = await _roleService.Create(role, claims);
                 if (!response.Success)
                 {
                     ModelState.AddModelError("", response.Message);
@@ -126,8 +125,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
                 }
                 role.Name = roleVM.Name;
                 var claims = await _claimService.FindAll(x => x.RoleId == roleVM.Id);
-                var claimsOlder = claims.Where(x =>!roleVM.ClaimsFake.Contains(x.ClaimType.ToString().Trim())).ToList();
-                var claimOlderNotRemove = claims.Where(x => roleVM.ClaimsFake.Contains(x.ClaimType.ToString().Trim())).Select(x=>x.ClaimValue).ToList();
+                var claimsOlder = claims.Where(x => !roleVM.ClaimsFake.Contains(x.ClaimType.ToString().Trim())).ToList();
+                var claimOlderNotRemove = claims.Where(x => roleVM.ClaimsFake.Contains(x.ClaimType.ToString().Trim())).Select(x => x.ClaimValue).ToList();
                 foreach (var item in claims)
                 {
                     if (item != null)
@@ -145,12 +144,12 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
                     {
                         if (item != null && !claimOlderNotRemove.Contains(item))
                         {
-                            newClaim.Add(new Claim() {ClaimType = item,ClaimValue = item });
+                            newClaim.Add(new Claim() { ClaimType = item, ClaimValue = item });
                         }
                     }
                 }
                 //var claims = role
-                var respone = await _roleService.Update(role,newClaim,claimsOlder);
+                var respone = await _roleService.Update(role, newClaim, claimsOlder);
                 if (!respone.Success)
                 {
                     ModelState.AddModelError("", respone.Message);
@@ -196,19 +195,19 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
             }
         }
 
-        // POST: RoleController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //// POST: RoleController/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
