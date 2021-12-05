@@ -14,6 +14,8 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
 {
     public interface ICourseServices
     {
+        Task<bool> IsExistsCourseTitle(string title);
+
         Task<IList<CourseVm>> GetAllDraftCourses(int id);
 
         Task<IList<CourseVm>> GetAllCourses(int id);

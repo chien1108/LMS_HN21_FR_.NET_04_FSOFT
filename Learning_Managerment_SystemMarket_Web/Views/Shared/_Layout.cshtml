@@ -91,9 +91,8 @@
 
                 </div>
             </li>
-            <li class="dropdown">
-                <partial name="~/Views/Shared/PartialViews/_InformationAdmin.cshtml">
-            </li>
+            <partial name="~/Views/Shared/PartialViews/_InformationAdmin.cshtml">
+
         </ul>
     </nav>
     <div class="main-sidebar" tabindex="1" style="overflow: hidden; outline: none;">
@@ -302,8 +301,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="/frontend/js/jquery.min.js"></script>
-    <script src="/js/popper.min.js">
-    </script>
+    <script src="~/js/popper.min.js"></script>
     <script src="/frontend/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/js/nicescroll.min.js"></script>
     <script src="/js/moment.min.js"></script>
@@ -321,5 +319,19 @@
 
     <script src="/js/summernote.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        $(document).ready(function () {
+            $('#admin-dropdown').click(function (e) {
+                if ($('#admin-function').hasClass("hidden")) {
+                    $('#admin-function').removeClass("hidden");
+                    $('#admin-function').addClass("show");
+                }
+                else {
+                    $('#admin-function').removeClass("show");
+                    $('#admin-function').addClass("hidden");
+                }
+            }
+    </script>
 </body>
 </html>

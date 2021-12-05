@@ -438,6 +438,9 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
                 }
             }
             return false;
+        public async Task<bool> IsExistsCourseTitle(string title)
+        {
+            return await _unitOfWork.Courses.IsExists(x => x.Title == title);
         }
     }
 }

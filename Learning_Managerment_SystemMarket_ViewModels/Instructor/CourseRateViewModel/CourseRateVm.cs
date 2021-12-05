@@ -1,5 +1,15 @@
-﻿using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
+
+﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.StudentViewModel;
+using System;
+
 
 namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseRateViewModel
 {
@@ -16,5 +26,9 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseRateView
         public StudentVm Student { get; set; }
 
         public CourseVm Course { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public string PrettyDate { get; set; }
     }
 }
