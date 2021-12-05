@@ -72,7 +72,7 @@
                                                 <a class="btn btn-sm btn-outline-success btn-icon m-1" asp-controller="Course" asp-action="ChangeToActive" asp-route-id="@listCourseWaitApprove.ElementAt(i-1).Id" onclick="return confirm('Are you sure you want to do this?')">
                                                     <span class="ul-btn__icon text-success">Approve</span>
                                                 </a>
-                                                <a class="btn btn-outline-danger btn-icon m-1" asp-controller="Course" asp-action="Reject" asp-route-id="@listCourseWaitApprove.ElementAt(i-1).Id" onclick="return confirm('Are you sure you want reject this course?')">
+                                                <a class="btn btn-outline-danger btn-icon m-1" asp-controller="Course" asp-action="ChangeToReject" asp-route-id="@listCourseWaitApprove.ElementAt(i-1).Id" onclick="return confirm('Are you sure you want reject this course?')">
                                                     <span class="ul-btn__icon text-danger">Reject</span>
                                                 </a>
                                             </td>

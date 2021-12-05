@@ -29,9 +29,21 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
             return View();
         }
 
+
         public async Task<ActionResult> ChangeToActive(int id)
         {
             var respone = await _courseService.ChangeToActive(id);
+            if (!respone)
+            {
+                ModelState.AddModelError("", "Error");
+                return RedirectToAction(nameof(WaitToApprove));
+            }
+            return RedirectToAction(nameof(WaitToApprove));
+        }
+
+        public async Task<ActionResult> ChangeToReject(int id)
+        {
+            var respone = await _courseService.ChangeToReject(id);
             if (!respone)
             {
                 ModelState.AddModelError("", "Error");

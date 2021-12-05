@@ -40,7 +40,8 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
         Task<DisCountCourseVm> GetDiscountById(int id);
         Task<CourseVm> GetCourseById(int id);
 
-        Task<IList<CourseVm>> GetAllCourseWaitApprove(); Task<bool> IsExisted(Expression<Func<Course, bool>> expression = null);
+        Task<IList<CourseVm>> GetAllCourseWaitApprove();
+        Task<bool> IsExisted(Expression<Func<Course, bool>> expression = null);
         Task<Course> Find(Expression<Func<Course, bool>> expression = null,
                            List<string> includes = null);
         Task<IList<Course>> FindAll(Expression<Func<Course, bool>> expression = null,
@@ -48,6 +49,8 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
                              List<string> includes = null);
         Task<ServiceResponse<Course>> Update(CourseVm updateCourse);
         Task<bool> ChangeToActive(int id);
+        Task<bool> ChangeToReject(int id);
+        Task<IList<CourseVm>> GetAllCourseReject();
         Task<bool> SaveChange();
 
     }

@@ -381,6 +381,18 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
 
             return map;
         }
+        public async Task<IList<CourseVm>> GetAllCourseReject()
+        {
+            var courses = await _unitOfWork.Courses.GetAll(x => x.Status == StatusCourse.Reject);
+            var map = _mapper.Map<List<CourseVm>>(courses);
+            foreach (var item in map)
+            {
+                item.Parts = _unitOfWork.Context.CourseContents.Count(x => x.CourseId == item.Id);
+                item.Sales = _unitOfWork.Context.Orders.Count(x => x.CourseId == item.Id);
+            }
+
+            return map;
+        }
 
         public async Task<ServiceResponse<Course>> Update(CourseVm updateCourse)
         {
@@ -438,6 +450,30 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
                 }
             }
             return false;
+        }
+
+        public async Task<bool> ChangeToReject(int id)
+        {
+            var course = await _unitOfWork.Courses.FindByCondition(x => x.Id == id);
+            if (course != null)
+            {
+                if (course.Status == StatusCourse.WaitForApproced)
+                {
+                    course.Status = StatusCourse.Reject;
+
+                    var isSuccess = await _unitOfWork.Save();
+                    if (isSuccess)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return false;
+        }
         public async Task<bool> IsExistsCourseTitle(string title)
         {
             return await _unitOfWork.Courses.IsExists(x => x.Title == title);
