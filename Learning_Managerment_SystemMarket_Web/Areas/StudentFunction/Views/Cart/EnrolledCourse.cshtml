@@ -30,7 +30,12 @@
                         {
                             <div class="fcrse_1 mb-30">
                                 <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.CourseId" class="hf_img">
-                                    <img src="@item.Course.CoverImage" alt="@item.Course.Title">
+                                    @if (item.Course.CoverImage != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(item.Course.CoverImage);
+                                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                        <img src="@imgsrc" alt="@item.Course.Title">
+                                    }
                                     <div class="course-overlay">
                                         <div class="crse_reviews">
                                             <i class="uil uil-star"></i>2.5
@@ -54,7 +59,10 @@
                                             @item.Course.Views
                                             views
                                         </span>
-                                        <span class="vdt14">@(DateTime.Now - item.CreatedDate) months ago</span>
+                                        @{ 
+                                            var days = (DateTime.Now - item.CreatedDate).Days;
+                                        }
+                                        <span class="vdt14">@days days ago</span>
                                     </div>
                                     <a asp-area="StudentFunction" asp-controller="Student"
                                        asp-action="CourseDetails" asp-route-id="@item.CourseId" 
@@ -67,7 +75,8 @@
                                     </a>
                                     <div class="auth1lnkprce">
                                         <p class="cr1fot">
-                                            By <a href="#">@item.Course.Instructor.InstructorName</a>
+                                            By <a asp-area="StudentFunction" asp-controller="Instructor" asp-action="InstructorDetails"
+                                           asp-route-id="@item.Course.InstructorId">@item.Course.Instructor.InstructorName</a>
                                         </p>
                                         <div class="prce142">
                                             $@item.Course.Price

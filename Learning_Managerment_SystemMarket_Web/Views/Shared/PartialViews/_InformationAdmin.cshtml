@@ -4,21 +4,23 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
-<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user" aria-expanded="true">
-    <img alt="image" src="/upload/image/60dee1e59cf8d.png" class="rounded-circle mr-1">
-    <div class="d-sm-none d-lg-inline-block">Hi, Admin</div>
-</a>
-<div class="dropdown-menu dropdown-menu-right hidden">
-    <div class="dropdown-title">Logged in </div>
-    <a href="/public/admin/profile" class="dropdown-item has-icon">
-        <i class="far fa-user"></i> Profile
+<li class="dropdown" id="admin-dropdown">
+    <a href="#" class="nav-link nav-link-lg nav-link-user">
+        <img alt="image" src="/upload/image/60dee1e59cf8d.png" class="rounded-circle mr-1">
+        <div class="d-sm-none d-lg-inline-block">Hi, Admin</div>
     </a>
+    <div class="dropdown-menu dropdown-menu-right hidden" id="admin-function">
+        <div class="dropdown-title">Logged in </div>
+        <a href="/public/admin/profile" class="dropdown-item has-icon">
+            <i class="far fa-user"></i> Profile
+        </a>
 
-    <a href="/admin/setting/general" class="dropdown-item has-icon">
-        <i class="fas fa-cog"></i> Settings
-    </a>
-    <div class="dropdown-divider"></div>
-    <a asp-area="StudentFunction" asp-action="Logout" asp-controller="Student" class="item channel_item">
-        Sign Out
-    </a>
-</div>
+        <a href="/admin/setting/general" class="dropdown-item has-icon">
+            <i class="fas fa-cog"></i> Settings
+        </a>
+        <div class="dropdown-divider"></div>
+        <a asp-area="StudentFunction" asp-action="Logout" asp-controller="Student" class="item channel_item">
+            Sign Out
+        </a>
+    </div>
+</li> 

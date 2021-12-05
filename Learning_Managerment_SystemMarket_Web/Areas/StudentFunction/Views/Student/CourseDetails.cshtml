@@ -10,8 +10,6 @@
     ViewData["Title"] = "CourseDetails";
     Layout = "/Views/Shared/_StudentLayout.cshtml";
     var user = await UserManager.GetUserAsync(User);
-    
-
 }
 
 <div class="_215b01">
@@ -37,12 +35,28 @@
                                 </a>
                             </div>
                             <div class="_215b10">
-                                <a asp-action="SavedToCourse" asp-route-courseId="@Model.Id" class="_215b11">
-                                    <span><i class="uil uil-heart"></i></span>Save
-                                </a>
-                                <a href="https://coursearly.com/cursus/public/report/1/add" class="_215b12">
-                                    <span><i class="uil uil-windsock"></i></span>Report abuse
-                                </a>
+                                @if (user != null)
+                                {
+                                    <a asp-area="StudentFunction" asp-controller="SavedCourse" asp-action="SavedToCourse" asp-route-studentId="@user.IdUser" asp-route-courseId="@Model.Id" class="_215b11">
+                                        <span><i class="uil uil-heart "></i></span>Save
+                                    </a>
+
+                                    <a href="#" class="_215b12">
+                                        <span><i class="uil uil-windsock"></i></span>Report abuse
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a id="login" asp-area="Identity" asp-page="/Account/Login"
+                                       class="_215b11" title="Save"
+                                       onclick="return confirm('You must login to show save course ')">
+                                        <span><i class="uil uil-heart "></i></span>Save
+                                    </a>
+
+                                    <a href="#" class="_215b12">
+                                        <span><i class="uil uil-windsock"></i></span>Report abuse
+                                    </a>
+                                }
                             </div>
                         </div>
                         <div class="col-xl-8 col-lg-7 col-md-6">
@@ -64,7 +78,6 @@
                                     <span><i class="uil uil-comment"></i></span>
                                     English
                                 </div>
-
                             </div>
                             <ul class="_215b31">
                                 <li>
@@ -128,20 +141,19 @@
 
                                 @if (user != null)
                                 {
-                                    var subcriptionExist = await _subcriptionService.IsSubcribeExist(user.IdUser ,Model.InstructorId);
+                                    var subcriptionExist = await _subcriptionService.IsSubcribeExist(user.IdUser, Model.InstructorId);
                                     if (!subcriptionExist)
                                     {
                                         <a class="btn btn-danger" asp-route-InstructorId="@Model.InstructorId"
-                                           asp-route-StudentId="@user.IdUser" asp-route-CourseId="@Model.Id"
-                                           asp-area="StudentFunction" asp-action="Subcribe" asp-controller="Student" >Subscribe</a>
+                                           asp-route-StudentId="@user.IdUser" asp-route-ReturnUrl="~/StudentFunction/Student/CourseDetails/@Model.Id"
+                                           asp-area="StudentFunction" asp-action="Subcribe" asp-controller="Student">Subscribe</a>
                                     }
                                     else
                                     {
                                         <a class="btn btn-danger" asp-route-InstructorId="@Model.InstructorId"
-                                           asp-route-StudentId="@user.IdUser" asp-route-CourseId="@Model.Id"
+                                           asp-route-StudentId="@user.IdUser" asp-route-ReturnUrl="~/StudentFunction/Student/CourseDetails/@Model.Id"
                                            asp-area="StudentFunction" asp-action="UnSubcribe" asp-controller="Student">UnSubscribe</a>
                                     }
-
 
                                 }
                                 else
@@ -163,14 +175,12 @@
                                     <i class="uil uil-thumbs-up"></i>
                                     <span>-2</span>
                                 </a>
-
                             </li>
                             <li>
                                 <a href="https://coursearly.com/cursus/public/like/1/1" class="lkcm152">
                                     <i class="uil uil-thumbs-down"></i>
                                     <span>2</span>
                                 </a>
-
                             </li>
                             <li>
                                 <a onclick="window.open('https://coursearly.com/cursus/public/courses/complete-python-bootcamp:-go-from-zero-to-hero-in-python-3/1/share','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;" class="lkcm152"><i class="uil uil-share-alt"></i><span>50</span></a>

@@ -10,6 +10,7 @@ using Learning_Managerment_SystemMarket_ViewModels.Instructor.ResponseResult;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
@@ -29,13 +30,14 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             };
         }
 
-        public async Task<ResponseResult> CreateCourse(CreateCourseVm model, List<CreateCourseContentVm> createCourseContentVms, List<CreateLectureVm> createLectureVms)
+        public async Task<ResponseResult> CreateCourse(CreateCourseVm model, List<CreateCourseContentVm> createCourseContentVms, List<CreateLectureVm> createLectureVms, int instructorId)
         {
             try
             {
                 var course = _mapper.Map<Course>(model);
-                //Dùng tạm InstructorId có sẵn
-                course.InstructorId = 3;
+                //InstructorId 
+                course.InstructorId = instructorId;
+
                 await _unitOfWork.Courses.Create(course);
 
                 foreach (var courseContentItem in createCourseContentVms)
@@ -369,7 +371,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
 
         public async Task<IList<CourseVm>> GetAllCourseWaitApprove()
         {
-            var courses = await _unitOfWork.Courses.GetAll(expression: x => x.Status == StatusCourse.WaitForApproced);
+            var courses = await _unitOfWork.Courses.GetAll(x => x.Status == StatusCourse.WaitForApproced);
             var map = _mapper.Map<List<CourseVm>>(courses);
             foreach (var item in map)
             {
@@ -378,6 +380,103 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             }
 
             return map;
+        }
+        public async Task<IList<CourseVm>> GetAllCourseReject()
+        {
+            var courses = await _unitOfWork.Courses.GetAll(x => x.Status == StatusCourse.Reject);
+            var map = _mapper.Map<List<CourseVm>>(courses);
+            foreach (var item in map)
+            {
+                item.Parts = _unitOfWork.Context.CourseContents.Count(x => x.CourseId == item.Id);
+                item.Sales = _unitOfWork.Context.Orders.Count(x => x.CourseId == item.Id);
+            }
+
+            return map;
+        }
+
+        public async Task<ServiceResponse<Course>> Update(CourseVm updateCourse)
+        {
+            try
+            {
+                var studentFromDb = await Find(x => x.Id == updateCourse.Id);
+                if (studentFromDb != null)
+                {
+                    var map = _mapper.Map<Course>(updateCourse);
+                    _unitOfWork.Courses.Update(map);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<Course> { Success = false, Message = "Something wrongs went update new Course" };
+                    }
+                    return new ServiceResponse<Course> { Success = true, Message = "Update Course Success" };
+                }
+                else
+                {
+                    return new ServiceResponse<Course> { Success = false, Message = "Not Found Course" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResponse<Course> { Success = true, Message = ex.Message };
+            }
+        }
+        public async Task<bool> SaveChange()
+            => await _unitOfWork.Save();
+        public async Task<Course> Find(Expression<Func<Course, bool>> expression = null,
+                                        List<string> includes = null)
+            => await _unitOfWork.Courses.FindByCondition(expression, includes);
+        public async Task<bool> IsExisted(Expression<Func<Course, bool>> expression = null)
+            => await _unitOfWork.Courses.IsExists(expression);
+
+        public async Task<IList<Course>> FindAll(Expression<Func<Course, bool>> expression = null, Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null, List<string> includes = null)
+        => await _unitOfWork.Courses.GetAll(expression, orderBy, includes);
+        public async Task<bool> ChangeToActive(int id)
+        {
+            var course = await _unitOfWork.Courses.FindByCondition(x => x.Id == id);
+            if (course != null)
+            {
+                if (course.Status == StatusCourse.WaitForApproced)
+                {
+                    course.Status = StatusCourse.Active;
+
+                    var isSuccess = await _unitOfWork.Save();
+                    if (isSuccess)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public async Task<bool> ChangeToReject(int id)
+        {
+            var course = await _unitOfWork.Courses.FindByCondition(x => x.Id == id);
+            if (course != null)
+            {
+                if (course.Status == StatusCourse.WaitForApproced)
+                {
+                    course.Status = StatusCourse.Reject;
+
+                    var isSuccess = await _unitOfWork.Save();
+                    if (isSuccess)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return false;
+        }
+        public async Task<bool> IsExistsCourseTitle(string title)
+        {
+            return await _unitOfWork.Courses.IsExists(x => x.Title == title);
         }
     }
 }

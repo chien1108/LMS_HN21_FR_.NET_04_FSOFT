@@ -3,7 +3,7 @@
         <div class="left_section">
             <ul>
                 <li class="menu--item">
-                    <a href="dashboard.html" class="menu--link " title="Dashboard">
+                    <a asp-area= "InstructorFunction" asp-controller="Dashboard" asp-action="Index" class="menu--link " title="Dashboard">
                         <i class="uil uil-apps menu--icon"></i>
                         <span class="menu--label">Dashboard</span>
                     </a>
@@ -28,14 +28,7 @@
                 </li>
 
                 <li class="menu--item">
-                    <a href="notifications.html" class="menu--link " title="Notifications">
-                        <i class='uil uil-bell menu--icon'></i>
-                        <span class="menu--label">Notifications</span>
-                    </a>
-                </li>
-
-                <li class="menu--item">
-                    <a href="review.html" class="menu--link " title="Reviews">
+                    <a href="Instructor/Review/Index" class="menu--link " title="Reviews">
                         <i class='uil uil-star menu--icon'></i>
                         <span class="menu--label">Reviews</span>
                     </a>
@@ -46,12 +39,7 @@
                         <span class="menu--label">Earning</span>
                     </a>
                 </li>
-                <li class="menu--item">
-                    <a href="payout.html" class="menu--link " title="Payout">
-                        <i class='uil uil-wallet menu--icon'></i>
-                        <span class="menu--label">Payout</span>
-                    </a>
-                </li>
+               
                 <li class="menu--item">
                     <a asp-area="InstructorFunction" asp-controller="Statement" asp-action="Index" class="menu--link " title="Statements">
                         <i class='uil uil-file-alt menu--icon'></i>
@@ -69,7 +57,7 @@
         <div class="left_section pt-2">
             <ul>
                 <li class="menu--item">
-                    <a href="setting.html" class="menu--link " title="Setting">
+                    <a asp-area= "InstructorFunction" asp-controller="Setting" asp-action="Index" class="menu--link " title="Setting">
                         <i class='uil uil-cog menu--icon'></i>
                         <span class="menu--label">Setting</span>
                     </a>

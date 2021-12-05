@@ -3,9 +3,10 @@
     public enum StatusCourse
     {
         Draft,
-        Active, 
-        WaitForApproced, 
-        Block, 
-        Deactive
+        Active,
+        WaitForApproced,
+        Block,
+        Deactive,
+        Reject
     }
 }

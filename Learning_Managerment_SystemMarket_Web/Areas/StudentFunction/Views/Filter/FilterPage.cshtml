@@ -1,0 +1,368 @@
+﻿@using Learning_Managerment_SystemMarket_Core.Models.Entities;
+@using Microsoft.AspNetCore.Identity
+@using Learning_Managerment_SystemMarket_Core.Modules.Enums
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject Learning_Managerment_SystemMarket_Services.StudentServices.OrderService.IOrderService orderService;
+@inject Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService.IStudentHomePageService studentService;
+@inject Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService.IInstructorLanguageService languageService
+@model IEnumerable<Learning_Managerment_SystemMarket_ViewModels.StudentViewModels.CardCourseVM>
+@{
+    ViewData["Title"] = "FilterPage";
+    Layout = "/Views/Shared/_StudentLayout.cshtml";
+    var user = await UserManager.GetUserAsync(User);
+    var categories = await studentService.GetAllCategory();
+    var languages = await languageService.GetAllLanguage();
+}
+
+<div class="">
+    <div class="row justify-content-between">
+        <div class="col-lg-3 col-md-4">
+            <form method="GET" id="srform">
+                <input type="hidden" name="sort" value="1" id="sort">
+                <div class="section3125 hstry142">
+                    <div class="result_stitles">
+                        <div class="rs6t_title">Filters</div>
+                        <div class="filter_selector">
+                            <div class="ui inline dropdown flt145" tabindex="0">
+                                <div class="text">Sort</div>
+                                <i class="dropdown icon"></i>
+                                <div class="menu transition hidden" tabindex="-1">
+                                    <div class="item" onclick="sortChange(1)"><a asp-area="StudentFunction" asp-controller="Filter" asp-action="FilterNewest">Newest</a></div>
+                                    <div class="item" onclick="sortChange(2)"><a asp-area="StudentFunction" asp-controller="Filter" asp-action="FilterLowestPrice">Lowest Price</a></div>
+                                    <div class="item" onclick="sortChange(3)"><a asp-area="StudentFunction" asp-controller="Filter" asp-action="FilterHighestPrice">Highest Price</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tb_145">
+                        <div class="panel-group accordion" id="accordionfilter">
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingOne">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapseOne" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Topic
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse" aria-labelledby="headingOne" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                @foreach (var item in categories)
+                                                {
+                                                    <div class="ui form checkbox_sign">
+                                                        <div class="inline field">
+                                                            <div class="ui checkbox mncheck">
+                                                                <input type="radio" tabindex="0" class="hidden" name="category" value="1" >
+                                                                <label>@item.CategoryName</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingThree">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapseThree" href="#" aria-expanded="false" aria-controls="collapseThree">
+                                            Language
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse" aria-labelledby="headingThree" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                @foreach (var item in languages)
+                                                {
+                                                    <div class="ui form checkbox_sign">
+                                                        <div class="inline field">
+                                                            <div class="ui checkbox mncheck">
+                                                                <input type="radio" name="language" tabindex="0" class="hidden" value="1">
+                                                                <label>@item.LanguageName</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingfour">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapsefour" href="#" aria-expanded="false" aria-controls="collapsefour">
+                                            Price
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapsefour" class="panel-collapse collapse" aria-labelledby="headingfour" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="price" value="1" tabindex="0" class="hidden">
+                                                            <label>Paid</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="price" value="0" tabindex="0" class="hidden">
+                                                            <label>Free</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingsix">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapsesix" href="#" aria-expanded="false" aria-controls="collapsesix">
+                                            Rating
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapsesix" class="panel-collapse collapse" aria-labelledby="headingsix" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="rating" value="5" tabindex="0" class="hidden">
+                                                            <label class="rating_filter">
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                5.0 &amp; up
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="rating" value="4" tabindex="0" class="hidden">
+                                                            <label class="rating_filter">
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                4.0 &amp; up
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="rating" value="3" tabindex="0" class="hidden">
+                                                            <label class="rating_filter">
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                3.0 &amp; up
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="rating" value="2" tabindex="0" class="hidden">
+                                                            <label class="rating_filter">
+                                                                <i class="uil uil-star"></i>
+                                                                <i class="uil uil-star"></i>
+                                                                2.0 &amp; up
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default m-0">
+                                <div class="panel-heading" id="headingseven">
+                                    <div class="panel-title10">
+                                        <a class="collapsed" data-toggle="collapse" data-target="#collapseseven" href="#" aria-expanded="false" aria-controls="collapseseven">
+                                            Video Duration
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapseseven" class="panel-collapse collapse" aria-labelledby="headingseven" data-parent="#accordionfilter">
+                                    <div class="panel-body">
+                                        <div class="ui form">
+                                            <div class="grouped fields">
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="duration" value="0-120" tabindex="0" class="hidden">
+                                                            <label>0-2 Hours</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="duration" value="180-360" tabindex="0" class="hidden">
+                                                            <label>3-6 Hours</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="duration" value="420-1080" tabindex="0" class="hidden">
+                                                            <label>7-18 Hours</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ui form checkbox_sign">
+                                                    <div class="inline field">
+                                                        <div class="ui checkbox mncheck">
+                                                            <input type="radio" name="duration" value="1140-9999" tabindex="0" class="hidden">
+                                                            <label>19+ Hours</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-9 col-md-8">
+            <div class="_14d25 mb-20">
+                @if (Model.Count() != 0)
+                {
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 class="mhs_title">
+                                Filters Results
+                            </h4>
+
+                            <div class="row">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="col-xl-4 col-lg-6 col-md-6">
+                                        <div class="item">
+                                            <div class="fcrse_1 mb-20">
+                                                <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="fcrse_img">
+                                                    @if (item.CoverImage != null)
+                                                    {
+                                                        var base64 = Convert.ToBase64String(item.CoverImage);
+                                                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                                        <img src="@imgsrc" width="100%" />
+                                                    }
+                                                    <div class="course-overlay">
+
+                                                        <span class="play_btn1"><i class="uil uil-play"></i></span>
+
+                                                        <div class="crse_timer">
+                                                            1.0 hours
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <div class="fcrse_content">
+                                                    <div class="eps_dots more_dropdown">
+
+                                                    </div>
+                                                    <div class="vdtodt">
+                                                        <span class="vdt14">@item.Views views</span>
+
+                                                        <span class="vdt14">@item.RelativeCreateDate</span>
+                                                    </div>
+                                                    <a asp-area="StudentFunction" asp-controller="Student" asp-action="CourseDetails" asp-route-id="@item.Id" class="crse14s">@item.Title</a>
+                                                    <a href="#" class="crse-cate">
+                                                        @*@item.Category.CategoryName*@
+                                                    </a>
+                                                    <div class="auth1lnkprce">
+                                                        <p class="cr1fot">
+                                                            By <a asp-area="StudentFunction" asp-controller="Instructor" asp-action="InstructorDetails"
+                                                                  asp-route-id="@item.Instructor.Id">@item.Instructor.InstructorName</a>
+                                                            </p>
+                                                            <div class="prce142">$@item.Price</div>
+                                                            @if (user != null)
+                                                            {
+                                                                var existingEnroll = await orderService.Find(
+                                                                  expression: c => c.CourseId == item.Id
+                                                                  && c.StudentId == user.IdUser);
+                                                                if (existingEnroll == null)
+                                                                {
+                                                                    <a class="shrt-cart-btn" title="cart" asp-area="StudentFunction"
+                                                                       asp-controller="Cart" asp-action="AddCourseToCart"
+                                                                       asp-route-courseId="@item.Id" asp-route-studentId="@user.IdUser"
+                                                                       onclick="return confirm('Are you sure want to add this course to cart?')">
+                                                                        <i class="uil uil-shopping-cart-alt"></i>
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a class="shrt-cart-btn" title="cart" id="login" href="#"
+                                                                       onclick="return confirm('You have enrolled this course')">
+                                                                        <i class="uil uil-shopping-cart-alt"></i>
+                                                                    </a>
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="shrt-cart-btn" title="cart" id="login" asp-area="Identity" asp-page="/Account/Login"
+                                                                   onclick="return confirm('You must login to add this course to cart')">
+                                                                    <i class="uil uil-shopping-cart-alt"></i>
+                                                                </a>
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                }
+                else
+                {
+
+                    <div class="row mt-30">
+                        <div class="col-12"><h4 class="item_title">Courses</h4></div>
+                        <div class="col-md-12 text-center">
+                            <div class="no-data-div">
+                                <img src="https://coursearly.com/cursus/public/nodata.svg" alt="No Data" srcset="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 text-center">
+                            <div class="main-loader mt-50">
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
