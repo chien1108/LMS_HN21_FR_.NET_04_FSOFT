@@ -371,7 +371,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
 
         public async Task<IList<CourseVm>> GetAllCourseWaitApprove()
         {
-            var courses = await _unitOfWork.Courses.GetAll(expression: x => x.Status == StatusCourse.WaitForApproced);
+            var courses = await _unitOfWork.Courses.GetAll(x => x.Status == StatusCourse.WaitForApproced);
             var map = _mapper.Map<List<CourseVm>>(courses);
             foreach (var item in map)
             {
@@ -417,5 +417,27 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
 
         public async Task<IList<Course>> FindAll(Expression<Func<Course, bool>> expression = null, Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null, List<string> includes = null)
         => await _unitOfWork.Courses.GetAll(expression, orderBy, includes);
+        public async Task<bool> ChangeToActive(int id)
+        {
+            var course = await _unitOfWork.Courses.FindByCondition(x => x.Id == id);
+            if (course != null)
+            {
+                if (course.Status == StatusCourse.WaitForApproced)
+                {
+                    course.Status = StatusCourse.Active;
+
+                    var isSuccess = await _unitOfWork.Save();
+                    if (isSuccess)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

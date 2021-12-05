@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Learning_Managerment_SystemMarket_Core.Modules.Enums;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -25,28 +24,17 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
             return View();
         }
 
+        public ActionResult ListReject()
+        {
+            return View();
+        }
 
         public async Task<ActionResult> ChangeToActive(int id)
         {
-            var course = await _courseService.GetCourseById(id);
-            if (course == null)
+            var respone = await _courseService.ChangeToActive(id);
+            if (!respone)
             {
-                return RedirectToAction(nameof(WaitToApprove));
-            }
-
-            if (course.Status == StatusCourse.Active)
-            {
-                course.Status = StatusCourse.Active;
-            }
-            else
-            {
-                course.Status = StatusCourse.Active;
-            }
-
-            var respone = await _courseService.Update(course);
-            if (!respone.Success)
-            {
-                ModelState.AddModelError("", respone.Message);
+                ModelState.AddModelError("", "Error");
                 return RedirectToAction(nameof(WaitToApprove));
             }
             return RedirectToAction(nameof(WaitToApprove));
