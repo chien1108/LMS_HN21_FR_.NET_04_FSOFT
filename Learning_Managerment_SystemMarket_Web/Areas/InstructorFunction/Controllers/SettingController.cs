@@ -7,7 +7,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -51,7 +54,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
                 : message == ManageMessageId.ChangePasswordSuccess ? "you have just successfully updated your password."
                 : message == ManageMessageId.Error ? "Some thing wrong."
                 : message == ManageMessageId.ErrorPassword ? "Unable to update password."
-                : message == ManageMessageId.ChangeNotification ? "You should change notification."
+                : message == ManageMessageId.ChangeNotification ? "You just changed notification."
                 : "";
 
             var user = await _userManager.GetUserAsync(User);
@@ -68,8 +71,12 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
                 Facebook = instructor.Facebook,
                 LinkedIn = instructor.LinkedIn,
                 Youtube = instructor.Youtube,
+                EmailNotification = Convert.ToBoolean(instructor.EmailNotification),
+                PushNotification = Convert.ToBoolean(instructor.PushNotification),
                 Email = user.Email,
             };
+         
+           
             return View(model);
         }
 
@@ -86,9 +93,6 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             instructor.Facebook = model.Facebook;
             instructor.LinkedIn = model.LinkedIn;
             instructor.Youtube = model.Youtube;
-
-            instructor.EmailNotification = model.EmailNotification;
-            instructor.PushNotification = model.PushNotification;
 
             if (Request.Form.Files.Count > 0)
             {
@@ -146,14 +150,10 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
         {
             var user = await _userManager.GetUserAsync(User);
             var instructor = await _unitOfWork.Instructors.FindByCondition(x => x.Id == user.IdUser);
-           
-            model = new EditExtraProfileModel()
-            {
-                InstructorId = instructor.Id,
-                EmailNotification = instructor.EmailNotification,
-                PushNotification = instructor.PushNotification,
-                
-            };
+
+            instructor.EmailNotification = Convert.ToInt32(model.EmailNotification);
+            instructor.PushNotification = Convert.ToInt32(model.PushNotification);
+            
             _unitOfWork.Instructors.Update(instructor);
             await _unitOfWork.Save();
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangeNotification });

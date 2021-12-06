@@ -19,8 +19,8 @@ namespace LMS.Web.Areas.IdentityMVC.Models.SettingViewModels
         public string LinkedIn { get; set; } = null;
         public string Youtube { get; set; } = null;
         public string Description { get; set; } = null;
-        public int EmailNotification { get; set; } = 1;// nhận thông báo
-        public int PushNotification { get; set; } = 1;
+        public bool EmailNotification { get; set; }// nhận thông báo
+        public bool PushNotification { get; set; }
         public DateTime? EmailVerifiedAt { get; set; }
         public StatusIns Status { get; set; }
         public decimal Balance { get; set; }

@@ -2,6 +2,7 @@
 @model EditExtraProfileModel
 @{
     ViewData["Title"] = "Setting";
+    var emailNotification = ViewData["emailNotification"] as SelectList;
 }
 <partial name="~/Areas/InstructorFunction/Views/Shared/_StatusMessage.cshtml" />
 
@@ -197,8 +198,9 @@
                           <div class="basic_ptitle">
                             <h4>Choose when and how to be notified</h4>
                           </div>
-                          <div class="ui toggle checkbox _1457s2">
-                            <input type="checkbox"  name="push_notification" value="@Model.PushNotification" checked="@Model.PushNotification">
+                          <div class="ui toggle checkbox _1457s2">                          
+                          <input type="checkbox" asp-for="@Model.PushNotification"  name="push_notification" value="@Model.PushNotification" />
+                           @Html.CheckBoxFor(m=>m.PushNotification,new { })
                             <label>Web push notifications</label>
                             <p class="ml5">Notify me with push notifications</p>
                           </div>
@@ -215,8 +217,9 @@
                             <p>Select push and email notifications you`d like to receive</p>
                           </div>
                           <div class="ui toggle checkbox _1457s2">
-                            <input type="checkbox"  name="email_notification" value="@Model.EmailNotification" checked=@Model.EmailNotification>
-                            <label>Email notifications</label>
+                           <input type="checkbox" asp-for="@Model.EmailNotification" name="email_notification" value="@Model.EmailNotification" />
+                            @Html.CheckBoxFor(m=>m.EmailNotification,new { }) 
+                            <label>Web email notifications</label>
                             <p class="ml5">Notify me with Email</p>
                           </div>
                         </div>
@@ -1497,4 +1500,16 @@
 
  @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+     <script src="~/lib/multiple-select/multiple-select.min.js"></script>
+    <link rel="stylesheet" href="~/lib/multiple-select/multiple-select.min.css" />
+
+    <script>
+        $("#emailNotification").Select({
+            selectAll: false,
+            keepOpen: false,
+            isOpen: false,
+        });
+    </script>
 }
+

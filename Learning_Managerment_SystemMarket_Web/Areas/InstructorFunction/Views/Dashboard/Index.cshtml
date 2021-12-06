@@ -65,7 +65,7 @@
                         <h1>Jump Into Course Creation</h1>
                     </div>
                     <div class="card_dash_right1">
-                    <button class="create_btn_dash" ><a class= "text-white" asp-area = "InstructorFunction" asp-controller= "Course" asp-action = "Create">Create Your Course</a></button>
+                    <button class="create_btn_dash" ><a class= "text-white" asp-area = "InstructorFunction" asp-controller= "Analyic" asp-action = "Index">Create Your Course</a></button>
                     </div>
                 </div>
             </div>
@@ -79,12 +79,12 @@
                         <div class="fcrse_1">
                             <div class="fcrse_content">
                                 <h6 class="crsedt8145">Current subscribers</h6>
-                                <h3 class="subcribe_title">2</h3>
+                                <h3 class="subcribe_title">@Model.TotalSubscriber</h3>
                                 <div class="allvperf">
                                     <div class="crse-perf-left">View</div>
                                     <div class="crse-perf-right">
                                         @Model.TotalViews<span class="analyics_pr">
-                                        (0)
+                                        (@Model.TotalEnrollToday)
                                     </span>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="auth1lnkprce">
-                        <a href="public/instructor/analytics" class="cr1fot50">Go to profile analytics</a>
+                        <a asp-area = "InstructorFunction" asp-controller= "Course" asp-action = "Create" class="cr1fot50">Go to profile analytics</a>
                     </div>
                 </div>
             </div>

@@ -82,17 +82,23 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
                 TotalEnrollToday = await TotalEnrollToday(),
                 TotalStudentsToday = await TotalStudentsToday(),
                 TotalSalesToday = await ToTalSalesToday(),
+                TotalSubscriber = await TotalSubscriber(),
                 SubmitCourses = coursesInPage,
                 LastSellCourses = lastSellCourses.ToList()
             };
 
             return View(model);
         }
-
+        private Task<Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor> GetInstructorAsync()
+        {
+            var user = _userManager.GetUserAsync(HttpContext.User).Result;
+            var instructor =  _unitOfWork.Instructors.FindByCondition(x => x.Id == user.IdUser);
+            return instructor;
+        }
+      
         public async Task<decimal> ToTalSales()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var instructor = await _unitOfWork.Instructors.FindByCondition(x => x.Id == user.IdUser); ;
+            var instructor = await GetInstructorAsync();
             var courses = await _unitOfWork.Courses.GetAll(c => c.InstructorId == instructor.Id);
 
             decimal totalSale = 0;
@@ -124,8 +130,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
         //get total sale theo khoa hoc trong ngay hom nay theo instructor
         public async Task<decimal> ToTalSalesToday()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var instructor = await _unitOfWork.Instructors.FindByCondition(x => x.Id == user.IdUser);
+            var instructor = await GetInstructorAsync();
             var courses = await _unitOfWork.Courses.GetAll(c => c.InstructorId == instructor.Id);
 
             decimal totalSale = 0;
@@ -156,19 +161,17 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
         // tong so khoa hoc co student cua instructor
         public async Task<int> TotalEnroll()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var instructor = await _unitOfWork.Instructors.FindByCondition(x => x.Id == user.IdUser);
+            var instructor = await GetInstructorAsync();
             var courses = await _unitOfWork.Courses.GetAll(
               c => c.InstructorId == instructor.Id && c.Orders.Count() > 0);
 
             return courses.Count();
         }
-
+                       
         // tong so khoa hoc co student enroll trong ngay hom nay cua instructor
         public async Task<int> TotalEnrollToday()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var instructor = await _unitOfWork.Instructors.FindByCondition(x => x.Id == user.IdUser);
+            var instructor = await GetInstructorAsync();
             var courses = await _unitOfWork.Courses.GetAll(
               c => c.InstructorId == instructor.Id && c.Orders.Count() > 0);
 
@@ -179,19 +182,15 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
         // tong khoa hoc cua instructor
         public async Task<int> TotalCourses()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var instructor = await _unitOfWork.Instructors.FindByCondition(x => x.Id == user.IdUser);
-            var courses = await _unitOfWork.Courses.GetAll(
-              c => c.InstructorId == instructor.Id);
+            var instructor = await GetInstructorAsync();
+            var courses = await _unitOfWork.Courses.GetAll(c => c.InstructorId == instructor.Id);
             return courses.Count();
         }
 
         public async Task<int> TotalCoursesToday()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var instructor = await _unitOfWork.Instructors.FindByCondition(x => x.Id == user.IdUser);
-            var instructorId = instructor.Id;
-            var courses = await _unitOfWork.Courses.GetAll(c => c.InstructorId == instructorId);
+            var instructor = await GetInstructorAsync();
+            var courses = await _unitOfWork.Courses.GetAll(c => c.InstructorId == instructor.Id);
 
             var coursesToday = courses.Where(x => x.CreatedDate.Date == System.DateTime.Now.Date);
             return coursesToday.Count();
@@ -200,8 +199,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
         // tinh tong student tham gia cac khoa hoc cua instructor
         public async Task<int> TotalStudents()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var instructor = await _unitOfWork.Instructors.FindByCondition(x => x.Id == user.IdUser);
+            var instructor = await GetInstructorAsync();
             var courses = await _unitOfWork.Courses.GetAll(c => c.InstructorId == instructor.Id);
 
             int totalStudent = 0;
@@ -226,10 +224,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
 
         public async Task<int> TotalStudentsToday()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var instructor = await _unitOfWork.Instructors.FindByCondition(x => x.Id == user.IdUser);
-            var instructorId = instructor.Id;
-            var courses = await _unitOfWork.Courses.GetAll(c => c.InstructorId == instructorId);
+            var instructor = await GetInstructorAsync();
+            var courses = await _unitOfWork.Courses.GetAll(c => c.InstructorId == instructor.Id);
 
             int totalStudentToday = 0;
 
@@ -254,10 +250,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
 
         public async Task<int> TotalView()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var instructor = await _unitOfWork.Instructors.FindByCondition(x => x.Id == user.IdUser);
-            var instructorId = instructor.Id;
-            var courses = await _unitOfWork.Courses.GetAll(c => c.InstructorId == instructorId);
+            var instructor = await GetInstructorAsync();
+            var courses = await _unitOfWork.Courses.GetAll(c => c.InstructorId == instructor.Id);
 
             int totalView = 0;
             foreach (var course in courses)
@@ -266,6 +260,14 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             }
 
             return totalView;
+        }
+
+        public async Task<int> TotalSubscriber()
+        {
+            var instructor = await GetInstructorAsync();
+
+            var subcriber = await _unitOfWork.Instructors.GetSubcriptionByInstructorId(instructor.Id);            
+            return subcriber.Count();
         }
     }
 }
