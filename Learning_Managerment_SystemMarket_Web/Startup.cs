@@ -112,6 +112,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IInstructorService, InstructorService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddTransient<ICourseServices, CourseServices>();
+            services.AddTransient<IStudentCourseRateService, StudentCourseRateService>();
             services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();
             services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
             services.AddTransient<IInstructorSubCategoryService, InstructorSubCategoryService>();

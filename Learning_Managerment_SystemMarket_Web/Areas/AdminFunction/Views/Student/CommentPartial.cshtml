@@ -1,4 +1,13 @@
-﻿<div class="row">
+﻿@using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseRateService
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
+@using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
+@inject IUserService _userService
+@inject IStudentCourseRateService _studentCourseRateService
+@inject ICourseServices _courseServices
+@{
+    var listCourseRate = await _studentCourseRateService.FindAll();
+}
+<div class="row">
     <div class="col-12 col-sm-12 col-lg-12">
         <div class="card">
             <div class="card-header">
@@ -6,43 +15,43 @@
             </div>
             <div class="card-body">
                 <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
-                    <li class="media">
-                        <img alt="image" class="mr-3 rounded-circle" width="70" height="70" src="https://coursearly.com/cursus/public/upload/image/60d6bebf5d165.jpg">
-                        <div class="media-body">
-                            <div class="media-right">
-                                <div class="product-review">
-
-                                    <i class="fas fa-star">
-                                    </i>
-
-                                    <i class="fas fa-star">
-                                    </i>
-
-                                    <i class="fas fa-star">
-                                    </i>
-
-                                    <i class="far fa-star">
-                                    </i>
-
-                                    <i class="far fa-star">
-                                    </i>
-
+                    @for (int i = 0; i < listCourseRate.Count(); i++)
+                    {
+                        <li class="media">
+                            <img alt="image" class="mr-3 rounded-circle" width="70" height="70" src="https://coursearly.com/cursus/public/upload/image/60d6bebf5d165.jpg">
+                            <div class="media-body">
+                                <div class="media-right">
+                                    <div class="product-review">
+                                        @for (int j = 1; j <= listCourseRate.ElementAt(i).Star; j++)
+                                        {
+                                            <i class="fas fa-star"></i>
+                                        }
+                                        @if (listCourseRate.ElementAt(i).Star < 5)
+                                        {
+                                            @for (int j = 1; j <= 5- listCourseRate.ElementAt(i).Star; j++)
+                                            {
+                                                <i class="far fa-star"></i>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                @{
+                                    var course = await _courseServices.Find(x => x.Id == @listCourseRate.ElementAt(i).CourseId);
+                                }
+                                <div class="media-title mb-1">
+                                    @course.Title
+                                </div>
+                                <div class="text-time">
+                                    1 month ago
+                                </div>
+                                <div class="media-description text-muted">
+                                </div>
+                                <div class="media-links">
+                                    <a href="https://coursearly.com/cursus/public/admin/review/1/delete" class="text-danger">Trash</a>
                                 </div>
                             </div>
-                            <div class="media-title mb-1">
-                                Complete Python Bootcamp: Go from zero to hero in Python 3
-                            </div>
-                            <div class="text-time">
-                                1 month ago
-                            </div>
-                            <div class="media-description text-muted">
-                            </div>
-                            <div class="media-links">
-
-                                <a href="https://coursearly.com/cursus/public/admin/review/1/delete" class="text-danger">Trash</a>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                     }
                 </ul>
             </div>
         </div>
