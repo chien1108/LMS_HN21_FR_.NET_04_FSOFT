@@ -69,7 +69,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             {
                 if (user.WhoIs == 2)
                 {
-                    return RedirectToAction("ManagerCategory", "Category", new { area = "AdminFunction" });
+                    return RedirectToAction("Index", "Dashboard", new { area = "AdminFunction" });
                 }
                 else if (user.WhoIs == 1)
                 {

@@ -1,0 +1,551 @@
+﻿@using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
+@using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
+@using Learning_Managerment_SystemMarket_Core.Modules.Enums
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService
+
+@inject ISubCategoryService _subCategoryservice
+@inject ICategoryService _categoryService
+@inject ILanguageService _languageService
+@inject ICourseServices _courseService
+@inject IUserService _userService
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    //Get total user by WhoIs
+    var userAdmin = await _userService.FindAll(x => x.WhoIs == 2);
+    var userInstructor = await _userService.FindAll(x => x.WhoIs == 1);
+    var userStudent = await _userService.FindAll(x => x.WhoIs == 0);
+
+    //Get total course
+    var totalCourse = await _courseService.FindAll();
+    var totalCourseWaitForApproced = await _courseService.FindAll(x => x.Status == StatusCourse.WaitForApproced);
+    var totalCourseBlock = await _courseService.FindAll(x => x.Status == StatusCourse.Block);
+    var totalCourseReject = await _courseService.FindAll(x => x.Status == StatusCourse.Reject);
+
+    //get total language
+    var totalLanguage = await _languageService.FindAll();
+
+    //get total category
+    var totalCategory = await _categoryService.FindAll();
+
+    //get total sub category
+    var totalSubCategory = await _subCategoryservice.FindAll();
+}
+<section class="section">
+    <div class="section-header">
+        <h1>Dashboard</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Home</a></div>
+            <div class="breadcrumb-item"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item">Dashboard</div>
+        </div>
+    </div>
+
+    <div class="section-body">
+
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-success">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Admin</h4>
+                        </div>
+                        <div class="card-body">
+                            @userAdmin.Count()
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-dark">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Instructor</h4>
+                        </div>
+                        <div class="card-body">
+                            @userInstructor.Count()
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-warning">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Student</h4>
+                        </div>
+                        <div class="card-body">
+                            @userStudent.Count()
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Statistics</h4>
+                    </div>
+                    <div class="card-body chart-body">
+                        <canvas id="myChart2" data-earning="[0,0,0,0,0,&quot;144.53&quot;,&quot;66,021.11&quot;,&quot;9.70&quot;,&quot;17.46&quot;,0,&quot;24.25&quot;,0]" data-month="[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;]" data-commission="[0,0,0,0,0,&quot;4.47&quot;,&quot;2,041.89&quot;,&quot;0.30&quot;,&quot;0.54&quot;,0,&quot;0.75&quot;,0]" style="display: block; box-sizing: border-box; height: 494px; width: 989px;" width="989" height="494"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card card-statistic-2">
+
+                    <div class="card-icon shadow-info bg-info">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Course</h4>
+                        </div>
+                        <div class="card-body">
+                            @totalCourse.Count()
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card card-statistic-2">
+                    <div class="card-icon shadow-warning bg-warning">
+                        <i class="far fa-hand-spock"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>waiting For Approval</h4>
+                        </div>
+                        <div class="card-body">
+                            @totalCourseWaitForApproced.Count
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card card-statistic-2">
+
+                    <div class="card-icon shadow-dark bg-dark">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Block</h4>
+                        </div>
+                        <div class="card-body">
+                            @totalCourseBlock.Count()
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="card card-statistic-2">
+
+                    <div class="card-icon shadow-primary bg-primary">
+                        <i class="far fa-trash-alt"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Rejected</h4>
+                        </div>
+                        <div class="card-body">
+                            @totalCourseReject.Count()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card gradient-bottom">
+                    <div class="card-header">
+                        <h4>Top 5 Courses</h4>
+                    </div>
+                    <div class="card-body courses-5" id="top-5-scroll" tabindex="2" style="height: 315px; overflow: hidden; outline: none;">
+                        <ul class="list-unstyled list-unstyled-border">
+
+                            <li class="media">
+                                <img class="mr-3 rounded" width="55" src="https://coursearly.com/cursus/public/upload/image/60d6cdf63914e.jpg" alt="product">
+                                <div class="media-body">
+                                    <div class="float-right">
+                                        <div class="font-weight-600 text-muted text-small">
+                                            3
+                                            Sales
+                                        </div>
+                                    </div>
+                                    <div class="media-title">CSS : The Complete Guide 2021 (Include SASS &amp; GRID)</div>
+                                    <div class="mt-1">
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-primary" data-width="64%" style="width: 64%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $58.20
+                                            </div>
+                                        </div>
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-success" data-width="43%" style="width: 43%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $1.80
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="mr-3 rounded" width="55" src="https://coursearly.com/cursus/public/upload/image/60d6c84251931.jpg" alt="product">
+                                <div class="media-body">
+                                    <div class="float-right">
+                                        <div class="font-weight-600 text-muted text-small">
+                                            3
+                                            Sales
+                                        </div>
+                                    </div>
+                                    <div class="media-title">The Complete Digital Marketing Course : 12 Courses In 1</div>
+                                    <div class="mt-1">
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-primary" data-width="64%" style="width: 64%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $72.75
+                                            </div>
+                                        </div>
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-success" data-width="43%" style="width: 43%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $2.25
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="mr-3 rounded" width="55" src="https://coursearly.com/cursus/public/upload/image/60d6c503be16c.jpg" alt="product">
+                                <div class="media-body">
+                                    <div class="float-right">
+                                        <div class="font-weight-600 text-muted text-small">
+                                            3
+                                            Sales
+                                        </div>
+                                    </div>
+                                    <div class="media-title">The Complete JavaScript Course 2021 : Build Real Project</div>
+                                    <div class="mt-1">
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-primary" data-width="64%" style="width: 64%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $52.38
+                                            </div>
+                                        </div>
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-success" data-width="43%" style="width: 43%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $1.62
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="mr-3 rounded" width="55" src="https://coursearly.com/cursus/public/upload/image/60d6c6f3bce3e.jpg" alt="product">
+                                <div class="media-body">
+                                    <div class="float-right">
+                                        <div class="font-weight-600 text-muted text-small">
+                                            2
+                                            Sales
+                                        </div>
+                                    </div>
+                                    <div class="media-title">Beginning C++ Programming : From Beginner To Beyond</div>
+                                    <div class="mt-1">
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-primary" data-width="64%" style="width: 64%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $19.40
+                                            </div>
+                                        </div>
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-success" data-width="43%" style="width: 43%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $0.60
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="mr-3 rounded" width="55" src="https://coursearly.com/cursus/public/upload/image/60d6cca34e000.jpg" alt="product">
+                                <div class="media-body">
+                                    <div class="float-right">
+                                        <div class="font-weight-600 text-muted text-small">
+                                            2
+                                            Sales
+                                        </div>
+                                    </div>
+                                    <div class="media-title">WordPress For Beginner : Create A Website Step By Step</div>
+                                    <div class="mt-1">
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-primary" data-width="64%" style="width: 64%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $34.92
+                                            </div>
+                                        </div>
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-success" data-width="43%" style="width: 43%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $1.08
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer pt-3 d-flex justify-content-center">
+                        <div class="budget-price justify-content-center">
+                            <div class="budget-price-square bg-primary" data-width="20" style="width: 20px;"></div>
+                            <div class="budget-price-label">Instructor Earning</div>
+                        </div>
+                        <div class="budget-price justify-content-center">
+                            <div class="budget-price-square bg-success" data-width="20" style="width: 20px;"></div>
+                            <div class="budget-price-label">Admin Commission</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card gradient-bottom">
+                    <div class="card-header">
+                        <h4>Top 5 Instructor</h4>
+                    </div>
+                    <div class="card-body courses-5" id="top-4-scroll" tabindex="2" style="height: 315px; overflow: hidden; outline: none;">
+                        <ul class="list-unstyled list-unstyled-border">
+                            <li class="media">
+                                <img class="mr-3 rounded" width="55" src="https://coursearly.com/cursus/public/upload/image/60d6ba317e2cf.jpg" alt="product">
+                                <div class="media-body">
+                                    <div class="float-right">
+                                        <div class="font-weight-600 text-muted text-small">
+                                            12
+                                            Sales
+                                        </div>
+                                    </div>
+                                    <div class="media-title">Jemmy</div>
+                                    <div class="mt-1">
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-primary" data-width="64%" style="width: 64%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $65,903.74
+                                            </div>
+                                        </div>
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-success" data-width="43%" style="width: 43%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $2,038.26
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="mr-3 rounded" width="55" src="https://coursearly.com/cursus/public/upload/image/60d6b809e0cc7.jpg" alt="product">
+                                <div class="media-body">
+                                    <div class="float-right">
+                                        <div class="font-weight-600 text-muted text-small">
+                                            3
+                                            Sales
+                                        </div>
+                                    </div>
+                                    <div class="media-title">Zoena</div>
+                                    <div class="mt-1">
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-primary" data-width="64%" style="width: 64%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $72.75
+                                            </div>
+                                        </div>
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-success" data-width="43%" style="width: 43%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $2.25
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="mr-3 rounded" width="55" src="https://coursearly.com/cursus/public/upload/image/60d6b4a486f0d.jpg" alt="product">
+                                <div class="media-body">
+                                    <div class="float-right">
+                                        <div class="font-weight-600 text-muted text-small">
+                                            3
+                                            Sales
+                                        </div>
+                                    </div>
+                                    <div class="media-title">Jassica William</div>
+                                    <div class="mt-1">
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-primary" data-width="64%" style="width: 64%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $52.38
+                                            </div>
+                                        </div>
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-success" data-width="43%" style="width: 43%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $1.62
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="mr-3 rounded" width="55" src="https://coursearly.com/cursus/public/upload/image/60d6b737531a5.jpg" alt="product">
+                                <div class="media-body">
+                                    <div class="float-right">
+                                        <div class="font-weight-600 text-muted text-small">
+                                            2
+                                            Sales
+                                        </div>
+                                    </div>
+                                    <div class="media-title">Joginder Singh</div>
+                                    <div class="mt-1">
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-primary" data-width="64%" style="width: 64%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $19.40
+                                            </div>
+                                        </div>
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-success" data-width="43%" style="width: 43%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $0.60
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="media">
+                                <img class="mr-3 rounded" width="55" src="https://coursearly.com/cursus/public/upload/image/60d6b9a282037.jpg" alt="product">
+                                <div class="media-body">
+                                    <div class="float-right">
+                                        <div class="font-weight-600 text-muted text-small">
+                                            2
+                                            Sales
+                                        </div>
+                                    </div>
+                                    <div class="media-title">Amritpal</div>
+                                    <div class="mt-1">
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-primary" data-width="64%" style="width: 64%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $34.92
+                                            </div>
+                                        </div>
+                                        <div class="budget-price">
+                                            <div class="budget-price-square bg-success" data-width="43%" style="width: 43%;">
+                                            </div>
+                                            <div class="budget-price-label">
+                                                $1.08
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-footer pt-3 d-flex justify-content-center">
+                        <div class="budget-price justify-content-center">
+                            <div class="budget-price-square bg-primary" data-width="20" style="width: 20px;"></div>
+                            <div class="budget-price-label">Instructor Earning</div>
+                        </div>
+                        <div class="budget-price justify-content-center">
+                            <div class="budget-price-square bg-success" data-width="20" style="width: 20px;"></div>
+                            <div class="budget-price-label">Admin Commission</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-success">
+                        <i class="fa fa-language"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Languages</h4>
+                        </div>
+                        <div class="card-body">
+                            @totalLanguage.Count()
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-light">
+                        <i class="fas fa-list-ul"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Category</h4>
+                        </div>
+                        <div class="card-body">
+                            @totalCategory.Count()
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                    <div class="card-icon bg-info">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Sub Category</h4>
+                        </div>
+                        <div class="card-body">
+                            @totalSubCategory.Count()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
