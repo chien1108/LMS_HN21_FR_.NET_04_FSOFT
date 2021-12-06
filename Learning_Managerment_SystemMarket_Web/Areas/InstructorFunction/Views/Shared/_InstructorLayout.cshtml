@@ -50,10 +50,11 @@
 </head>
 
 <body>
-    @Html.Partial("~/Areas/InstructorFunction/Views/Shared/_Header.cshtml");
-    @Html.Partial("~/Areas/InstructorFunction/Views/Shared/_Nav.cshtml");
+    @Html.Partial("~/Areas/InstructorFunction/Views/Shared/_Header.cshtml")
+    @Html.Partial("~/Areas/InstructorFunction/Views/Shared/_Nav.cshtml")
     <div class="wrapper">
-        @RenderBody();
+        @RenderBody()
+        @Html.Partial("~/Areas/InstructorFunction/Views/Shared/_Footer.cshtml")
     </div>
 
     <script src="~/instructor/public/frontend/js/vertical-responsive-menu.min.js"></script>
