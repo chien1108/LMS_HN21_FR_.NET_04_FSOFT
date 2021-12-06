@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "~/Areas/InstructorFunction/Views/Shared/_InstructorLayout.cshtml";
+}
+
+
+<div class="sa4d25">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="st_title"><i class="uil uil-analysis"></i> Analytics</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-4 col-sm-6">
+                <div class="card card-mini analysis_card">
+                    <div class="card-body">
+                        <h2 class="mb-2">2</h2>
+                        <p>Subscribers</p>
+                        <div class="chartjs-wrapper">
+                            <canvas id="barChart" data-chat=[@ViewBag.Data] data-month='[ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]'></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-lg-4 col-md-5">
+                <div class="top_countries mt-30">
+                    <div class="top_countries_title">
+                        <h2>View Sale of Month</h2>
+                    </div>
+                    <div class="statement_invoice_content">
+                        <form asp-action="Index" method="post">
+                            <input type="number" class="form-control" placeholder="Month" name="month" required min="1" max="12" />
+                            <input type="number" class="form-control" placeholder="Year" name="year" required />
+                            <button type="submit" class="btn btn-success">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-md-12">
+                <div class="card card-default analysis_card p-0" data-scroll-height="450">
+                    <div class="card-header">
+                        <h2>Sales Of The Year</h2>
+                    </div>
+                    <div class="card-body p-5 linechart">
+                        <canvas id="linechart" class="chartjs" data-chat='[@ViewBag.Earning]' data-lable='[ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]'></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*@if (ViewBag.Check == true)
+        {
+            @Html.Partial("~/Areas/InstructorFunction/Views/Analyic/_ListSaleByDayOfMonth.cshtml");
+        }*@
+    </div>
+</div>
+
+@*@if (TempData["Message"] != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@TempData["Message"]");
+            };
+    </script>
+}*@

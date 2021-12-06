@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
 {
-    [Area("Instructor")]
+    [Area("InstructorFunction")]
     public class StatementController : Controller
     {
         private readonly IInsInstructorService _insInstructorService;

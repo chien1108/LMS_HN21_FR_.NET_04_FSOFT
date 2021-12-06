@@ -54,6 +54,24 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             return View();
         }
 
+        public ActionResult ClearDiscountExpire()
+        {
+            var instructor = _userManager.GetUserAsync(User).Result;
+            var result = _courseServices.ClearDiscountExpire(instructor.IdUser);
+
+            if (result.Result.Success == true)
+            {
+                TempData["Message"] = result.Result.Message;
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                TempData["Message"] = result.Result.Message;
+                return RedirectToAction(nameof(Index));
+            }
+
+        }
+
         // GET: CourseController/Create
         public ActionResult Create()
         {

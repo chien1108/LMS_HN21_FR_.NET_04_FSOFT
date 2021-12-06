@@ -342,12 +342,12 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             return map;
         }
 
-        public async Task<ServiceResponse<DisCountCourseVm>> ClearDiscountExpire()
+        public async Task<ServiceResponse<DisCountCourseVm>> ClearDiscountExpire(int id)
         {
-            var discountCourses = await _unitOfWork.SpecialDiscounts.GetAll(expression: x => x.InstructorId == 1);
-            foreach (var item in discountCourses)
+            var discountCourses = await _unitOfWork.SpecialDiscounts.GetAll(expression: x => x.InstructorId == id);
+            foreach(var item in discountCourses)
             {
-                if (item.EndDate < DateTime.Now)
+                if(item.EndDate < DateTime.Now)
                 {
                     _unitOfWork.SpecialDiscounts.Delete(item);
                     if (item.Status == Status.IsActive)
