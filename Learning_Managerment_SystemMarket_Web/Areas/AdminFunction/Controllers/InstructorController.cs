@@ -40,6 +40,14 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
         }
 
         // GET: StudentController/Details/5
+        public ActionResult ViewInfo(int id, int idIns)
+        {
+            ViewBag.IdCourse = id;
+            ViewBag.IdInstructor = idIns;
+            return View();
+        }
+
+        // GET: StudentController/Details/5
         public ActionResult InstructorInfo(int id)
         {
             ViewBag.IdInstructor = id;

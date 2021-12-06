@@ -1,0 +1,251 @@
+﻿@using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
+@using Learning_Managerment_SystemMarket_Core.Modules.Enums
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.CourseContentService
+@using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseRateService
+
+@inject IStudentCourseRateService _studentCourseRateService
+@inject ICourseServices _courseService
+@inject ICategoryService _categoryService
+@inject IUserService _userService
+@inject ISubCategoryService _subCategoryService
+@inject ICourseContentService _courseContentService
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int idCourse = ViewBag.IdCourse;
+    int idInstructor = ViewBag.IdInstructor;
+    var infor = await _courseService.Find(x => x.Id == idCourse);
+    var listCourseRate = await _studentCourseRateService.FindAll();
+}
+
+<section class="section">
+    <div class="section-header">
+        <h1>Courses</h1>
+        <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Home</a></div>
+            <div class="breadcrumb-item"><a href="#">Courses</a></div>
+            <div class="breadcrumb-item"><a href="#">Detail</a></div>
+        </div>
+    </div>
+    <div class="section-body">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+                        <article class="article article-style-c">
+                            <div class="article-header">
+                                <div class="article-image" data-background="https://coursearly.com/cursus/public/upload/image/60d6c503be16c.jpg" style="background-image: url(https://coursearly.com/cursus/public/upload/image/60d6c503be16c.jpg);">
+                                </div>
+                                <div class="article-badge d-flex">
+                                    @if (infor.IsFeatured)
+                                    {
+                                        <div class="article-badge-item bg-danger mr-1">
+                                            <i class="fas fa-fire"></i> Featured
+                                        </div>
+                                    }
+                                    @if (infor.IsBestseller)
+                                    {
+                                        <div class="article-badge-item bg-danger mr-1">
+                                            <i class="fas fa-fire"></i> Bestseller
+                                        </div>
+                                    }
+                                    @if (infor.Status == StatusCourse.Active)
+                                    {
+                                        <div class="article-badge-item bg-dark">
+                                            <i class="fas fa-fire"></i>Active
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            @{
+                                var category = await _categoryService.Find(x => x.Id == infor.CategoryId);
+                                var subCategory = await _subCategoryService.Find(x => x.Id == infor.SubcategoryId);
+                            }
+                            <div class="article-details">
+                                <div class="article-category">
+                                    <a href="#">@category.CategoryName</a>
+                                    <div class="bullet"></div>
+                                    <a href="#">@subCategory.SubCategoryName</a>
+                                </div>
+                                <div class="article-title">
+                                    <h2><a href="#">@infor.Title</a></h2>
+                                </div>
+                                <p>@infor.SubTitile</p>
+
+                                @{
+                                    var userInstructor = await _userService.Find(u => u.IdUser == idInstructor);
+                                }
+                                <div class="article-user">
+                                    <img alt="image" src="https://coursearly.com/cursus/public/upload/image/60d6b4a486f0d.jpg">
+                                    <div class="article-user-details">
+                                        <div class="user-detail-name">
+                                            <a href="#">@userInstructor.FullName</a>
+                                        </div>
+                                        <div class="text-job">@userInstructor.Email</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h4>Extra Details</h4>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled user-details list-unstyled-border list-unstyled-noborder">
+                                    <li class="media">
+
+                                        <div class="media-items">
+                                            <div class="media-item">
+                                                <div class="media-value">2417</div>
+                                                <div class="media-label">Views</div>
+                                            </div>
+                                            <div class="media-item">
+                                                <div class="media-value">-5</div>
+                                                <div class="media-label">Likes</div>
+                                            </div>
+                                            <div class="media-item">
+                                                <div class="media-value">6</div>
+                                                <div class="media-label">Dis-Likes</div>
+                                            </div>
+                                            <div class="media-item">
+                                                <div class="media-value">41</div>
+                                                <div class="media-label">Share</div>
+                                            </div>
+                                            <div class="media-item">
+                                                <div class="media-value">2</div>
+                                                <div class="media-label">Report</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-9">
+
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Courses Content</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Reviews</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="tab-pane fade show active" id="nav-about" role="tabpanel">
+                                    <div class="_htg451">
+                                        <div class="_htg452">
+                                            <h3>Requirements</h3>
+                                            <ul>
+                                                <li><span class="_5f7g11">Have a computer with Internet</span></li>
+                                                <li><span class="_5f7g11">Be ready to learn an insane amount of awesome stuff</span></li>
+                                                <li><span class="_5f7g11">Prepare to build real web apps!</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="_htg452 mt-35">
+                                            <h3>Description</h3>
+                                            <span class="_abc123">@infor.Description</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row">
+
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>Introduction To This Course</h4>
+                                            </div>
+                                            @{
+                                                var courseContent = await _courseContentService.Find(u => u.CourseId == idCourse);
+                                            }
+                                            <div class="card-body">
+                                                <div id="accordion2">
+                                                    <div class="accordion">
+                                                        <div class="accordion-header collapsed" role="button" data-toggle="collapse" data-target="#panel-body-2" aria-expanded="false">
+                                                            <h4>@courseContent.Title</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade " id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-lg-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>Comments</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
+                                                    @for (int i = 0; i < listCourseRate.Count(); i++)
+                                                    {
+                                                        <li class="media">
+                                                            <img alt="image" class="mr-3 rounded-circle" width="70" src="https://coursearly.com/cursus/public/default.png">
+                                                            <div class="media-body">
+                                                                <div class="media-right">
+                                                                    <div class="product-review">
+                                                                        @for (int j = 1; j <= listCourseRate.ElementAt(i).Star; j++)
+                                                                        {
+                                                                            <i class="fas fa-star"></i>
+                                                                        }
+                                                                        @if (listCourseRate.ElementAt(i).Star < 5)
+                                                                        {
+                                                                            @for (int j = 1; j <= 5 - listCourseRate.ElementAt(i).Star; j++)
+                                                                            {
+                                                                                <i class="far fa-star"></i>
+                                                                            }
+                                                                        }
+
+                                                                    </div>
+                                                                </div>
+                                                                @{
+                                                                    var user = await _userService.Find(u => u.IdUser == @listCourseRate.ElementAt(i).StudentId);
+                                                                }
+                                                                <div class="media-title mb-1">
+                                                                    @user.FullName
+                                                                </div>
+                                                                <div class="text-time">
+                                                                    5 months ago
+                                                                </div>
+                                                                <div class="media-description text-muted">
+                                                                    @listCourseRate.ElementAt(i).Messge
+                                                                </div>
+                                                                <div class="media-links">
+                                                                    <a href="https://coursearly.com/cursus/public/admin/review/2/delete" class="text-danger">Trash</a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    }
+                                                    </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

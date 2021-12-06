@@ -85,7 +85,7 @@
                                 <td>@listCourse.ElementAt(i).CreatedDate.ToString("dd MMM yyyy")</td>
 
                                 <td class="d-flex">
-                                    <a class="btn btn-sm btn-outline-info btn-icon m-1">
+                                    <a class="btn btn-sm btn-outline-info btn-icon m-1" asp-area="AdminFunction" asp-controller="Instructor" asp-action="ViewInfo" asp-route-id="@listCourse.ElementAt(i).Id" asp-route-idIns="@listCourse.ElementAt(i).InstructorId">
                                         View
                                     </a>
                                     <form asp-area="AdminFunction" asp-controller="Instructor" asp-action="ChangeBlock" asp-route-id="@listCourse.ElementAt(i).Id" asp-route-idIns="@listCourse.ElementAt(i).InstructorId">
