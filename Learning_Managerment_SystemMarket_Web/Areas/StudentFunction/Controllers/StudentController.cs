@@ -15,6 +15,7 @@ using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Learning_Managerment_SystemMarket_Services.StudentServices.CourseRateService;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controllers
 {
@@ -27,6 +28,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISavedCourseService _savedCourseService;
         private readonly ISubcriptionService _subcriptionService;
+        private readonly ICourseRateService _courseRateService;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private IPasswordHasher<User> _passwordHasher;
@@ -38,6 +40,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             , IMapper mapper
             , IStudentExploreService studentExploreService,
             ISubcriptionService subcriptionService,
+            ICourseRateService courseRateService,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             IPasswordHasher<User> passwordHasher)
@@ -52,6 +55,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             _userManager = userManager;
             _signInManager = signInManager;
             _passwordHasher = passwordHasher;
+            _courseRateService = courseRateService;
         }
 
         /// <summary>
@@ -280,6 +284,25 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         {
             return View();
         }
-
+        [HttpPost]
+        public async Task<IActionResult> StudentRateCourse(CourseRateVM courseRate)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            try
+            {
+                var respon = await _courseRateService.CreateCourseRate(courseRate, user.IdUser);
+                if (respon.Success)
+                {
+                    return RedirectToAction("CourseDetails", new { id = courseRate.CourseId });
+                }
+                else
+                    return BadRequest();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+            
+        }
     }
 }

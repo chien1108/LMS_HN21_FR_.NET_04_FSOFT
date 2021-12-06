@@ -5,11 +5,13 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @inject Learning_Managerment_SystemMarket_Services.StudentServices.OrderService.IOrderService orderService;
+@inject Learning_Managerment_SystemMarket_Services.StudentServices.CourseRateService.ICourseRateService courseRateService;
 @inject ISubcriptionService _subcriptionService;
 @{
     ViewData["Title"] = "CourseDetails";
     Layout = "/Views/Shared/_StudentLayout.cshtml";
     var user = await UserManager.GetUserAsync(User);
+    ViewData["courseId"] = Model.Id;
 }
 
 <div class="_215b01">
@@ -66,9 +68,13 @@
                             </div>
                             <div class="_215b05">
                                 <div class="crse_reviews mr-2">
-                                    <i class="uil uil-star"></i>3.0
+                                    @{ 
+                                        var courseRates = await courseRateService.AvgCourseRate(Model.Id);
+                                        var countStudentRates = await courseRateService.CountStudentRate(Model.Id);
+                                    }
+                                    <i class="uil uil-star"></i>@courseRates
                                 </div>
-                                (1 ratings)
+                                (@countStudentRates ratings)
                             </div>
                             <div class="_215b05">
                                 1 students enrolled
@@ -95,13 +101,16 @@
                                                 Add
                                                 to Cart
                                             </a>
+                                            <button class="btn_buy">Buy Now</button>
                                         }
                                         else
                                         {
-                                            <a id="login" href="#" class="btn btn-danger"
+                                            <button class="btn_buy">Watch Now</button>
+
+                                            @*<a id="login" href="#" class="btn btn-danger"
                                                onclick="return confirm('You have enrolled this course')">
                                                 You have enrolled
-                                            </a>
+                                            </a>*@
                                         }
                                     }
                                     else
@@ -111,9 +120,6 @@
                                             Add to Cart
                                         </a>
                                     }
-                                </li>
-                                <li>
-                                    <button class="btn_buy" onclick="window.location.href = 'https://coursearly.com/cursus/public/cart/1/buy/add';">Buy Now</button>
                                 </li>
                             </ul>
                             <div class="_215fgt1">
@@ -196,6 +202,22 @@
                             <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-selected="false">Reviews</a>
                         </div>
                     </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="_215b17">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="course_tab_content">
+                    <div class="tab-content" id="nav-tabContent">
+                        <partial name="/Areas/StudentFunction/Views/Shared/_CourseDetailAbout.cshtml" />
+                        <partial name="/Areas/StudentFunction/Views/Shared/_CourseDetailContent.cshtml" />
+                        <partial name="/Areas/StudentFunction/Views/Shared/_CourseDetailReview.cshtml" view-data="ViewData"/>
+                    </div>
                 </div>
             </div>
         </div>

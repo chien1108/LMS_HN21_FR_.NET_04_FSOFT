@@ -1,4 +1,5 @@
 ﻿@using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
+@using Learning_Managerment_SystemMarket_Services.StudentServices.CourseRateService;
 @using Learning_Managerment_SystemMarket_Core.Models.Entities;
 @using Learning_Managerment_SystemMarket_Core.Contracts;
 @using Microsoft.AspNetCore.Identity
@@ -13,6 +14,7 @@
 @inject IUnitOfWork unitOfWork;
 @inject IMapper _mapper;
 @inject Learning_Managerment_SystemMarket_Services.StudentServices.OrderService.IOrderService orderService;
+@inject ICourseRateService _courseRate;
 @{
     ViewData["Title"] = "Index";
     ICollection<Course> courseFeature = await studentHomePage.GetFeatureCourse(5);
@@ -48,7 +50,10 @@
                                                 @*<img src="@item.CoverImage.ToString()" alt="">*@
                                                 <div class="course-overlay">
                                                     <div class="crse_reviews">
-                                                        <i class="uil uil-star"></i>3.5
+                                                        @{
+                                                            var courseRates = await _courseRate.AvgCourseRate(item.Id);
+                                                        }
+                                                        <i class="uil uil-star"></i>@courseRates
                                                     </div>
                                                     <span class="play_btn1"><i class="uil uil-play"></i></span>
                                                 </div>
@@ -151,7 +156,10 @@
                                                 @*<img src="@item.CoverImage.ToString()" alt="">*@
                                                 <div class="course-overlay">
                                                     <div class="crse_reviews">
-                                                        <i class="uil uil-star"></i>3.5
+                                                        @{
+                                                            var courseRatess = await _courseRate.AvgCourseRate(item.Id);
+                                                        }
+                                                        <i class="uil uil-star"></i>@courseRatess
                                                     </div>
                                                     <span class="play_btn1"><i class="uil uil-play"></i></span>
                                                 </div>

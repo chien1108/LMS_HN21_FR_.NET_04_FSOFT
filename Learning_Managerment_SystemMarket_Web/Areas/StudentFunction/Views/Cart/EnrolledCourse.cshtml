@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Learning_Managerment_SystemMarket_Core.Models.Entities.Order>
-
+@inject Learning_Managerment_SystemMarket_Services.StudentServices.CourseRateService.ICourseRateService courseRateService;
 @{
     ViewData["Title"] = "EnrolledCourse";
     Layout = "/Views/Shared/_StudentLayout.cshtml";
@@ -38,7 +38,10 @@
                                     }
                                     <div class="course-overlay">
                                         <div class="crse_reviews">
-                                            <i class="uil uil-star"></i>2.5
+                                            @{ 
+                                                var courseRates = await courseRateService.AvgCourseRate(item.CourseId);
+                                            }
+                                            <i class="uil uil-star"></i>@courseRates
                                         </div>
 
                                         <span class="play_btn1"><i class="uil uil-play"></i></span>
