@@ -105,6 +105,14 @@
                                                     {
                                                         <b class="course_active text-danger">Pending</b>
                                                     }
+                                                    else if (item.Status == StatusCourse.Reject)
+                                                    {
+                                                        <b class="course_active text-danger">No Data</b>
+                                                    }
+                                                    else if (item.Status == StatusCourse.Block)
+                                                    {
+                                                        <b class="course_active text-danger">Block</b>
+                                                    }
                                                 </td>
                                                 <td class="text-center d-flex justify-content-center">
                                                     <a href="public/instructor/courses/8/edit" title="Edit" class="gray-s">
