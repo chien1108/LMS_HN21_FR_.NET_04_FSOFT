@@ -14,9 +14,6 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.InstructorRepo
         int CountOrderByInstructorId(int id);
 
         decimal SumOrderByInstructorIdOrderByMonth(int id, int number);
-
-        decimal SumOrderByInstructorIdOrderByDayOfMonth(int id, int day, int month, int year);
-
         
     }
 }

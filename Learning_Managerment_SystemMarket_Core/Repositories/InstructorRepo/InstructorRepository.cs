@@ -17,9 +17,19 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.InstructorRepo
             _context = context;
         }
 
-        
+        public int CountOrderByInstructorId(int id)
+        {
+            var count = _context.Orders.Include(x => x.Course).ThenInclude(x => x.Instructor).Where(x => x.Course.InstructorId == id).Count();
 
-        decimal SumOrderByInstructorIdOrderByDayOfMonth(int id, int day, int month, int year);
+            return count;
+        }
+
+        public int CountStudentSubByInstructorId(int id)
+        {
+            var count = _context.SubScriptions.Where(x => x.InstructorId == id).Count();
+
+            return count;
+        }
 
         /// <summary>
         /// KhanhPC1 GetSubscrierByInstructorId
@@ -36,6 +46,24 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.InstructorRepo
                  .ToListAsync();
             return subScription;
         }
-    
+
+        public decimal SumOrderByInstructorIdOrderByMonth(int id, int number)
+        {
+            var sum = _context.Orders.Include(x => x.Course).ThenInclude(x => x.Instructor).Where(x => x.Course.InstructorId == id && x.CreatedDate.Month == number).Sum(x => x.Price);
+
+            return sum;
+        }
+
+        public decimal SumStudentSubByInstructorIdOrderByMonth(int id, int number)
+        {
+            var sum = 0;
+            var list = _context.SubScriptions.Where(x => x.InstructorId == id && x.CreatedDate.Month == number).ToList();
+            foreach(var item in list)
+            {
+                sum = sum + 1;
+            }
+
+            return sum;
+        }
     }
 }

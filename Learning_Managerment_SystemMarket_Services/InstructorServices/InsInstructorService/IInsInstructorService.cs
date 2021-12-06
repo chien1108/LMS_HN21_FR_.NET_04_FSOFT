@@ -19,8 +19,6 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstr
 
         List<string> SumOrderByInstructorIdOrderByMonth(int id);
 
-        List<string> SumOrderByInstructorIdOrderByDayOfMonth(int id, int month, int year);
-
         int CountStudentSubByInstructorId(int id);
 
         int CountOrderByInstructorId(int id);
