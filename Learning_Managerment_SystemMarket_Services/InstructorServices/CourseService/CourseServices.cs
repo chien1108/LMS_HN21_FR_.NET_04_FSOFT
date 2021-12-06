@@ -75,10 +75,6 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             {
                 var discountCourse = await _unitOfWork.SpecialDiscounts.FindByCondition(x => x.Id == id);
                 var course = await _unitOfWork.Courses.FindByCondition(x => x.Id == discountCourse.CourseId);
-                if (course.DiscountPrice != 0)
-                {
-                    return new ServiceResponse<DisCountCourseVm> { Success = false, Message = "Already have discount" };
-                }
                 if (discountCourse.Status == Status.IsActive)
                 {
                     discountCourse.Status = Status.IsDeleted;
@@ -307,11 +303,6 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
                 var map = _mapper.Map<SpecialDiscount>(entity);
                 map.ModifiedDate = DateTime.Now;
                 map.Course = course;
-
-                if (course.DiscountPrice != 0)
-                {
-                    return new ServiceResponse<DisCountCourseVm> { Success = false, Message = "Already have discount" };
-                }
 
                 _unitOfWork.SpecialDiscounts.Update(map);
                 course.DiscountPrice = course.Price - (course.Price * entity.Percentage) / 100;

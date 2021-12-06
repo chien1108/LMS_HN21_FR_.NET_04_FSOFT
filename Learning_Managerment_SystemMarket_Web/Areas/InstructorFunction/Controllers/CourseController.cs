@@ -369,7 +369,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
 
             if (result.Result.Success == false)
             {
-                ModelState.AddModelError("", result.Result.Message);
+                TempData["Message"] = result.Result.Message;
                 return RedirectToAction(nameof(EditDiscount), new { id = entity.Id });
             }
             else
