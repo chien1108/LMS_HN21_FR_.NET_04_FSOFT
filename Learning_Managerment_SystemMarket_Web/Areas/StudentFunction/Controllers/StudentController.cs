@@ -29,6 +29,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         private readonly ISubcriptionService _subcriptionService;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private IPasswordHasher<User> _passwordHasher;
 
         public StudentController(
             IStudentHomePageService studentHomePageService
@@ -38,7 +39,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             , IStudentExploreService studentExploreService,
             ISubcriptionService subcriptionService,
             UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager,
+            IPasswordHasher<User> passwordHasher)
 
         {
             _studentHomePageService = studentHomePageService;
@@ -49,6 +51,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             _subcriptionService = subcriptionService;
             _userManager = userManager;
             _signInManager = signInManager;
+            _passwordHasher = passwordHasher;
         }
 
         /// <summary>
@@ -227,6 +230,55 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
             var courses = await _studentHomePageService.FindAllCourse(c => c.CategoryId == id);
             var model = _mapper.Map<ICollection<CardCourseVM>>(courses);
             return View(model);
+        }
+
+        public async Task<IActionResult> Update(int id)
+        {
+            User user = await _userManager.FindByIdAsync(id.ToString());
+            var model = _mapper.Map<UpdateVM>(user);
+            if (user != null)
+                return View(model);
+            else
+                return RedirectToAction("Index");
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> Update(string id, string email, string password, string fullname)
+        {
+            User user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                if (!string.IsNullOrEmpty(email))
+                    user.Email = email;
+                else
+                    ModelState.AddModelError("", "Email cannot be empty");
+
+                if (!string.IsNullOrEmpty(password))
+                    user.PasswordHash = _passwordHasher.HashPassword(user, password);
+                else
+                    ModelState.AddModelError("", "Password cannot be empty");
+                if (!string.IsNullOrEmpty(fullname))
+                    user.FullName = fullname;
+                else
+                    ModelState.AddModelError("", "Fullname cannot be empty");
+
+                if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+                {
+                    IdentityResult result = await _userManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                        return RedirectToAction("Index");
+                    else
+                        return RedirectToAction("Error");
+                }
+            }
+            else
+                ModelState.AddModelError("", "User Not Found");
+            return View(user);
+        }
+
+        public IActionResult Error()
+        {
+            return View();
         }
 
     }
