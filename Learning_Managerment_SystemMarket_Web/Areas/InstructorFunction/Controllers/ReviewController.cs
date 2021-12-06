@@ -1,16 +1,20 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseRateService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService;
+using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseRateViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Controllers
 {
     [Area("InstructorFunction")]
+    [Authorize]
     public class ReviewController : Controller
     {
         private readonly IInstructorCourseRateService _instructorCourseRateService;
@@ -26,22 +30,23 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
 
         public async Task<IActionResult> Index()
         {
-            //var user = await _userManager.GetUserAsync(User);
-            //var instructorId = user.IdUser;
+            var user = await _userManager.GetUserAsync(User);
+            var instructorId = user.IdUser;
             int avarageRate = 0;
+
             int count = 0;
             int vote1 = 0;
             int vote2 = 0;
             int vote3 = 0;
             int vote4 = 0;
             int vote5 = 0;
-            var listCourse = await _courseServices.GetAllCourses(3);
+            var listCourse = await _courseServices.GetAllCourses(instructorId);
 
             var courseRates = new ArrayList();
-
+            var courseRate = new List<CourseRateVm>();
             foreach (var item in listCourse)
             {
-                var courseRate = await _instructorCourseRateService.GetCourseRates(expression: c => c.CourseId == item.Id, includes: new List<string> { "Student", "Course" });
+                courseRate = (List<CourseRateVm>)await _instructorCourseRateService.GetCourseRates(expression: c => c.CourseId == item.Id, includes: new List<string> { "Student", "Course" });
 
                 foreach (var rate in courseRate)
                 {
@@ -71,12 +76,23 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
                 }
                 courseRates.Add(courseRate);
             }
+            if (count > 0)
+            {
+                ViewData["Vote1"] = Math.Round(((double)vote1 / count) * 100);
+                ViewData["Vote2"] = Math.Round(((double)vote2 / count) * 100);
+                ViewData["Vote3"] = Math.Round(((double)vote3 / count) * 100);
+                ViewData["Vote4"] = Math.Round(((double)vote4 / count) * 100);
+                ViewData["Vote5"] = Math.Round(((double)vote5 / count) * 100);
+            }
+            else
+            {
+                ViewData["Vote1"] = 0;
+                ViewData["Vote2"] = 0;
+                ViewData["Vote3"] = 0;
+                ViewData["Vote4"] = 0;
+                ViewData["Vote5"] = 0;
+            }
 
-            ViewData["Vote1"] = Math.Round(((double)vote1 / count) * 100);
-            ViewData["Vote2"] = Math.Round(((double)vote2 / count) * 100);
-            ViewData["Vote3"] = Math.Round(((double)vote3 / count) * 100);
-            ViewData["Vote4"] = Math.Round(((double)vote4 / count) * 100);
-            ViewData["Vote5"] = Math.Round(((double)vote5 / count) * 100);
 
             ViewData["AvarageRate"] = (double)avarageRate / count;
 

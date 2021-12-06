@@ -1,4 +1,6 @@
-﻿var extension = "";
+﻿const { debug } = require("console");
+
+var extension = "";
 var file = "";
 var LectureData = [];
 var CourseContent = [];
@@ -171,7 +173,9 @@ $(document).ready(function () {
                 data: model,
                 success: function (data) {
                     if (data.code) {
-                        toastr.success("Create Course Success")
+                        toastr.success("Create Course Success");
+                        debugger;
+                        setTimeout(Redirect(), 5000);
                     }
                     else {
                         toastr.warning(data.message)
@@ -187,6 +191,11 @@ $(document).ready(function () {
             toastr.warning("Please add at least one Course Content");
         }
     });
+
+    //Redirect to Course Index Action
+    function Redirect() {
+        window.location = "https://localhost:44371/InstructorFunction/Course/Index";
+    }
 
     //config toastr
     $(function () {

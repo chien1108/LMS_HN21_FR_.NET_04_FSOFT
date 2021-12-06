@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Controllers
 {
     [Area("InstructorFunction")]
+    [Authorize]
     public class CourseController : Controller
     {
         private static List<CreateCourseContentVm> createCourseContentVms = new List<CreateCourseContentVm>();
@@ -53,9 +54,29 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             return View();
         }
 
+        public ActionResult ClearDiscountExpire()
+        {
+            var instructor = _userManager.GetUserAsync(User).Result;
+            var result = _courseServices.ClearDiscountExpire(instructor.IdUser);
+
+            if (result.Result.Success == true)
+            {
+                TempData["Message"] = result.Result.Message;
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                TempData["Message"] = result.Result.Message;
+                return RedirectToAction(nameof(Index));
+            }
+
+        }
+
         // GET: CourseController/Create
         public ActionResult Create()
         {
+            createCourseContentVms.Clear();
+            createLectureVms.Clear();
             return View();
         }
 
@@ -95,14 +116,22 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
         [HttpGet]
         public async Task<ActionResult> CreateCourse(CreateCourseVm model)
         {
-            //var user = await _userManager.GetUserAsync(User);
-            //var instructorId = user.IdUser;
-            var instructorId = 3;
+            var user = await _userManager.GetUserAsync(User);
+            var instructorId = user.IdUser;
+            //var instructorId = 3;
+            model.CoverImage = _picture;
+            
             var responseResult = new ResponseResult
             {
                 Code = false,
                 Message = "Please add at least one Course Content"
             };
+            if (_picture is null)
+            {
+                responseResult.Message = "Please check Cover Image";
+                return Json(responseResult);
+            }
+
             bool checkIsExist = await _courseServices.IsExistsCourseTitle(model.Title);
             if (checkIsExist)
             {

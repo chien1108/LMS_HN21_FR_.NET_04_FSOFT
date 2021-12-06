@@ -29,11 +29,11 @@
                         <h1>Jump Into Course Creation</h1>
                     </div>
                     <div class="card_dash_right1">
-                        <button class="create_btn_dash" onclick="window.location.href = 'public/instructor/courses/create';">
+                        <a class="upload_btn" asp-action="Create">
                             Create
                             Your
                             Course
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -105,9 +105,17 @@
                                                     {
                                                         <b class="course_active text-danger">Pending</b>
                                                     }
+                                                    else if (item.Status == StatusCourse.Reject)
+                                                    {
+                                                        <b class="course_active text-danger">No Data</b>
+                                                    }
+                                                    else if (item.Status == StatusCourse.Block)
+                                                    {
+                                                        <b class="course_active text-danger">Block</b>
+                                                    }
                                                 </td>
                                                 <td class="text-center d-flex justify-content-center">
-                                                    <a href="public/instructor/courses/8/edit" title="Edit" class="gray-s">
+                                                    <a href="#" title="Edit" class="gray-s">
                                                         <i class="uil uil-edit-alt"></i>
                                                     </a>
                                                     @if (item.Status == StatusCourse.Active)
@@ -174,7 +182,7 @@
                                                     }
                                                 </td>
                                                 <td class="text-center d-flex justify-content-center">
-                                                    <a href="public/instructor/courses/10/edit" title="Edit" class="gray-s">
+                                                    <a href="#" title="Edit" class="gray-s">
                                                         <i class="uil uil-edit-alt"></i>
                                                     </a>
                                                     <a asp-action="ChangeStatusToPending" asp-route-id="@item.Id" title="Give For Review" class="gray-s">
@@ -216,13 +224,22 @@
                                                 <td>@item.Title</td>
                                                 <td class="text-center"><a href="#">View</a></td>
                                                 <td class="text-center"><span class="text-primary">@item.CategoryName</span></td>
-                                                <td class="text-center">@item.Price</td>
+                                                <td class="text-center">
+                                                    @if (item.DiscountPrice == 0)
+                                                    {
+                                                        <text>@item.Price</text>
+                                                    }
+                                                    else
+                                                    {
+                                                        <text>@item.DiscountPrice</text>
+                                                    }
+                                                </td>
                                                 <td class="text-center">@item.ModifiedDate.ToString("dd MMMM yyyy | HH:mm")</td>
                                                 <td class="text-center ">
                                                     <b class="course_active text-danger">Pending</b>
                                                 </td>
                                                 <td class="text-center d-flex justify-content-center">
-                                                    <a href="public/instructor/courses/10/edit" title="Edit" class="gray-s">
+                                                    <a href="#" title="Edit" class="gray-s">
                                                         <i class="uil uil-edit-alt"></i>
                                                     </a>
                                                     <a asp-action="ChangeStatusToDraft" asp-route-id="@item.Id" title="Back To Draft" class="gray-s">
@@ -284,7 +301,7 @@
                                                                     <div class="ui search focus mt-20 lbel25">
                                                                         <label>Start Date</label>
                                                                         <div class="ui left icon input swdh19">
-                                                                            <input class="prompt srch_explore datepicker-here" type="date" asp-for="StartDate" placeholder="dd/mm/yyyy" required min="@DateTime.Now" onchange="$('#enddate').attr({ 'min': this.value, });">
+                                                                            <input class="prompt srch_explore datepicker-here" type="date" asp-for="StartDate" placeholder="dd/mm/yyyy" required min="@DateTime.Now.ToString("yyyy-MM-dd")" onchange="$('#enddate').attr({ 'min': this.value, });">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -344,9 +361,12 @@
                                                     }
                                                 </td>
                                                 <td class="text-center d-flex justify-content-center">
-                                                    <a asp-action="EditDiscount" asp-route-id="@item.Id" title="Edit" class="gray-s">
-                                                        <i class="uil uil-edit-alt"></i>
-                                                    </a>
+                                                    @if (item.Status == Status.IsDeleted)
+                                                    {
+                                                        <a asp-action="EditDiscount" asp-route-id="@item.Id" title="Edit" class="gray-s">
+                                                            <i class="uil uil-edit-alt"></i>
+                                                        </a>
+                                                    }
                                                     <a asp-action="ChangeStatus" asp-route-id="@item.Id" title="Change Status" class="gray-s">
                                                         <i class="uil uil-exchange"></i>
                                                     </a>
@@ -365,7 +385,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <a class="btn btn-primary" asp-action="ClearDiscountExpire">Clear Discount</a>
+                            <a class="btn btn-primary" asp-action="ClearDiscountExpire">Clear Discount Expire</a>
                         </div>
                         <div class="tab-pane fade" id="pills-promotions" role="tabpanel" aria-labelledby="pills-promotions-tab">
                             <div class="promotion_tab mb-10">

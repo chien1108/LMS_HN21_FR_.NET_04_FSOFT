@@ -1,14 +1,15 @@
 ﻿@using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService
 @using Learning_Managerment_SystemMarket_Core.Modules.Enums
 @using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices
-
+@using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
 
 @inject IInstructorOrderService _instructorOrderService
+@inject ICourseServices _courseService
 @inject ICategoryService _categoryService
 @{
     int id = ViewBag.IdInstructor;
 
-    var listCourse = await _instructorOrderService.FindAll(x => x.Course.InstructorId == id, null, new List<string>() { "Course" });
+    var listCourse = await _courseService.FindAll(x => x.InstructorId == id);
 
 }
 
@@ -65,22 +66,31 @@
                             <tr role="row">
                                 <td class="sorting_1">@(i+1)</td>
                                 <td>
-                                    @listCourse.ElementAt(i).Course.Title
+                                    @listCourse.ElementAt(i).Title
+                                    @if (listCourse.ElementAt(i).IsBestseller)
+                                    {
+                                        <span class="badge badge-secondary m-1">Bestseller</span>
+                                    }
+                                    @if (listCourse.ElementAt(i).IsFeatured)
+                                    {
+                                        <span class="badge badge-dark m-1">Featured</span>
+                                    }
                                 </td>
                                 @{
-                                    var category = await _categoryService.Find(x => x.Id == listCourse.ElementAt(i).Course.CategoryId);
-                                    }
+                                    var category = await _categoryService.Find(x => x.Id == listCourse.ElementAt(i).CategoryId);
+                                }
                                 <td>@category.CategoryName</td>
-                                <td>@listCourse.ElementAt(i).Course.Price</td>
+                                <td>@listCourse.ElementAt(i).Price</td>
                                 <td class="text-center text-primary">@listCourse.ElementAt(i).Status</td>
                                 <td>@listCourse.ElementAt(i).CreatedDate.ToString("dd MMM yyyy")</td>
+
                                 <td class="d-flex">
-                                    <a class="btn btn-sm btn-outline-info btn-icon m-1" >
+                                    <a class="btn btn-sm btn-outline-info btn-icon m-1" asp-area="AdminFunction" asp-controller="Instructor" asp-action="ViewInfo" asp-route-id="@listCourse.ElementAt(i).Id" asp-route-idIns="@listCourse.ElementAt(i).InstructorId">
                                         View
                                     </a>
-                                    <form action="">
+                                    <form asp-area="AdminFunction" asp-controller="Instructor" asp-action="ChangeBlock" asp-route-id="@listCourse.ElementAt(i).Id" asp-route-idIns="@listCourse.ElementAt(i).InstructorId">
                                         <button type="button" class="btn btn-sm btn-outline-danger btn-icon m-1" onclick="confirm('Are you sure you want to do this?') ? this.parentElement.submit() : ''">
-                                            @if (@listCourse.ElementAt(i).Status == StatusOrder.Active)
+                                            @if (@listCourse.ElementAt(i).Status == StatusCourse.Active)
                                             {
                                                 <span class="ul-btn__icon">
                                                     Block
@@ -95,18 +105,36 @@
                                         </button>
                                     </form>
 
-                                    <form action="">
+                                    <form asp-area="AdminFunction" asp-controller="Instructor" asp-action="ChangeBestSeller" asp-route-id="@listCourse.ElementAt(i).Id" asp-route-idIns="@listCourse.ElementAt(i).InstructorId">
                                         <button type="button" class="btn btn-sm btn-outline-secondary btn-icon m-1" onclick="confirm('Are you sure you want to do this?') ? this.parentElement.submit() : ''">
-                                            <span class="ul-btn__icon">
-                                                Bestseller
-                                            </span>
+                                            @if (@listCourse.ElementAt(i).IsBestseller)
+                                            {
+                                                <span class="ul-btn__icon">
+                                                    Remove BestSeller
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="ul-btn__icon">
+                                                    BestSeller
+                                                </span>
+                                            }
                                         </button>
                                     </form>
-                                    <form action="">
+                                    <form asp-area="AdminFunction" asp-controller="Instructor" asp-action="ChangeFeatured" asp-route-id="@listCourse.ElementAt(i).Id" asp-route-idIns="@listCourse.ElementAt(i).InstructorId">
                                         <button type="button" class="btn btn-sm btn-outline-dark btn-icon m-1" onclick="confirm('Are you sure you want to do this?') ? this.parentElement.submit() : ''">
-                                            <span class="ul-btn__icon">
-                                                Remove Featured
-                                            </span>
+                                            @if (@listCourse.ElementAt(i).IsFeatured)
+                                            {
+                                                <span class="ul-btn__icon">
+                                                    Remove Feature
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="ul-btn__icon">
+                                                    Feature
+                                                </span>
+                                            }
                                         </button>
                                     </form>
                                 </td>

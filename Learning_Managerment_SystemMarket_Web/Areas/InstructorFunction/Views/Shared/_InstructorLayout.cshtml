@@ -50,10 +50,11 @@
 </head>
 
 <body>
-    @Html.Partial("~/Areas/InstructorFunction/Views/Shared/_Header.cshtml");
-    @Html.Partial("~/Areas/InstructorFunction/Views/Shared/_Nav.cshtml");
+    @Html.Partial("~/Areas/InstructorFunction/Views/Shared/_Header.cshtml")
+    @Html.Partial("~/Areas/InstructorFunction/Views/Shared/_Nav.cshtml")
     <div class="wrapper">
-        @RenderBody();
+        @RenderBody()
+        @Html.Partial("~/Areas/InstructorFunction/Views/Shared/_Footer.cshtml")
     </div>
 
     <script src="~/instructor/public/frontend/js/vertical-responsive-menu.min.js"></script>
@@ -68,6 +69,9 @@
     <script src="~/instructor/public/frontend/js/night-mode.js"></script>
     <script src="~/instructor/public/frontend/vendor/snackbar/snackbar.min.js"></script>
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+
+    <script src="~/instructor/public/frontend/js/Chart.min.js"></script>
+    <script src="~/instructor/public/frontend/js/chart.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

@@ -20,6 +20,20 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstr
             _mapper = mapper;
         }
 
+        public int CountOrderByInstructorId(int id)
+        {
+            var count = _unitOfWork.Instructors.CountOrderByInstructorId(id);
+
+            return count;
+        }
+
+        public int CountStudentSubByInstructorId(int id)
+        {
+            var count = _unitOfWork.Instructors.CountStudentSubByInstructorId(id);
+
+            return count;
+        }
+
         public async Task<List<OrderVM>> GetAllOrders(int id)
         {
             //var instructor = await _unitOfWork.Instructors.FindByCondition(x => x.Id == id);
@@ -68,6 +82,45 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstr
             var map = _mapper.Map<List<OrderVM>>(orders);
 
             return map;
+        }
+
+        public List<string> SumOrderByInstructorIdOrderByDayOfMonth(int id, int month, int year)
+        {
+            var list = new List<string>();
+
+            for(int i = 1; i <= 31; i++)
+            {
+                var sum = _unitOfWork.Instructors.SumOrderByInstructorIdOrderByDayOfMonth(id, i, month, year);
+                list.Add(sum.ToString());
+            }
+
+            return list;
+        }
+
+        public List<string> SumOrderByInstructorIdOrderByMonth(int id)
+        {
+            var list = new List<string>();
+
+            for (int i = 1; i <= 12; i++)
+            {
+                var sum = _unitOfWork.Instructors.SumOrderByInstructorIdOrderByMonth(id, i);
+                list.Add(sum.ToString());
+            }
+
+            return list;
+        }
+
+        public List<string> SumStudentSubByInstructorIdOrderByMonth(int id)
+        {
+            var list = new List<string>();
+
+            for(int i = 1; i<=12; i++)
+            {
+                var sum = _unitOfWork.Instructors.SumStudentSubByInstructorIdOrderByMonth(id, i);
+                list.Add(sum.ToString());
+            }
+
+            return list;
         }
     }
 }

@@ -17,13 +17,19 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.InstructorRepo
             _context = context;
         }
 
+        
+
+        decimal SumOrderByInstructorIdOrderByDayOfMonth(int id, int day, int month, int year);
+
         /// <summary>
         /// KhanhPC1 GetSubscrierByInstructorId
         /// </summary>
         /// <param name="instructorId"></param>
         /// <returns></returns>
-          public async Task<ICollection<SubScription>> GetSubcriptionByInstructorId(int instructorId)
+        public async Task<ICollection<SubScription>> GetSubcriptionByInstructorId(int instructorId)
         {
+            
+
             var subScription = await _context.SubScriptions
                  .Include(x => x.Instructor)
                  .Where(x => x.InstructorId == instructorId)

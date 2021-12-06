@@ -11,6 +11,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
     {
         public ICollection<CardCourseVM> Courses { get; set; }
         public string SearchString { get; set; }
+        public ICollection<CardInstructorVM> Instructors { get; set; }
     }
     
 }

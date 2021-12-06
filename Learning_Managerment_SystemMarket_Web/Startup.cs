@@ -26,6 +26,7 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.CourseContentService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
@@ -38,6 +39,7 @@ using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseServic
 using Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstructorService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.SendEmailService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.CartService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.InstructorService;
@@ -112,6 +114,8 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IInstructorService, InstructorService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddTransient<ICourseServices, CourseServices>();
+            services.AddTransient<ICourseContentService, CourseContentService>();
+            services.AddTransient<IStudentCourseRateService, StudentCourseRateService>();
             services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();
             services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
             services.AddTransient<IInstructorSubCategoryService, InstructorSubCategoryService>();
@@ -127,6 +131,8 @@ namespace Learning_Managerment_SystemMarket_Web
 
             services.AddScoped<IStudentOrderService, StudentOrderService>();
             services.AddScoped<IStudentInstructorService, StudentInstructorService>();
+
+            services.AddSingleton<IEmailSender, EmailSender>();
 
             //Config for Dependence Service
 

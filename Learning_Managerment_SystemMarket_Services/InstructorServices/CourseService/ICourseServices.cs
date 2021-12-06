@@ -1,9 +1,13 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Models;
+using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseContentViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.LectureViewModel;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.ResponseResult;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
@@ -31,12 +35,25 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
         Task<ServiceResponse<DisCountCourseVm>> DeleteDiscount(int id);
         Task<ServiceResponse<DisCountCourseVm>> CreateDiscount(DisCountCourseVm entity);
         Task<ServiceResponse<DisCountCourseVm>> UpdateDiscount(DisCountCourseVm entity);
-        Task<ServiceResponse<DisCountCourseVm>> ClearDiscountExpire();
+        Task<ServiceResponse<DisCountCourseVm>> ClearDiscountExpire(int id);
 
         Task<DisCountCourseVm> GetDiscountById(int id);
         Task<CourseVm> GetCourseById(int id);
 
         Task<IList<CourseVm>> GetAllCourseWaitApprove();
+        Task<bool> IsExisted(Expression<Func<Course, bool>> expression = null);
+        Task<Course> Find(Expression<Func<Course, bool>> expression = null,
+                           List<string> includes = null);
+        Task<IList<Course>> FindAll(Expression<Func<Course, bool>> expression = null,
+                             Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null,
+                             List<string> includes = null);
+        Task<ServiceResponse<Course>> Update(CourseVm updateCourse);
+
+        Task<ServiceResponse<Course>> Update(Course updateCourse);
+        Task<bool> ChangeToActive(int id);
+        Task<bool> ChangeToReject(int id);
+        Task<IList<CourseVm>> GetAllCourseReject();
+        Task<bool> SaveChange();
 
     }
 }

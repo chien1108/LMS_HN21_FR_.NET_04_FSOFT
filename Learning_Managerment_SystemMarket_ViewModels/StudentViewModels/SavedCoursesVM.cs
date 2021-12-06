@@ -11,7 +11,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
         public int StudentId { get; set; }
         public int CourseId { get; set; }
 
-        public CourseDetailVM Student { get; set; }
-        public StudentHomePageVM Course { get; set; }
+        public CardCourseVM CourseVM { get; set; }
+        public StudentHomePageVM Student { get; set; }
     }
 }

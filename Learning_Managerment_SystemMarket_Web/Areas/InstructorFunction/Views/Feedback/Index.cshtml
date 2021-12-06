@@ -1,0 +1,40 @@
+﻿<div class="sa4d25">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="st_title"><i class="uil uil-comment-info-alt"></i> Send Feedback</h2>
+                <form asp-action="Index" method="post" enctype="multipart/form-data">
+                    <div class="row mt-5">
+                        <div class="col-lg-6 col-md-8">
+                            <div class="ui search focus mt-30">
+                                <div class="ui left icon input swdh11 swdh19">
+                                    <input class="prompt srch_explore" type="email" name="from" required="" maxlength="64" placeholder="Email address">
+                                    <i class="uil uil-envelope icon icon2"></i>
+
+                                </div>
+                            </div>
+                            <div class="ui search focus mt-30">
+                                <div class="ui form swdh30">
+                                    <div class="field">
+                                        <textarea rows="6" name="body" placeholder="Describe your issue or share your ideas" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="save_btn" type="submit">Send Feedback</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@TempData["Message"]");
+            };
+    </script>
+}
+

@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "~/Areas/InstructorFunction/Views/Shared/_InstructorLayout.cshtml";
+}
+@using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
+@using Microsoft.AspNetCore.Identity
+@using Learning_Managerment_SystemMarket_Core.Models.Entities
+@inject ICourseServices coursesService
+@inject UserManager<User> userManager
+@{
+    var instructor = await userManager.GetUserAsync(User);
+    var courses = await coursesService.GetAllCourses(instructor.IdUser);
+}
+
+
+<div class="sa4d25">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="st_title"><i class="uil uil-analysis"></i> Analytics</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-4 col-sm-6">
+                <div class="card card-mini analysis_card">
+                    <div class="card-body">
+                        <h2 class="mb-2">@ViewBag.Count</h2>
+                        <p>Subscribers</p>
+                        <div class="chartjs-wrapper">
+                            <canvas id="barChart" data-chat=[@ViewBag.Data] data-month='[ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]'></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-md-12">
+                <div class="card card-default analysis_card p-0" data-scroll-height="450">
+                    <div class="card-header">
+                        <h2>Sales Of The Year</h2>
+                    </div>
+                    <div class="card-body p-5 linechart">
+                        <canvas id="linechart" class="chartjs" data-chat='[@ViewBag.Earning]' data-lable='[ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]'></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="table-responsive mt-30">
+                    <table class="table ucp-table">
+                        <thead class="thead-s">
+                            <tr>
+                                <th class="cell-ta" scope="col">Item No.</th>
+                                <th class="cell-ta" scope="col">Title</th>
+                                <th class="cell-ta" scope="col">Purchases</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in courses)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Title</td>
+                                    <td>@item.Sales</td>                                    
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

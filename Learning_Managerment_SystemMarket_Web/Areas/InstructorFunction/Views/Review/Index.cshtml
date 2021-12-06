@@ -3,11 +3,16 @@
     Layout = "~/Areas/InstructorFunction/Views/Shared/_InstructorLayout.cshtml";
     double averageRate = (double)ViewData["AvarageRate"];
 
-    int Vote1 = Convert.ToInt32(ViewData["Vote1"]);
-    int Vote3 = Convert.ToInt32(ViewData["Vote3"]);
-    int Vote2 = Convert.ToInt32(ViewData["Vote2"]);
-    int Vote4 = Convert.ToInt32(ViewData["Vote4"]);
-    int Vote5 = 100 - Vote1 - Vote2 - Vote3 - Vote4;
+    int Vote1 = (int)ViewData["Vote1"];
+    int Vote2 = (int)ViewData["Vote2"];
+    int Vote3 = (int)ViewData["Vote3"];
+    int Vote4 = (int)ViewData["Vote4"];
+    int Vote5 = Vote5 = (int)ViewData["Vote5"];
+    if (averageRate > 0)
+    {
+        Vote5 = 100 - Vote1 - Vote2 - Vote3 - Vote4;
+
+    }
 }
 <div class="container-fluid">
     <div class="row">
@@ -23,8 +28,15 @@
                         <div class="reviews_left">
                             <h3>All Student Feedback</h3>
                             <div class="total_rating">
-                                <div class="_rate001">@averageRate</div>
-                                
+                                @if (averageRate > 0)
+                                {
+                                    <div class="_rate001">@averageRate</div>
+                                }
+                                else
+                                {
+                                    <div class="_rate001">No result</div>
+                                }
+
                                 <div class="rating-box">
                                     @for (int i = 0; i < Math.Round(averageRate); i++)
                                     {

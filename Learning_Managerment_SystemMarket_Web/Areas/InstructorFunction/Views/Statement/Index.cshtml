@@ -1,6 +1,6 @@
 ﻿@*@model List<Learning_Managerment_SystemMarket_ViewModels.Instructor.InstructorViewModel.OrderVM>*@
 @{
-    Layout = "~/Areas/Instructor/Views/Shared/_InstructorLayout.cshtml";
+    Layout = "~/Areas/InstructorFunction/Views/Shared/_InstructorLayout.cshtml";
 }
 @using Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstructorService
 @using Microsoft.AspNetCore.Identity
@@ -106,7 +106,7 @@
                                     <td>@item.CourseName</td>
                                     <td>@item.Price</td>
                                     <td>-$0</td>
-                                    <td><a asp-action="Details" asp-route-id="@item.Id">View</a></td>
+                                    <td><a asp-action="Details" asp-route-id="@item.Id" target="_blank">View</a></td>
                                 </tr>
                             }
                         </tbody>
@@ -115,7 +115,7 @@
             </div>
             @if (ViewBag.Check == true)
             {
-                @Html.Partial("~/Areas/Instructor/Views/Statement/_ListOrdersSearch.cshtml");
+                @Html.Partial("~/Areas/InstructorFunction/Views/Statement/_ListOrdersSearch.cshtml");
             }
         </div>
     </div>
