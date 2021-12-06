@@ -416,7 +416,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             }
             catch (Exception ex)
             {
-                return new ServiceResponse<Course> { Success = true, Message = ex.Message };
+                return new ServiceResponse<Course> { Success = false, Message = ex.Message };
             }
         }
         public async Task<bool> SaveChange()
@@ -477,6 +477,31 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
         public async Task<bool> IsExistsCourseTitle(string title)
         {
             return await _unitOfWork.Courses.IsExists(x => x.Title == title);
+        }
+
+        public async Task<ServiceResponse<Course>> Update(Course updateCourse)
+        {
+            try
+            {
+                var studentFromDb = await Find(x => x.Id == updateCourse.Id);
+                if (studentFromDb != null)
+                {
+                    _unitOfWork.Courses.Update(studentFromDb);
+                    if (!await SaveChange())
+                    {
+                        return new ServiceResponse<Course> { Success = false, Message = "Something wrongs went update new Course" };
+                    }
+                    return new ServiceResponse<Course> { Success = true, Message = "Update Course Success" };
+                }
+                else
+                {
+                    return new ServiceResponse<Course> { Success = false, Message = "Not Found Course" };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ServiceResponse<Course> { Success = false, Message = ex.Message };
+            }
         }
     }
 }
