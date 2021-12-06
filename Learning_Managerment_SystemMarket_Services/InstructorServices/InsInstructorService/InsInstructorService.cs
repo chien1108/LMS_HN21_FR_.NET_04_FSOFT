@@ -20,6 +20,20 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstr
             _mapper = mapper;
         }
 
+        public int CountOrderByInstructorId(int id)
+        {
+            var count = _unitOfWork.Instructors.CountOrderByInstructorId(id);
+
+            return count;
+        }
+
+        public int CountStudentSubByInstructorId(int id)
+        {
+            var count = _unitOfWork.Instructors.CountStudentSubByInstructorId(id);
+
+            return count;
+        }
+
         public async Task<List<OrderVM>> GetAllOrders(int id)
         {
             //var instructor = await _unitOfWork.Instructors.FindByCondition(x => x.Id == id);

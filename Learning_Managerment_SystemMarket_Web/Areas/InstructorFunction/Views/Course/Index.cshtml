@@ -115,7 +115,7 @@
                                                     }
                                                 </td>
                                                 <td class="text-center d-flex justify-content-center">
-                                                    <a href="public/instructor/courses/8/edit" title="Edit" class="gray-s">
+                                                    <a href="#" title="Edit" class="gray-s">
                                                         <i class="uil uil-edit-alt"></i>
                                                     </a>
                                                     @if (item.Status == StatusCourse.Active)
@@ -182,7 +182,7 @@
                                                     }
                                                 </td>
                                                 <td class="text-center d-flex justify-content-center">
-                                                    <a href="public/instructor/courses/10/edit" title="Edit" class="gray-s">
+                                                    <a href="#" title="Edit" class="gray-s">
                                                         <i class="uil uil-edit-alt"></i>
                                                     </a>
                                                     <a asp-action="ChangeStatusToPending" asp-route-id="@item.Id" title="Give For Review" class="gray-s">
@@ -239,7 +239,7 @@
                                                     <b class="course_active text-danger">Pending</b>
                                                 </td>
                                                 <td class="text-center d-flex justify-content-center">
-                                                    <a href="public/instructor/courses/10/edit" title="Edit" class="gray-s">
+                                                    <a href="#" title="Edit" class="gray-s">
                                                         <i class="uil uil-edit-alt"></i>
                                                     </a>
                                                     <a asp-action="ChangeStatusToDraft" asp-route-id="@item.Id" title="Back To Draft" class="gray-s">
@@ -361,9 +361,12 @@
                                                     }
                                                 </td>
                                                 <td class="text-center d-flex justify-content-center">
-                                                    <a asp-action="EditDiscount" asp-route-id="@item.Id" title="Edit" class="gray-s">
-                                                        <i class="uil uil-edit-alt"></i>
-                                                    </a>
+                                                    @if (item.Status == Status.IsDeleted)
+                                                    {
+                                                        <a asp-action="EditDiscount" asp-route-id="@item.Id" title="Edit" class="gray-s">
+                                                            <i class="uil uil-edit-alt"></i>
+                                                        </a>
+                                                    }
                                                     <a asp-action="ChangeStatus" asp-route-id="@item.Id" title="Change Status" class="gray-s">
                                                         <i class="uil uil-exchange"></i>
                                                     </a>

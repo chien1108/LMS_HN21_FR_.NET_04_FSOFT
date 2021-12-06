@@ -40,7 +40,7 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.InstructorS
             var list = await unitOfWork.Courses.GetAll(x => x.InstructorId == id, includes: new List<string> { "Category","SubCategory" });
             return list;
         }
-
+        
         public async Task<IList<Instructor>> GetInstructorByStudentId(int id)
         {
             var subScriptions = await unitOfWork.Context.SubScriptions.Where(s => s.StudentId == id).ToListAsync();
@@ -62,6 +62,16 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.InstructorS
         public async Task<IList<Instructor>> GetAllInstructor()
         {
             return await unitOfWork.Instructors.GetAll();
+        }
+
+        public async Task<ICollection<Instructor>> SearchInstructorByStudentId(string searchString, int studentId)
+        {
+            var instructor = await GetInstructorByStudentId(studentId);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                instructor = instructor.Where(x => x.InstructorName.Contains(searchString)).ToList();
+            }
+            return instructor;
         }
     }
 }

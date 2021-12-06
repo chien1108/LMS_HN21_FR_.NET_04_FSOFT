@@ -1,6 +1,7 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstructorService;
 using Learning_Managerment_SystemMarket_ViewModels.Instructor.InstructorViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace Learning_Managerment_SystemMarket_Web.Areas.Instructor.Controllers
 {
     [Area("InstructorFunction")]
+    [Authorize]
     public class StatementController : Controller
     {
         private readonly IInsInstructorService _insInstructorService;

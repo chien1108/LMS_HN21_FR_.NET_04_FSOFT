@@ -7,8 +7,8 @@
         <span class="collapse_menu--label"></span>
     </button>
     <div class="main_logo" id="logo">
-        <a href="~/instructor/public/instructor/home"><img src="~/instructor/public/frontend/images/logo.svg " alt=""></a>
-        <a href="~/instructor/public/instructor/home"><img class="logo-inverse" src="~/instructor/public/frontend/images/ct_logo.svg" alt=""></a>
+        <a asp-area="InstructorFunction" asp-controller="Dashboard" asp-action="Index"><img src="~/instructor/public/frontend/images/logo.svg " alt=""></a>
+        <a asp-area="InstructorFunction" asp-controller="Dashboard" asp-action="Index"><img class="logo-inverse" src="~/instructor/public/frontend/images/ct_logo.svg" alt=""></a>
     </div>
     <div class="top-category">
 
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                     </a>
-                    <a class="vbm_btn" href="~/instructor/public/instructor/messages">View All <i class='uil uil-arrow-right'></i></a>
+                    <a class="vbm_btn" href="#">View All <i class='uil uil-arrow-right'></i></a>
                 </div>
             </li>
             <li class="ui dropdown">
@@ -99,7 +99,7 @@
                     </a>
 
 
-                    <a class="vbm_btn" href="~/instructor/public/instructor/notifications">View All <i class='uil uil-arrow-right'></i></a>
+                    <a class="vbm_btn" href="#">View All <i class='uil uil-arrow-right'></i></a>
                 </div>
             </li>
             <li class="ui dropdown">

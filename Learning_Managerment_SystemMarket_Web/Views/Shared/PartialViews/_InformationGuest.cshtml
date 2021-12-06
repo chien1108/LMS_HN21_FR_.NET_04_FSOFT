@@ -38,7 +38,7 @@
                 </a>
             </div>
             <a href="https://coursearly.com/cursus/public/subscription" class="item channel_item">Subscription</a>
-            <a href="https://coursearly.com/cursus/public/profile" class="item channel_item">Setting</a>
+            <a  asp-area="StudentFunction" asp-controller="Student" asp-action="Update" asp-route-id="@user.Id" class="item channel_item">Setting</a>
             <a href="https://coursearly.com/cursus/public/help" class="item channel_item">Help</a>
             <a href="https://coursearly.com/cursus/public/feedback" class="item channel_item">Send Feedback</a>
             <a asp-area="StudentFunction" asp-action="Logout" asp-controller="Student" class="item channel_item">
