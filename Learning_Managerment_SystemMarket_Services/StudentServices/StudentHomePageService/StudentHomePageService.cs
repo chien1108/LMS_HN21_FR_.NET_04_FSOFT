@@ -23,7 +23,6 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
             _map = map;
         }
 
-
         public async Task<ServiceResponse<StudentHomePageVM>> Create(StudentHomePageVM studentHomeVM)
         {
             try
@@ -40,17 +39,13 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
             {
                 return new ServiceResponse<StudentHomePageVM> { Success = false, Message = "Create fail" };
             }
-
         }
 
         public void Delete(StudentHomePageVM studentHomeVM)
         {
             var course = _map.Map<Course>(studentHomeVM);
             unitOfWork.Courses.Delete(course);
-
         }
-
-
 
         public async Task<CardCourseVM> FindCourse(Expression<Func<Course, bool>> expression = null, List<string> includes = null)
         {
@@ -110,6 +105,294 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
             return _map.Map<IList<CategoryDetailVM>>(categories);
         }
 
+        public async Task<IList<CardCourseVM>> FindCoursesNewestByCondition(int? categoryId,int? languageId
+            ,bool? isFree,decimal? courseDuration)
+        {
+            if (categoryId != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                     expression: x => x.Status == StatusCourse.Active
+                     && x.Category.Id == categoryId
+                    , orderBy: x => x.OrderByDescending(a => a.ModifiedDate)
+                    .ThenByDescending(a => a.CreatedDate)
+                    , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (languageId != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                     expression: x => x.Status == StatusCourse.Active
+                     && x.Language.Id == languageId
+                    , orderBy: x => x.OrderByDescending(a => a.ModifiedDate)
+                    .ThenByDescending(a => a.CreatedDate)
+                    , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (isFree != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    && x.IsFree == isFree
+                   , orderBy: x => x.OrderByDescending(a => a.ModifiedDate)
+                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if(categoryId != null&& languageId != null)
+            {
 
+                var coursesNewest = await FindAllCourse(
+                     expression: x => x.Status == StatusCourse.Active
+                     && x.Category.Id == categoryId
+                     &&x.Language.Id==languageId
+                    , orderBy: x => x.OrderByDescending(a => a.ModifiedDate)
+                    .ThenByDescending(a => a.CreatedDate)
+                    , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if(categoryId != null && isFree != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    && x.Category.Id == categoryId
+                    && x.IsFree == isFree
+                   , orderBy: x => x.OrderByDescending(a => a.ModifiedDate)
+                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (languageId != null && isFree != null)
+            {
+
+                var coursesNewest = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    && x.Language.Id == languageId
+                    && x.IsFree == isFree
+                   , orderBy: x => x.OrderByDescending(a => a.ModifiedDate)
+                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if(categoryId!=null&&languageId != null && isFree != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    && x.Category.Id == categoryId
+                    &&x.Language.Id==languageId
+                    && x.IsFree == isFree
+                   , orderBy: x => x.OrderByDescending(a => a.ModifiedDate)
+                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else
+            {
+                var courses = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    , orderBy: x => x.OrderByDescending(a => a.ModifiedDate)
+                     .ThenByDescending(a => a.CreatedDate)
+                    , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return courses;
+            }
+        }
+
+        public async Task<IList<CardCourseVM>> FindCoursesLowestPriceByCondition(int? categoryId, int? languageId
+            , bool? isFree, decimal? courseDuration)
+        {
+            if (categoryId != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                     expression: x => x.Status == StatusCourse.Active
+                     && x.Category.Id == categoryId
+                     , orderBy: x => x.OrderBy(a => a.Price)
+                .ThenByDescending(a => a.ModifiedDate)
+                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (languageId != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                     expression: x => x.Status == StatusCourse.Active
+                     && x.Language.Id == languageId
+                     , orderBy: x => x.OrderBy(a => a.Price)
+                .ThenByDescending(a => a.ModifiedDate)
+                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (isFree != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    && x.IsFree == isFree
+                   , orderBy: x => x.OrderBy(a => a.Price)
+                .ThenByDescending(a => a.ModifiedDate)
+                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (categoryId != null && languageId != null)
+            {
+
+                var coursesNewest = await FindAllCourse(
+                     expression: x => x.Status == StatusCourse.Active
+                     && x.Category.Id == categoryId
+                     && x.Language.Id == languageId
+                    , orderBy: x => x.OrderBy(a => a.Price)
+                .ThenByDescending(a => a.ModifiedDate)
+                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (categoryId != null && isFree != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    && x.Category.Id == categoryId
+                    && x.IsFree == isFree
+                   , orderBy: x => x.OrderBy(a => a.Price)
+                .ThenByDescending(a => a.ModifiedDate)
+                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (languageId != null && isFree != null)
+            {
+
+                var coursesNewest = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    && x.Language.Id == languageId
+                    && x.IsFree == isFree
+                   , orderBy: x => x.OrderBy(a => a.Price)
+                .ThenByDescending(a => a.ModifiedDate)
+                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (categoryId != null && languageId != null && isFree != null)
+            {
+                var courses = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    && x.Category.Id == categoryId
+                    && x.Language.Id == languageId
+                    && x.IsFree == isFree
+                    , orderBy: x => x.OrderBy(a => a.Price)
+                .ThenByDescending(a => a.ModifiedDate)
+                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return courses;
+            }
+            else
+            {
+                var courses = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                     , orderBy: x => x.OrderBy(a => a.Price)
+                .ThenByDescending(a => a.ModifiedDate)
+                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return courses;
+            }
+        }
+
+        public async Task<IList<CardCourseVM>> FindCoursesHighestPriceByCondition(int? categoryId, int? languageId
+            , bool? isFree, decimal? courseDuration)
+        {
+            if (categoryId != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                     expression: x => x.Status == StatusCourse.Active
+                     && x.Category.Id == categoryId
+                     , orderBy: x => x.OrderByDescending(a => a.Price)
+                                   .ThenByDescending(a => a.ModifiedDate)
+                                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (languageId != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                     expression: x => x.Status == StatusCourse.Active
+                     && x.Language.Id == languageId
+                    , orderBy: x => x.OrderByDescending(a => a.Price)
+                                   .ThenByDescending(a => a.ModifiedDate)
+                                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (isFree != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    && x.IsFree == isFree
+                    , orderBy: x => x.OrderByDescending(a => a.Price)
+                                   .ThenByDescending(a => a.ModifiedDate)
+                                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (categoryId != null && languageId != null)
+            {
+
+                var coursesNewest = await FindAllCourse(
+                     expression: x => x.Status == StatusCourse.Active
+                     && x.Category.Id == categoryId
+                     && x.Language.Id == languageId
+                     , orderBy: x => x.OrderByDescending(a => a.Price)
+                                   .ThenByDescending(a => a.ModifiedDate)
+                                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (categoryId != null && isFree != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    && x.Category.Id == categoryId
+                    && x.IsFree == isFree
+                    , orderBy: x => x.OrderByDescending(a => a.Price)
+                                   .ThenByDescending(a => a.ModifiedDate)
+                                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+ 
+                return coursesNewest;
+            }
+            else if (languageId != null && isFree != null)
+            {
+
+                var coursesNewest = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    && x.Language.Id == languageId
+                    && x.IsFree == isFree
+                   , orderBy: x => x.OrderByDescending(a => a.Price)
+                                   .ThenByDescending(a => a.ModifiedDate)
+                                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else if (categoryId != null && languageId != null && isFree != null)
+            {
+                var coursesNewest = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    && x.Category.Id == categoryId
+                    && x.Language.Id == languageId
+                    && x.IsFree == isFree
+                   , orderBy: x => x.OrderByDescending(a => a.Price)
+                                   .ThenByDescending(a => a.ModifiedDate)
+                                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return coursesNewest;
+            }
+            else
+            {
+                var courses = await FindAllCourse(
+                    expression: x => x.Status == StatusCourse.Active
+                    , orderBy: x => x.OrderByDescending(a => a.Price)
+                                   .ThenByDescending(a => a.ModifiedDate)
+                                   .ThenByDescending(a => a.CreatedDate)
+                   , includes: new List<string>() { "Instructor", "SubCategory", "Category" });
+                return courses;
+            }
+        }
     }
 }

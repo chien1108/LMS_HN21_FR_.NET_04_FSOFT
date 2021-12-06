@@ -35,6 +35,11 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.StudentHome
 
         Task<ICollection<Course>> GetNewestCourse(int size);
 
-
+        Task<IList<CardCourseVM>> FindCoursesNewestByCondition(int? categoryId, int? languageId
+            , bool? isFree, decimal? courseDuration);
+        Task<IList<CardCourseVM>> FindCoursesLowestPriceByCondition(int? categoryId, int? languageId
+          , bool? isFree, decimal? courseDuration);
+        Task<IList<CardCourseVM>> FindCoursesHighestPriceByCondition(int? categoryId, int? languageId
+         , bool? isFree, decimal? courseDuration);
     }
 }
