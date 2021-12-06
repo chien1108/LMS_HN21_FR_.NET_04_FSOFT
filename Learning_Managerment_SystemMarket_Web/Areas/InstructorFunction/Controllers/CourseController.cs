@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Controllers
 {
     [Area("InstructorFunction")]
+    [Authorize]
     public class CourseController : Controller
     {
         private static List<CreateCourseContentVm> createCourseContentVms = new List<CreateCourseContentVm>();
@@ -113,9 +114,11 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
         [HttpGet]
         public async Task<ActionResult> CreateCourse(CreateCourseVm model)
         {
-            //var user = await _userManager.GetUserAsync(User);
-            //var instructorId = user.IdUser;
-            var instructorId = 3;
+            var user = await _userManager.GetUserAsync(User);
+            var instructorId = user.IdUser;
+            //var instructorId = 3;
+            model.CoverImage = _picture;
+
             var responseResult = new ResponseResult
             {
                 Code = false,
