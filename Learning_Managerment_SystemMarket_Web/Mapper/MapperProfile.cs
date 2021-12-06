@@ -57,6 +57,7 @@ namespace Learning_Managerment_SystemMarket_Web.Mapper
             CreateMap<StudentVm, Student>().ReverseMap();
             CreateMap<Course, SubmitCoursesVM>().ReverseMap();
             CreateMap<List<Course>, List<LastSellCoursesVM>>().ReverseMap();
+            CreateMap<User, UpdateVM>().ReverseMap();
           
         }
     }
