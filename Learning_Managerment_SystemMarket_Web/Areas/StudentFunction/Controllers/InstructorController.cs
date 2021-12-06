@@ -6,6 +6,8 @@ using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseServ
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentHomePageService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.SubcriptionService;
+using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels;
+using Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -65,11 +67,39 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.StudentFunction.Controller
         /// </summary>
         /// <param name="id">Student id</param>
         /// <returns>List instruction</returns>
-        public async Task<IActionResult> GetSubcriptionByStudentId(int id)
+        public async Task<IActionResult> GetSubcriptionByStudentId(string searchString,int id, int? page)
         {
-            var instructions = await _studentInstructorService.GetInstructorByStudentId(id);
-            return View(instructions);
+            var instructions = await _studentInstructorService.SearchInstructorByStudentId(searchString,id);
+            var collection = _mapper.Map<ICollection<Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor>, ICollection<CardInstructorVM>>(instructions);
+
+            if (page <= 0 || page == null)
+            {
+                page = 1;
+            }
+            int pageSize = 12;
+            int start = (int)(page - 1) * pageSize;
+
+            int totalPage = instructions.Count;
+            float totalNumsize = (totalPage / (float)pageSize);
+            int numSize = (int)Math.Ceiling(totalNumsize);
+
+            var ExplorePagingModel = new ExplorePagingModel
+            {
+                CurrentPage = page,
+                NumSize = numSize,
+                SearchString = searchString
+            };
+
+            ViewBag.ExplorePagingModel = ExplorePagingModel;
+            ViewBag.PageSize = pageSize;
+            StudentExploreVM studentExploreVM = new StudentExploreVM
+            {
+                Instructors = collection.Skip(start).Take(pageSize).ToList(),
+                SearchString = searchString
+            };
+            return View(studentExploreVM);
         }
+     
         /// <summary>
         /// Get all instructor VuTV10
         /// </summary>

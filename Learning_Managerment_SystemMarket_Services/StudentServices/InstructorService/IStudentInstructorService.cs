@@ -15,5 +15,6 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.InstructorS
         Task<IList<Course>> GetCourseByInstructorId(int id);
         Task<IList<Instructor>> GetInstructorByStudentId(int id);
         Task<IList<Instructor>> GetAllInstructor();
+        Task<ICollection<Instructor>> SearchInstructorByStudentId(string searchString,int studentId);
     }
 }
