@@ -1,6 +1,15 @@
 ﻿@{
     Layout = "~/Areas/InstructorFunction/Views/Shared/_InstructorLayout.cshtml";
 }
+@using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
+@using Microsoft.AspNetCore.Identity
+@using Learning_Managerment_SystemMarket_Core.Models.Entities
+@inject ICourseServices coursesService
+@inject UserManager<User> userManager
+@{
+    var instructor = await userManager.GetUserAsync(User);
+    var courses = await coursesService.GetAllCourses(instructor.IdUser);
+}
 
 
 <div class="sa4d25">
@@ -14,7 +23,7 @@
             <div class="col-xl-4 col-sm-6">
                 <div class="card card-mini analysis_card">
                     <div class="card-body">
-                        <h2 class="mb-2">2</h2>
+                        <h2 class="mb-2">@ViewBag.Count</h2>
                         <p>Subscribers</p>
                         <div class="chartjs-wrapper">
                             <canvas id="barChart" data-chat=[@ViewBag.Data] data-month='[ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]'></canvas>
@@ -22,20 +31,6 @@
                     </div>
                 </div>
             </div>
-            @*<div class="col-lg-4 col-md-5">
-                <div class="top_countries mt-30">
-                    <div class="top_countries_title">
-                        <h2>View Sale of Month</h2>
-                    </div>
-                    <div class="statement_invoice_content">
-                        <form asp-action="Index" method="post">
-                            <input type="number" class="form-control" placeholder="Month" name="month" required min="1" max="12" />
-                            <input type="number" class="form-control" placeholder="Year" name="year" required />
-                            <button type="submit" class="btn btn-success">Search</button>
-                        </form>
-                    </div>
-                </div>
-            </div>*@
         </div>
         <div class="row">
             <div class="col-xl-12 col-md-12">
@@ -48,19 +43,30 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="table-responsive mt-30">
+                    <table class="table ucp-table">
+                        <thead class="thead-s">
+                            <tr>
+                                <th class="cell-ta" scope="col">Item No.</th>
+                                <th class="cell-ta" scope="col">Title</th>
+                                <th class="cell-ta" scope="col">Purchases</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in courses)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Title</td>
+                                    <td>@item.Sales</td>                                    
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        @*@if (ViewBag.Check == true)
-        {
-            @Html.Partial("~/Areas/InstructorFunction/Views/Analyic/_ListSaleByDayOfMonth.cshtml");
-        }*@
     </div>
 </div>
 
-@*@if (TempData["Message"] != null)
-{
-    <script type="text/javascript">
-            window.onload = function () {
-                alert("@TempData["Message"]");
-            };
-    </script>
-}*@

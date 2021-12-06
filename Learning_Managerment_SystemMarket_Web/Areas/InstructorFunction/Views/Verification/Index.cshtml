@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Areas/InstructorFunction/Views/Shared/_InstructorLayout.cshtml";
+}
+@using Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstructorService
+@using Microsoft.AspNetCore.Identity
+@using Learning_Managerment_SystemMarket_Core.Models.Entities
+@inject IInsInstructorService service
+@inject UserManager<User> userManager
+@{
+    var instructor = await userManager.GetUserAsync(User);
+    var countOrder = service.CountOrderByInstructorId(instructor.IdUser);
+    var countStudentSub = service.CountStudentSubByInstructorId(instructor.IdUser);
+}
+
+<div class="sa4d25">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="st_title"><i class="uil uil-check-circle"></i> Verification</h2>
+            </div>
+        </div>
+        <div class="row justify-content-xl-center justify-content-lg-center justify-content-md-center">
+            <div class="col-xl-6 col-lg-8 col-md-8">
+                <div class="verification_content">
+                    <img src="~/instructor/public/frontend/images/verified-account.svg" alt="">
+                    <h4>Verification with Cursus+</h4>
+                    <ul class="alert_verification">
+                        <li>
+                            <div class="required_group">
+                                <div class="edututs_required_img">
+                                    <i class="uil uil-dashboard"></i>
+                                </div>
+                                <div class="edututs_required">
+                                    <span><strong>@countStudentSub subscribers</strong></span>
+                                    <span>1001 required</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="required_group">
+                                <div class="edututs_required_img">
+                                    <i class="uil uil-dashboard"></i>
+                                </div>
+                                <div class="edututs_required">
+                                    <span><strong>@countOrder sells</strong></span>
+                                    <span>49 required</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="apply_verify_text"><i class="uil uil-check-circle"></i>We`ll send you an email when you`re Verify with Cursus+</div>
+                    <div class="verification_form">
+                        <h4 class="text-danger">
+                            You are not eligible to verify your account on Cursus+
+                        </h4>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

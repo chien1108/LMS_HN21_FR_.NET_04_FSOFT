@@ -16,6 +16,20 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.InstructorRepo
             _context = context;
         }
 
+        public int CountOrderByInstructorId(int id)
+        {
+            var count = _context.Orders.Include(x => x.Course).ThenInclude(x => x.Instructor).Where(x => x.Course.InstructorId == id).Count();
+
+            return count;
+        }
+
+        public int CountStudentSubByInstructorId(int id)
+        {
+            var count = _context.SubScriptions.Where(x => x.InstructorId == id).Count();
+
+            return count;
+        }
+
         public decimal SumOrderByInstructorIdOrderByDayOfMonth(int id, int day, int month, int year)
         {
             var sum = _context.Orders.Include(x => x.Course).ThenInclude(x => x.Instructor)

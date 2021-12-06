@@ -38,6 +38,7 @@ using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseServic
 using Learning_Managerment_SystemMarket_Services.InstructorServices.InsInstructorService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.LanguageService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.OrderService;
+using Learning_Managerment_SystemMarket_Services.InstructorServices.SendEmailService;
 using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.CartService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.InstructorService;
@@ -127,6 +128,8 @@ namespace Learning_Managerment_SystemMarket_Web
 
             services.AddScoped<IStudentOrderService, StudentOrderService>();
             services.AddScoped<IStudentInstructorService, StudentInstructorService>();
+
+            services.AddSingleton<IEmailSender, EmailSender>();
 
             //Config for Dependence Service
 
