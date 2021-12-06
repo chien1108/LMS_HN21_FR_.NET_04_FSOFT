@@ -2,6 +2,7 @@
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -18,6 +19,8 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
         Task<bool> IsExisted(string userName);
 
         Task<IList<User>> FindAll();
+
+        Task<IList<User>> FindAll(Expression<Func<User, bool>> expression = null);
 
         Task<User> Find(Expression<Func<User, bool>> expression);
 

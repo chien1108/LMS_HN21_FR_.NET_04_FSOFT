@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -127,5 +128,8 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
                 return new ServiceResponse<User> { Success = false, Message = "Add User's Roles Failed" };
             }
         }
+
+        public async Task<IList<User>> FindAll(Expression<Func<User, bool>> expression = null)
+            => await _userManager.Users.Where(expression).ToListAsync();
     }
 }
