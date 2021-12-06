@@ -1,5 +1,6 @@
 ﻿using Learning_Managerment_SystemMarket_Core.Contracts;
 using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Core.Repositories.InstructorRepo
@@ -13,5 +14,7 @@ namespace Learning_Managerment_SystemMarket_Core.Repositories.InstructorRepo
         decimal SumOrderByInstructorIdOrderByMonth(int id, int number);
 
         decimal SumOrderByInstructorIdOrderByDayOfMonth(int id, int day, int month, int year);
+
+        
     }
 }

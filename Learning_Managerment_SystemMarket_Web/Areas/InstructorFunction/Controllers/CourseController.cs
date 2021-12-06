@@ -75,6 +75,8 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
         // GET: CourseController/Create
         public ActionResult Create()
         {
+            createCourseContentVms.Clear();
+            createLectureVms.Clear();
             return View();
         }
 
@@ -118,12 +120,18 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             var instructorId = user.IdUser;
             //var instructorId = 3;
             model.CoverImage = _picture;
-
+            
             var responseResult = new ResponseResult
             {
                 Code = false,
                 Message = "Please add at least one Course Content"
             };
+            if (_picture is null)
+            {
+                responseResult.Message = "Please check Cover Image";
+                return Json(responseResult);
+            }
+
             bool checkIsExist = await _courseServices.IsExistsCourseTitle(model.Title);
             if (checkIsExist)
             {

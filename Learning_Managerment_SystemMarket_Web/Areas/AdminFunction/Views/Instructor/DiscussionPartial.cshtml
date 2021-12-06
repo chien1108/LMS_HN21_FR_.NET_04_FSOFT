@@ -1,24 +1,37 @@
-﻿<div class="card">
+﻿@using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseRateService
+@using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
+@inject IUserService _userService
+@inject IStudentCourseRateService _studentCourseRateService
+@{
+    var listCourseRate = await _studentCourseRateService.FindAll();
+}
+<div class="card">
     <div class="card-header">
         <h4>Discussions</h4>
     </div>
     <div class="card-body">
         <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
-            <li class="media">
-                <img alt="image" class="mr-3 rounded-circle" width="70" src="https://coursearly.com/cursus/public/upload/image/60d6b4a486f0d.jpg">
-                <div class="media-body">
-                    <div class="media-right">
+            @for (int i = 0; i < listCourseRate.Count(); i++)
+            {
+                <li class="media">
+                    <img alt="image" class="mr-3 rounded-circle" width="70" src="https://coursearly.com/cursus/public/upload/image/60d6b4a486f0d.jpg">
+                    <div class="media-body">
+                        <div class="media-right">
+                        </div>
+                        @{
+                            var user = await _userService.Find(u => u.IdUser == @listCourseRate.ElementAt(i).StudentId);
+                        }
+                        <div class="media-title mb-1">@user.FullName</div>
+                        <div class="text-time">3 weeks ago</div>
+                        <div class="media-description text-muted">@listCourseRate.ElementAt(i).Messge</div>
+                        <div class="media-links">
+                            <a href="#">Like 0</a>
+                            <div class="bullet"></div>
+                            <a href="#" class="text-danger">Dis-Like 0</a>
+                        </div>
                     </div>
-                    <div class="media-title mb-1">Jassica William</div>
-                    <div class="text-time">3 weeks ago</div>
-                    <div class="media-description text-muted">kjhjbjbhjghjgjghjgjhghjgjhgjgjhgjh</div>
-                    <div class="media-links">
-                        <a href="#">Like 0</a>
-                        <div class="bullet"></div>
-                        <a href="#" class="text-danger">Dis-Like 0</a>
-                    </div>
-                </div>
-            </li>
+                </li>
+            }
         </ul>
     </div>
 </div>

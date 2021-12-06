@@ -99,8 +99,6 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.CourseViewMode
 
         public bool IsBestseller { get; set; }
 
-        [DisplayName("Cover Image")]
-        [Required(ErrorMessage = "{0} is Required")]
         public byte[] CoverImage { get; set; }// default img.png
 
         public string PromotionVideo { get; set; } // null

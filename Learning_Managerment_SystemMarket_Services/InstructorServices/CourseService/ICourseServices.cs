@@ -48,6 +48,8 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
                              Func<IQueryable<Course>, IOrderedQueryable<Course>> orderBy = null,
                              List<string> includes = null);
         Task<ServiceResponse<Course>> Update(CourseVm updateCourse);
+
+        Task<ServiceResponse<Course>> Update(Course updateCourse);
         Task<bool> ChangeToActive(int id);
         Task<bool> ChangeToReject(int id);
         Task<IList<CourseVm>> GetAllCourseReject();
