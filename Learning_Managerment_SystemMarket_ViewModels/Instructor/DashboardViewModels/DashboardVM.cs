@@ -32,7 +32,7 @@ namespace Learning_Managerment_SystemMarket_ViewModels.Instructor.DashboardViewM
 
         [Display(Name = "Total Views")]
         public int TotalViews { get; set; }
-
+        public int TotalSubscriber { get; set; }
         public List<SubmitCoursesVM> SubmitCourses { get; set; }
 
         public List<LastSellCoursesVM> LastSellCourses { get; set; }

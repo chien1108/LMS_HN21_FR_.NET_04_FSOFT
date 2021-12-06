@@ -26,6 +26,7 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.CourseContentService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
@@ -113,6 +114,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IInstructorService, InstructorService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddTransient<ICourseServices, CourseServices>();
+            services.AddTransient<ICourseContentService, CourseContentService>();
             services.AddTransient<IStudentCourseRateService, StudentCourseRateService>();
             services.AddTransient<IInstructorCategoryService, InstructorCategoryService>();
             services.AddTransient<IInstructorLanguageService, InstructorLanguageService>();
