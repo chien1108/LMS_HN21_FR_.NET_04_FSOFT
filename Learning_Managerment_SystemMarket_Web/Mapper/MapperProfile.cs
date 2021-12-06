@@ -49,6 +49,7 @@ namespace Learning_Managerment_SystemMarket_Web.Mapper
             CreateMap<SubCategory, SubCategoryVm>().ReverseMap();
             CreateMap<Language, LanguageVm>().ReverseMap();
             CreateMap<Instructor, InstructorVm>().ReverseMap();
+            CreateMap<Instructor, CardInstructorVM>().ReverseMap();
             CreateMap<Course, CourseDetailVM>().ReverseMap();
             CreateMap<Course, CardCourseVM>().ReverseMap();
             CreateMap<Order, OrderVm>().ReverseMap();
