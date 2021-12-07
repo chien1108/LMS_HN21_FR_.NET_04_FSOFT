@@ -31,7 +31,7 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             User user = await _userManager.GetUserAsync(User);
 
             //var orders = await _instructorOrderService.FindAll(x => x.Course.InstructorId == user.IdUser);
-            var orders = await _instructorOrderService.FindAll(x => x.Course.InstructorId == 1);
+            var orders = await _instructorOrderService.FindAll(x => x.Course.InstructorId == user.IdUser);
 
             var result = orders.GroupBy(x => new { x.CreatedDate.Month, x.CreatedDate.Year }).Select(c => new { Month = c.Key.Month, Year = c.Key.Year });
 
@@ -52,12 +52,12 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
                 string[] date = dateTime.Split("-");
 
                 orders = (List<OrderVm>)await _instructorOrderService
-                    .FindAll(x => x.Course.InstructorId == 1 && x.CreatedDate.Month == Int32.Parse(date[0]) && x.CreatedDate.Year == Int32.Parse(date[1]), includes: new List<string>() { "Course" });
+                    .FindAll(x => x.Course.InstructorId == user.IdUser && x.CreatedDate.Month == Int32.Parse(date[0]) && x.CreatedDate.Year == Int32.Parse(date[1]), includes: new List<string>() { "Course" });
             }
             else
             {
                 //var orders = await _instructorOrderService.FindAll(x => x.Course.InstructorId == user.IdUser);
-                orders = (List<OrderVm>)await _instructorOrderService.FindAll(x => x.Course.InstructorId == 1, includes: new List<string>() { "Course" });
+                orders = (List<OrderVm>)await _instructorOrderService.FindAll(x => x.Course.InstructorId == user.IdUser, includes: new List<string>() { "Course" });
             }
 
             var salesEarnings = orders.Sum(x => x.Price);

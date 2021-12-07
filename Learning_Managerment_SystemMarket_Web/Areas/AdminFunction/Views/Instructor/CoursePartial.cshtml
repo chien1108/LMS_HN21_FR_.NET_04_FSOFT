@@ -88,7 +88,7 @@
                                     <a class="btn btn-sm btn-outline-info btn-icon m-1" asp-area="AdminFunction" asp-controller="Instructor" asp-action="ViewInfo" asp-route-id="@listCourse.ElementAt(i).Id" asp-route-idIns="@listCourse.ElementAt(i).InstructorId">
                                         View
                                     </a>
-                                    <form asp-area="AdminFunction" asp-controller="Instructor" asp-action="ChangeBlock" asp-route-id="@listCourse.ElementAt(i).Id" asp-route-idIns="@listCourse.ElementAt(i).InstructorId">
+                                    <form asp-area="AdminFunction" asp-controller="Instructor" asp-action="ChangeBlockCourse" asp-route-id="@listCourse.ElementAt(i).Id" asp-route-idIns="@listCourse.ElementAt(i).InstructorId">
                                         <button type="button" class="btn btn-sm btn-outline-danger btn-icon m-1" onclick="confirm('Are you sure you want to do this?') ? this.parentElement.submit() : ''">
                                             @if (@listCourse.ElementAt(i).Status == StatusCourse.Active)
                                             {

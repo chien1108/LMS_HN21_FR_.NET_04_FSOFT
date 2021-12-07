@@ -186,8 +186,12 @@
                         <li>
                             <a class="nav-link" asp-area="AdminFunction" asp-controller="Course" asp-action="WaitToApprove">Waiting for approval</a>
                         </li>
-                        <li><a class="nav-link  " href="https://coursearly.com/cursus/public/admin/courses/all">All</a></li>
-                        <li><a class="nav-link  " href="https://coursearly.com/cursus/public/admin/courses/rejected">Rejected</a></li>
+                        <li>
+                            <a class="nav-link" asp-area="AdminFunction" asp-controller="Course" asp-action="AllCourse">All</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" asp-area="AdminFunction" asp-controller="Course" asp-action="ListReject">Rejected</a>
+                        </li>
                     </ul>
                 </li>
                 <li class="menu-header">Extra</li>

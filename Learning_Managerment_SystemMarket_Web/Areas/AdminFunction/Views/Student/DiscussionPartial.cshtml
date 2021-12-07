@@ -1,5 +1,6 @@
 ﻿@using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseRateService
 @using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
+@using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
 @inject IUserService _userService
 @inject IStudentCourseRateService _studentCourseRateService
 @{
@@ -21,8 +22,8 @@
                         @{
                             var user = await _userService.Find(u => u.IdUser == @listCourseRate.ElementAt(i).StudentId);
                         }
-                    <div class="media-title mb-1">@user.FullName</div>
-                        <div class="text-time">3 weeks ago</div>
+                        <div class="media-title mb-1">@user.FullName</div>
+                        <div class="text-time">@RelativeDate.ChangeDate(listCourseRate.ElementAt(i).CreatedDate);</div>
                         <div class="media-description text-muted">@listCourseRate.ElementAt(i).Messge</div>
                         <div class="media-links">
                             <a href="#">Like 0</a>

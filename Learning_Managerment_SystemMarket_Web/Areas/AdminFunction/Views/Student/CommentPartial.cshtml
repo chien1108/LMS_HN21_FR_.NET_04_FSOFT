@@ -1,6 +1,7 @@
 ﻿@using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseRateService
 @using Learning_Managerment_SystemMarket_Services.AdminFunction.UserService
 @using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseService
+@using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
 @inject IUserService _userService
 @inject IStudentCourseRateService _studentCourseRateService
 @inject ICourseServices _courseServices
@@ -28,7 +29,7 @@
                                         }
                                         @if (listCourseRate.ElementAt(i).Star < 5)
                                         {
-                                            @for (int j = 1; j <= 5- listCourseRate.ElementAt(i).Star; j++)
+                                            @for (int j = 1; j <= 5 - listCourseRate.ElementAt(i).Star; j++)
                                             {
                                                 <i class="far fa-star"></i>
                                             }
@@ -42,7 +43,7 @@
                                     @course.Title
                                 </div>
                                 <div class="text-time">
-                                    1 month ago
+                                    @RelativeDate.ChangeDate(listCourseRate.ElementAt(i).CreatedDate)
                                 </div>
                                 <div class="media-description text-muted">
                                 </div>
@@ -51,7 +52,7 @@
                                 </div>
                             </div>
                         </li>
-                     }
+                    }
                 </ul>
             </div>
         </div>

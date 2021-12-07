@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+﻿using Learning_Managerment_SystemMarket_Core.Models.Entities;
+using Learning_Managerment_SystemMarket_Core.Modules.Enums;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorService;
+using Learning_Managerment_SystemMarket_Services.AdminFunction.StudentService;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using Learning_Managerment_SystemMarket_Core.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorService;
-using Learning_Managerment_SystemMarket_Services.AdminFunction.StudentService;
-using Learning_Managerment_SystemMarket_Core.Modules.Enums;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
 {
@@ -93,11 +89,11 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.Identity.Pages.Account
                 User user;
                 if (Input.IsInstructor)
                 {
-                    var instructor = new Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor { InstructorName = Input.FullName, Status = StatusIns.Deactive };
+                    var instructor = new Learning_Managerment_SystemMarket_Core.Models.Entities.Instructor { InstructorName = Input.FullName, Status = StatusIns.Active };
                     var response = await _instructorService.Create(instructor);
                     if (!response.Success)
                     {
-                        ModelState.AddModelError("",$"{response.Message}");
+                        ModelState.AddModelError("", $"{response.Message}");
                         return Page();
                     }
                     user = new User { UserName = Input.Email, Email = Input.Email, WhoIs = 1, FullName = Input.FullName, EmailConfirmed = true, IdUser = instructor.Id };

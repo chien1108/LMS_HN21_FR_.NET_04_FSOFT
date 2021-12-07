@@ -23,7 +23,11 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.CourseRateS
         public async Task<double> AvgCourseRate(int courseId)
         {
             var courseRates = await _unitOfWork.CourseRates.GetAll(c => c.CourseId == courseId);
-            return Math.Round(courseRates.Average(c=>c.Star), 1);
+            if (courseRates.Count != 0)
+            {
+                return Math.Round(courseRates.Average(c => c.Star), 1);
+            }
+            return 0;
         }
 
         public async Task<int> CountStudentRate(int courseId)
@@ -40,9 +44,9 @@ namespace Learning_Managerment_SystemMarket_Services.StudentServices.CourseRateS
                 model.StudentId = studentId;
                 model.CreatedDate = DateTime.Now;
                 var existingCourseRate = await _unitOfWork.CourseRates.FindByCondition(
-                    expression: c => c.CourseId == model.CourseId 
+                    expression: c => c.CourseId == model.CourseId
                     && c.StudentId == model.StudentId);
-                if(existingCourseRate == null)
+                if (existingCourseRate == null)
                 {
                     await _unitOfWork.CourseRates.Create(model);
                     var success = await _unitOfWork.Save();
