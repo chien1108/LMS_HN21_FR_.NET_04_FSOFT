@@ -78,11 +78,11 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.InstructorFunction.Control
             }
             if (count > 0)
             {
-                ViewData["Vote1"] = Math.Round(((double)vote1 / count) * 100);
-                ViewData["Vote2"] = Math.Round(((double)vote2 / count) * 100);
-                ViewData["Vote3"] = Math.Round(((double)vote3 / count) * 100);
-                ViewData["Vote4"] = Math.Round(((double)vote4 / count) * 100);
-                ViewData["Vote5"] = Math.Round(((double)vote5 / count) * 100);
+                ViewData["Vote1"] = Math.Round(((double)vote1 / count) * 100, 0);
+                ViewData["Vote2"] = Math.Round(((double)vote2 / count) * 100, 0);
+                ViewData["Vote3"] = Math.Round(((double)vote3 / count) * 100, 0);
+                ViewData["Vote4"] = Math.Round(((double)vote4 / count) * 100, 0);
+                ViewData["Vote5"] = Math.Round(((double)vote5 / count) * 100, 0);
             }
             else
             {

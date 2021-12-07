@@ -3,11 +3,11 @@
     Layout = "~/Areas/InstructorFunction/Views/Shared/_InstructorLayout.cshtml";
     double averageRate = Math.Round((double)ViewData["AvarageRate"], 1);
 
-    int Vote1 = Convert.ToInt32(Math.Round((double)ViewData["Vote1"]));
-    int Vote2 = Convert.ToInt32(Math.Round((double)ViewData["Vote2"]));
-    int Vote3 = Convert.ToInt32(Math.Round((double)ViewData["Vote3"]));
-    int Vote4 = Convert.ToInt32(Math.Round((double)ViewData["Vote4"]));
-    int Vote5 = Convert.ToInt32(Math.Round((double)ViewData["Vote5"]));
+    var Vote1 = Convert.ToInt32(ViewData["Vote1"]);
+    var Vote2 = Convert.ToInt32(ViewData["Vote2"]);
+    var Vote3 = Convert.ToInt32(ViewData["Vote3"]);
+    var Vote4 = Convert.ToInt32(ViewData["Vote4"]);
+    var Vote5 = Convert.ToInt32(ViewData["Vote5"]);
 
     if (averageRate > 0)
     {
