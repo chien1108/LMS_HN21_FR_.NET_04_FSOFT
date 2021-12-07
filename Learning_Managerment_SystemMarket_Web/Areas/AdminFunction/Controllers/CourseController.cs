@@ -29,6 +29,10 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
             return View();
         }
 
+        public ActionResult AllCourse()
+        {
+            return View();
+        }
 
         public async Task<ActionResult> ChangeToActive(int id)
         {
@@ -51,5 +55,11 @@ namespace Learning_Managerment_SystemMarket_Web.Areas.AdminFunction.Controllers
             }
             return RedirectToAction(nameof(WaitToApprove));
         }
+
+        //public async Task<ActionResult> Show(int id)
+        //{
+        //    var courseFromDb = await _courseService.GetCourseById(id);
+        //    return View(courseFromDb);
+        //}
     }
 }

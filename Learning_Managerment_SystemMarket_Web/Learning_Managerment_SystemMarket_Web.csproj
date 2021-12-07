@@ -47,6 +47,7 @@
   <ItemGroup>
     <Folder Include="Areas\AdminFunction\Data\" />
     <Folder Include="Areas\AdminFunction\Models\" />
+    <Folder Include="Areas\AdminFunction\Views\FAQ\" />
     <Folder Include="Areas\StudentFunction\Data\" />
     <Folder Include="Areas\StudentFunction\Models\" />
     <Folder Include="wwwroot\assets\images\" />

@@ -26,7 +26,11 @@ using Learning_Managerment_SystemMarket_Core.Repositories.SubCategoryRepo;
 using Learning_Managerment_SystemMarket_Core.Repositories.UnitOfWork;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.CategoryServices;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.ClaimService;
+
 using Learning_Managerment_SystemMarket_Services.AdminFunction.CourseContentService;
+
+using Learning_Managerment_SystemMarket_Services.AdminFunction.FAQService;
+
 using Learning_Managerment_SystemMarket_Services.AdminFunction.InstructorService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.LanguageService;
 using Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService;
@@ -125,7 +129,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddTransient<IInstructorOrderService, InstructorOrderService>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IOrderService, OrderService>();
-
+            services.AddTransient<IFAQService, FAQService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ILanguageService, LanguageService>();
             services.AddScoped<ISubCategoryService, SubCategoryService>();

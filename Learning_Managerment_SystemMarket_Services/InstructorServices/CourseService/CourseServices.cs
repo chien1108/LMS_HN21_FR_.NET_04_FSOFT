@@ -336,9 +336,9 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
         public async Task<ServiceResponse<DisCountCourseVm>> ClearDiscountExpire(int id)
         {
             var discountCourses = await _unitOfWork.SpecialDiscounts.GetAll(expression: x => x.InstructorId == id);
-            foreach(var item in discountCourses)
+            foreach (var item in discountCourses)
             {
-                if(item.EndDate < DateTime.Now)
+                if (item.EndDate < DateTime.Now)
                 {
                     _unitOfWork.SpecialDiscounts.Delete(item);
                     if (item.Status == Status.IsActive)
@@ -470,6 +470,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             return await _unitOfWork.Courses.IsExists(x => x.Title == title);
         }
 
+
         public async Task<ServiceResponse<Course>> Update(Course updateCourse)
         {
             try
@@ -493,6 +494,22 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
             {
                 return new ServiceResponse<Course> { Success = false, Message = ex.Message };
             }
+
+
+        }
+        public async Task<IList<CourseVm>> GetAllCourseFromDb()
+        {
+            var courses = await _unitOfWork.Courses.GetAll(includes: new List<string> { "Category" });
+            var map = _mapper.Map<List<CourseVm>>(courses);
+            foreach (var item in map)
+            {
+                item.Parts = _unitOfWork.Context.CourseContents.Count(x => x.CourseId == item.Id);
+                item.Sales = _unitOfWork.Context.Orders.Count(x => x.CourseId == item.Id);
+            }
+
+            return map;
+
         }
     }
+}
 }

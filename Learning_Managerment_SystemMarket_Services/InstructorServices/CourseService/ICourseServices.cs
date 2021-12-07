@@ -53,6 +53,7 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
         Task<bool> ChangeToActive(int id);
         Task<bool> ChangeToReject(int id);
         Task<IList<CourseVm>> GetAllCourseReject();
+        Task<IList<CourseVm>> GetAllCourseFromDb();
         Task<bool> SaveChange();
 
     }
