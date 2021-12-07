@@ -512,4 +512,3 @@ namespace Learning_Managerment_SystemMarket_Services.InstructorServices.CourseSe
         }
     }
 }
-}
