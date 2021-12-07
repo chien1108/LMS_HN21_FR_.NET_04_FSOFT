@@ -5,6 +5,7 @@
 @using Learning_Managerment_SystemMarket_Services.AdminFunction.SubCategoryService
 @using Learning_Managerment_SystemMarket_Services.AdminFunction.CourseContentService
 @using Learning_Managerment_SystemMarket_Services.InstructorServices.CourseRateService
+@using Learning_Managerment_SystemMarket_ViewModels.StudentViewModels
 
 @inject IStudentCourseRateService _studentCourseRateService
 @inject ICourseServices _courseService
@@ -37,8 +38,15 @@
                     <div class="col-12 col-sm-6 col-md-6 col-lg-3">
                         <article class="article article-style-c">
                             <div class="article-header">
-                                <div class="article-image" data-background="https://coursearly.com/cursus/public/upload/image/60d6c503be16c.jpg" style="background-image: url(https://coursearly.com/cursus/public/upload/image/60d6c503be16c.jpg);">
-                                </div>
+                                @if (infor.CoverImage != null)
+                                {
+                                    var base64 = Convert.ToBase64String(infor.CoverImage);
+                                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                    //<img src="@imgsrc" width="100%" />
+                                    <div class="article-image" data-background="@imgsrc" style="background-image: url(@imgsrc);">
+                                    </div>
+                                }
+
                                 <div class="article-badge d-flex">
                                     @if (infor.IsFeatured)
                                     {
@@ -156,8 +164,10 @@
                                         </div>
                                         <div class="_htg452 mt-35">
                                             <h3>Description</h3>
-                                            <span class="_abc123">@infor.Description</span>
+                                            @Html.Raw(@infor.Description)
+                                            @*<span class="_abc123">@infor.Description</span>*@
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -222,7 +232,7 @@
                                                                     @user.FullName
                                                                 </div>
                                                                 <div class="text-time">
-                                                                    5 months ago
+                                                                    @RelativeDate.ChangeDate(listCourseRate.ElementAt(i).CreatedDate)
                                                                 </div>
                                                                 <div class="media-description text-muted">
                                                                     @listCourseRate.ElementAt(i).Messge
@@ -233,7 +243,7 @@
                                                             </div>
                                                         </li>
                                                     }
-                                                    </ul>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>

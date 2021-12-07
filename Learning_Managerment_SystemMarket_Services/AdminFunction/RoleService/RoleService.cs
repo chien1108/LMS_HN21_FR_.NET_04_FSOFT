@@ -20,7 +20,7 @@ namespace Learning_Managerment_SystemMarket_Services.AdminFunction.RoleService
         private readonly UserManager<User> _userManager;
         private readonly IClaimService _claimService;
 
-        public RoleService(IUnitOfWork unitOfWork, IMapper mapper, RoleManager<Role> roleManager, UserManager<User> userManager,IClaimService claimService)
+        public RoleService(IUnitOfWork unitOfWork, IMapper mapper, RoleManager<Role> roleManager, UserManager<User> userManager, IClaimService claimService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;

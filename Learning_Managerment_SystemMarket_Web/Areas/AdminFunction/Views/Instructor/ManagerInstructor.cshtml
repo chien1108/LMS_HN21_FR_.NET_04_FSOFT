@@ -66,7 +66,7 @@
                                                     @listInstructor.ElementAt(i - 1).InstructorName
                                                     <span class="badge badge-dark m-1">Popular</span>
                                                 </td>
-                                                @{ 
+                                                @{
                                                     var userInstructor = await _userService.Find(u => u.IdUser == listInstructor.ElementAt(i - 1).Id);
                                                 }
                                                 <td>@userInstructor.Email</td>
@@ -89,9 +89,9 @@
                                                             </span>
                                                         </button>
                                                     </form>
-                                                    <form asp-area="AdminFunction" asp-controller="Instructor" asp-action="ChangeBlock" asp-route-id="@listInstructor.ElementAt(i-1).Id">
+                                                    <form asp-area="AdminFunction" asp-controller="Instructor" asp-action="ChangeBlockInstructor" asp-route-id="@listInstructor.ElementAt(i-1).Id">
                                                         <button type="button" class="btn btn-sm btn-outline-danger btn-icon m-1"
-                                                               onclick="confirm('Are you sure you want to do this?') ? this.parentElement.submit() : ''">
+                                                                onclick="confirm('Are you sure you want to do this?') ? this.parentElement.submit() : ''">
                                                             @if (listInstructor.ElementAt(i - 1).Status == StatusIns.Active)
                                                             {
                                                                 <span class="ul-btn__icon">
