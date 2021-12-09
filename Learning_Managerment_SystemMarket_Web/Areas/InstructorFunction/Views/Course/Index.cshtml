@@ -74,6 +74,7 @@
                                         <tr>
                                             <th class="text-center" scope="col">#</th>
                                             <th>Title</th>
+                                            <th>Thumbnail</th>
                                             <th class="text-center" scope="col">Updated Date</th>
                                             <th class="text-center" scope="col">Sales</th>
                                             <th class="text-center" scope="col">Parts</th>
@@ -88,6 +89,14 @@
                                             <tr>
                                                 <td class="text-center">@item.Id</td>
                                                 <td>@item.Title</td>
+                                                <td>
+                                                    @if (item.CoverImage != null)
+                                                    {
+                                                        var base64 = Convert.ToBase64String(item.CoverImage);
+                                                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                                        <img src="@imgsrc" width="100%" />
+                                                    }
+                                                </td>
                                                 <td class="text-center">@item.ModifiedDate.ToString("dd MMMM yyyy | HH:mm")</td>
                                                 <td class="text-center">@item.Sales</td>
                                                 <td class="text-center">@item.Parts</td>
@@ -167,7 +176,14 @@
                                             <tr>
                                                 <td class="text-center">@item.Id</td>
                                                 <td>@item.Title</td>
-                                                <td class="text-center"><a href="#">View</a></td>
+                                                <td>
+                                                    @if (item.CoverImage != null)
+                                                    {
+                                                        var base64 = Convert.ToBase64String(item.CoverImage);
+                                                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                                        <img src="@imgsrc" width="100%" />
+                                                    }
+                                                </td>
                                                 <td class="text-center"><span class="text-primary">@item.CategoryName</span></td>
                                                 <td class="text-center">@item.Parts</td>
                                                 <td class="text-center">@item.ModifiedDate.ToString("dd MMMM yyyy | HH:mm")</td>
@@ -222,7 +238,14 @@
                                             <tr>
                                                 <td class="text-center">@item.Id</td>
                                                 <td>@item.Title</td>
-                                                <td class="text-center"><a href="#">View</a></td>
+                                                <td>
+                                                    @if (item.CoverImage != null)
+                                                    {
+                                                        var base64 = Convert.ToBase64String(item.CoverImage);
+                                                        var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                                        <img src="@imgsrc" width="100%" />
+                                                    }
+                                                </td>
                                                 <td class="text-center"><span class="text-primary">@item.CategoryName</span></td>
                                                 <td class="text-center">
                                                     @if (item.DiscountPrice == 0)
@@ -392,7 +415,7 @@
                                 <img src="images/dashboard/promotion.svg" alt="">
                                 <h4>We Are come in future with this feature.</h4>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>

@@ -185,7 +185,7 @@
                                                             <div class="upload__input">
                                                                 <div class="input-group">
                                                                     <div class="custom-file">
-                                                                        <input type="file" class="custom-file-input" id="cover_image" name="cover_image" multiple="multiple" required/>
+                                                                        <input type="file" class="custom-file-input" id="cover_image" name="cover_image" multiple="multiple" required />
                                                                         <label class="custom-file-label" for="inputGroupFile04">No Choose file</label>
                                                                     </div>
                                                                 </div>
@@ -241,11 +241,8 @@
                                                             <div class="col-lg-4 col-md-6">
                                                                 <div class="part_input mt-30 lbel25">
                                                                     <label>File*</label>
-                                                                    <div class="input-group">
-                                                                        <div class="custom-file">
-                                                                            <input type="file" class="custom-file-input" id="lectureFileInput" name="file" required onchange="onLectureFileChange()">
-                                                                            <label class="custom-file-label" for="inputGroupFile06" id="fileName">No Choose file - (Pdf, Video)</label>
-                                                                        </div>
+                                                                    <div class="ui left icon input swdh19">
+                                                                        <input class="prompt srch_explore" type="text" placeholder="Insert your lecture title." name="lectureFileInput" data-purpose="edit-course-title" id="lectureFileInput" value="" required>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -438,7 +435,7 @@
                 var lecture = {
                     IdFake: IdFake,
                     Title: $("#lectureTitle").val(),
-                    File: file.name,
+                    File: $("#lectureFileInput").val(),
                     Description: $("#lectureDescription").val(),
                     Volume: $("#lectureVolume").val(),
                     Duration: $("#lectureDuration").val(),
@@ -710,24 +707,18 @@
             var tr = "";
             LectureData.forEach((element, index) => {
                 tr += ` <tr>
-                <td class="text-center">${index + 1}</td>
-                <td class="cell-ta">${element.Title}</td>
-                <td class="text-center">${element.Volume}</td>
-                <td class="text-center">${element.Duration}</td>
-                <td class="text-center">${element.Positon}</td>
-                <td class="text-center">  <a href="#">${element.File}</a>   </td>
-                <td class="text-center">
-                    <a href="#" title="Delete" class="gray-s" onclick="DeleteLecture(${index})"><i class="uil uil-trash-alt"></i></a>
-                </td>
-            </tr>`;
+                                <td class="text-center">${index + 1}</td>
+                                <td class="cell-ta">${element.Title}</td>
+                                <td class="text-center">${element.Volume}</td>
+                                <td class="text-center">${element.Duration}</td>
+                                <td class="text-center">${element.Positon}</td>
+                                <td class="text-center">  <a href="#">${element.File}</a>   </td>
+                                <td class="text-center">
+                                    <a href="#" title="Delete" class="gray-s" onclick="DeleteLecture(${index})"><i class="uil uil-trash-alt"></i></a>
+                                </td>
+                            </tr>`;
             });
             $("#tbodylecture").html(tr);
-        }
-
-        //validate address file
-        function onLectureFileChange() {
-            file = $('#lectureFileInput')[0].files[0]
-            $(this).next('label').text(file);
         }
 
         //remove lecture in array
@@ -782,16 +773,16 @@
                 });
 
                 tr += ` <tr>
-                <td class="text-center">${index + 1}</td>
-                <td class="cell-ta">${element.Title}</td>
-                <td class="text-center">${lecture}</td>
-                <td class="text-center">${volumn}</td>
-                <td class="text-center">${duration}</td>
-                <td class="text-center">  <a href="#">${date}</a>   </td>
-                <td class="text-center">
-                    <a href="#" title="Delete" class="gray-s" onclick="DeleteCourse(${index})"><i class="uil uil-trash-alt"></i></a>
-                </td>
-                </tr>`;
+                                <td class="text-center">${index + 1}</td>
+                                <td class="cell-ta">${element.Title}</td>
+                                <td class="text-center">${lecture}</td>
+                                <td class="text-center">${volumn}</td>
+                                <td class="text-center">${duration}</td>
+                                <td class="text-center">  <a href="#">${date}</a>   </td>
+                                <td class="text-center">
+                                    <a href="#" title="Delete" class="gray-s" onclick="DeleteCourse(${index})"><i class="uil uil-trash-alt"></i></a>
+                                </td>
+                                </tr>`;
             });
             $("#tbodycourse").html(tr);
         }

@@ -48,6 +48,7 @@ using Learning_Managerment_SystemMarket_Services.InstructorServices.SubCategoryS
 using Learning_Managerment_SystemMarket_Services.StudentServices.CartService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.CourseRateService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.InstructorService;
+using Learning_Managerment_SystemMarket_Services.StudentServices.LectureService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.OrderService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.SavedCourseService;
 using Learning_Managerment_SystemMarket_Services.StudentServices.StudentExploreService;
@@ -137,6 +138,7 @@ namespace Learning_Managerment_SystemMarket_Web
             services.AddScoped<IStudentOrderService, StudentOrderService>();
             services.AddScoped<IStudentInstructorService, StudentInstructorService>();
             services.AddScoped<ICourseRateService, CourseRateService>();
+            services.AddScoped<ILectureService, LectureService>();
 
             services.AddSingleton<IEmailSender, EmailSender>();
 

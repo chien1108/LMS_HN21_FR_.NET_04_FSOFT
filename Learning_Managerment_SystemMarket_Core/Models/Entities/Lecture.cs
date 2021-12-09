@@ -11,6 +11,7 @@ namespace Learning_Managerment_SystemMarket_Core.Models.Entities
 
         public string Description { get; set; }
         public string File { get; set; }
+        public string Video { get; set; } = null;
         public int Volume { get; set; }
         public int Duration { get; set; }
         public int Positon { get; set; }

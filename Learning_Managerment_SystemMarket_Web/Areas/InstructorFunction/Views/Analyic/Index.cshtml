@@ -50,6 +50,7 @@
                             <tr>
                                 <th class="cell-ta" scope="col">Item No.</th>
                                 <th class="cell-ta" scope="col">Title</th>
+                                <th class="cell-ta" scope="col">Thumbnail</th>
                                 <th class="cell-ta" scope="col">Purchases</th>
                             </tr>
                         </thead>
@@ -59,7 +60,15 @@
                                 <tr>
                                     <td>@item.Id</td>
                                     <td>@item.Title</td>
-                                    <td>@item.Sales</td>                                    
+                                    <td>
+                                        @if (item.CoverImage != null)
+                                        {
+                                            var base64 = Convert.ToBase64String(item.CoverImage);
+                                            var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                                            <img src="@imgsrc" width="100%" />
+                                        }
+                                    </td>
+                                    <td>@item.Sales</td>
                                 </tr>
                             }
                         </tbody>
